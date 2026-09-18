@@ -1,50 +1,100 @@
-import { useEffect, useState } from 'react';
+/**
+ * Home: the canon as nested disclosures — testament → division → book → chapters — using
+ * native <details>/<summary> so every level is keyboard and screen-reader operable. Which
+ * levels are open is remembered on this device.
+ */
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { I, IconBtn, Topbar } from '../components/ui.tsx';
 import { db } from '../db/db.ts';
-import type { Position } from '../model/types.ts';
-import { CANON, SECTIONS, refLabel } from '../text/canon.ts';
+import type { Lang, Position } from '../model/types.ts';
+import { CANON, refLabel, type BookInfo } from '../text/canon.ts';
+import { greekNumeral } from '../text/greek.ts';
+import { hebrewNumeral } from '../text/hebrew.ts';
 import { getSettings } from '../state/settings.ts';
 
-type Filter = 'all' | 'he' | 'gr';
+interface Division {
+  id: string;
+  title: string;
+  native: string;
+  /** canon sections that belong to this division, in order */
+  sections: string[];
+}
+interface Testament {
+  id: string;
+  title: string;
+  native: string;
+  lang: Lang;
+  divisions: Division[];
+}
+
+/** Tanakh in Masoretic order; the New Testament as narrative books and letters (Revelation, addressed to the seven churches, sits with the letters). */
+export const TREE: Testament[] = [
+  {
+    id: 'tanakh',
+    title: 'Tanakh',
+    native: 'תַּנַ״ךְ',
+    lang: 'he',
+    divisions: [
+      { id: 'Torah', title: 'Torah', native: 'תּוֹרָה', sections: ['Torah'] },
+      { id: 'Neviim', title: 'Neviʾim · Prophets', native: 'נְבִיאִים', sections: ['Neviim'] },
+      { id: 'Ketuvim', title: 'Ketuvim · Writings', native: 'כְּתוּבִים', sections: ['Ketuvim'] },
+    ],
+  },
+  {
+    id: 'nt',
+    title: 'New Testament',
+    native: 'Ἡ Καινὴ Διαθήκη',
+    lang: 'gr',
+    divisions: [
+      { id: 'Histories', title: 'Histories', native: 'Εὐαγγέλια · Πράξεις', sections: ['Gospels', 'Acts'] },
+      { id: 'Epistles', title: 'Epistles', native: 'Ἐπιστολαί · Ἀποκάλυψις', sections: ['Paul', 'General', 'Revelation'] },
+    ],
+  },
+];
+
+export function booksOf(d: Division): BookInfo[] {
+  return d.sections.flatMap((s) => CANON.filter((b) => b.section === s));
+}
+
+const OPEN_KEY = 'biblia:home-open';
+function loadOpen(): Set<string> {
+  try {
+    const raw = localStorage.getItem(OPEN_KEY);
+    return new Set(raw ? (JSON.parse(raw) as string[]) : ['tanakh', 'nt']);
+  } catch {
+    return new Set(['tanakh', 'nt']);
+  }
+}
 
 export default function Home() {
   const nav = useNavigate();
   const [last, setLast] = useState<Position | null>(null);
   const [positions, setPositions] = useState<Map<string, Position>>(new Map());
-  const [filter, setFilter] = useState<Filter>(() => {
-    try {
-      return (localStorage.getItem('biblia:home-filter') as Filter) || 'all';
-    } catch {
-      return 'all';
-    }
-  });
-  const [done, setDone] = useState<Map<string, number>>(new Map());
+  const [done, setDone] = useState<Set<string>>(new Set());
+  const [open, setOpen] = useState<Set<string>>(loadOpen);
 
   useEffect(() => {
     db.positions.orderBy('at').reverse().toArray().then((rows) => {
       setPositions(new Map(rows.map((r) => [r.book, r])));
       setLast(rows[0] ?? null);
     });
-    db.progress.filter((p) => p.done).toArray().then((rows) => {
-      const m = new Map<string, number>();
-      for (const r of rows) m.set(r.book, (m.get(r.book) ?? 0) + 1);
-      setDone(m);
-    });
+    db.progress.filter((p) => p.done).toArray().then((rows) => setDone(new Set(rows.map((r) => r.id))));
   }, []);
 
-  function pick(f: Filter) {
-    setFilter(f);
-    try {
-      localStorage.setItem('biblia:home-filter', f);
-    } catch {
-      /* ignore */
-    }
+  function toggle(id: string, isOpen: boolean) {
+    setOpen((prev) => {
+      const next = new Set(prev);
+      if (isOpen) next.add(id);
+      else next.delete(id);
+      try {
+        localStorage.setItem(OPEN_KEY, JSON.stringify([...next]));
+      } catch {
+        /* private mode */
+      }
+      return next;
+    });
   }
-  const open = (id: string) => {
-    const p = positions.get(id);
-    nav(p ? `/read/${id}/${p.ch}?v=${p.v}` : `/read/${id}/1`);
-  };
   const lastBook = getSettings().lastBook;
 
   return (
@@ -74,35 +124,64 @@ export default function Home() {
             <div className="home__continue-sub">{CANON.find((b) => b.id === last.book)?.native}</div>
           </Link>
         )}
-        <div className="testament segmented">
-          <button aria-pressed={filter === 'all'} onClick={() => pick('all')}>All</button>
-          <button aria-pressed={filter === 'he'} onClick={() => pick('he')}>Tanakh</button>
-          <button aria-pressed={filter === 'gr'} onClick={() => pick('gr')}>New Testament</button>
-        </div>
-        <div className="canon">
-          {SECTIONS.filter((s) => filter === 'all' || s.lang === filter).map((s) => (
-            <div key={s.id}>
-              <div className="canon__section">
-                {s.title} <span className={`native ${s.lang}`}>{s.native}</span>
-              </div>
-              {CANON.filter((b) => b.section === s.id).map((b) => {
-                const p = positions.get(b.id);
-                const d = done.get(b.id) ?? 0;
+        <nav className="tree" aria-label="Books">
+          {TREE.map((t) => (
+            <Node key={t.id} id={t.id} level={1} open={open} onToggle={toggle} title={t.title} native={t.native} lang={t.lang} meta={`${t.divisions.reduce((n, d) => n + booksOf(d).length, 0)} books`}>
+              {t.divisions.map((d) => {
+                const books = booksOf(d);
                 return (
-                  <button key={b.id} className="canon__book" onClick={() => open(b.id)} style={b.id === lastBook ? { color: 'var(--accent)' } : undefined}>
-                    <span className="canon__en">{b.en}</span>
-                    <span className={`canon__native ${b.lang}`}>{b.native}</span>
-                    <span className="canon__meta">{p ? `at ${p.ch}` : d ? `${d}/${b.verses.length}` : `${b.verses.length} ch`}</span>
-                  </button>
+                  <Node key={d.id} id={d.id} level={2} open={open} onToggle={toggle} title={d.title} native={d.native} lang={t.lang} meta={`${books.length} books`}>
+                    {books.map((b) => {
+                      const p = positions.get(b.id);
+                      const finished = b.verses.filter((_, i) => done.has(`${b.id}:${i + 1}`)).length;
+                      return (
+                        <Node key={b.id} id={b.id} level={3} open={open} onToggle={toggle} title={b.en} native={b.native} lang={b.lang} current={b.id === lastBook} meta={p ? `at ${p.ch}` : finished ? `${finished}/${b.verses.length}` : `${b.verses.length} ch`}>
+                          <div className="chapters" role="group" aria-label={`${b.en} chapters`}>
+                            {p && (
+                              <button type="button" className="chapters__resume" onClick={() => nav(`/read/${b.id}/${p.ch}?v=${p.v}`)}>
+                                Resume at {refLabel(b.id, p.ch, p.v)}
+                              </button>
+                            )}
+                            {b.verses.map((_, i) => {
+                              const n = i + 1;
+                              const isDone = done.has(`${b.id}:${n}`);
+                              return (
+                                <Link key={n} to={`/read/${b.id}/${n}`} className={`chapters__ch${isDone ? ' chapters__ch--done' : ''}${p?.ch === n ? ' chapters__ch--at' : ''}`} aria-label={`${b.en} ${n}`} title={`${b.en} ${n}${isDone ? ' · read' : ''}`}>
+                                  <span>{n}</span>
+                                  <span className={`chapters__native ${b.lang}`}>{b.lang === 'he' ? hebrewNumeral(n) : greekNumeral(n)}</span>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </Node>
+                      );
+                    })}
+                  </Node>
                 );
               })}
-            </div>
+            </Node>
           ))}
-        </div>
+        </nav>
         <p className="home__about">
           Miqra according to the Masorah · SBL Greek New Testament · OSHB & MorphGNT morphology · BDB · Abbott-Smith · Strong's. <Link to="/settings">Sources & licences</Link>
         </p>
       </div>
     </div>
+  );
+}
+
+/** One disclosure level. Native <details> keeps it operable by keyboard and assistive technology. */
+function Node({ id, level, open, onToggle, title, native, lang, meta, current, children }: { id: string; level: 1 | 2 | 3; open: Set<string>; onToggle: (id: string, open: boolean) => void; title: string; native: string; lang: Lang; meta?: string; current?: boolean; children: ReactNode }) {
+  const isOpen = open.has(id);
+  return (
+    <details className={`tree__node tree__node--${level}${current ? ' tree__node--current' : ''}`} open={isOpen} onToggle={(e) => onToggle(id, (e.currentTarget as HTMLDetailsElement).open)}>
+      <summary className="tree__summary">
+        <span className="tree__chevron" aria-hidden="true">{I.chevron}</span>
+        <span className="tree__title">{title}</span>
+        <span className={`tree__native ${lang}`}>{native}</span>
+        {meta && <span className="tree__meta">{meta}</span>}
+      </summary>
+      {isOpen && <div className="tree__body">{children}</div>}
+    </details>
   );
 }

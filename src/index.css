@@ -533,3 +533,56 @@ fieldset.field legend { color: var(--ink-soft); font-size: 0.9rem; padding: 0; m
 .notfound h2 { font-weight: 400; font-size: 1.4rem; margin-bottom: 0.6rem; }
 
 @media (max-width: 979px) { .reader__headbtn { min-height: 2.75rem; } }
+
+/* ================================================================ home tree */
+.tree { text-align: left; max-width: 34rem; margin: 0.5rem auto 0; }
+.tree__node { border-bottom: 1px solid var(--rule); }
+.tree__node--1 > .tree__summary { padding: 0.9rem 0.6rem; }
+.tree__node--1 > .tree__summary .tree__title { font-size: 1.35rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; color: var(--ink); }
+.tree__node--1 > .tree__summary .tree__native { font-size: 1.35rem; }
+.tree__node--2 { border-bottom: 0; }
+.tree__node--2 > .tree__summary { padding: 0.65rem 0.6rem 0.65rem 1.6rem; }
+.tree__node--2 > .tree__summary .tree__title { font-variant: small-caps; letter-spacing: 0.08em; font-size: 1.05rem; color: var(--ink-soft); }
+.tree__node--3 { border-bottom: 0; }
+.tree__node--3 > .tree__summary { padding: 0.55rem 0.6rem 0.55rem 2.7rem; }
+.tree__node--3 > .tree__summary .tree__title { font-size: 1.12rem; }
+.tree__node--current > .tree__summary .tree__title { color: var(--accent); }
+.tree__summary { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; color: var(--ink); transition: background-color 0.15s; border-radius: 4px; min-height: 2.75rem; }
+.tree__summary::-webkit-details-marker { display: none; }
+.tree__summary:hover { background: color-mix(in srgb, var(--ink) 3.5%, transparent); }
+.tree__summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.tree__chevron { display: inline-flex; width: 1rem; height: 1rem; color: var(--ink-faint); align-self: center; transform: rotate(-90deg); transition: transform 0.15s; flex: none; }
+.tree__chevron svg { width: 16px; height: 16px; }
+details[open] > .tree__summary > .tree__chevron { transform: rotate(0); }
+.tree__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tree__native { margin-left: auto; color: var(--ink-soft); font-size: 1.15rem; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; }
+.tree__native.he { font-size: 1.2rem; }
+.tree__meta { color: var(--ink-faint); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; min-width: 3.4rem; text-align: right; flex: none; }
+.tree__body { animation: 0.18s ease-out both prose-in; }
+.tree__node--1 > .tree__body { padding-bottom: 0.4rem; }
+.chapters { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.3rem 0.6rem 0.9rem 2.7rem; }
+.chapters__resume { width: 100%; text-align: left; color: var(--accent); font-size: 0.9rem; letter-spacing: 0.04em; padding: 0.3rem 0 0.4rem; min-height: 2.25rem; }
+.chapters__resume:hover { text-decoration: underline; }
+.chapters__ch { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0.15rem 0.35rem; border: 1px solid var(--rule-strong); border-radius: 6px; color: var(--ink); background: var(--paper-raised); font-size: 0.95rem; line-height: 1.15; transition: border-color 0.15s, background-color 0.15s; }
+.chapters__ch:hover { border-color: var(--accent-soft); text-decoration: none; }
+.chapters__ch--done { border-color: var(--olive); }
+.chapters__ch--done > span:first-child::after { content: ' ·'; color: var(--olive); }
+.chapters__ch--at { background: var(--accent); border-color: var(--accent); color: #fdfaf3; }
+.chapters__ch--at .chapters__native { color: #fdfaf3cc; }
+.chapters__native { font-size: 0.7rem; color: var(--ink-faint); line-height: 1; }
+.chapters__native.he { font-size: 0.8rem; }
+@media (max-width: 420px) {
+  .tree__node--2 > .tree__summary { padding-left: 1rem; }
+  .tree__node--3 > .tree__summary { padding-left: 1.6rem; }
+  .chapters { padding-left: 1.6rem; }
+  .tree__node--1 > .tree__summary .tree__title, .tree__node--1 > .tree__summary .tree__native { font-size: 1.15rem; }
+  .tree__native { max-width: 42%; }
+}
+@media (max-width: 480px) {
+  /* the English title wins the space; the native title wraps under it */
+  .tree__node--3 > .tree__summary { flex-wrap: wrap; row-gap: 0; }
+  .tree__node--3 > .tree__summary .tree__title { white-space: normal; flex: 1 1 60%; }
+  .tree__node--3 > .tree__summary .tree__meta { order: 2; }
+  .tree__node--3 > .tree__summary .tree__native { order: 3; flex: 1 1 100%; margin-left: 0; max-width: none; font-size: 1rem; color: var(--ink-faint); }
+  .tree__node--2 > .tree__summary .tree__title { white-space: normal; }
+}
