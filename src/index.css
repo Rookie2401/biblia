@@ -596,3 +596,12 @@ fieldset.field legend { color: var(--ink-soft); font-size: 0.9rem; padding: 0; m
   .lib__native { max-width: 45%; }
   .entry__num { min-width: 3.6rem; }
 }
+
+/* chapter rows: "Chapter 1" on the left, the native heading (פֶּרֶק א / Κεφάλαιον αʹ) on the right */
+.entry--chapter { flex-wrap: wrap; gap: 0.1rem 0.9rem; align-items: baseline; }
+.entry--chapter .entry__num { min-width: 0; font-size: 1.05rem; }
+.entry--chapter .entry__native { margin-left: auto; font-size: 1.15rem; color: var(--ink-soft); white-space: nowrap; }
+.entry--chapter .entry__native.he { font-size: 1.25rem; }
+.entry--chapter .entry__preview { flex-basis: 100%; font-size: 0.85rem; color: var(--ink-faint); -webkit-line-clamp: 1; }
+.entry--chapter.entry--at .entry__native { color: var(--accent); }
+.entry--chapter.entry--done .entry__native { color: var(--olive); }

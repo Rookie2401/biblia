@@ -149,11 +149,9 @@ export default function Home() {
                               const n = i + 1;
                               const isDone = done.has(`${b.id}:${n}`);
                               return (
-                                <Link key={n} to={`/read/${b.id}/${n}`} className={`entry${isDone ? ' entry--done' : ''}${p?.ch === n ? ' entry--at' : ''}`} role="listitem" aria-label={`${b.en} ${n}${isDone ? ', read' : ''}`}>
-                                  <span className="entry__num">
-                                    {n}
-                                    <span className={`entry__native ${b.lang}`}>{b.lang === 'he' ? hebrewNumeral(n) : greekNumeral(n)}</span>
-                                  </span>
+                                <Link key={n} to={`/read/${b.id}/${n}`} className={`entry entry--chapter${isDone ? ' entry--done' : ''}${p?.ch === n ? ' entry--at' : ''}`} role="listitem" aria-label={`${b.en} ${n}${isDone ? ', read' : ''}`}>
+                                  <span className="entry__num">Chapter {n}</span>
+                                  <span className={`entry__native ${b.lang}`} lang={b.lang === 'he' ? 'he' : 'el'}>{b.lang === 'he' ? `פֶּרֶק ${hebrewNumeral(n)}` : `Κεφάλαιον ${greekNumeral(n)}`}</span>
                                   <span className="entry__preview">{count} verses{isDone ? ' · read' : p?.ch === n ? ' · reading' : ''}</span>
                                 </Link>
                               );
