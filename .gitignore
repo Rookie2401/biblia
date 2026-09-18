@@ -1,0 +1,8 @@
+node_modules
+dist
+data/mam-raw
+data/oshb
+data/gnt
+data/lexicon
+data/fetch.log
+public/data

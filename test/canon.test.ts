@@ -1,0 +1,29 @@
+import { describe, expect, it } from 'vitest';
+import { CANON, adjacentChapter, book, parseRef, refLabel } from '../src/text/canon.ts';
+
+describe('canon', () => {
+  it('has 66 books with verse counts from the data', () => {
+    expect(CANON.length).toBe(66);
+    expect(book('Gen')?.verses.length).toBe(50);
+    expect(book('Gen')?.verses[0]).toBe(31);
+    expect(book('Ps')?.verses.length).toBe(150);
+    expect(book('Rev')?.verses.length).toBe(22);
+    expect(book('Matt')?.lang).toBe('gr');
+  });
+  it('walks chapters across books within a testament only', () => {
+    expect(adjacentChapter('Gen', 50, 1)).toEqual({ book: 'Exod', ch: 1 });
+    expect(adjacentChapter('Exod', 1, -1)).toEqual({ book: 'Gen', ch: 50 });
+    expect(adjacentChapter('2Chr', 36, 1)).toBeNull();
+    expect(adjacentChapter('Matt', 1, -1)).toBeNull();
+    expect(adjacentChapter('Jude', 1, 1)).toEqual({ book: 'Rev', ch: 1 });
+  });
+  it('parses references', () => {
+    expect(parseRef('Gen 1:1')).toEqual({ book: 'Gen', ch: 1, v: 1 });
+    expect(parseRef('1 Kings 3')).toEqual({ book: '1Kgs', ch: 3, v: undefined });
+    expect(parseRef('john 3.16')).toEqual({ book: 'John', ch: 3, v: 16 });
+    expect(parseRef('Song of Songs 2:1')).toEqual({ book: 'Song', ch: 2, v: 1 });
+    expect(parseRef('Ps 151')).toBeNull();
+    expect(parseRef('λόγος')).toBeNull();
+    expect(refLabel('1Sam', 3, 4)).toBe('1 Samuel 3:4');
+  });
+});
