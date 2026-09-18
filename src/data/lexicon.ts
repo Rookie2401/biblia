@@ -76,8 +76,8 @@ export async function concordance(lang: Lang, id: string): Promise<number[][]> {
   return out;
 }
 
-/** Search indices: [id, lemma, transliteration, gloss, count]. */
-export type IndexRow = [string, string, string, string, number];
+/** Search indices: [id, lemma, transliteration, gloss, count, gloss source]. */
+export type IndexRow = [string, string, string, string, number, string?];
 let heIndex: Promise<IndexRow[]> | null = null;
 let grIndex: Promise<IndexRow[]> | null = null;
 export function searchIndex(lang: Lang): Promise<IndexRow[]> {
@@ -92,6 +92,7 @@ export async function allDataUrls(bookIds: string[], langOfBook: (id: string) =>
   const urls = bookIds.map((id) => `./data/${langOfBook(id)}/${id}.json`);
   for (let i = 0; i <= 29; i++) urls.push(`./data/lex/he-${i}.json`, `./data/conc/he-${i}.json`);
   for (const s of man.shards ?? []) urls.push(`./data/lex/gr-${s}.json`, `./data/conc/gr-${s}.json`);
-  urls.push('./data/lex/he-index.json', './data/lex/gr-index.json', './data/lex/gr-manifest.json');
+  urls.push('./data/lex/he-index.json', './data/lex/gr-index.json', './data/lex/gr-manifest.json', './data/lex/he-bdb-index.json');
+  for (const id of bookIds) urls.push(`./data/ctx/${langOfBook(id)}/${id}.json`);
   return urls;
 }

@@ -61,8 +61,10 @@ export interface HeEntry {
   x?: string; // transliteration
   pron?: string;
   pos?: string;
-  /** short gloss */
+  /** short lemma gloss */
   g: string;
+  /** where the short gloss comes from: curated | bdb | index | strongs | kjv */
+  gs?: string;
   sd?: string; // Strong's definition
   kj?: string; // KJV renderings
   der?: string; // Strong's derivation note
@@ -85,7 +87,9 @@ export interface GrEntry {
   l: string;
   id?: string; // Strong's G-number
   x?: string; // transliteration
-  g: string; // short gloss (Dodson)
+  g: string; // short lemma gloss
+  /** where the short gloss comes from: curated | dodson | abbott | strongs */
+  gs?: string;
   long?: string; // Dodson's longer definition
   sd?: string;
   kj?: string;

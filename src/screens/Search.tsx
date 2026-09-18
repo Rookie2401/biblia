@@ -9,6 +9,8 @@ import { searchIndex } from '../data/lexicon.ts';
 import { parseRef, refLabel } from '../text/canon.ts';
 import { searchLexicon, toGreekSearchRows, toHebrewSearchRows, wordUrl, type SearchRow, type SearchScope } from '../state/search.ts';
 
+const SOURCE: Record<string, string> = { curated: 'Biblia', bdb: 'BDB', index: 'OS index', strongs: "Strong's", kjv: 'KJV', dodson: 'Dodson', abbott: 'Abbott-Smith' };
+
 export default function Search() {
   const [params, setParams] = useSearchParams();
   const nav = useNavigate();
@@ -59,6 +61,7 @@ export default function Search() {
           </fieldset>
           {rows && <span className="faint" style={{ fontSize: '0.85rem' }}>{rows.length.toLocaleString()} lemmas</span>}
         </div>
+        <p className="card__note" style={{ margin: '-0.4rem 0 0.8rem' }}>Results show lemma glosses — dictionary meanings, not contextual translations. The source of each gloss is named on the right.</p>
         {ref && refUrl && (
           <Link className="home__continue" to={refUrl}>
             <span className="home__continue-label">Open</span>
@@ -73,8 +76,8 @@ export default function Search() {
             <div className="result__head">
               <span className={r.lang === 'he' ? 'he' : 'gr'} style={{ fontSize: '1.35rem' }}>{r.lemma}</span>
               {r.transliteration && <span className="faint" style={{ fontStyle: 'italic' }}>{r.transliteration}</span>}
-              <span className="g">{r.gloss}</span>
-              <span className="result__meta">{r.strong || (r.lang === 'he' ? 'Hebrew' : 'Greek')} · {r.count}×</span>
+              <span className="g">{r.gloss || <span className="faint">no gloss in the source lexica</span>}</span>
+              <span className="result__meta">{r.strong || (r.lang === 'he' ? 'Hebrew' : 'Greek')} · {r.count}×{r.source ? ` · ${SOURCE[r.source] ?? r.source}` : ''}</span>
             </div>
           </Link>
         ))}

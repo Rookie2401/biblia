@@ -605,3 +605,15 @@ fieldset.field legend { color: var(--ink-soft); font-size: 0.9rem; padding: 0; m
 .entry--chapter .entry__preview { flex-basis: 100%; font-size: 0.85rem; color: var(--ink-faint); -webkit-line-clamp: 1; }
 .entry--chapter.entry--at .entry__native { color: var(--accent); }
 .entry--chapter.entry--done .entry__native { color: var(--olive); }
+
+/* word card: contextual rendering (BSB) above the lemma gloss, each labelled with its source */
+.card__ctx { margin-top: 0.35rem; display: flex; flex-direction: column; }
+.card__ctx-text { font-size: 1.2rem; color: var(--ink); }
+.card__ctx-src { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-top: 0.05rem; }
+.card__gloss { display: flex; flex-direction: column; }
+.card__gloss-text { font-size: 1.05rem; color: var(--ink-soft); }
+.card__gloss-src { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-top: 0.05rem; }
+.card__note { font-size: 0.8rem; color: var(--ink-faint); font-style: italic; margin-top: 0.35rem; line-height: 1.4; }
+.inter__ctx { font-family: var(--serif); font-size: 0.9rem; color: var(--ink); direction: ltr; text-align: center; max-width: 8rem; line-height: 1.25; margin-top: 0.15rem; }
+.inter__gloss { color: var(--ink-faint); font-style: italic; }
+.glossline__label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-right: 0.4rem; }

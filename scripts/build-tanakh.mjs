@@ -105,6 +105,7 @@ function lcsAlign(a, b) {
 const stemOf = (lemma) => lemma.split('/').pop().replace(/\+$/, '');
 
 const conc = {}; // lemma id -> flat [bookIdx, ch, v, wordIdx, ...]
+const posCounts = {}; // lemma id -> { morphPos: count } from the corpus (the authoritative part of speech)
 const stats = { books: 0, chapters: 0, verses: 0, words: 0, exact: 0, lcs: 0, unmatched: 0, filled: 0, verseMismatch: [] };
 const oddLemmas = new Set();
 
@@ -159,7 +160,15 @@ TANAKH.forEach(([sefaria, id], bookIdx) => {
         const t = otoks[j];
         const stem = stemOf(t.lemma);
         if (!/^\d+( [a-z])?$/.test(stem)) oddLemmas.add(t.lemma);
-        (conc[stem] ??= []).push(bookIdx, ci + 1, vi + 1, i);
+        else {
+          (conc[stem] ??= []).push(bookIdx, ci + 1, vi + 1, i);
+          // the main segment's code: skip the prefix segments (C/R/Td …) that precede it
+          const segs = t.morph.slice(1).split('/');
+          const nPre = t.lemma.split('/').length - 1;
+          const main = segs[Math.min(nPre, segs.length - 1)] || '';
+          const key = main.startsWith('V') ? 'verb' : main.startsWith('Np') ? 'proper noun' : main.startsWith('Ng') ? 'gentilic' : main.startsWith('N') ? 'noun' : main.startsWith('Ac') ? 'number' : main.startsWith('Ao') ? 'ordinal' : main.startsWith('A') ? 'adjective' : main.startsWith('P') ? 'pronoun' : main.startsWith('R') ? 'preposition' : main.startsWith('C') ? 'conjunction' : main.startsWith('D') ? 'adverb' : main.startsWith('T') ? 'particle' : 'other';
+          (posCounts[stem] ??= {})[key] = (posCounts[stem][key] || 0) + 1;
+        }
         const seg = t.text.includes('/') ? t.text.replace(HE_MARKS, '').replace(/[׃׀]/g, '') : undefined;
         return seg ? [t.lemma, t.morph, seg] : [t.lemma, t.morph];
       });
@@ -175,6 +184,7 @@ TANAKH.forEach(([sefaria, id], bookIdx) => {
 });
 console.log();
 fs.writeFileSync(path.join(buildDir, 'conc-he.json'), JSON.stringify(conc));
+fs.writeFileSync(path.join(buildDir, 'pos-he.json'), JSON.stringify(posCounts));
 fs.writeFileSync(
   path.join(outDir, 'SOURCES.json'),
   JSON.stringify(

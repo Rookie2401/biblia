@@ -31,7 +31,7 @@ const text = (s) => unesc(s.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim()
 
 // ---- LexicalIndex: Strong's (+aug) -> bdb id, pos, gloss, xlit
 const li = fs.readFileSync(path.join(root, 'data', 'lexicon', 'LexicalIndex.xml'), 'utf8');
-const index = new Map(); // "1254 a" -> {...}
+const index = new Map(); // "1254 a" -> [{...}] (several when a multi-word name shares the number)
 const bdbToIds = new Map(); // bdb id -> [lemma ids]
 for (const m of li.matchAll(/<entry id="([^"]+)">([\s\S]*?)<\/entry>/g)) {
   const body = m[2];
@@ -43,7 +43,7 @@ for (const m of li.matchAll(/<entry id="([^"]+)">([\s\S]*?)<\/entry>/g)) {
   const id = strong + (attr('aug') ? ' ' + attr('aug') : '');
   const w = body.match(/<w xlit="([^"]*)">([^<]*)<\/w>/);
   const e = { bdb: attr('bdb'), pos: text((body.match(/<pos>([^<]*)<\/pos>/) || [])[1] || ''), def: text((body.match(/<def>([\s\S]*?)<\/def>/) || [])[1] || ''), xlit: w ? unesc(w[1]) : '', w: w ? unesc(w[2]) : '', root: (body.match(/<etym root="([^"]*)"/) || [])[1] };
-  if (!index.has(id)) index.set(id, e);
+  (index.get(id) || index.set(id, []).get(id)).push(e);
   if (e.bdb) (bdbToIds.get(e.bdb) || bdbToIds.set(e.bdb, []).get(e.bdb)).push(id);
 }
 
@@ -78,7 +78,8 @@ for (const sec of bdbXml.matchAll(/<section id="([^"]+)">([\s\S]*?)<\/section>/g
     const [, id, attrs, body] = m;
     const w = (body.match(/<w[^>]*>([\s\S]*?)<\/w>/) || [])[1];
     const isRoot = /type="root"/.test(attrs);
-    const e = { html: renderBdb(body), w: w ? text(w) : '', section: secId, isRoot, def: text((body.match(/<def>([\s\S]*?)<\/def>/) || [])[1] || '') };
+    const defs = [...body.matchAll(/<def>([\s\S]*?)<\/def>/g)].map((d) => text(d[1]));
+    const e = { html: renderBdb(body), w: w ? text(w) : '', section: secId, isRoot, def: defs[0] || '', defs };
     bdb.set(id, e);
     info.entries.push(id);
     if (isRoot && !info.root) info.root = id;
@@ -86,16 +87,55 @@ for (const sec of bdbXml.matchAll(/<section id="([^"]+)">([\s\S]*?)<\/section>/g
   sections.set(secId, info);
 }
 
-function shortGloss(li, st) {
-  if (li?.def) return li.def;
-  if (!st) return '';
-  const clean = (s) => s.replace(/\(.*?\)/g, ' ').replace(/\[.*?\]/g, ' ').replace(/\s+/g, ' ').trim();
-  const skip = /^(properly|probably|apparently|perhaps|a primitive root|from|the same as|denominative|of uncertain derivation|feminine of|masculine of|plural of|or|i\.e\.|by implication|by extension|figuratively|specifically|literally|in the sense of|contracted|patrial|patronymic|a variation)/i;
-  const clauses = clean(st.strongs_def || '').split(/[;:]/).map((c) => c.trim()).filter((c) => c && !skip.test(c));
-  const d = (clauses[0] ?? '').split(',')[0].trim();
-  if (d && d.length <= 42) return d;
-  const k = clean(st.kjv_def || '').split(/[;,]/).map((c) => c.replace(/^[×x+]\s*/, '').trim()).filter(Boolean)[0];
-  return k || d.slice(0, 42);
+const curated = JSON.parse(fs.readFileSync(path.join(root, 'data', 'curated', 'he-glosses.json'), 'utf8'));
+const posCounts = fs.existsSync(path.join(buildDir, 'pos-he.json')) ? JSON.parse(fs.readFileSync(path.join(buildDir, 'pos-he.json'), 'utf8')) : {};
+const consOf = (w) => (w || '').normalize('NFC').replace(/[֑-ׇ͏]/g, '').replace(/[^א-ת]/g, '');
+const ARCHAIC = /\b(thou|thee|thy|thine|ye|hath|shalt|art|wilt|doth|begat|forgattest|didst|saith|unto|whoso|shew|receiveth|maketh|floodest|longeth|dost|hast|wouldest|shutteth|strengtheneth|hurleth)\b/i;
+const clean = (x) => x.replace(/\(.*?\)/g, ' ').replace(/\[.*?\]/g, ' ').replace(/\s+/g, ' ').trim();
+const words = (x) => x.trim().split(/\s+/).length;
+/** A candidate is usable as a lexical gloss when it is short, modern and not a cross reference. */
+const usable = (g, max = 6) => !!g && words(g) <= max && !ARCHAIC.test(g) && !/\bcompare\b|\bsee\b|^and |^the .* (which|that) |[!?]/i.test(g) && !/\.\s*\S/.test(g);
+/** Choose the LexicalIndex entry for a lemma id: exact augmented id first, then the one whose headword matches Strong's. */
+function pickIndex(id, num, strongLemma) {
+  const exact = index.get(id) || [];
+  const pool = exact.length ? exact : index.get(num) || [];
+  if (!pool.length) return undefined;
+  const c = consOf(strongLemma);
+  return pool.find((e) => consOf(e.w) === c) || pool.find((e) => e.pos !== 'Np') || pool[0];
+}
+/**
+ * The short gloss, in order of trust: curated → BDB outline definitions → LexicalIndex definition
+ * (when it is a real definition, not a KJV phrase) → first clause of Strong's → a short KJV rendering.
+ * Returns [gloss, source].
+ */
+function shortGloss(id, num, liE, bdbE, st, isName) {
+  if (curated[id]) return [curated[id], 'curated'];
+  if (curated[num] && !id.includes(' ')) return [curated[num], 'curated'];
+  // a name: the index gives the conventional English form; BDB's definition is its etymology
+  if (isName && liE?.def && /^[A-Z]/.test(liE.def) && usable(liE.def, 4)) return [liE.def, 'index'];
+  const bdbDefs = (bdbE?.defs || []).map((d) => d.trim()).filter((d) => usable(d, 5) && !(isName && /hath|^Yah/.test(d)));
+  if (bdbDefs.length) return [[...new Set(bdbDefs)].slice(0, 3).join(', '), 'bdb'];
+  if (liE?.def && usable(liE.def, 4) && !(isName && /^[a-z]/.test(liE.def))) return [liE.def, 'index'];
+  if (st) {
+    const skip = /^(properly|probably|apparently|perhaps|a primitive root|from|the same as|denominative|of uncertain derivation|feminine of|masculine of|plural of|or|i\.e\.|by implication|by extension|figuratively|specifically|literally|in the sense of|contracted|patrial|patronymic|a variation|of foreign origin|of egyptian|of persian|of uncertain)/i;
+    const clauses = clean(st.strongs_def || '').split(/[;:.]/).map((c) => c.trim()).filter((c) => c && !skip.test(c));
+    const d = (clauses[0] ?? '').split(',').slice(0, isName ? 1 : 2).join(',').trim();
+    if (d && d.length <= 48 && usable(d, 8)) return [d, 'strongs'];
+    const k = clean(st.kjv_def || '').split(/[;,]/).map((c) => c.replace(/^[×x+]\s*/, '').trim()).filter((c) => c && usable(c, 3))[0];
+    if (k) return [k, 'kjv'];
+    if (d) return [d.slice(0, 48), 'strongs'];
+  }
+  if (liE?.def) return [liE.def, 'index'];
+  return ['', ''];
+}
+/** Part of speech: what the corpus morphology says (dominant code), else the LexicalIndex. */
+function partOfSpeech(id, liE) {
+  const pc = posCounts[id];
+  if (pc) {
+    const best = Object.entries(pc).sort((a, b) => b[1] - a[1])[0];
+    if (best && best[0] !== 'other') return best[0];
+  }
+  return liE?.pos ? POS[liE.pos] ?? liE.pos : undefined;
 }
 
 const POS = { N: 'noun', Np: 'proper noun', V: 'verb', A: 'adjective', D: 'adverb', P: 'pronoun', R: 'preposition', C: 'conjunction', T: 'particle', I: 'interjection', X: '', Ng: 'gentilic', Nc: 'noun', Ac: 'number', Ao: 'ordinal', Ag: 'gentilic adjective' };
@@ -106,7 +146,7 @@ let withFull = 0;
 for (const id of Object.keys(conc)) {
   const num = id.split(' ')[0];
   const st = strongs['H' + num];
-  const liE = index.get(id) || index.get(num);
+  const liE = pickIndex(id, num, st?.lemma);
   const bdbId = liE?.bdb;
   const b = bdbId ? bdb.get(bdbId) : undefined;
   if (b) withBdb++;
@@ -115,19 +155,23 @@ for (const id of Object.keys(conc)) {
   const fam = sec
     ? sec.entries
         .filter((eid) => eid !== bdbId)
-        .flatMap((eid) => (bdbToIds.get(eid) || []).map((lid) => [lid, index.get(lid)?.w || bdb.get(eid)?.w || '', index.get(lid)?.def || bdb.get(eid)?.def || '']))
+        .flatMap((eid) => (bdbToIds.get(eid) || []).map((lid) => [lid, entries[lid]?.w || bdb.get(eid)?.w || '', entries[lid]?.g || bdb.get(eid)?.def || '']))
         .filter(([lid]) => conc[lid])
     : [];
   const aramaic = /Aramaic|Chaldee/i.test(st?.strongs_def || '') || /^(Aramaic)/.test(st?.derivation || '');
   const full = sefariaFor(num, st?.lemma || liE?.w || '', aramaic);
+  const pos = partOfSpeech(id, liE);
+  const [gloss, gsrc] = shortGloss(id, num, liE, b, st, pos === 'proper noun');
   if (full) withFull++;
   entries[id] = {
     id,
-    w: st?.lemma || liE?.w || b?.w || '',
+    // the headword: the index entry when it names something else than Strong's lemma (a multi-word name sharing the number)
+    w: liE && consOf(liE.w) !== consOf(st?.lemma) && (id.includes(' ') || liE.pos === 'Np' || liE.w.includes(' ') || liE.w.includes('־')) ? liE.w : st?.lemma || liE?.w || b?.w || '',
     x: st?.xlit || liE?.xlit || undefined,
     pron: st?.pron || undefined,
-    pos: liE?.pos ? POS[liE.pos] ?? liE.pos : undefined,
-    g: shortGloss(liE, st),
+    pos,
+    g: gloss,
+    gs: gsrc || undefined,
     sd: st?.strongs_def?.trim() || undefined,
     kj: st?.kjv_def?.trim() || undefined,
     der: st?.derivation?.trim() || undefined,
@@ -160,7 +204,7 @@ for (const [bid, ids] of bdbToIds) {
 }
 fs.writeFileSync(path.join(lexDir, 'he-bdb-index.json'), JSON.stringify(bdbIndexOut));
 for (const [k, v] of Object.entries(concShards)) fs.writeFileSync(path.join(concDir, `he-${k}.json`), JSON.stringify(v));
-fs.writeFileSync(path.join(lexDir, 'he-index.json'), JSON.stringify(Object.values(entries).map((e) => [e.id, e.w, e.x || '', e.g, e.n])));
+fs.writeFileSync(path.join(lexDir, 'he-index.json'), JSON.stringify(Object.values(entries).map((e) => [e.id, e.w, e.x || '', e.g, e.n, e.gs || ''])));
 fs.writeFileSync(
   path.join(lexDir, 'he-SOURCES.json'),
   JSON.stringify(

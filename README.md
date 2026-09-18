@@ -20,6 +20,7 @@ Library (offline PWA, paper-and-Garamond chrome).
 | Greek text | SBL Greek New Testament (Holmes, 2010) | CC BY 4.0 |
 | Greek morphology | MorphGNT, SBLGNT edition | CC BY-SA 3.0 |
 | Greek lexicon | Abbott-Smith (1922, TEI), Dodson, Strong's | public domain |
+| Contextual renderings | Berean Standard Bible interlinear tables (per-word English in its verse), aligned at build time | public domain |
 
 The text is never edited: MAM's reader markup is resolved (ketiv/qere read as qere, paragraph
 marks kept as flags, editorial footnotes kept as notes) and everything else is shown as the
@@ -34,13 +35,20 @@ Dictionary HTML is sanitized at build time (`scripts/sanitize-html.mjs`: element
 allowlists, dangerous elements removed with their content, nesting rebalanced, every shipped
 entry re-asserted) and validated again before rendering (`src/text/safeHtml.ts`).
 
+## English layers
+
+Two kinds of English appear, always labelled:
+
+- **Contextual rendering (BSB)** — what the Berean Standard Bible makes of *this word in this verse*; the only layer that translates the verse. Built by `scripts/build-bsb.mjs` from the public-domain interlinear tables (98.7% of Hebrew and 99.7% of Greek words aligned).
+- **Lemma gloss** — the dictionary meaning of the lemma, with its source named on the card (`gs`): a curated modern gloss (`data/curated/*.json`, mostly function words, names and lemmas the lexica miss), the BDB outline's definitions, the Open Scriptures index, the first clause of Strong's, or a short KJV rendering as a last resort. KJV renderings are otherwise shown only as *historical renderings*. Part of speech comes from the corpus morphology, not from the index. `test/lexicon-quality.test.ts` guards the shipped files against archaic phrasing, missing glosses and the audited mis-mappings.
+
 ## Commands
 
 ```bash
 npm run fetch:sources   # download every source into data/ (idempotent)
 node scripts/fetch-bdb.mjs    # full BDB from Sefaria: walk the headword chain into data/bdb-sefaria (resumable)
 node scripts/fetch-bdb2.mjs   # full BDB from Sefaria: sweep by Strong's lemma forms (what the lookup indexes; ~40 min)
-npm run build:data      # public/data/{he,gr,lex,conc} + src/data/canon.json
+npm run build:data      # public/data/{he,gr,lex,conc,ctx} + src/data/{canon,coverage}.json (needs data/bsb/bsb_tables.xlsx)
 npm run dev             # Vite dev server
 npm test                # vitest
 npm run build           # tsc + vite build → dist/ (≈40 MB with the data)

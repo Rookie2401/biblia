@@ -28,6 +28,7 @@
 | `build-lexicon-gr.mjs` | Abbott-Smith TEI, Dodson, Strong's | `lex/gr-*.json`, `gr-index.json`, `gr-manifest.json`, `conc/gr-*`, `data/build/lxx-by-strong.json` |
 | `build-lexicon-he.mjs` | Sefaria BDB (full), Open Scriptures BDB + LexicalIndex, Strong's | `lex/he-*.json`, `he-index.json`, `conc/he-*` |
 | `build-canon.mjs` | the built books | `src/data/canon.json` |
+| `build-bsb.mjs` | `data/bsb/bsb_tables.xlsx` (Berean interlinear, public domain) | `public/data/ctx/{he,gr}/*.json` — per-verse arrays of the BSB rendering of each word (chapter-level LCS alignment; `''` = rendered with a neighbour, `null` = unaligned) |
 
 **MAM parsing** (`parseVerse`): resolves `mam-kq` (ketiv in parentheses, qere in brackets → the
 qere is read, both kept), qere-only and ketiv-only spans, `mam-kq-trivial`, implicit maqaf,
@@ -44,6 +45,8 @@ matched neighbours when the skeletons are within an edit distance of a third. Re
 Settings displays): 305,309 of 305,452 maqaf-split content words carry an analysis = 99.95%;
 143 words (0.05%) are shown in the reader as plain text without a card. Before the fallback
 the figure was 99.63%.
+
+**Glosses (content audit, 2026-09-18).** `build-lexicon-he.mjs`: the LexicalIndex is a multimap (multi-word names share their component's Strong's number; `pickIndex` chooses the exact augmented id, then the headword matching Strong's); part of speech is the dominant OSHB code from `data/build/pos-he.json`; the short gloss comes, in order, from `data/curated/he-glosses.json`, the BDB outline's `<def>`s, the index definition (only when it is a real definition), the first clause of Strong's, or a ≤3-word KJV rendering, each filtered for archaic phrasing and cross references; the source is recorded as `gs`. `build-lexicon-gr.mjs`: `data/curated/gr-glosses.json` supplies glosses and `_alias` links for the lemmas the lexica do not cover; more spelling-variant candidates (deponents, contracted adjectives, ἕνεκεν/ἕνεκα …); lemmas without a Strong's transliteration are transliterated (`translit`); Dodson's "descendent" is corrected. The UI shows the BSB rendering first (`WordCard`, `VerseCard`, the reader gloss line), then the lemma gloss with its source and the note "not a contextual translation"; KJV renderings are labelled historical.
 
 **Lexicon keys.** Hebrew: OSHB lemma id = Strong's number + Open Scriptures' augment letter
 ("1254 a" shape/create vs "1254 b" be fat); prefixes (`c/b/…`) and the `+` of multi-word names

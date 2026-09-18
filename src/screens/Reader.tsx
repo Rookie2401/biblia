@@ -12,6 +12,7 @@ import { WordCard } from '../components/WordCard.tsx';
 import { useMediaQuery, useModalDialog } from '../components/dialog.ts';
 import { I, IconBtn, Sheet } from '../components/ui.tsx';
 import { loadBook, type AnyBook } from '../data/books.ts';
+import { cachedContext, loadContext } from '../data/context.ts';
 import type { GrVerse, HeVerse, VocabStatus, WordRef } from '../model/types.ts';
 import { adjacentChapter, book as bookInfo, refLabel, validRef } from '../text/canon.ts';
 import { splitPrinted, greekNumeral } from '../text/greek.ts';
@@ -91,6 +92,9 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   useEffect(() => {
     if (!glossIndex(lang)) void ensureGlossIndex(lang).then(() => setTick((t) => t + 1));
   }, [lang]);
+  useEffect(() => {
+    if (!cachedContext(lang, bookId)) void loadContext(lang, bookId).then(() => setTick((t) => t + 1));
+  }, [lang, bookId]);
 
   const words = useMemo(() => (book ? chapterWords(book, ch) : []), [book, ch]);
   const keys = useMemo(() => words.map((w) => w.key).filter((k): k is string => Boolean(k)), [words]);
@@ -410,12 +414,18 @@ function VerseNumber({ bookId, ch, v, on, label }: { bookId: string; ch: number;
   );
 }
 
+/** Under the tapped verse: the BSB's rendering of each word in this verse (a translation), word by word in source order. */
 function GlossLine({ words, lang, selI }: { words: WordInfo[]; lang: 'he' | 'gr'; selI?: number }) {
+  const w0 = words[0];
+  const ctx = w0 ? cachedContext(lang, w0.ref.book)?.chapters[w0.ref.ch - 1]?.[w0.ref.v - 1] : undefined;
   return (
     <span className="glossline">
-      {words.map((w) => (
-        <span key={w.ref.i} className={selI === w.ref.i ? 'on' : undefined}>{shortGloss(lang, w.lexId) || (w.he?.prefixOnly ? w.he.morph.prefixes.map((p) => p.gloss).join('+') : '·')}</span>
-      ))}
+      <span className="glossline__label">{ctx ? 'BSB, word by word' : 'lemma glosses, not a translation'}</span>
+      {words.map((w) => {
+        const c = ctx?.[w.ref.i];
+        const text = ctx ? (c ? c : c === '' ? '‒' : '·') : shortGloss(lang, w.lexId) || (w.he?.prefixOnly ? w.he.morph.prefixes.map((p) => p.gloss).join('+') : '·');
+        return <span key={w.ref.i} className={selI === w.ref.i ? 'on' : undefined}>{text}</span>;
+      })}
     </span>
   );
 }

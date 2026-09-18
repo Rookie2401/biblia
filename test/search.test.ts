@@ -62,3 +62,11 @@ describe('lexicon search', () => {
     for (const r of rows) expect(wordUrl(r)).toMatch(/^\/word\/(he|gr)\//);
   });
 });
+
+describe('English ranking', () => {
+  it('puts the frequent lemma whose gloss opens with the word above rare exact matches', () => {
+    const list = toHebrewSearchRows([['3983', 'מֵאמַר', 'mêʼmar', 'word', 2], ['1697', 'דָּבָר', 'dâbâr', 'word, speech, thing, matter', 1440], ['1703', 'דַּבָּרָה', 'dabbârâh', 'word', 1], ['4405', 'מִלָּה', 'millâh', 'a word, speech', 38]]);
+    const r = searchLexicon(list, 'word', 'he').map((x) => x.id);
+    expect(r).toEqual(['3983', '1703', '1697', '4405']); // exact glosses (by frequency), then a gloss opening with the word, then the rest
+  });
+});

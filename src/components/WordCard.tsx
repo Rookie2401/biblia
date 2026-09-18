@@ -7,6 +7,7 @@
  */
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { contextGloss, loadContext } from '../data/context.ts';
 import { concordance } from '../data/lexicon.ts';
 import { db } from '../db/db.ts';
 import type { GrEntry, HeEntry, Lexeme, VocabStatus, WordRef } from '../model/types.ts';
@@ -20,6 +21,7 @@ import { StatusPicker, STATUS_NAMES } from './StatusPicker.tsx';
 import { fmtDate, I } from './ui.tsx';
 
 const lookedUp = new Set<string>();
+const GLOSS_SOURCE: Record<string, string> = { curated: 'Biblia', bdb: 'BDB', index: 'Open Scriptures index', strongs: "Strong's", kjv: 'KJV rendering', dodson: 'Dodson', abbott: 'Abbott-Smith' };
 
 export interface WordCardProps {
   info: WordInfo;
@@ -41,6 +43,7 @@ export function WordCard(p: WordCardProps) {
   const [history, setHistory] = useState(false);
   const [conc, setConc] = useState<number[][] | null>(null);
   const [concAll, setConcAll] = useState(false);
+  const [ctx, setCtx] = useState<string | null | undefined>(undefined);
   const refId = `${info.ref.book}:${info.ref.ch}:${info.ref.v}:${info.ref.i}`;
 
   useEffect(() => {
@@ -49,7 +52,9 @@ export function WordCard(p: WordCardProps) {
     setConc(null);
     setConcAll(false);
     setEntry(undefined);
+    setCtx(undefined);
     let alive = true;
+    if (info.ref.book && !p.standalone) loadContext(info.lang, info.ref.book).then(() => alive && setCtx(contextGloss(info.lang, info.ref.book, info.ref.ch, info.ref.v, info.ref.i)));
     (async () => {
       const e = await loadEntry(info).catch(() => undefined);
       if (!alive) return;
@@ -87,6 +92,7 @@ export function WordCard(p: WordCardProps) {
   const he = info.lang === 'he' ? (entry as HeEntry | null | undefined) : undefined;
   const gr = info.lang === 'gr' ? (entry as GrEntry | null | undefined) : undefined;
   const gloss = entry?.g ?? '';
+  const glossSource = GLOSS_SOURCE[entry?.gs ?? ''] ?? '';
   const prefixForms = info.he?.segments.filter((s) => ['conjunction', 'preposition', 'article', 'relative', 'interrogative'].includes(s.kind)).map((s) => toNiqqud(s.form)) ?? [];
   const morphLine = info.he ? heMorphLine(info, prefixForms) : info.gr ? [info.gr.morph.pos, info.gr.morph.features].filter(Boolean).join(' · ') : '';
   const reading = info.lang === 'he' ? toNiqqud(info.printed) : '';
@@ -103,7 +109,27 @@ export function WordCard(p: WordCardProps) {
       </div>
       <div className={info.lang === 'he' ? 'card__surface' : 'card__surface card__surface--gr'}>{info.printed}</div>
       {reading && reading !== info.printed && <div className="card__vocalized" title="Reading without the accents">{reading}</div>}
-      {entry === undefined && info.lexId ? <div className="card__gloss faint">Loading…</div> : gloss ? <div className="card__gloss card__gloss--quote">{gloss}</div> : prefixOnly ? <div className="card__gloss">{info.he!.morph.prefixes.map((x) => x.gloss).join(' + ')}</div> : !info.lexId ? <div className="card__gloss faint">no morphology aligned to this word</div> : null}
+      {ctx !== undefined && !p.standalone && (
+        <div className="card__ctx">
+          {ctx ? <span className="card__ctx-text">“{ctx}”</span> : ctx === '' ? <span className="card__ctx-text faint">rendered together with a neighbouring word</span> : <span className="card__ctx-text faint">no rendering aligned for this word</span>}
+          <span className="card__ctx-src">in this verse · BSB</span>
+        </div>
+      )}
+      {entry === undefined && info.lexId ? (
+        <div className="card__gloss faint">Loading…</div>
+      ) : gloss ? (
+        <div className="card__gloss">
+          <span className="card__gloss-text">{gloss}</span>
+          <span className="card__gloss-src">lemma gloss{glossSource ? ' · ' + glossSource : ''}</span>
+        </div>
+      ) : prefixOnly ? (
+        <div className="card__gloss"><span className="card__gloss-text">{info.he!.morph.prefixes.map((x) => x.gloss).join(' + ')}</span><span className="card__gloss-src">prefix only</span></div>
+      ) : !info.lexId ? (
+        <div className="card__gloss faint">no morphology aligned to this word</div>
+      ) : entry === null ? (
+        <div className="card__gloss faint">no gloss in the source lexica</div>
+      ) : null}
+      {gloss && <div className="card__note">Lemma gloss — the dictionary meaning, not a contextual translation{ctx ? '; the BSB line above is what this verse says' : ''}.</div>}
       {entry && (
         <div className="card__line">
           <span className="k">Lemma</span>
@@ -174,9 +200,9 @@ export function WordCard(p: WordCardProps) {
             ) : null;
           })()}
           {info.he?.morph.lang === 'Aramaic' && <div className="card__text"><b>Aramaic.</b> This word is in the Aramaic portions of the Bible (Daniel 2:4b–7:28, Ezra 4:8–6:18 and 7:12–26, Jeremiah 10:11, two words in Genesis 31:47).</div>}
-          {he?.kj && <div className="card__text"><b>Rendered in the KJV as:</b> {he.kj}</div>}
+          {he?.kj && <div className="card__text"><b>Historical renderings (KJV, 1611):</b> {he.kj}</div>}
           {gr?.long && gr.long !== gloss && <div className="card__text">{gr.long}</div>}
-          <div className="card__prov">{provenance}</div>
+          <div className="card__prov">{provenance}{glossSource ? ` · gloss: ${glossSource}` : ''}</div>
         </div>
       )}
 
@@ -196,7 +222,7 @@ export function WordCard(p: WordCardProps) {
             <div className="card__section">
               <span className="label">Strong's {he ? `H${he.id}` : gr?.id}</span>
               <div className="card__text">{entry.der ? <span className="faint">{entry.der} </span> : null}{entry.sd}</div>
-              {entry.kj && <div className="card__kj">KJV: {entry.kj}</div>}
+              {entry.kj && <div className="card__kj">Historical renderings (KJV): {entry.kj}</div>}
             </div>
           )}
           {he && (he.fam?.length || he.lxx?.length) ? (

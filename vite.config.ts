@@ -32,7 +32,7 @@ export default defineConfig({
       manifest: {
         name: 'Biblia',
         short_name: 'Biblia',
-        description: 'The Masoretic Text and the Greek New Testament, every word explained.',
+        description: 'The Masoretic Text and the Greek New Testament, nearly every word explained.',
         lang: 'en',
         start_url: './',
         scope: './',

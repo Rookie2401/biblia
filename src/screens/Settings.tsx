@@ -6,6 +6,8 @@ import { db } from '../db/db.ts';
 import { CANON, langOf } from '../text/canon.ts';
 import { DEFAULTS, setSettings, useSettings } from '../state/settings.ts';
 
+const GR_CURATED = 93;
+
 export default function Settings() {
   const s = useSettings();
   const [dl, setDl] = useState<{ done: number; total: number; failed: number } | null>(null);
@@ -96,10 +98,11 @@ export default function Settings() {
         <div className="prose" style={{ fontSize: '0.92rem' }}>
           <p><b>Tanakh text</b> — <i>Miqra according to the Masorah</i> (MAM), a digital edition based on the Aleppo Codex and related manuscripts, via the Sefaria API. CC BY-SA 4.0. The text is shown exactly as the edition prints it: nothing is corrected, normalised or respelled; ketiv/qere are shown with the qere read.</p>
           <p><b>Hebrew morphology</b> — Open Scriptures Hebrew Bible (OSHB), CC BY 4.0, aligned word by word to MAM at build time: {coverage.hebrewCoveragePercent}% of the {coverage.hebrewWords.toLocaleString()} words carry an analysis ({coverage.hebrewUnmatched} unmatched, shown without a card).</p>
-          <p><b>Hebrew lexicon</b> — Brown, Driver & Briggs (1906, public domain), the complete text via Sefaria; the Open Scriptures Lexical Index and BDB outline (CC BY 4.0) and Strong's Hebrew Dictionary (public domain; JSON CC BY-SA).</p>
+          <p><b>Contextual renderings</b> — the <i>Berean Standard Bible</i> interlinear tables (Bible Hub / Berean Bible Translation Committee, dedicated to the public domain 30 April 2023), one English rendering per word in its verse, aligned to the MAM and SBLGNT texts at build time. This is the only English layer that translates the verse; every other gloss is a lemma meaning. The BSB translates the WLC and the NA/SBL Greek, so a few words in our base texts carry no rendering.</p>
+          <p><b>Hebrew lexicon</b> — Brown, Driver & Briggs (1906, public domain), the complete text via Sefaria; the Open Scriptures Lexical Index and BDB outline (CC BY 4.0) and Strong's Hebrew Dictionary (public domain; JSON CC BY-SA). The short lemma gloss on each card names its source: <i>Biblia</i> (a curated modern gloss, mostly for function words and names), <i>BDB</i> (the outline's definitions), <i>Open Scriptures index</i>, <i>Strong's</i> (first clause) or, last of all, a <i>KJV rendering</i>. KJV renderings are shown separately as historical renderings, never as the meaning.</p>
           <p><b>Greek text</b> — <i>The Greek New Testament: SBL Edition</i>, ed. Michael W. Holmes (SBL / Logos, 2010), CC BY 4.0.</p>
           <p><b>Greek morphology</b> — MorphGNT, SBLGNT edition, CC BY-SA 3.0.</p>
-          <p><b>Greek lexicon</b> — G. Abbott-Smith, <i>A Manual Greek Lexicon of the New Testament</i> (1922, public domain; TEI transcription by translatable-exegetical-tools, CC BY-SA 4.0), the Dodson Greek Lexicon (public domain) and Strong's Greek Dictionary (public domain).</p>
+          <p><b>Greek lexicon</b> — G. Abbott-Smith, <i>A Manual Greek Lexicon of the New Testament</i> (1922, public domain; TEI transcription by translatable-exegetical-tools, CC BY-SA 4.0), the Dodson Greek Lexicon (public domain) and Strong's Greek Dictionary (public domain). Short glosses come from Dodson, else Abbott-Smith, else Strong's; the {GR_CURATED} MorphGNT lemmas none of them cover (spelling variants, contracted forms, names) carry a curated gloss marked <i>Biblia</i> and are linked to the nearest lexicon entry.</p>
           <p><b>Type</b> — Frank Ruhl Libre and EB Garamond (SIL Open Font License).</p>
           <p>The grammatical explanations under <i>More</i> are the app's own summaries of standard grammar (Gesenius–Kautzsch, Joüon–Muraoka; Smyth, Wallace) and are not part of any source.</p>
         </div>

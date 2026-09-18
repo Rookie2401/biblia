@@ -24,16 +24,18 @@ export interface SearchRow {
   count: number;
   /** Strong's label: "H1254" / "G3056" ('' when unknown) */
   strong: string;
+  /** where the gloss comes from (curated | bdb | index | strongs | kjv | dodson | abbott) */
+  source: string;
 }
 
 export type SearchScope = 'all' | 'he' | 'gr';
 
 /** Greek index rows are [lemma, Strong's id, transliteration, gloss, count]. */
 export function toGreekSearchRows(rows: IndexRow[]): SearchRow[] {
-  return rows.map(([lemma, strong, transliteration, gloss, count]) => ({ lang: 'gr', id: lemma, lemma, transliteration: transliteration || '', gloss: gloss || '', count, strong: strong || '' }));
+  return rows.map(([lemma, strong, transliteration, gloss, count, source]) => ({ lang: 'gr', id: lemma, lemma, transliteration: transliteration || '', gloss: gloss || '', count, strong: strong || '', source: source || '' }));
 }
 export function toHebrewSearchRows(rows: IndexRow[]): SearchRow[] {
-  return rows.map(([id, lemma, transliteration, gloss, count]) => ({ lang: 'he', id, lemma: lemma || id, transliteration: transliteration || '', gloss: gloss || '', count, strong: `H${id.split(' ')[0]}` }));
+  return rows.map(([id, lemma, transliteration, gloss, count, source]) => ({ lang: 'he', id, lemma: lemma || id, transliteration: transliteration || '', gloss: gloss || '', count, strong: `H${id.split(' ')[0]}`, source: source || '' }));
 }
 
 export function wordUrl(row: Pick<SearchRow, 'lang' | 'id'>): string {
@@ -77,9 +79,10 @@ export function searchLexicon(rows: SearchRow[], query: string, scope: SearchSco
   } else {
     const l = s.toLowerCase();
     const word = new RegExp(`\\b${escapeRe(l)}`, 'i');
-    const exact = (r: SearchRow) => r.gloss.toLowerCase() === l || r.transliteration.toLowerCase() === l;
+    // exact gloss first, then a gloss that opens with the word, then the rest; ties by frequency
+    const score = (r: SearchRow) => (r.gloss.toLowerCase() === l || r.transliteration.toLowerCase() === l ? 2 : new RegExp('^' + escapeRe(l) + '\b', 'i').test(r.gloss) ? 1 : 0);
     out = rows.filter((r) => word.test(r.gloss) || r.transliteration.toLowerCase().startsWith(l));
-    out.sort((a, b) => Number(exact(b)) - Number(exact(a)) || b.count - a.count);
+    out.sort((a, b) => score(b) - score(a) || b.count - a.count);
   }
   if (scope !== 'all') out = out.filter((r) => r.lang === scope);
   return out.slice(0, limit);

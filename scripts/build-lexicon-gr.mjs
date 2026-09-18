@@ -111,6 +111,31 @@ function shortStrongs(e) {
 const abbottBase = new Map();
 for (const [l, e] of abbott) if (!abbottBase.has(base(l))) abbottBase.set(base(l), e);
 
+const curated = JSON.parse(fs.readFileSync(path.join(root, 'data', 'curated', 'gr-glosses.json'), 'utf8'));
+const alias = curated._alias || {};
+// Greek -> Latin transliteration (SBL general style) for lemmas Strong's does not cover
+const XLIT = { α: 'a', β: 'b', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'ē', θ: 'th', ι: 'i', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'x', ο: 'o', π: 'p', ρ: 'r', σ: 's', ς: 's', τ: 't', υ: 'y', φ: 'ph', χ: 'ch', ψ: 'ps', ω: 'ō' };
+function translit(lemma) {
+  const d = lemma.normalize('NFD');
+  let out = '';
+  let prevGreek = '';
+  for (let i = 0; i < d.length; i++) {
+    const ch = d[i];
+    const lower = ch.toLowerCase();
+    const isUpper = ch !== lower;
+    const marks = [];
+    while (i + 1 < d.length && /[̀-ͯ]/.test(d[i + 1])) marks.push(d[++i]);
+    let t = XLIT[lower] ?? (/[a-z]/i.test(ch) ? ch : '');
+    if (marks.includes('̔')) t = (lower === 'ρ' ? 'rh' : 'h' + t);
+    if (lower === 'γ' && /[γκξχ]/.test(d[i + 1]?.toLowerCase() || '')) t = 'n';
+    if (lower === 'υ' && /[αεηο]/.test(prevGreek) && !marks.includes('̈')) t = 'u';
+    prevGreek = lower;
+    if (isUpper) t = t[0].toUpperCase() + t.slice(1);
+    out += t;
+  }
+  return out;
+}
+const fixTypos = (x) => (x || '').replace(/descendent/g, 'descendant');
 const entries = {};
 let matchedAS = 0;
 let matchedStrongs = 0;
@@ -118,7 +143,7 @@ for (const lemma of Object.keys(conc)) {
   const occ = conc[lemma].length / 4;
   // candidates: the lemma itself; without a parenthesised movable letter (οὕτω(ς)); the active
   // form of a deponent (φοβέομαι -> φοβέω, ἀφίσταμαι -> ἀφίστημι); Abbott-Smith's spelling Δαυείδ.
-  const cands = [lemma, lemma.replace(/\(([^)]*)\)/g, '$1'), lemma.replace(/\([^)]*\)/g, ''), lemma.replace(/ομαι$/, 'ω'), lemma.replace(/αμαι$/, 'ημι'), lemma.replace(/υί/g, 'υεί')];
+  const cands = [lemma, alias[lemma], lemma.replace(/\(([^)]*)\)/g, '$1'), lemma.replace(/\([^)]*\)/g, ''), lemma.replace(/ομαι$/, 'ω'), lemma.replace(/αμαι$/, 'ημι'), lemma.replace(/υί/g, 'υεί'), lemma.replace(/άω$/, 'έω'), lemma.replace(/οῦς$/, 'εος'), lemma.replace(/οῦν$/, 'εον'), lemma.replace(/εν$/, 'α'), lemma.replace(/ει$/, 'ω'), lemma.replace(/ίτης$/, 'είτης'), lemma.replace(/ῖτις$/, 'εῖτις')].filter(Boolean);
   let as;
   let gid;
   for (const c of cands) {
@@ -134,13 +159,17 @@ for (const lemma of Object.keys(conc)) {
   const st = gid ? strongs[gid] : undefined;
   if (st) matchedStrongs++;
   const dd = gid ? dodson.get(gid) : undefined;
-  const gloss = dd?.brief || as?.glosses[0] || (st ? shortStrongs(st) : '');
+  const cur = curated[lemma];
+  const gloss = cur || fixTypos(dd?.brief) || as?.glosses[0] || (st ? shortStrongs(st) : '');
+  const gs = cur ? 'curated' : dd?.brief ? 'dodson' : as?.glosses[0] ? 'abbott' : st ? 'strongs' : '';
   entries[lemma] = {
     l: lemma,
     id: gid || undefined,
-    x: st?.translit || undefined,
+    // Strong's transliteration only when it is this very lemma; an aliased or unmatched lemma is transliterated itself
+    x: st?.translit && st.lemma && base(st.lemma.normalize('NFC')) === base(lemma) ? st.translit : translit(lemma),
     g: gloss,
-    long: dd?.long && dd.long !== gloss ? dd.long : undefined,
+    gs: gs || undefined,
+    long: dd?.long && fixTypos(dd.long) !== gloss ? fixTypos(dd.long) : undefined,
     sd: st?.strongs_def?.trim() || undefined,
     kj: st?.kjv_def?.trim() || undefined,
     der: st?.derivation?.trim() || undefined,
@@ -170,7 +199,7 @@ for (const e of Object.values(entries)) if (e.as) assertSafe(e.as, 'Abbott-Smith
 for (const [k, v] of Object.entries(shards)) fs.writeFileSync(path.join(lexDir, `gr-${k}.json`), JSON.stringify(v));
 for (const [k, v] of Object.entries(concShards)) fs.writeFileSync(path.join(concDir, `gr-${k}.json`), JSON.stringify(v));
 fs.writeFileSync(path.join(lexDir, 'gr-manifest.json'), JSON.stringify({ split: [...split], shards: Object.keys(shards).sort() }));
-fs.writeFileSync(path.join(lexDir, 'gr-index.json'), JSON.stringify(Object.values(entries).map((e) => [e.l, e.id || '', e.x || '', e.g, e.n])));
+fs.writeFileSync(path.join(lexDir, 'gr-index.json'), JSON.stringify(Object.values(entries).map((e) => [e.l, e.id || '', e.x || '', e.g, e.n, e.gs || ''])));
 fs.writeFileSync(
   path.join(lexDir, 'gr-SOURCES.json'),
   JSON.stringify(
