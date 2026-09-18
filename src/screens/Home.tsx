@@ -1,10 +1,12 @@
 /**
- * Home: the canon as nested disclosures — testament → division → book → chapters — using
- * native <details>/<summary> so every level is keyboard and screen-reader operable. Which
- * levels are open is remembered on this device.
+ * Home: the canon as nested disclosures — testament → division → book → chapters — in the
+ * Classical Library's format: a button head with a rotating chevron, a height-animated
+ * collapsible, children indented one rung and tied to the parent with a quiet rule, and
+ * chapters as a vertical list of entries. Which levels are open is remembered on this device.
  */
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Collapsible } from '../components/Collapsible.tsx';
 import { I, IconBtn, Topbar } from '../components/ui.tsx';
 import { db } from '../db/db.ts';
 import type { Lang, Position } from '../model/types.ts';
@@ -82,11 +84,11 @@ export default function Home() {
     db.progress.filter((p) => p.done).toArray().then((rows) => setDone(new Set(rows.map((r) => r.id))));
   }, []);
 
-  function toggle(id: string, isOpen: boolean) {
+  function toggle(id: string) {
     setOpen((prev) => {
       const next = new Set(prev);
-      if (isOpen) next.add(id);
-      else next.delete(id);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       try {
         localStorage.setItem(OPEN_KEY, JSON.stringify([...next]));
       } catch {
@@ -124,42 +126,46 @@ export default function Home() {
             <div className="home__continue-sub">{CANON.find((b) => b.id === last.book)?.native}</div>
           </Link>
         )}
-        <nav className="tree" aria-label="Books">
+        <nav className="lib" aria-label="Books">
           {TREE.map((t) => (
-            <Node key={t.id} id={t.id} level={1} open={open} onToggle={toggle} title={t.title} native={t.native} lang={t.lang} meta={`${t.divisions.reduce((n, d) => n + booksOf(d).length, 0)} books`}>
+            <Group key={t.id} id={t.id} level={1} open={open.has(t.id)} onToggle={toggle} title={t.title} native={t.native} lang={t.lang} meta={`${t.divisions.reduce((n, d) => n + booksOf(d).length, 0)} books`}>
               {t.divisions.map((d) => {
                 const books = booksOf(d);
                 return (
-                  <Node key={d.id} id={d.id} level={2} open={open} onToggle={toggle} title={d.title} native={d.native} lang={t.lang} meta={`${books.length} books`}>
+                  <Group key={d.id} id={d.id} level={2} open={open.has(d.id)} onToggle={toggle} title={d.title} native={d.native} lang={t.lang} meta={`${books.length} books`}>
                     {books.map((b) => {
                       const p = positions.get(b.id);
                       const finished = b.verses.filter((_, i) => done.has(`${b.id}:${i + 1}`)).length;
                       return (
-                        <Node key={b.id} id={b.id} level={3} open={open} onToggle={toggle} title={b.en} native={b.native} lang={b.lang} current={b.id === lastBook} meta={p ? `at ${p.ch}` : finished ? `${finished}/${b.verses.length}` : `${b.verses.length} ch`}>
-                          <div className="chapters" role="group" aria-label={`${b.en} chapters`}>
+                        <Group key={b.id} id={b.id} level={3} open={open.has(b.id)} onToggle={toggle} title={b.en} native={b.native} lang={b.lang} current={b.id === lastBook} meta={p ? `at ${p.ch}` : finished ? `${finished}/${b.verses.length}` : `${b.verses.length} ch`}>
+                        <div className="entrylist" role="list" aria-label={`${b.en} chapters`}>
                             {p && (
-                              <button type="button" className="chapters__resume" onClick={() => nav(`/read/${b.id}/${p.ch}?v=${p.v}`)}>
-                                Resume at {refLabel(b.id, p.ch, p.v)}
+                              <button type="button" className="entry entry--resume" role="listitem" onClick={() => nav(`/read/${b.id}/${p.ch}?v=${p.v}`)}>
+                                <span className="entry__num">Resume</span>
+                                <span className="entry__preview">{refLabel(b.id, p.ch, p.v)}</span>
                               </button>
                             )}
-                            {b.verses.map((_, i) => {
+                            {b.verses.map((count, i) => {
                               const n = i + 1;
                               const isDone = done.has(`${b.id}:${n}`);
                               return (
-                                <Link key={n} to={`/read/${b.id}/${n}`} className={`chapters__ch${isDone ? ' chapters__ch--done' : ''}${p?.ch === n ? ' chapters__ch--at' : ''}`} aria-label={`${b.en} ${n}`} title={`${b.en} ${n}${isDone ? ' · read' : ''}`}>
-                                  <span>{n}</span>
-                                  <span className={`chapters__native ${b.lang}`}>{b.lang === 'he' ? hebrewNumeral(n) : greekNumeral(n)}</span>
+                                <Link key={n} to={`/read/${b.id}/${n}`} className={`entry${isDone ? ' entry--done' : ''}${p?.ch === n ? ' entry--at' : ''}`} role="listitem" aria-label={`${b.en} ${n}${isDone ? ', read' : ''}`}>
+                                  <span className="entry__num">
+                                    {n}
+                                    <span className={`entry__native ${b.lang}`}>{b.lang === 'he' ? hebrewNumeral(n) : greekNumeral(n)}</span>
+                                  </span>
+                                  <span className="entry__preview">{count} verses{isDone ? ' · read' : p?.ch === n ? ' · reading' : ''}</span>
                                 </Link>
                               );
                             })}
                           </div>
-                        </Node>
+                        </Group>
                       );
                     })}
-                  </Node>
+                  </Group>
                 );
               })}
-            </Node>
+            </Group>
           ))}
         </nav>
         <p className="home__about">
@@ -170,18 +176,19 @@ export default function Home() {
   );
 }
 
-/** One disclosure level. Native <details> keeps it operable by keyboard and assistive technology. */
-function Node({ id, level, open, onToggle, title, native, lang, meta, current, children }: { id: string; level: 1 | 2 | 3; open: Set<string>; onToggle: (id: string, open: boolean) => void; title: string; native: string; lang: Lang; meta?: string; current?: boolean; children: ReactNode }) {
-  const isOpen = open.has(id);
+/** One disclosure rung: button head with a rotating chevron, height-animated children. */
+function Group({ id, level, open, onToggle, title, native, lang, meta, current, children }: { id: string; level: 1 | 2 | 3; open: boolean; onToggle: (id: string) => void; title: string; native: string; lang: Lang; meta?: string; current?: boolean; children: ReactNode }) {
   return (
-    <details className={`tree__node tree__node--${level}${current ? ' tree__node--current' : ''}`} open={isOpen} onToggle={(e) => onToggle(id, (e.currentTarget as HTMLDetailsElement).open)}>
-      <summary className="tree__summary">
-        <span className="tree__chevron" aria-hidden="true">{I.chevron}</span>
-        <span className="tree__title">{title}</span>
-        <span className={`tree__native ${lang}`}>{native}</span>
-        {meta && <span className="tree__meta">{meta}</span>}
-      </summary>
-      {isOpen && <div className="tree__body">{children}</div>}
-    </details>
+    <div className={`lib__group lib__group--${level}${current ? ' lib__group--current' : ''}`}>
+      <button type="button" className="lib__head" aria-expanded={open} onClick={() => onToggle(id)}>
+        <span className={`lib__chev${open ? ' lib__chev--open' : ''}`} aria-hidden="true">{I.chevronRight}</span>
+        <span className="lib__title">{title}</span>
+        <span className={`lib__native ${lang}`}>{native}</span>
+        {meta && <span className="lib__meta">{meta}</span>}
+      </button>
+      <Collapsible open={open}>
+        <div className="lib__children">{children}</div>
+      </Collapsible>
+    </div>
   );
 }
