@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
+import { useRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { useModalDialog, useStableId } from './dialog.ts';
 
 export const I = {
   back: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M15 6l-6 6 6 6" /></svg>,
@@ -38,17 +39,21 @@ export function IconBtn({ onClick, label, active, children, to }: { onClick?: ()
   const cls = `iconbtn${active ? ' iconbtn--active' : ''}`;
   if (to) return <Link to={to} className={cls} aria-label={label} title={label}>{children}</Link>;
   return (
-    <button className={cls} onClick={onClick} aria-label={label} title={label} aria-pressed={active}>
+    <button type="button" className={cls} onClick={onClick} aria-label={label} title={label} aria-pressed={active}>
       {children}
     </button>
   );
 }
 
+/** A modal sheet: focus moves in, Tab stays inside, Escape and the backdrop close it, focus returns. */
 export function Sheet({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const titleId = useStableId('sheet-title');
+  useModalDialog(ref, { active: true, onClose, inertSelector: '.shell > *:not(.sheet-backdrop)' });
   return (
     <div className="sheet-backdrop" onClick={onClose}>
-      <div className="sheet" role="dialog" aria-label={title} onClick={(e) => e.stopPropagation()}>
-        <div className="sheet__title">{title}</div>
+      <div className="sheet" role="dialog" aria-modal="true" aria-labelledby={titleId} ref={ref} onClick={(e) => e.stopPropagation()}>
+        <div className="sheet__title" id={titleId}>{title}</div>
         {children}
       </div>
     </div>

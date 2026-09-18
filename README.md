@@ -24,9 +24,15 @@ Library (offline PWA, paper-and-Garamond chrome).
 The text is never edited: MAM's reader markup is resolved (ketiv/qere read as qere, paragraph
 marks kept as flags, editorial footnotes kept as notes) and everything else is shown as the
 edition prints it. Alignment of OSHB to MAM is by consonantal comparison with a spelling
-fallback for single-word gaps (99.95% of words carry morphology). The full BDB text is
-present for 99.8% of Hebrew word occurrences (9,041 of 9,200 lemma ids); the rest fall back to
-the Open Scriptures BDB outline plus Strong's.
+fallback for single-word gaps: 305,309 of the 305,452 maqaf-split content words carry an
+OSHB analysis (99.95%; 143 unmatched). The figure is computed from the shipped files by
+`scripts/coverage.mjs` into `src/data/coverage.json`, which Settings displays. The full BDB
+text is present for 99.8% of Hebrew word occurrences (9,041 of 9,200 lemma ids); the rest fall
+back to the Open Scriptures BDB outline plus Strong's.
+
+Dictionary HTML is sanitized at build time (`scripts/sanitize-html.mjs`: element and attribute
+allowlists, dangerous elements removed with their content, nesting rebalanced, every shipped
+entry re-asserted) and validated again before rendering (`src/text/safeHtml.ts`).
 
 ## Commands
 

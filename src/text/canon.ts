@@ -46,13 +46,21 @@ export function chapterCount(id: string): number {
 /** The chapter after (dir = 1) or before (dir = -1) this one, crossing into the next book of the same testament. */
 export function adjacentChapter(id: string, ch: number, dir: 1 | -1): { book: string; ch: number } | null {
   const b = byId.get(id);
-  if (!b) return null;
+  if (!b || !Number.isInteger(ch) || ch < 1 || ch > b.verses.length) return null;
   const next = ch + dir;
   if (next >= 1 && next <= b.verses.length) return { book: id, ch: next };
   const i = bookIndex(id) + dir;
   const nb = CANON[i];
   if (!nb || nb.lang !== b.lang) return null;
   return { book: nb.id, ch: dir === 1 ? 1 : nb.verses.length };
+}
+
+/** True when the chapter (and verse, if given) exists. */
+export function validRef(id: string, ch: number, v?: number): boolean {
+  const b = byId.get(id);
+  if (!b || !Number.isInteger(ch) || ch < 1 || ch > b.verses.length) return false;
+  if (v === undefined) return true;
+  return Number.isInteger(v) && v >= 1 && v <= b.verses[ch - 1];
 }
 
 /** "Genesis 1" / "1 Kings 3:4" in English. */

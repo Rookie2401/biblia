@@ -1,31 +1,26 @@
 /**
  * Search: a reference ("Gen 1:1", "John 3:16") opens the reader; anything else searches both
- * lexica — Hebrew or Greek letters match lemmas, Latin letters match glosses and
- * transliterations, "H1254" / "G3056" / "1254" match Strong's numbers.
+ * lexica (see state/search.ts for the query rules).
  */
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { BackLink, Topbar } from '../components/ui.tsx';
-import { searchIndex, type IndexRow } from '../data/lexicon.ts';
-import type { Lang } from '../model/types.ts';
+import { searchIndex } from '../data/lexicon.ts';
 import { parseRef, refLabel } from '../text/canon.ts';
-import { greekBase } from '../text/greek.ts';
-import { skeleton } from '../text/hebrew.ts';
-
-type Row = IndexRow & { lang: Lang };
+import { searchLexicon, toGreekSearchRows, toHebrewSearchRows, wordUrl, type SearchRow, type SearchScope } from '../state/search.ts';
 
 export default function Search() {
   const [params, setParams] = useSearchParams();
   const nav = useNavigate();
-  const [q, setQ] = useState(params.get('q')?.replace(/^bdb:.*$/, '') ?? '');
-  const [rows, setRows] = useState<Row[] | null>(null);
-  const [scope, setScope] = useState<'all' | 'he' | 'gr'>('all');
+  const [q, setQ] = useState(params.get('q') ?? '');
+  const [rows, setRows] = useState<SearchRow[] | null>(null);
+  const [scope, setScope] = useState<SearchScope>('all');
 
   useEffect(() => {
     let alive = true;
     Promise.all([searchIndex('he'), searchIndex('gr')]).then(([he, gr]) => {
       if (!alive) return;
-      setRows([...he.map((r) => [...r, 'he'] as unknown as Row), ...gr.map((r) => [...r, 'gr'] as unknown as Row)]);
+      setRows([...toHebrewSearchRows(he), ...toGreekSearchRows(gr)]);
     });
     return () => {
       alive = false;
@@ -38,64 +33,42 @@ export default function Search() {
   }, [q, setParams]);
 
   const ref = useMemo(() => parseRef(q), [q]);
-  const results = useMemo(() => {
-    if (!rows || q.trim().length < 1) return [];
-    const s = q.trim();
-    const isHe = /[א-ת]/.test(s);
-    const isGr = /[Ͱ-Ͽἀ-῿]/.test(s);
-    const num = s.match(/^([HG])?(\d+)( [a-z])?$/i);
-    let out: Row[] = [];
-    if (num) {
-      const n = num[2];
-      const want = num[1]?.toUpperCase();
-      out = rows.filter((r) => (r.lang === 'he' ? r[0].split(' ')[0] === n && want !== 'G' : r[1] === 'G' + n && want !== 'H'));
-    } else if (isHe) {
-      const sk = skeleton(s);
-      out = rows.filter((r) => r.lang === 'he' && skeleton(r[1]).includes(sk)).sort((a, b) => (skeleton(a[1]) === sk ? -1 : skeleton(b[1]) === sk ? 1 : b[4] - a[4]));
-    } else if (isGr) {
-      const b = greekBase(s);
-      out = rows.filter((r) => r.lang === 'gr' && greekBase(r[0]).includes(b)).sort((a, b2) => (greekBase(a[0]) === b ? -1 : greekBase(b2[0]) === b ? 1 : b2[4] - a[4]));
-    } else {
-      const l = s.toLowerCase();
-      const word = new RegExp(`\\b${l.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
-      out = rows
-        .filter((r) => word.test(r[3]) || r[2].toLowerCase().startsWith(l))
-        .sort((a, b) => Number(b[3].toLowerCase() === l || b[2].toLowerCase() === l) - Number(a[3].toLowerCase() === l || a[2].toLowerCase() === l) || b[4] - a[4]);
-    }
-    if (scope !== 'all') out = out.filter((r) => r.lang === scope);
-    return out.slice(0, 80);
-  }, [rows, q, scope]);
+  const results = useMemo(() => (rows ? searchLexicon(rows, q, scope) : []), [rows, q, scope]);
+  const refUrl = ref ? `/read/${ref.book}/${ref.ch}${ref.v ? `?v=${ref.v}` : ''}` : null;
 
   return (
     <div>
       <Topbar title="Search" left={<BackLink />} />
       <div className="page page--narrow route-fade">
         <div className="searchbar">
-          <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Gen 1:1 · John 3:16 · דבר · λόγος · word · H1697" onKeyDown={(e) => { if (e.key === 'Enter' && ref) nav(`/read/${ref.book}/${ref.ch}${ref.v ? `?v=${ref.v}` : ''}`); }} />
+          <label htmlFor="search-q" className="sr-only">Search a reference, a Hebrew or Greek word, an English gloss or a Strong's number</label>
+          <input id="search-q" type="search" autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Gen 1:1 · John 3:16 · דבר · λόγος · word · H1697 · G3056" onKeyDown={(e) => { if (e.key === 'Enter' && refUrl) nav(refUrl); }} />
         </div>
         <div className="filters">
-          <div className="segmented">
-            <button aria-pressed={scope === 'all'} onClick={() => setScope('all')}>Both</button>
-            <button aria-pressed={scope === 'he'} onClick={() => setScope('he')}>Hebrew</button>
-            <button aria-pressed={scope === 'gr'} onClick={() => setScope('gr')}>Greek</button>
-          </div>
+          <fieldset className="segmented" style={{ border: 0, padding: 0, margin: 0 }}>
+            <legend className="sr-only">Language</legend>
+            <button type="button" aria-pressed={scope === 'all'} onClick={() => setScope('all')}>Both</button>
+            <button type="button" aria-pressed={scope === 'he'} onClick={() => setScope('he')}>Hebrew</button>
+            <button type="button" aria-pressed={scope === 'gr'} onClick={() => setScope('gr')}>Greek</button>
+          </fieldset>
           {rows && <span className="faint" style={{ fontSize: '0.85rem' }}>{rows.length.toLocaleString()} lemmas</span>}
         </div>
-        {ref && (
-          <Link className="home__continue" to={`/read/${ref.book}/${ref.ch}${ref.v ? `?v=${ref.v}` : ''}`}>
+        {ref && refUrl && (
+          <Link className="home__continue" to={refUrl}>
             <span className="home__continue-label">Open</span>
             <div className="home__continue-ref">{refLabel(ref.book, ref.ch, ref.v)}</div>
           </Link>
         )}
-        {!rows && <p className="faint">Loading the lexica…</p>}
-        {rows && q && !results.length && !ref && <p className="faint">Nothing found.</p>}
+        {!rows && <p className="faint" aria-live="polite">Loading the lexica…</p>}
+        {rows && q && !results.length && !ref && <p className="faint" role="status">Nothing found.</p>}
+        <div aria-live="polite" className="sr-only">{rows && q ? `${results.length} results` : ''}</div>
         {results.map((r) => (
-          <Link key={r.lang + r[0]} to={`/word/${r.lang}/${encodeURIComponent(r[0])}`} className="result" style={{ display: 'block', color: 'inherit' }}>
+          <Link key={`${r.lang}:${r.id}`} to={wordUrl(r)} className="result" style={{ display: 'block', color: 'inherit' }}>
             <div className="result__head">
-              <span className={r.lang === 'he' ? 'he' : 'gr'} style={{ fontSize: '1.35rem' }}>{r[1] || r[0]}</span>
-              {r[2] && <span className="faint" style={{ fontStyle: 'italic' }}>{r[2]}</span>}
-              <span className="g">{r[3]}</span>
-              <span className="result__meta">{r.lang === 'he' ? `H${r[0]}` : r[1]} · {r[4]}×</span>
+              <span className={r.lang === 'he' ? 'he' : 'gr'} style={{ fontSize: '1.35rem' }}>{r.lemma}</span>
+              {r.transliteration && <span className="faint" style={{ fontStyle: 'italic' }}>{r.transliteration}</span>}
+              <span className="g">{r.gloss}</span>
+              <span className="result__meta">{r.strong || (r.lang === 'he' ? 'Hebrew' : 'Greek')} · {r.count}×</span>
             </div>
           </Link>
         ))}

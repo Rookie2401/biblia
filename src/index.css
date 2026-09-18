@@ -478,3 +478,56 @@ h1, h2, h3, h4, p { margin: 0; }
 
 /* chapter names in the bottom nav are English: keep them left-to-right inside the RTL bar */
 .reader__nav-cite { direction: ltr; unicode-bidi: isolate; font-family: var(--serif); }
+
+/* ============================================================ audit fixes */
+/* Faint text meets WCAG AA (≥ 4.5:1) on both paper tones: light 5.1:1 / 5.5:1, dark 5.6:1 / 5.3:1. */
+:root { --ink-faint: #6f6555; }
+:root[data-theme='dark'] { --ink-faint: #9a8c72; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { --ink-faint: #9a8c72; } }
+.btn:disabled, .reader__nav-btn:disabled { opacity: 0.35; }
+
+/* words and verse numbers are real buttons: inline typography kept, focus made visible */
+button.w, button.vn { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; display: inline; line-height: inherit; letter-spacing: inherit; direction: inherit; unicode-bidi: isolate; cursor: pointer; }
+button.w { padding: 0 0.04em; }
+button.w:focus-visible, button.vn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.panel:focus-visible, .sheet:focus-visible { outline: none; }
+.panel:focus { outline: none; }
+
+/* touch targets ≥ 44px on phones without a heavier header */
+@media (max-width: 979px) {
+  .iconbtn, .reader__header-inner .iconbtn { width: 2.75rem; height: 2.75rem; }
+  .reader__header-inner { gap: 0; }
+  .segmented button, .btn, .status__dot, .textbtn { min-height: 2.75rem; }
+  .status__dot { width: 2.75rem; height: 2.75rem; border-radius: 50%; font-size: 1.1rem; }
+  .status { gap: 0; }
+  .sheet__actions .btn, .card__actions .btn { min-height: 2.75rem; }
+  .vn { padding: 0.4em 0.25em; margin: 0 0.05em; }
+}
+@media (max-width: 400px) {
+  .reader__header-inner .iconbtn[aria-label="Search"] { display: none; }
+}
+
+/* home rows never push the document wider than the viewport */
+.canon__book { overflow: hidden; min-width: 0; }
+.canon__book:hover, .canon__book:focus-visible { padding-left: 0.6rem; }
+.canon__en { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.canon__native { min-width: 0; overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; }
+@media (max-width: 420px) {
+  .canon__book { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 0.75rem; row-gap: 0.1rem; align-items: baseline; }
+  .canon__en { grid-column: 1; grid-row: 1; white-space: normal; }
+  .canon__native { grid-column: 2; grid-row: 1; margin-left: 0; max-width: 55%; justify-self: end; }
+  .canon__meta { grid-column: 1 / -1; grid-row: 2; text-align: left; min-width: 0; }
+  .page { padding-left: max(0.9rem, env(safe-area-inset-left, 0px)); padding-right: max(0.9rem, env(safe-area-inset-right, 0px)); }
+  .home__title { font-size: 1.7rem; }
+}
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* labelled settings */
+.field--row label { flex: 1; min-width: 0; }
+fieldset.field { border: 0; padding: 0; margin: 0 0 1rem; min-width: 0; }
+fieldset.field legend { color: var(--ink-soft); font-size: 0.9rem; padding: 0; margin-bottom: 0.3rem; }
+.sheet__row fieldset { border: 0; padding: 0; margin: 0; display: contents; }
+.sheet__row legend { width: 6rem; color: var(--ink-soft); font-size: 0.9rem; float: left; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.notfound { text-align: center; padding: 4rem 1rem; }
+.notfound h2 { font-weight: 400; font-size: 1.4rem; margin-bottom: 0.6rem; }

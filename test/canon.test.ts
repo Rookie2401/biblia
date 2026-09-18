@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CANON, adjacentChapter, book, parseRef, refLabel } from '../src/text/canon.ts';
+import { CANON, adjacentChapter, book, parseRef, refLabel, validRef } from '../src/text/canon.ts';
 
 describe('canon', () => {
   it('has 66 books with verse counts from the data', () => {
@@ -16,6 +16,21 @@ describe('canon', () => {
     expect(adjacentChapter('2Chr', 36, 1)).toBeNull();
     expect(adjacentChapter('Matt', 1, -1)).toBeNull();
     expect(adjacentChapter('Jude', 1, 1)).toEqual({ book: 'Rev', ch: 1 });
+  });
+  it('refuses to step from an invalid chapter', () => {
+    expect(adjacentChapter('Gen', 999, 1)).toBeNull();
+    expect(adjacentChapter('Gen', 0, -1)).toBeNull();
+    expect(adjacentChapter('Gen', 1.5, 1)).toBeNull();
+    expect(adjacentChapter('Nope', 1, 1)).toBeNull();
+    expect(adjacentChapter('Gen', 50, 1)).toEqual({ book: 'Exod', ch: 1 });
+    expect(adjacentChapter('Exod', 1, -1)).toEqual({ book: 'Gen', ch: 50 });
+  });
+  it('validates references', () => {
+    expect(validRef('Gen', 1, 31)).toBe(true);
+    expect(validRef('Gen', 1, 32)).toBe(false);
+    expect(validRef('Gen', 999)).toBe(false);
+    expect(validRef('Gen', 1)).toBe(true);
+    expect(validRef('Nope', 1)).toBe(false);
   });
   it('parses references', () => {
     expect(parseRef('Gen 1:1')).toEqual({ book: 'Gen', ch: 1, v: 1 });

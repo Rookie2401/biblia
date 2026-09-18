@@ -3,21 +3,63 @@
  * the complete entry, root family, Septuagint links, concordance and history.
  */
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { WordCard } from '../components/WordCard.tsx';
 import { BackLink, Topbar } from '../components/ui.tsx';
 import { lexemeKey, type Lang } from '../model/types.ts';
-import { ensureGlossIndex, indexLemma, type WordInfo } from '../state/wordinfo.ts';
+import { ensureGlossIndex, glossIndex, indexLemma, type WordInfo } from '../state/wordinfo.ts';
 
 export default function Word() {
-  const { lang: langS = 'he', id: idS = '' } = useParams();
-  const lang = (langS === 'gr' ? 'gr' : 'he') as Lang;
+  const { lang: langS = '', id: idS = '' } = useParams();
+  const lang: Lang | null = langS === 'he' || langS === 'gr' ? langS : null;
   const id = decodeURIComponent(idS);
   const nav = useNavigate();
   const [lemma, setLemma] = useState('');
+  const [known, setKnown] = useState<boolean | null>(null);
   useEffect(() => {
-    ensureGlossIndex(lang).then(() => setLemma(indexLemma(lang, id) || id));
+    if (!lang) return;
+    let alive = true;
+    ensureGlossIndex(lang).then((m) => {
+      if (!alive) return;
+      const hit = m.get(id) ?? (lang === 'he' ? m.get(id.split(' ')[0]) : undefined);
+      setKnown(!!hit);
+      setLemma(indexLemma(lang, id) || hit?.[1] || id);
+    });
+    return () => {
+      alive = false;
+    };
   }, [lang, id]);
+
+  if (!lang || !id) {
+    return (
+      <div>
+        <Topbar title="Word" left={<BackLink to="/search" label="Search" />} />
+        <div className="page page--narrow notfound route-fade">
+          <h2>Not a valid word link</h2>
+          <p className="faint">A word address looks like <code>#/word/he/1254 a</code> or <code>#/word/gr/λόγος</code>.</p>
+          <div className="card__actions" style={{ justifyContent: 'center' }}>
+            <Link className="btn" to="/search">Search</Link>
+            <Link className="btn" to="/">Library</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (known === false && glossIndex(lang)) {
+    return (
+      <div>
+        <Topbar title={lang === 'he' ? 'Hebrew word' : 'Greek word'} left={<BackLink to="/search" label="Search" />} />
+        <div className="page page--narrow notfound route-fade">
+          <h2>No {lang === 'he' ? 'Hebrew' : 'Greek'} entry “{id}”</h2>
+          <p className="faint">The lexicon has no entry with that id.</p>
+          <div className="card__actions" style={{ justifyContent: 'center' }}>
+            <Link className="btn" to={`/search?q=${encodeURIComponent(id)}`}>Search for it</Link>
+            <Link className="btn" to="/">Library</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
   const info: WordInfo = { ref: { book: '', ch: 0, v: 0, i: 0 }, lang, printed: lemma || id, form: lemma || id, lexId: id, key: lexemeKey(lang, id) };
   return (
     <div>

@@ -38,7 +38,12 @@ never be silently dropped. The dash MAM prints for Josh 21:36–37 becomes `abse
 
 **Alignment** OSHB → MAM: per verse, exact consonantal match else LCS; when the two editions
 divide a chapter differently (Exod 20, Num 25, Deut 5) the whole chapter is aligned at once.
-Result 2026-09-18: 305,452 words, 0.37% unmatched (shown in the reader as words without a card).
+A spelling fallback (`align-fallback.mjs`) then matches a single unmatched word between two
+matched neighbours when the skeletons are within an edit distance of a third. Result
+(`scripts/coverage.mjs`, computed from the shipped files into `src/data/coverage.json`, which
+Settings displays): 305,309 of 305,452 maqaf-split content words carry an analysis = 99.95%;
+143 words (0.05%) are shown in the reader as plain text without a card. Before the fallback
+the figure was 99.63%.
 
 **Lexicon keys.** Hebrew: OSHB lemma id = Strong's number + Open Scriptures' augment letter
 ("1254 a" shape/create vs "1254 b" be fat); prefixes (`c/b/…`) and the `+` of multi-word names

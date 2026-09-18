@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { assertSafe, sanitizeHtml } from './sanitize-html.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const lexDir = path.join(root, 'public', 'data', 'lex');
@@ -71,9 +72,8 @@ function renderTei(xml) {
   s = s.replace(/<table[^>]*>/g, '<table>').replace(/<row[^>]*>/g, '<tr>').replace(/<\/row>/g, '</tr>').replace(/<cell[^>]*>/g, '<td>').replace(/<\/cell>/g, '</td>');
   s = s.replace(/<div[^>]*>/g, '<div>');
   s = s.replace(/<p[^>]*>/g, '<p>');
-  // anything left that is not in the allow-list is stripped, its text kept
-  s = s.replace(/<\/?(?!(b|i|em|span|div|p|a|br|table|tr|td|sup)\b)[a-zA-Z][^>]*>/g, '');
-  return esc(s.replace(/\s+/g, ' ').replace(/> </g, '><').trim());
+  // the sanitizer drops anything outside the allowlist (tags kept, text kept) and rebalances nesting
+  return sanitizeHtml(s.replace(/\s+/g, ' ').replace(/> </g, '><').trim());
 }
 
 const abbott = new Map(); // lemma -> entry
@@ -166,6 +166,7 @@ for (const [l, e] of Object.entries(entries)) {
   (shards[k] ??= {})[l] = e;
   (concShards[k] ??= {})[l] = conc[l];
 }
+for (const e of Object.values(entries)) if (e.as) assertSafe(e.as, 'Abbott-Smith ' + e.l);
 for (const [k, v] of Object.entries(shards)) fs.writeFileSync(path.join(lexDir, `gr-${k}.json`), JSON.stringify(v));
 for (const [k, v] of Object.entries(concShards)) fs.writeFileSync(path.join(concDir, `gr-${k}.json`), JSON.stringify(v));
 fs.writeFileSync(path.join(lexDir, 'gr-manifest.json'), JSON.stringify({ split: [...split], shards: Object.keys(shards).sort() }));

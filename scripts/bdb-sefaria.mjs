@@ -5,6 +5,7 @@
 // by Strong's number first (lexicon API), then by consonantal headword (text index).
 import fs from 'node:fs';
 import path from 'node:path';
+import { sanitizeHtml } from './sanitize-html.mjs';
 
 const SEFARIA_BOOKS = { Genesis: 'Gen', Exodus: 'Exod', Leviticus: 'Lev', Numbers: 'Num', Deuteronomy: 'Deut', Joshua: 'Josh', Judges: 'Judg', 'I Samuel': '1Sam', 'II Samuel': '2Sam', 'I Kings': '1Kgs', 'II Kings': '2Kgs', Isaiah: 'Isa', Jeremiah: 'Jer', Ezekiel: 'Ezek', Hosea: 'Hos', Joel: 'Joel', Amos: 'Amos', Obadiah: 'Obad', Jonah: 'Jonah', Micah: 'Mic', Nahum: 'Nah', Habakkuk: 'Hab', Zephaniah: 'Zeph', Haggai: 'Hag', Zechariah: 'Zech', Malachi: 'Mal', Psalms: 'Ps', Proverbs: 'Prov', Job: 'Job', 'Song of Songs': 'Song', Ruth: 'Ruth', Lamentations: 'Lam', Ecclesiastes: 'Eccl', Esther: 'Esth', Daniel: 'Dan', Ezra: 'Ezra', Nehemiah: 'Neh', 'I Chronicles': '1Chr', 'II Chronicles': '2Chr' };
 
@@ -29,7 +30,7 @@ export function inline(def) {
 
 export function renderSefaria(content) {
   const senses = (sn) => sn.map((s) => `<div class="sense">${s.number ? `<span class="n">${s.number}</span> ` : ''}${inline(s.definition || '')}${s.senses ? senses(s.senses) : ''}</div>`).join('');
-  return senses(content.senses || []).replace(/\s+/g, ' ');
+  return sanitizeHtml(senses(content.senses || []).replace(/\s+/g, ' '));
 }
 
 /** Load every crawled entry from both crawls. */
@@ -52,7 +53,7 @@ export function loadSefariaBdb(dir, textsDir) {
         if (!f.endsWith('.json')) continue;
         const e = JSON.parse(fs.readFileSync(path.join(d, f), 'utf8'));
         if (!e.html) continue;
-        out.push({ rid: e.ref, hw: stripSup(e.hw), cons: cons(e.hw), strongs: new Set(), aramaic, html: '<div class="sense">' + inline(e.html).replace(/\s+/g, ' ') + '</div>', root: false, source: 'texts' });
+        out.push({ rid: e.ref, hw: stripSup(e.hw), cons: cons(e.hw), strongs: new Set(), aramaic, html: sanitizeHtml('<div class="sense">' + inline(e.html).replace(/\s+/g, ' ') + '</div>'), root: false, source: 'texts' });
       }
     }
   }

@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSefariaBdb, sefariaIndex } from './bdb-sefaria.mjs';
+import { assertSafe, sanitizeHtml } from './sanitize-html.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const lexDir = path.join(root, 'public', 'data', 'lex');
@@ -66,8 +67,7 @@ function renderBdb(xml) {
   s = s.replace(/<sense n="([^"]*)">/g, '<div class="sense"><span class="n">$1</span> ').replace(/<sense>/g, '<div class="sense">').replace(/<\/sense>/g, '</div>');
   s = s.replace(/<foreign[^>]*>([\s\S]*?)<\/foreign>/g, '<i>$1</i>');
   s = s.replace(/<em>([\s\S]*?)<\/em>/g, '<em>$1</em>');
-  s = s.replace(/<\/?(?!(b|i|em|span|div|a|br|sup)\b)[a-zA-Z][^>]*>/g, '');
-  return esc(s.replace(/\s+/g, ' ').replace(/> </g, '><').trim());
+  return sanitizeHtml(s.replace(/\s+/g, ' ').replace(/> </g, '><').trim());
 }
 const bdb = new Map(); // entry id -> { html, w, section, root: boolean, first def }
 const sections = new Map(); // section id -> { root: entry id, entries: [ids] }
@@ -150,7 +150,15 @@ for (const [id, e] of Object.entries(entries)) {
   (shards[k] ??= {})[id] = e;
   (concShards[k] ??= {})[id] = conc[id];
 }
+for (const e of Object.values(entries)) if (e.bdb) assertSafe(e.bdb, 'BDB ' + e.id);
 for (const [k, v] of Object.entries(shards)) fs.writeFileSync(path.join(lexDir, `he-${k}.json`), JSON.stringify(v));
+// BDB entry id -> [lemma id, lemma, gloss], for the cross references inside entries
+const bdbIndexOut = {};
+for (const [bid, ids] of bdbToIds) {
+  const rows = ids.filter((lid) => entries[lid]).map((lid) => [lid, entries[lid].w, entries[lid].g]);
+  if (rows.length) bdbIndexOut[bid] = rows;
+}
+fs.writeFileSync(path.join(lexDir, 'he-bdb-index.json'), JSON.stringify(bdbIndexOut));
 for (const [k, v] of Object.entries(concShards)) fs.writeFileSync(path.join(concDir, `he-${k}.json`), JSON.stringify(v));
 fs.writeFileSync(path.join(lexDir, 'he-index.json'), JSON.stringify(Object.values(entries).map((e) => [e.id, e.w, e.x || '', e.g, e.n])));
 fs.writeFileSync(
