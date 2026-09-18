@@ -1,0 +1,32 @@
+{
+  "_about": "Reviewed Strong's assignments where the lemma is a homograph in Strong's, or where MorphGNT's lemma spelling is not the one Strong's uses and the automatic spelling check cannot confirm Abbott-Smith's number. Each override is applied before any automatic match; the build fails if one is not honoured. Reviewed 2026-09-18 against the corpus occurrences and the Strong's headwords.",
+  "overrides": {
+    "σύνειμι": { "strong": "G4895", "why": "Strong's has two σύνειμι: G4895 'be with' (εἰμί) and G4896 'come together' (εἶμι). MorphGNT uses one lemma; the occurrences (Luke 9:18, Acts 22:11; Luke 8:4 is the other verb) are read as G4895 per review." },
+    "βάτος": { "strong": "G942", "why": "G942 bramble (Luke 6:44, 20:37, Mark 12:26, Acts 7:30, 35) vs G943 the liquid measure bath (Luke 16:6 only); the lemma is glossed as the bramble." },
+    "ῥέω": { "strong": "G4482", "why": "G4482 'flow' (John 7:38); G4483 is the suppletive 'say' (ἐρρέθη), which MorphGNT lemmatises separately." },
+    "Ζηλωτής": { "strong": "G2208", "why": "Capitalised: the Zealot (Simon), G2208; the common noun zealot is G2207." },
+    "ἄρχω": { "strong": "G757", "why": "MorphGNT lemma is the active ἄρχω (G757); G756 is Strong's middle ἄρχομαι." },
+    "οἶδα": { "strong": "G1492", "why": "Strong's heads the perfect οἶδα under εἴδω." },
+    "ἀνεκτός": { "strong": "G414", "why": "Strong's heads it by its comparative ἀνεκτότερος." },
+    "ἐπικαλέω": { "strong": "G1941", "why": "Strong's heads it as the middle ἐπικαλέομαι." },
+    "ἐμπίμπρημι": { "strong": "G1714", "why": "Strong's spelling ἐμπρήθω, the same verb (Matt 22:7)." },
+    "πίμπλημι": { "strong": "G4130", "why": "Strong's spelling πλήθω, the same verb." },
+    "διαρρήγνυμι": { "strong": "G1284", "why": "Strong's spelling διαρρήσσω, the same verb." },
+    "ὠτάριον": { "strong": "G5621", "why": "Strong's heads the diminutive under ὠτίον." },
+    "Μεννά": { "strong": "G3104", "why": "Strong's spelling Μαϊνάν (Luke 3:31)." },
+    "ὑπερεκχύννομαι": { "strong": "G5240", "why": "Strong's spelling ὑπερεκχύνω (Luke 6:38)." },
+    "δάκρυον": { "strong": "G1144", "why": "Strong's heads it as δάκρυ." },
+    "εὖγε": { "strong": "G2095", "why": "Strong's has only εὖ; εὖγε (Luke 19:17) is its strengthened form." },
+    "ἐχθές": { "strong": "G5504", "why": "Strong's spelling χθές." },
+    "ἐπιλέγω": { "strong": "G1951", "why": "Strong's heads it as the middle ἐπιλέγομαι." },
+    "ἔπειμι": { "strong": "G1966", "why": "Strong's heads it by its participle ἐπιοῦσα." },
+    "δεισιδαίμων": { "strong": "G1174", "why": "Strong's heads it by the comparative δεισιδαιμονέστερος (Acts 17:22)." },
+    "διακούω": { "strong": "G1251", "why": "Strong's heads it as the middle διακούομαι." },
+    "ἀκριβής": { "strong": "G196", "why": "Strong's heads it by the superlative ἀκριβέστατος (Acts 26:5)." },
+    "Καῦδα": { "strong": "G2802", "why": "Strong's spelling Κλαύδη, the same island (Acts 27:16)." },
+    "ἥσσων": { "strong": "G2276", "why": "Strong's spelling ἥττον." },
+    "ἐκλανθάνω": { "strong": "G1585", "why": "Strong's heads it as the middle ἐκλανθάνομαι." },
+    "ἔοικα": { "strong": "G1503", "why": "Strong's heads the perfect ἔοικα under εἴκω." },
+    "ἀπογίνομαι": { "strong": "G581", "why": "Strong's heads it by its participle ἀπογενόμενος (1 Pet 2:24)." }
+  }
+}

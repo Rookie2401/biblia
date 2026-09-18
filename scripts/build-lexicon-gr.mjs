@@ -136,6 +136,15 @@ function translit(lemma) {
   return out;
 }
 const fixTypos = (x) => (x || '').replace(/descendent/g, 'descendant');
+function lev(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+/** Reviewed Strong's assignments for homographs and source irregularities (data/curated/gr-overrides.json). */
+const overrides = JSON.parse(fs.readFileSync(path.join(root, 'data', 'curated', 'gr-overrides.json'), 'utf8')).overrides;
+const conflicts = [];
 const entries = {};
 let matchedAS = 0;
 let matchedStrongs = 0;
@@ -150,10 +159,34 @@ for (const lemma of Object.keys(conc)) {
     as = abbott.get(c) || abbottBase.get(base(c));
     if (as) break;
   }
-  for (const c of cands) {
-    gid = as?.g || strongsByLemma.get(c) || strongsByLemma.get('~' + base(c));
-    if (gid) break;
+  // Strong's number, in order of trust: a reviewed override; an exact canonical Strong's lemma
+  // for the lemma or a reviewed alias; an accent-free canonical match; Abbott-Smith's number only
+  // when Strong's lemma for it is the same word (its annotations are sometimes off by one entry).
+  const asId = as?.g && /^G\d+$/.test(as.g) ? as.g : undefined;
+  // the same word when the accent-free forms agree, or differ only by a spelling variant
+  // (Δαβίδ/Δαυίδ, δεικνύω/δείκνυμι, Μωσεύς/Μωϋσῆς): a small edit distance from the same initial
+  const sameWord = (id) => {
+    const sl = strongs[id]?.lemma;
+    if (!sl) return false;
+    const a = base(sl.normalize('NFC'));
+    const b = base(lemma);
+    if (a === b) return true;
+    return a[0] === b[0] && lev(a, b) <= (Math.min(a.length, b.length) <= 5 ? 1 : 3);
+  };
+  if (overrides[lemma]) gid = overrides[lemma].strong;
+  else {
+    for (const c of [lemma, alias[lemma]].filter(Boolean)) {
+      gid = strongsByLemma.get(c);
+      if (gid) break;
+    }
+    if (!gid) for (const c of cands) {
+      gid = strongsByLemma.get('~' + base(c));
+      if (gid) break;
+    }
+    if (!gid && asId && sameWord(asId)) gid = asId;
+    if (!gid && asId) conflicts.push({ lemma, abbott: asId, abbottLemma: strongs[asId]?.lemma, canonical: null, used: null, note: 'Abbott-Smith number names another word; no canonical match' });
   }
+  if (asId && gid && asId !== gid) conflicts.push({ lemma, abbott: asId, abbottLemma: strongs[asId]?.lemma, canonical: gid, canonicalLemma: strongs[gid]?.lemma, used: gid, note: overrides[lemma] ? 'reviewed override' : 'canonical Strong lemma preferred' });
   if (!as && gid) as = abbottByStrong.get(gid);
   if (as) matchedAS++;
   const st = gid ? strongs[gid] : undefined;
@@ -170,7 +203,7 @@ for (const lemma of Object.keys(conc)) {
     g: gloss,
     gs: gs || undefined,
     long: dd?.long && fixTypos(dd.long) !== gloss ? fixTypos(dd.long) : undefined,
-    sd: st?.strongs_def?.trim() || undefined,
+    sd: st?.strongs_def?.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim() || undefined,
     kj: st?.kjv_def?.trim() || undefined,
     der: st?.derivation?.trim() || undefined,
     as: as?.html || undefined,
@@ -199,6 +232,10 @@ for (const e of Object.values(entries)) if (e.as) assertSafe(e.as, 'Abbott-Smith
 for (const [k, v] of Object.entries(shards)) fs.writeFileSync(path.join(lexDir, `gr-${k}.json`), JSON.stringify(v));
 for (const [k, v] of Object.entries(concShards)) fs.writeFileSync(path.join(concDir, `gr-${k}.json`), JSON.stringify(v));
 fs.writeFileSync(path.join(lexDir, 'gr-manifest.json'), JSON.stringify({ split: [...split], shards: Object.keys(shards).sort() }));
+// every disagreement between Abbott-Smith's number and the canonical Strong's lemma, for review
+fs.writeFileSync(path.join(buildDir, 'gr-strong-conflicts.json'), JSON.stringify(conflicts, null, 1));
+console.log(`Strong's conflicts (Abbott-Smith number ≠ canonical lemma): ${conflicts.length}, listed in data/build/gr-strong-conflicts.json`);
+for (const [lemma, o] of Object.entries(overrides)) if (entries[lemma] && entries[lemma].id !== o.strong) throw new Error(`override not applied for ${lemma}`);
 fs.writeFileSync(path.join(lexDir, 'gr-index.json'), JSON.stringify(Object.values(entries).map((e) => [e.l, e.id || '', e.x || '', e.g, e.n, e.gs || ''])));
 fs.writeFileSync(
   path.join(lexDir, 'gr-SOURCES.json'),

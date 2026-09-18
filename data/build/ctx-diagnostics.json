@@ -1,0 +1,9782 @@
+{
+ "chapters": {
+  "he": {
+   "Gen 1": {
+    "words": 434,
+    "nonempty": 400,
+    "joint": 34,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 2": {
+    "words": 328,
+    "nonempty": 301,
+    "joint": 27,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 3": {
+    "words": 347,
+    "nonempty": 324,
+    "joint": 23,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 4": {
+    "words": 341,
+    "nonempty": 309,
+    "joint": 32,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 5": {
+    "words": 365,
+    "nonempty": 255,
+    "joint": 110,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 6": {
+    "words": 305,
+    "nonempty": 271,
+    "joint": 34,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 7": {
+    "words": 332,
+    "nonempty": 284,
+    "joint": 48,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 8": {
+    "words": 308,
+    "nonempty": 263,
+    "joint": 42,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Gen 9": {
+    "words": 353,
+    "nonempty": 310,
+    "joint": 43,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 10": {
+    "words": 287,
+    "nonempty": 241,
+    "joint": 46,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 11": {
+    "words": 392,
+    "nonempty": 325,
+    "joint": 67,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 12": {
+    "words": 268,
+    "nonempty": 231,
+    "joint": 37,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 13": {
+    "words": 241,
+    "nonempty": 210,
+    "joint": 30,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Gen 14": {
+    "words": 341,
+    "nonempty": 297,
+    "joint": 40,
+    "nulls": 4,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Gen 15": {
+    "words": 258,
+    "nonempty": 225,
+    "joint": 33,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 16": {
+    "words": 223,
+    "nonempty": 194,
+    "joint": 29,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 17": {
+    "words": 355,
+    "nonempty": 283,
+    "joint": 72,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 18": {
+    "words": 437,
+    "nonempty": 398,
+    "joint": 39,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 19": {
+    "words": 563,
+    "nonempty": 483,
+    "joint": 78,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Gen 20": {
+    "words": 282,
+    "nonempty": 248,
+    "joint": 34,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 21": {
+    "words": 436,
+    "nonempty": 366,
+    "joint": 70,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 22": {
+    "words": 367,
+    "nonempty": 290,
+    "joint": 77,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 23": {
+    "words": 275,
+    "nonempty": 219,
+    "joint": 56,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 24": {
+    "words": 918,
+    "nonempty": 805,
+    "joint": 112,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Gen 25": {
+    "words": 405,
+    "nonempty": 338,
+    "joint": 65,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Gen 26": {
+    "words": 466,
+    "nonempty": 415,
+    "joint": 50,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Gen 27": {
+    "words": 638,
+    "nonempty": 568,
+    "joint": 67,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Gen 28": {
+    "words": 323,
+    "nonempty": 274,
+    "joint": 49,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 29": {
+    "words": 471,
+    "nonempty": 403,
+    "joint": 68,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 30": {
+    "words": 561,
+    "nonempty": 495,
+    "joint": 64,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Gen 31": {
+    "words": 768,
+    "nonempty": 647,
+    "joint": 121,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 32": {
+    "words": 453,
+    "nonempty": 384,
+    "joint": 69,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Gen 33": {
+    "words": 268,
+    "nonempty": 224,
+    "joint": 44,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 34": {
+    "words": 421,
+    "nonempty": 349,
+    "joint": 72,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 35": {
+    "words": 378,
+    "nonempty": 330,
+    "joint": 46,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Gen 36": {
+    "words": 487,
+    "nonempty": 428,
+    "joint": 57,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Gen 37": {
+    "words": 494,
+    "nonempty": 418,
+    "joint": 76,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 38": {
+    "words": 405,
+    "nonempty": 366,
+    "joint": 39,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 39": {
+    "words": 347,
+    "nonempty": 286,
+    "joint": 60,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Gen 40": {
+    "words": 312,
+    "nonempty": 258,
+    "joint": 53,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Gen 41": {
+    "words": 776,
+    "nonempty": 664,
+    "joint": 111,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Gen 42": {
+    "words": 528,
+    "nonempty": 453,
+    "joint": 75,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 43": {
+    "words": 485,
+    "nonempty": 410,
+    "joint": 74,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Gen 44": {
+    "words": 455,
+    "nonempty": 380,
+    "joint": 75,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 45": {
+    "words": 397,
+    "nonempty": 347,
+    "joint": 49,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Gen 46": {
+    "words": 414,
+    "nonempty": 352,
+    "joint": 58,
+    "nulls": 4,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Gen 47": {
+    "words": 512,
+    "nonempty": 429,
+    "joint": 83,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 48": {
+    "words": 350,
+    "nonempty": 312,
+    "joint": 38,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gen 49": {
+    "words": 368,
+    "nonempty": 330,
+    "joint": 37,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Gen 50": {
+    "words": 375,
+    "nonempty": 313,
+    "joint": 62,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 1": {
+    "words": 240,
+    "nonempty": 194,
+    "joint": 45,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Exod 2": {
+    "words": 340,
+    "nonempty": 291,
+    "joint": 49,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 3": {
+    "words": 395,
+    "nonempty": 342,
+    "joint": 53,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 4": {
+    "words": 454,
+    "nonempty": 394,
+    "joint": 57,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Exod 5": {
+    "words": 318,
+    "nonempty": 270,
+    "joint": 48,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 6": {
+    "words": 404,
+    "nonempty": 338,
+    "joint": 65,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 7": {
+    "words": 418,
+    "nonempty": 357,
+    "joint": 61,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Exod 8": {
+    "words": 422,
+    "nonempty": 372,
+    "joint": 49,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Exod 9": {
+    "words": 521,
+    "nonempty": 459,
+    "joint": 62,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 10": {
+    "words": 497,
+    "nonempty": 413,
+    "joint": 83,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 11": {
+    "words": 174,
+    "nonempty": 151,
+    "joint": 23,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 12": {
+    "words": 751,
+    "nonempty": 630,
+    "joint": 120,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Exod 13": {
+    "words": 325,
+    "nonempty": 296,
+    "joint": 29,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 14": {
+    "words": 474,
+    "nonempty": 391,
+    "joint": 80,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Exod 15": {
+    "words": 321,
+    "nonempty": 300,
+    "joint": 21,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 16": {
+    "words": 548,
+    "nonempty": 476,
+    "joint": 70,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Exod 17": {
+    "words": 246,
+    "nonempty": 219,
+    "joint": 27,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 18": {
+    "words": 418,
+    "nonempty": 366,
+    "joint": 52,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 19": {
+    "words": 375,
+    "nonempty": 339,
+    "joint": 34,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Exod 20": {
+    "words": 312,
+    "nonempty": 274,
+    "joint": 38,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Exod 21": {
+    "words": 451,
+    "nonempty": 395,
+    "joint": 55,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Exod 22": {
+    "words": 361,
+    "nonempty": 318,
+    "joint": 43,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Exod 23": {
+    "words": 398,
+    "nonempty": 355,
+    "joint": 42,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Exod 24": {
+    "words": 252,
+    "nonempty": 226,
+    "joint": 26,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 25": {
+    "words": 440,
+    "nonempty": 371,
+    "joint": 68,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 26": {
+    "words": 480,
+    "nonempty": 385,
+    "joint": 94,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 27": {
+    "words": 262,
+    "nonempty": 240,
+    "joint": 22,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 28": {
+    "words": 595,
+    "nonempty": 498,
+    "joint": 96,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 29": {
+    "words": 649,
+    "nonempty": 541,
+    "joint": 106,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Exod 30": {
+    "words": 468,
+    "nonempty": 383,
+    "joint": 85,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 31": {
+    "words": 229,
+    "nonempty": 188,
+    "joint": 41,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 32": {
+    "words": 544,
+    "nonempty": 484,
+    "joint": 59,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 33": {
+    "words": 354,
+    "nonempty": 311,
+    "joint": 43,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 34": {
+    "words": 538,
+    "nonempty": 475,
+    "joint": 62,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 35": {
+    "words": 440,
+    "nonempty": 353,
+    "joint": 87,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Exod 36": {
+    "words": 514,
+    "nonempty": 407,
+    "joint": 104,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Exod 37": {
+    "words": 366,
+    "nonempty": 288,
+    "joint": 76,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Exod 38": {
+    "words": 412,
+    "nonempty": 338,
+    "joint": 73,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Exod 39": {
+    "words": 568,
+    "nonempty": 448,
+    "joint": 117,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Exod 40": {
+    "words": 440,
+    "nonempty": 353,
+    "joint": 87,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 1": {
+    "words": 252,
+    "nonempty": 219,
+    "joint": 33,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 2": {
+    "words": 200,
+    "nonempty": 177,
+    "joint": 23,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 3": {
+    "words": 249,
+    "nonempty": 213,
+    "joint": 36,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 4": {
+    "words": 542,
+    "nonempty": 462,
+    "joint": 80,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 5": {
+    "words": 430,
+    "nonempty": 346,
+    "joint": 83,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Lev 6": {
+    "words": 303,
+    "nonempty": 263,
+    "joint": 40,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Lev 7": {
+    "words": 480,
+    "nonempty": 414,
+    "joint": 66,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 8": {
+    "words": 570,
+    "nonempty": 463,
+    "joint": 107,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 9": {
+    "words": 318,
+    "nonempty": 270,
+    "joint": 48,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 10": {
+    "words": 327,
+    "nonempty": 281,
+    "joint": 44,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Lev 11": {
+    "words": 593,
+    "nonempty": 489,
+    "joint": 102,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Lev 12": {
+    "words": 117,
+    "nonempty": 103,
+    "joint": 14,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 13": {
+    "words": 893,
+    "nonempty": 744,
+    "joint": 148,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Lev 14": {
+    "words": 818,
+    "nonempty": 670,
+    "joint": 147,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Lev 15": {
+    "words": 456,
+    "nonempty": 414,
+    "joint": 42,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 16": {
+    "words": 552,
+    "nonempty": 453,
+    "joint": 98,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Lev 17": {
+    "words": 274,
+    "nonempty": 232,
+    "joint": 42,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 18": {
+    "words": 344,
+    "nonempty": 282,
+    "joint": 61,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Lev 19": {
+    "words": 440,
+    "nonempty": 382,
+    "joint": 57,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Lev 20": {
+    "words": 428,
+    "nonempty": 333,
+    "joint": 93,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Lev 21": {
+    "words": 305,
+    "nonempty": 246,
+    "joint": 57,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Lev 22": {
+    "words": 439,
+    "nonempty": 367,
+    "joint": 72,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 23": {
+    "words": 593,
+    "nonempty": 515,
+    "joint": 76,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Lev 24": {
+    "words": 277,
+    "nonempty": 233,
+    "joint": 44,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Lev 25": {
+    "words": 710,
+    "nonempty": 618,
+    "joint": 91,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Lev 26": {
+    "words": 582,
+    "nonempty": 515,
+    "joint": 66,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Lev 27": {
+    "words": 458,
+    "nonempty": 389,
+    "joint": 69,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 1": {
+    "words": 588,
+    "nonempty": 455,
+    "joint": 131,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Num 2": {
+    "words": 340,
+    "nonempty": 234,
+    "joint": 105,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Num 3": {
+    "words": 599,
+    "nonempty": 502,
+    "joint": 94,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Num 4": {
+    "words": 668,
+    "nonempty": 517,
+    "joint": 151,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 5": {
+    "words": 462,
+    "nonempty": 386,
+    "joint": 76,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 6": {
+    "words": 360,
+    "nonempty": 313,
+    "joint": 47,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 7": {
+    "words": 1070,
+    "nonempty": 928,
+    "joint": 139,
+    "nulls": 3,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Num 8": {
+    "words": 361,
+    "nonempty": 292,
+    "joint": 69,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 9": {
+    "words": 354,
+    "nonempty": 294,
+    "joint": 57,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Num 10": {
+    "words": 380,
+    "nonempty": 330,
+    "joint": 44,
+    "nulls": 6,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Num 11": {
+    "words": 549,
+    "nonempty": 472,
+    "joint": 76,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Num 12": {
+    "words": 196,
+    "nonempty": 181,
+    "joint": 15,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 13": {
+    "words": 394,
+    "nonempty": 332,
+    "joint": 59,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Num 14": {
+    "words": 635,
+    "nonempty": 544,
+    "joint": 90,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Num 15": {
+    "words": 511,
+    "nonempty": 439,
+    "joint": 71,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Num 16": {
+    "words": 493,
+    "nonempty": 431,
+    "joint": 61,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Num 17": {
+    "words": 395,
+    "nonempty": 322,
+    "joint": 73,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Num 18": {
+    "words": 521,
+    "nonempty": 432,
+    "joint": 89,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 19": {
+    "words": 346,
+    "nonempty": 299,
+    "joint": 46,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Num 20": {
+    "words": 418,
+    "nonempty": 365,
+    "joint": 52,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Num 21": {
+    "words": 472,
+    "nonempty": 406,
+    "joint": 63,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Num 22": {
+    "words": 652,
+    "nonempty": 564,
+    "joint": 86,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Num 23": {
+    "words": 389,
+    "nonempty": 354,
+    "joint": 33,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Num 24": {
+    "words": 306,
+    "nonempty": 278,
+    "joint": 28,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 25": {
+    "words": 229,
+    "nonempty": 189,
+    "joint": 40,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 26": {
+    "words": 677,
+    "nonempty": 570,
+    "joint": 105,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Num 27": {
+    "words": 319,
+    "nonempty": 272,
+    "joint": 47,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 28": {
+    "words": 348,
+    "nonempty": 299,
+    "joint": 49,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 29": {
+    "words": 420,
+    "nonempty": 354,
+    "joint": 66,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 30": {
+    "words": 263,
+    "nonempty": 214,
+    "joint": 49,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Num 31": {
+    "words": 677,
+    "nonempty": 498,
+    "joint": 179,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Num 32": {
+    "words": 555,
+    "nonempty": 453,
+    "joint": 100,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Num 33": {
+    "words": 464,
+    "nonempty": 402,
+    "joint": 59,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Num 34": {
+    "words": 303,
+    "nonempty": 242,
+    "joint": 59,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Num 35": {
+    "words": 482,
+    "nonempty": 386,
+    "joint": 95,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Num 36": {
+    "words": 212,
+    "nonempty": 174,
+    "joint": 38,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 1": {
+    "words": 654,
+    "nonempty": 550,
+    "joint": 103,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Deut 2": {
+    "words": 532,
+    "nonempty": 458,
+    "joint": 72,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Deut 3": {
+    "words": 461,
+    "nonempty": 394,
+    "joint": 65,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Deut 4": {
+    "words": 813,
+    "nonempty": 700,
+    "joint": 110,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Deut 5": {
+    "words": 472,
+    "nonempty": 416,
+    "joint": 54,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Deut 6": {
+    "words": 318,
+    "nonempty": 279,
+    "joint": 37,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Deut 7": {
+    "words": 412,
+    "nonempty": 374,
+    "joint": 37,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Deut 8": {
+    "words": 293,
+    "nonempty": 256,
+    "joint": 34,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Deut 9": {
+    "words": 499,
+    "nonempty": 439,
+    "joint": 59,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Deut 10": {
+    "words": 324,
+    "nonempty": 287,
+    "joint": 36,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Deut 11": {
+    "words": 508,
+    "nonempty": 428,
+    "joint": 80,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 12": {
+    "words": 520,
+    "nonempty": 432,
+    "joint": 87,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Deut 13": {
+    "words": 328,
+    "nonempty": 266,
+    "joint": 62,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Deut 14": {
+    "words": 351,
+    "nonempty": 288,
+    "joint": 63,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 15": {
+    "words": 354,
+    "nonempty": 300,
+    "joint": 54,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 16": {
+    "words": 334,
+    "nonempty": 291,
+    "joint": 43,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 17": {
+    "words": 368,
+    "nonempty": 306,
+    "joint": 62,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 18": {
+    "words": 304,
+    "nonempty": 266,
+    "joint": 37,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Deut 19": {
+    "words": 332,
+    "nonempty": 274,
+    "joint": 58,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 20": {
+    "words": 316,
+    "nonempty": 266,
+    "joint": 49,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Deut 21": {
+    "words": 354,
+    "nonempty": 292,
+    "joint": 60,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Deut 22": {
+    "words": 437,
+    "nonempty": 369,
+    "joint": 67,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Deut 23": {
+    "words": 339,
+    "nonempty": 274,
+    "joint": 64,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Deut 24": {
+    "words": 327,
+    "nonempty": 272,
+    "joint": 54,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Deut 25": {
+    "words": 260,
+    "nonempty": 214,
+    "joint": 45,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Deut 26": {
+    "words": 319,
+    "nonempty": 279,
+    "joint": 40,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 27": {
+    "words": 326,
+    "nonempty": 293,
+    "joint": 32,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Deut 28": {
+    "words": 994,
+    "nonempty": 866,
+    "joint": 120,
+    "nulls": 8,
+    "coverage": 0.992,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Deut 29": {
+    "words": 439,
+    "nonempty": 379,
+    "joint": 59,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Deut 30": {
+    "words": 326,
+    "nonempty": 279,
+    "joint": 44,
+    "nulls": 3,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Deut 31": {
+    "words": 553,
+    "nonempty": 469,
+    "joint": 84,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Deut 32": {
+    "words": 615,
+    "nonempty": 564,
+    "joint": 45,
+    "nulls": 6,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Deut 33": {
+    "words": 337,
+    "nonempty": 319,
+    "joint": 13,
+    "nulls": 5,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Deut 34": {
+    "words": 176,
+    "nonempty": 157,
+    "joint": 18,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Josh 1": {
+    "words": 320,
+    "nonempty": 272,
+    "joint": 48,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Josh 2": {
+    "words": 403,
+    "nonempty": 345,
+    "joint": 57,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Josh 3": {
+    "words": 293,
+    "nonempty": 231,
+    "joint": 59,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Josh 4": {
+    "words": 390,
+    "nonempty": 310,
+    "joint": 79,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Josh 5": {
+    "words": 288,
+    "nonempty": 238,
+    "joint": 49,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Josh 6": {
+    "words": 474,
+    "nonempty": 392,
+    "joint": 78,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Josh 7": {
+    "words": 494,
+    "nonempty": 417,
+    "joint": 76,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Josh 8": {
+    "words": 616,
+    "nonempty": 525,
+    "joint": 90,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Josh 9": {
+    "words": 414,
+    "nonempty": 345,
+    "joint": 66,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Josh 10": {
+    "words": 766,
+    "nonempty": 642,
+    "joint": 124,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Josh 11": {
+    "words": 409,
+    "nonempty": 331,
+    "joint": 78,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Josh 12": {
+    "words": 248,
+    "nonempty": 230,
+    "joint": 18,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Josh 13": {
+    "words": 439,
+    "nonempty": 379,
+    "joint": 58,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Josh 14": {
+    "words": 278,
+    "nonempty": 242,
+    "joint": 35,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Josh 15": {
+    "words": 553,
+    "nonempty": 474,
+    "joint": 74,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Josh 16": {
+    "words": 123,
+    "nonempty": 110,
+    "joint": 13,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Josh 17": {
+    "words": 337,
+    "nonempty": 280,
+    "joint": 56,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Josh 18": {
+    "words": 405,
+    "nonempty": 340,
+    "joint": 60,
+    "nulls": 5,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Josh 19": {
+    "words": 485,
+    "nonempty": 399,
+    "joint": 84,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Josh 20": {
+    "words": 172,
+    "nonempty": 137,
+    "joint": 34,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Josh 21": {
+    "words": 563,
+    "nonempty": 373,
+    "joint": 187,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Josh 22": {
+    "words": 688,
+    "nonempty": 555,
+    "joint": 132,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Josh 23": {
+    "words": 299,
+    "nonempty": 256,
+    "joint": 42,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Josh 24": {
+    "words": 574,
+    "nonempty": 483,
+    "joint": 87,
+    "nulls": 4,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Judg 1": {
+    "words": 529,
+    "nonempty": 416,
+    "joint": 109,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Judg 2": {
+    "words": 363,
+    "nonempty": 301,
+    "joint": 61,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Judg 3": {
+    "words": 481,
+    "nonempty": 384,
+    "joint": 95,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Judg 4": {
+    "words": 422,
+    "nonempty": 356,
+    "joint": 63,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Judg 5": {
+    "words": 364,
+    "nonempty": 347,
+    "joint": 16,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Judg 6": {
+    "words": 679,
+    "nonempty": 577,
+    "joint": 100,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Judg 7": {
+    "words": 504,
+    "nonempty": 424,
+    "joint": 76,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Judg 8": {
+    "words": 527,
+    "nonempty": 442,
+    "joint": 82,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Judg 9": {
+    "words": 875,
+    "nonempty": 743,
+    "joint": 129,
+    "nulls": 3,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Judg 10": {
+    "words": 260,
+    "nonempty": 200,
+    "joint": 59,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Judg 11": {
+    "words": 663,
+    "nonempty": 554,
+    "joint": 105,
+    "nulls": 4,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Judg 12": {
+    "words": 223,
+    "nonempty": 190,
+    "joint": 32,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Judg 13": {
+    "words": 394,
+    "nonempty": 348,
+    "joint": 44,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Judg 14": {
+    "words": 336,
+    "nonempty": 292,
+    "joint": 44,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Judg 15": {
+    "words": 321,
+    "nonempty": 274,
+    "joint": 46,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Judg 16": {
+    "words": 553,
+    "nonempty": 467,
+    "joint": 77,
+    "nulls": 9,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Judg 17": {
+    "words": 192,
+    "nonempty": 173,
+    "joint": 18,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Judg 18": {
+    "words": 548,
+    "nonempty": 446,
+    "joint": 99,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Judg 19": {
+    "words": 529,
+    "nonempty": 451,
+    "joint": 73,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Judg 20": {
+    "words": 747,
+    "nonempty": 602,
+    "joint": 143,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Judg 21": {
+    "words": 375,
+    "nonempty": 315,
+    "joint": 57,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "1Sam 1": {
+    "words": 415,
+    "nonempty": 357,
+    "joint": 57,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1Sam 2": {
+    "words": 556,
+    "nonempty": 504,
+    "joint": 49,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Sam 3": {
+    "words": 304,
+    "nonempty": 271,
+    "joint": 31,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "1Sam 4": {
+    "words": 369,
+    "nonempty": 331,
+    "joint": 35,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "1Sam 5": {
+    "words": 218,
+    "nonempty": 173,
+    "joint": 40,
+    "nulls": 5,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "1Sam 6": {
+    "words": 395,
+    "nonempty": 329,
+    "joint": 64,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Sam 7": {
+    "words": 287,
+    "nonempty": 249,
+    "joint": 37,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Sam 8": {
+    "words": 271,
+    "nonempty": 244,
+    "joint": 26,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Sam 9": {
+    "words": 494,
+    "nonempty": 420,
+    "joint": 71,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "1Sam 10": {
+    "words": 442,
+    "nonempty": 385,
+    "joint": 53,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "1Sam 11": {
+    "words": 257,
+    "nonempty": 223,
+    "joint": 31,
+    "nulls": 3,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "1Sam 12": {
+    "words": 425,
+    "nonempty": 373,
+    "joint": 50,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Sam 13": {
+    "words": 355,
+    "nonempty": 306,
+    "joint": 47,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "1Sam 14": {
+    "words": 844,
+    "nonempty": 726,
+    "joint": 113,
+    "nulls": 5,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "1Sam 15": {
+    "words": 529,
+    "nonempty": 465,
+    "joint": 63,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1Sam 16": {
+    "words": 373,
+    "nonempty": 326,
+    "joint": 46,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Sam 17": {
+    "words": 914,
+    "nonempty": 793,
+    "joint": 116,
+    "nulls": 5,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Sam 18": {
+    "words": 432,
+    "nonempty": 374,
+    "joint": 55,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "1Sam 19": {
+    "words": 395,
+    "nonempty": 336,
+    "joint": 53,
+    "nulls": 6,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "1Sam 20": {
+    "words": 703,
+    "nonempty": 583,
+    "joint": 113,
+    "nulls": 7,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "1Sam 21": {
+    "words": 282,
+    "nonempty": 251,
+    "joint": 31,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "1Sam 22": {
+    "words": 419,
+    "nonempty": 371,
+    "joint": 43,
+    "nulls": 5,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "1Sam 23": {
+    "words": 436,
+    "nonempty": 388,
+    "joint": 44,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "1Sam 24": {
+    "words": 373,
+    "nonempty": 317,
+    "joint": 52,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": [
+     "versification"
+    ]
+   },
+   "1Sam 25": {
+    "words": 750,
+    "nonempty": 623,
+    "joint": 123,
+    "nulls": 4,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Sam 26": {
+    "words": 475,
+    "nonempty": 412,
+    "joint": 62,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1Sam 27": {
+    "words": 209,
+    "nonempty": 184,
+    "joint": 22,
+    "nulls": 3,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "1Sam 28": {
+    "words": 431,
+    "nonempty": 365,
+    "joint": 64,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Sam 29": {
+    "words": 218,
+    "nonempty": 184,
+    "joint": 34,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Sam 30": {
+    "words": 487,
+    "nonempty": 394,
+    "joint": 91,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Sam 31": {
+    "words": 201,
+    "nonempty": 160,
+    "joint": 38,
+    "nulls": 3,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "2Sam 1": {
+    "words": 367,
+    "nonempty": 326,
+    "joint": 39,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Sam 2": {
+    "words": 515,
+    "nonempty": 422,
+    "joint": 92,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "2Sam 3": {
+    "words": 655,
+    "nonempty": 555,
+    "joint": 95,
+    "nulls": 5,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "2Sam 4": {
+    "words": 237,
+    "nonempty": 202,
+    "joint": 35,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Sam 5": {
+    "words": 351,
+    "nonempty": 303,
+    "joint": 44,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "2Sam 6": {
+    "words": 377,
+    "nonempty": 328,
+    "joint": 47,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Sam 7": {
+    "words": 461,
+    "nonempty": 401,
+    "joint": 58,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Sam 8": {
+    "words": 262,
+    "nonempty": 224,
+    "joint": 37,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Sam 9": {
+    "words": 222,
+    "nonempty": 193,
+    "joint": 29,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Sam 10": {
+    "words": 314,
+    "nonempty": 261,
+    "joint": 50,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "2Sam 11": {
+    "words": 442,
+    "nonempty": 377,
+    "joint": 64,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "2Sam 12": {
+    "words": 527,
+    "nonempty": 437,
+    "joint": 85,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "2Sam 13": {
+    "words": 647,
+    "nonempty": 547,
+    "joint": 97,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Sam 14": {
+    "words": 598,
+    "nonempty": 512,
+    "joint": 80,
+    "nulls": 6,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "2Sam 15": {
+    "words": 602,
+    "nonempty": 519,
+    "joint": 76,
+    "nulls": 7,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "2Sam 16": {
+    "words": 387,
+    "nonempty": 329,
+    "joint": 48,
+    "nulls": 10,
+    "coverage": 0.974,
+    "rules": []
+   },
+   "2Sam 17": {
+    "words": 521,
+    "nonempty": 442,
+    "joint": 77,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Sam 18": {
+    "words": 589,
+    "nonempty": 489,
+    "joint": 90,
+    "nulls": 10,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "2Sam 19": {
+    "words": 817,
+    "nonempty": 706,
+    "joint": 107,
+    "nulls": 4,
+    "coverage": 0.995,
+    "rules": [
+     "versification"
+    ]
+   },
+   "2Sam 20": {
+    "words": 443,
+    "nonempty": 378,
+    "joint": 57,
+    "nulls": 8,
+    "coverage": 0.982,
+    "rules": []
+   },
+   "2Sam 21": {
+    "words": 419,
+    "nonempty": 348,
+    "joint": 56,
+    "nulls": 15,
+    "coverage": 0.964,
+    "rules": []
+   },
+   "2Sam 22": {
+    "words": 382,
+    "nonempty": 355,
+    "joint": 20,
+    "nulls": 7,
+    "coverage": 0.982,
+    "rules": []
+   },
+   "2Sam 23": {
+    "words": 443,
+    "nonempty": 384,
+    "joint": 42,
+    "nulls": 17,
+    "coverage": 0.962,
+    "rules": []
+   },
+   "2Sam 24": {
+    "words": 456,
+    "nonempty": 396,
+    "joint": 56,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "1Kgs 1": {
+    "words": 813,
+    "nonempty": 725,
+    "joint": 84,
+    "nulls": 4,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Kgs 2": {
+    "words": 806,
+    "nonempty": 688,
+    "joint": 117,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "1Kgs 3": {
+    "words": 472,
+    "nonempty": 411,
+    "joint": 61,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Kgs 4": {
+    "words": 200,
+    "nonempty": 166,
+    "joint": 33,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Kgs 5": {
+    "words": 503,
+    "nonempty": 421,
+    "joint": 81,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": [
+     "versification"
+    ]
+   },
+   "1Kgs 6": {
+    "words": 510,
+    "nonempty": 426,
+    "joint": 76,
+    "nulls": 8,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "1Kgs 7": {
+    "words": 791,
+    "nonempty": 641,
+    "joint": 140,
+    "nulls": 10,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "1Kgs 8": {
+    "words": 1146,
+    "nonempty": 999,
+    "joint": 143,
+    "nulls": 4,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Kgs 9": {
+    "words": 472,
+    "nonempty": 400,
+    "joint": 69,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "1Kgs 10": {
+    "words": 462,
+    "nonempty": 405,
+    "joint": 57,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Kgs 11": {
+    "words": 690,
+    "nonempty": 615,
+    "joint": 75,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Kgs 12": {
+    "words": 584,
+    "nonempty": 493,
+    "joint": 86,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "1Kgs 13": {
+    "words": 602,
+    "nonempty": 514,
+    "joint": 88,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Kgs 14": {
+    "words": 519,
+    "nonempty": 469,
+    "joint": 47,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "1Kgs 15": {
+    "words": 523,
+    "nonempty": 455,
+    "joint": 66,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Kgs 16": {
+    "words": 545,
+    "nonempty": 462,
+    "joint": 80,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "1Kgs 17": {
+    "words": 356,
+    "nonempty": 312,
+    "joint": 40,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "1Kgs 18": {
+    "words": 741,
+    "nonempty": 654,
+    "joint": 85,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Kgs 19": {
+    "words": 371,
+    "nonempty": 321,
+    "joint": 49,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Kgs 20": {
+    "words": 746,
+    "nonempty": 636,
+    "joint": 107,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Kgs 21": {
+    "words": 480,
+    "nonempty": 406,
+    "joint": 71,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "1Kgs 22": {
+    "words": 808,
+    "nonempty": 708,
+    "joint": 93,
+    "nulls": 7,
+    "coverage": 0.991,
+    "rules": [
+     "versification"
+    ]
+   },
+   "2Kgs 1": {
+    "words": 359,
+    "nonempty": 306,
+    "joint": 53,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Kgs 2": {
+    "words": 427,
+    "nonempty": 393,
+    "joint": 32,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Kgs 3": {
+    "words": 435,
+    "nonempty": 392,
+    "joint": 42,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "2Kgs 4": {
+    "words": 671,
+    "nonempty": 593,
+    "joint": 66,
+    "nulls": 12,
+    "coverage": 0.982,
+    "rules": []
+   },
+   "2Kgs 5": {
+    "words": 488,
+    "nonempty": 437,
+    "joint": 49,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Kgs 6": {
+    "words": 529,
+    "nonempty": 460,
+    "joint": 67,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Kgs 7": {
+    "words": 408,
+    "nonempty": 350,
+    "joint": 54,
+    "nulls": 4,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "2Kgs 8": {
+    "words": 516,
+    "nonempty": 454,
+    "joint": 57,
+    "nulls": 5,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "2Kgs 9": {
+    "words": 611,
+    "nonempty": 544,
+    "joint": 64,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Kgs 10": {
+    "words": 621,
+    "nonempty": 537,
+    "joint": 81,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Kgs 11": {
+    "words": 358,
+    "nonempty": 289,
+    "joint": 61,
+    "nulls": 8,
+    "coverage": 0.978,
+    "rules": []
+   },
+   "2Kgs 12": {
+    "words": 362,
+    "nonempty": 300,
+    "joint": 57,
+    "nulls": 5,
+    "coverage": 0.986,
+    "rules": [
+     "versification"
+    ]
+   },
+   "2Kgs 13": {
+    "words": 416,
+    "nonempty": 368,
+    "joint": 46,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Kgs 14": {
+    "words": 479,
+    "nonempty": 409,
+    "joint": 64,
+    "nulls": 6,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "2Kgs 15": {
+    "words": 587,
+    "nonempty": 501,
+    "joint": 83,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Kgs 16": {
+    "words": 363,
+    "nonempty": 301,
+    "joint": 57,
+    "nulls": 5,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "2Kgs 17": {
+    "words": 689,
+    "nonempty": 575,
+    "joint": 107,
+    "nulls": 7,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "2Kgs 18": {
+    "words": 663,
+    "nonempty": 563,
+    "joint": 87,
+    "nulls": 13,
+    "coverage": 0.98,
+    "rules": []
+   },
+   "2Kgs 19": {
+    "words": 569,
+    "nonempty": 511,
+    "joint": 53,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "2Kgs 20": {
+    "words": 363,
+    "nonempty": 317,
+    "joint": 44,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Kgs 21": {
+    "words": 397,
+    "nonempty": 340,
+    "joint": 56,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "2Kgs 22": {
+    "words": 371,
+    "nonempty": 323,
+    "joint": 45,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "2Kgs 23": {
+    "words": 773,
+    "nonempty": 640,
+    "joint": 128,
+    "nulls": 5,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Kgs 24": {
+    "words": 312,
+    "nonempty": 267,
+    "joint": 40,
+    "nulls": 5,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "2Kgs 25": {
+    "words": 508,
+    "nonempty": 414,
+    "joint": 92,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Isa 1": {
+    "words": 360,
+    "nonempty": 345,
+    "joint": 15,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 2": {
+    "words": 253,
+    "nonempty": 246,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 3": {
+    "words": 250,
+    "nonempty": 230,
+    "joint": 16,
+    "nulls": 4,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Isa 4": {
+    "words": 89,
+    "nonempty": 82,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 5": {
+    "words": 384,
+    "nonempty": 353,
+    "joint": 30,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Isa 6": {
+    "words": 188,
+    "nonempty": 166,
+    "joint": 22,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 7": {
+    "words": 345,
+    "nonempty": 309,
+    "joint": 36,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 8": {
+    "words": 299,
+    "nonempty": 258,
+    "joint": 41,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Isa 9": {
+    "words": 267,
+    "nonempty": 243,
+    "joint": 19,
+    "nulls": 5,
+    "coverage": 0.981,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Isa 10": {
+    "words": 406,
+    "nonempty": 376,
+    "joint": 27,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Isa 11": {
+    "words": 219,
+    "nonempty": 202,
+    "joint": 17,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 12": {
+    "words": 62,
+    "nonempty": 61,
+    "joint": 0,
+    "nulls": 1,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Isa 13": {
+    "words": 253,
+    "nonempty": 236,
+    "joint": 16,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Isa 14": {
+    "words": 376,
+    "nonempty": 354,
+    "joint": 21,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Isa 15": {
+    "words": 125,
+    "nonempty": 109,
+    "joint": 16,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 16": {
+    "words": 192,
+    "nonempty": 171,
+    "joint": 20,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Isa 17": {
+    "words": 179,
+    "nonempty": 165,
+    "joint": 13,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Isa 18": {
+    "words": 124,
+    "nonempty": 112,
+    "joint": 11,
+    "nulls": 1,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Isa 19": {
+    "words": 327,
+    "nonempty": 307,
+    "joint": 20,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 20": {
+    "words": 96,
+    "nonempty": 86,
+    "joint": 9,
+    "nulls": 1,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Isa 21": {
+    "words": 202,
+    "nonempty": 191,
+    "joint": 11,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 22": {
+    "words": 308,
+    "nonempty": 281,
+    "joint": 26,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Isa 23": {
+    "words": 217,
+    "nonempty": 204,
+    "joint": 10,
+    "nulls": 3,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Isa 24": {
+    "words": 256,
+    "nonempty": 228,
+    "joint": 27,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Isa 25": {
+    "words": 161,
+    "nonempty": 148,
+    "joint": 11,
+    "nulls": 2,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Isa 26": {
+    "words": 233,
+    "nonempty": 221,
+    "joint": 9,
+    "nulls": 3,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Isa 27": {
+    "words": 174,
+    "nonempty": 154,
+    "joint": 19,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Isa 28": {
+    "words": 380,
+    "nonempty": 358,
+    "joint": 19,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Isa 29": {
+    "words": 326,
+    "nonempty": 291,
+    "joint": 32,
+    "nulls": 3,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Isa 30": {
+    "words": 492,
+    "nonempty": 446,
+    "joint": 44,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Isa 31": {
+    "words": 156,
+    "nonempty": 144,
+    "joint": 12,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 32": {
+    "words": 203,
+    "nonempty": 189,
+    "joint": 12,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Isa 33": {
+    "words": 275,
+    "nonempty": 256,
+    "joint": 18,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Isa 34": {
+    "words": 220,
+    "nonempty": 208,
+    "joint": 12,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 35": {
+    "words": 126,
+    "nonempty": 121,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 36": {
+    "words": 380,
+    "nonempty": 327,
+    "joint": 42,
+    "nulls": 11,
+    "coverage": 0.971,
+    "rules": []
+   },
+   "Isa 37": {
+    "words": 564,
+    "nonempty": 506,
+    "joint": 55,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Isa 38": {
+    "words": 281,
+    "nonempty": 256,
+    "joint": 25,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 39": {
+    "words": 146,
+    "nonempty": 125,
+    "joint": 20,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Isa 40": {
+    "words": 357,
+    "nonempty": 334,
+    "joint": 22,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Isa 41": {
+    "words": 351,
+    "nonempty": 330,
+    "joint": 19,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Isa 42": {
+    "words": 288,
+    "nonempty": 274,
+    "joint": 11,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Isa 43": {
+    "words": 314,
+    "nonempty": 308,
+    "joint": 6,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 44": {
+    "words": 389,
+    "nonempty": 368,
+    "joint": 18,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Isa 45": {
+    "words": 360,
+    "nonempty": 346,
+    "joint": 13,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Isa 46": {
+    "words": 150,
+    "nonempty": 147,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Isa 47": {
+    "words": 213,
+    "nonempty": 191,
+    "joint": 19,
+    "nulls": 3,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Isa 48": {
+    "words": 265,
+    "nonempty": 251,
+    "joint": 13,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Isa 49": {
+    "words": 363,
+    "nonempty": 341,
+    "joint": 15,
+    "nulls": 7,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Isa 50": {
+    "words": 176,
+    "nonempty": 163,
+    "joint": 13,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 51": {
+    "words": 334,
+    "nonempty": 317,
+    "joint": 16,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Isa 52": {
+    "words": 202,
+    "nonempty": 189,
+    "joint": 11,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Isa 53": {
+    "words": 166,
+    "nonempty": 157,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 54": {
+    "words": 221,
+    "nonempty": 210,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Isa 55": {
+    "words": 185,
+    "nonempty": 175,
+    "joint": 9,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Isa 56": {
+    "words": 179,
+    "nonempty": 165,
+    "joint": 14,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 57": {
+    "words": 260,
+    "nonempty": 247,
+    "joint": 12,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Isa 58": {
+    "words": 222,
+    "nonempty": 215,
+    "joint": 5,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Isa 59": {
+    "words": 284,
+    "nonempty": 261,
+    "joint": 21,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Isa 60": {
+    "words": 295,
+    "nonempty": 288,
+    "joint": 5,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Isa 61": {
+    "words": 165,
+    "nonempty": 159,
+    "joint": 6,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Isa 62": {
+    "words": 178,
+    "nonempty": 162,
+    "joint": 15,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Isa 63": {
+    "words": 239,
+    "nonempty": 227,
+    "joint": 11,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Isa 64": {
+    "words": 128,
+    "nonempty": 126,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Isa 65": {
+    "words": 361,
+    "nonempty": 333,
+    "joint": 24,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Isa 66": {
+    "words": 386,
+    "nonempty": 353,
+    "joint": 32,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Jer 1": {
+    "words": 266,
+    "nonempty": 245,
+    "joint": 20,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Jer 2": {
+    "words": 512,
+    "nonempty": 467,
+    "joint": 33,
+    "nulls": 12,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "Jer 3": {
+    "words": 410,
+    "nonempty": 363,
+    "joint": 40,
+    "nulls": 7,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Jer 4": {
+    "words": 422,
+    "nonempty": 383,
+    "joint": 31,
+    "nulls": 8,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Jer 5": {
+    "words": 430,
+    "nonempty": 387,
+    "joint": 35,
+    "nulls": 8,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Jer 6": {
+    "words": 416,
+    "nonempty": 378,
+    "joint": 31,
+    "nulls": 7,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Jer 7": {
+    "words": 539,
+    "nonempty": 466,
+    "joint": 71,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Jer 8": {
+    "words": 348,
+    "nonempty": 308,
+    "joint": 35,
+    "nulls": 5,
+    "coverage": 0.986,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Jer 9": {
+    "words": 375,
+    "nonempty": 344,
+    "joint": 30,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Jer 10": {
+    "words": 319,
+    "nonempty": 297,
+    "joint": 19,
+    "nulls": 3,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Jer 11": {
+    "words": 384,
+    "nonempty": 333,
+    "joint": 51,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jer 12": {
+    "words": 262,
+    "nonempty": 236,
+    "joint": 25,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Jer 13": {
+    "words": 377,
+    "nonempty": 339,
+    "joint": 33,
+    "nulls": 5,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Jer 14": {
+    "words": 356,
+    "nonempty": 331,
+    "joint": 22,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Jer 15": {
+    "words": 315,
+    "nonempty": 286,
+    "joint": 24,
+    "nulls": 5,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Jer 16": {
+    "words": 367,
+    "nonempty": 319,
+    "joint": 47,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Jer 17": {
+    "words": 402,
+    "nonempty": 371,
+    "joint": 27,
+    "nulls": 4,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Jer 18": {
+    "words": 318,
+    "nonempty": 283,
+    "joint": 27,
+    "nulls": 8,
+    "coverage": 0.975,
+    "rules": []
+   },
+   "Jer 19": {
+    "words": 283,
+    "nonempty": 250,
+    "joint": 31,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Jer 20": {
+    "words": 294,
+    "nonempty": 257,
+    "joint": 36,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Jer 21": {
+    "words": 248,
+    "nonempty": 219,
+    "joint": 27,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Jer 22": {
+    "words": 468,
+    "nonempty": 417,
+    "joint": 48,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Jer 23": {
+    "words": 608,
+    "nonempty": 548,
+    "joint": 58,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Jer 24": {
+    "words": 185,
+    "nonempty": 162,
+    "joint": 22,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Jer 25": {
+    "words": 615,
+    "nonempty": 527,
+    "joint": 85,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Jer 26": {
+    "words": 433,
+    "nonempty": 379,
+    "joint": 50,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Jer 27": {
+    "words": 420,
+    "nonempty": 356,
+    "joint": 63,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Jer 28": {
+    "words": 304,
+    "nonempty": 268,
+    "joint": 35,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Jer 29": {
+    "words": 536,
+    "nonempty": 471,
+    "joint": 62,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Jer 30": {
+    "words": 342,
+    "nonempty": 312,
+    "joint": 30,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jer 31": {
+    "words": 622,
+    "nonempty": 565,
+    "joint": 50,
+    "nulls": 7,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Jer 32": {
+    "words": 747,
+    "nonempty": 647,
+    "joint": 97,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Jer 33": {
+    "words": 418,
+    "nonempty": 372,
+    "joint": 43,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Jer 34": {
+    "words": 425,
+    "nonempty": 357,
+    "joint": 66,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Jer 35": {
+    "words": 368,
+    "nonempty": 327,
+    "joint": 40,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Jer 36": {
+    "words": 618,
+    "nonempty": 535,
+    "joint": 82,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Jer 37": {
+    "words": 331,
+    "nonempty": 290,
+    "joint": 39,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Jer 38": {
+    "words": 547,
+    "nonempty": 464,
+    "joint": 79,
+    "nulls": 4,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Jer 39": {
+    "words": 298,
+    "nonempty": 251,
+    "joint": 42,
+    "nulls": 5,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Jer 40": {
+    "words": 365,
+    "nonempty": 326,
+    "joint": 36,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Jer 41": {
+    "words": 361,
+    "nonempty": 304,
+    "joint": 56,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Jer 42": {
+    "words": 408,
+    "nonempty": 353,
+    "joint": 53,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Jer 43": {
+    "words": 237,
+    "nonempty": 196,
+    "joint": 39,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Jer 44": {
+    "words": 623,
+    "nonempty": 540,
+    "joint": 82,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Jer 45": {
+    "words": 93,
+    "nonempty": 78,
+    "joint": 15,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jer 46": {
+    "words": 402,
+    "nonempty": 370,
+    "joint": 31,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Jer 47": {
+    "words": 107,
+    "nonempty": 96,
+    "joint": 11,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jer 48": {
+    "words": 580,
+    "nonempty": 531,
+    "joint": 39,
+    "nulls": 10,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Jer 49": {
+    "words": 584,
+    "nonempty": 531,
+    "joint": 45,
+    "nulls": 8,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Jer 50": {
+    "words": 692,
+    "nonempty": 629,
+    "joint": 51,
+    "nulls": 12,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Jer 51": {
+    "words": 888,
+    "nonempty": 815,
+    "joint": 66,
+    "nulls": 7,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Jer 52": {
+    "words": 564,
+    "nonempty": 441,
+    "joint": 115,
+    "nulls": 8,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Ezek 1": {
+    "words": 382,
+    "nonempty": 333,
+    "joint": 48,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Ezek 2": {
+    "words": 156,
+    "nonempty": 139,
+    "joint": 17,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 3": {
+    "words": 411,
+    "nonempty": 367,
+    "joint": 42,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Ezek 4": {
+    "words": 264,
+    "nonempty": 220,
+    "joint": 42,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ezek 5": {
+    "words": 287,
+    "nonempty": 253,
+    "joint": 34,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 6": {
+    "words": 212,
+    "nonempty": 198,
+    "joint": 13,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Ezek 7": {
+    "words": 343,
+    "nonempty": 311,
+    "joint": 26,
+    "nulls": 6,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Ezek 8": {
+    "words": 320,
+    "nonempty": 290,
+    "joint": 28,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Ezek 9": {
+    "words": 199,
+    "nonempty": 171,
+    "joint": 24,
+    "nulls": 4,
+    "coverage": 0.98,
+    "rules": []
+   },
+   "Ezek 10": {
+    "words": 310,
+    "nonempty": 269,
+    "joint": 41,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 11": {
+    "words": 349,
+    "nonempty": 314,
+    "joint": 34,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Ezek 12": {
+    "words": 399,
+    "nonempty": 362,
+    "joint": 37,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 13": {
+    "words": 358,
+    "nonempty": 315,
+    "joint": 43,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 14": {
+    "words": 391,
+    "nonempty": 359,
+    "joint": 29,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ezek 15": {
+    "words": 103,
+    "nonempty": 94,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 16": {
+    "words": 833,
+    "nonempty": 724,
+    "joint": 85,
+    "nulls": 24,
+    "coverage": 0.971,
+    "rules": []
+   },
+   "Ezek 17": {
+    "words": 382,
+    "nonempty": 351,
+    "joint": 29,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Ezek 18": {
+    "words": 474,
+    "nonempty": 406,
+    "joint": 66,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Ezek 19": {
+    "words": 157,
+    "nonempty": 153,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 20": {
+    "words": 733,
+    "nonempty": 645,
+    "joint": 88,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 21": {
+    "words": 530,
+    "nonempty": 487,
+    "joint": 41,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Ezek 22": {
+    "words": 390,
+    "nonempty": 352,
+    "joint": 37,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Ezek 23": {
+    "words": 621,
+    "nonempty": 545,
+    "joint": 71,
+    "nulls": 5,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ezek 24": {
+    "words": 375,
+    "nonempty": 332,
+    "joint": 41,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Ezek 25": {
+    "words": 259,
+    "nonempty": 231,
+    "joint": 26,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ezek 26": {
+    "words": 307,
+    "nonempty": 288,
+    "joint": 19,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezek 27": {
+    "words": 407,
+    "nonempty": 366,
+    "joint": 37,
+    "nulls": 4,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Ezek 28": {
+    "words": 352,
+    "nonempty": 337,
+    "joint": 14,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Ezek 29": {
+    "words": 344,
+    "nonempty": 313,
+    "joint": 27,
+    "nulls": 4,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Ezek 30": {
+    "words": 342,
+    "nonempty": 310,
+    "joint": 30,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Ezek 31": {
+    "words": 311,
+    "nonempty": 286,
+    "joint": 22,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Ezek 32": {
+    "words": 482,
+    "nonempty": 455,
+    "joint": 25,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Ezek 33": {
+    "words": 517,
+    "nonempty": 462,
+    "joint": 54,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Ezek 34": {
+    "words": 458,
+    "nonempty": 413,
+    "joint": 44,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Ezek 35": {
+    "words": 194,
+    "nonempty": 173,
+    "joint": 18,
+    "nulls": 3,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Ezek 36": {
+    "words": 565,
+    "nonempty": 512,
+    "joint": 46,
+    "nulls": 7,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Ezek 37": {
+    "words": 446,
+    "nonempty": 403,
+    "joint": 39,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Ezek 38": {
+    "words": 370,
+    "nonempty": 351,
+    "joint": 17,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Ezek 39": {
+    "words": 434,
+    "nonempty": 391,
+    "joint": 42,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Ezek 40": {
+    "words": 724,
+    "nonempty": 594,
+    "joint": 125,
+    "nulls": 5,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Ezek 41": {
+    "words": 370,
+    "nonempty": 312,
+    "joint": 54,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Ezek 42": {
+    "words": 285,
+    "nonempty": 236,
+    "joint": 43,
+    "nulls": 6,
+    "coverage": 0.979,
+    "rules": []
+   },
+   "Ezek 43": {
+    "words": 415,
+    "nonempty": 353,
+    "joint": 57,
+    "nulls": 5,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Ezek 44": {
+    "words": 501,
+    "nonempty": 418,
+    "joint": 78,
+    "nulls": 5,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Ezek 45": {
+    "words": 396,
+    "nonempty": 333,
+    "joint": 61,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Ezek 46": {
+    "words": 381,
+    "nonempty": 335,
+    "joint": 40,
+    "nulls": 6,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Ezek 47": {
+    "words": 366,
+    "nonempty": 317,
+    "joint": 46,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ezek 48": {
+    "words": 526,
+    "nonempty": 396,
+    "joint": 128,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Hos 1": {
+    "words": 137,
+    "nonempty": 120,
+    "joint": 17,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Hos 2": {
+    "words": 338,
+    "nonempty": 304,
+    "joint": 33,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Hos 3": {
+    "words": 81,
+    "nonempty": 69,
+    "joint": 10,
+    "nulls": 2,
+    "coverage": 0.975,
+    "rules": []
+   },
+   "Hos 4": {
+    "words": 223,
+    "nonempty": 206,
+    "joint": 15,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Hos 5": {
+    "words": 179,
+    "nonempty": 167,
+    "joint": 12,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Hos 6": {
+    "words": 104,
+    "nonempty": 98,
+    "joint": 4,
+    "nulls": 2,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Hos 7": {
+    "words": 189,
+    "nonempty": 180,
+    "joint": 8,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Hos 8": {
+    "words": 154,
+    "nonempty": 141,
+    "joint": 10,
+    "nulls": 3,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Hos 9": {
+    "words": 213,
+    "nonempty": 205,
+    "joint": 7,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Hos 10": {
+    "words": 201,
+    "nonempty": 188,
+    "joint": 12,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Hos 11": {
+    "words": 123,
+    "nonempty": 116,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Hos 12": {
+    "words": 160,
+    "nonempty": 153,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Hos 13": {
+    "words": 163,
+    "nonempty": 158,
+    "joint": 4,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Hos 14": {
+    "words": 116,
+    "nonempty": 114,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Joel 1": {
+    "words": 235,
+    "nonempty": 226,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Joel 2": {
+    "words": 385,
+    "nonempty": 357,
+    "joint": 28,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Joel 3": {
+    "words": 67,
+    "nonempty": 62,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Joel 4": {
+    "words": 270,
+    "nonempty": 255,
+    "joint": 14,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Amos 1": {
+    "words": 212,
+    "nonempty": 204,
+    "joint": 7,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Amos 2": {
+    "words": 214,
+    "nonempty": 203,
+    "joint": 11,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Amos 3": {
+    "words": 207,
+    "nonempty": 190,
+    "joint": 16,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Amos 4": {
+    "words": 215,
+    "nonempty": 194,
+    "joint": 21,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Amos 5": {
+    "words": 321,
+    "nonempty": 300,
+    "joint": 21,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Amos 6": {
+    "words": 177,
+    "nonempty": 167,
+    "joint": 9,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Amos 7": {
+    "words": 255,
+    "nonempty": 230,
+    "joint": 25,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Amos 8": {
+    "words": 190,
+    "nonempty": 174,
+    "joint": 14,
+    "nulls": 2,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Amos 9": {
+    "words": 251,
+    "nonempty": 231,
+    "joint": 20,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Obad 1": {
+    "words": 291,
+    "nonempty": 273,
+    "joint": 18,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jonah 1": {
+    "words": 254,
+    "nonempty": 231,
+    "joint": 23,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jonah 2": {
+    "words": 112,
+    "nonempty": 107,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Jonah 3": {
+    "words": 139,
+    "nonempty": 122,
+    "joint": 17,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jonah 4": {
+    "words": 183,
+    "nonempty": 158,
+    "joint": 25,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Mic 1": {
+    "words": 212,
+    "nonempty": 198,
+    "joint": 11,
+    "nulls": 3,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Mic 2": {
+    "words": 176,
+    "nonempty": 167,
+    "joint": 8,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Mic 3": {
+    "words": 166,
+    "nonempty": 155,
+    "joint": 10,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Mic 4": {
+    "words": 222,
+    "nonempty": 213,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Mic 5": {
+    "words": 172,
+    "nonempty": 164,
+    "joint": 7,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Mic 6": {
+    "words": 204,
+    "nonempty": 195,
+    "joint": 8,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Mic 7": {
+    "words": 244,
+    "nonempty": 239,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Nah 1": {
+    "words": 154,
+    "nonempty": 144,
+    "joint": 7,
+    "nulls": 3,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Nah 2": {
+    "words": 173,
+    "nonempty": 159,
+    "joint": 9,
+    "nulls": 5,
+    "coverage": 0.971,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Nah 3": {
+    "words": 231,
+    "nonempty": 218,
+    "joint": 12,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Hab 1": {
+    "words": 197,
+    "nonempty": 182,
+    "joint": 15,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Hab 2": {
+    "words": 262,
+    "nonempty": 246,
+    "joint": 14,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Hab 3": {
+    "words": 212,
+    "nonempty": 205,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Zeph 1": {
+    "words": 269,
+    "nonempty": 249,
+    "joint": 20,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Zeph 2": {
+    "words": 222,
+    "nonempty": 204,
+    "joint": 16,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Zeph 3": {
+    "words": 276,
+    "nonempty": 269,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Hag 1": {
+    "words": 238,
+    "nonempty": 214,
+    "joint": 23,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Hag 2": {
+    "words": 362,
+    "nonempty": 320,
+    "joint": 42,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Zech 1": {
+    "words": 273,
+    "nonempty": 242,
+    "joint": 28,
+    "nulls": 3,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Zech 2": {
+    "words": 220,
+    "nonempty": 196,
+    "joint": 24,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Zech 3": {
+    "words": 164,
+    "nonempty": 146,
+    "joint": 18,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Zech 4": {
+    "words": 187,
+    "nonempty": 155,
+    "joint": 31,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Zech 5": {
+    "words": 155,
+    "nonempty": 140,
+    "joint": 14,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Zech 6": {
+    "words": 203,
+    "nonempty": 180,
+    "joint": 22,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Zech 7": {
+    "words": 186,
+    "nonempty": 168,
+    "joint": 17,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Zech 8": {
+    "words": 356,
+    "nonempty": 321,
+    "joint": 34,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Zech 9": {
+    "words": 222,
+    "nonempty": 211,
+    "joint": 11,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Zech 10": {
+    "words": 166,
+    "nonempty": 151,
+    "joint": 14,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Zech 11": {
+    "words": 254,
+    "nonempty": 225,
+    "joint": 28,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Zech 12": {
+    "words": 227,
+    "nonempty": 197,
+    "joint": 29,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Zech 13": {
+    "words": 152,
+    "nonempty": 135,
+    "joint": 17,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Zech 14": {
+    "words": 362,
+    "nonempty": 330,
+    "joint": 29,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Mal 1": {
+    "words": 239,
+    "nonempty": 218,
+    "joint": 20,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Mal 2": {
+    "words": 269,
+    "nonempty": 250,
+    "joint": 19,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Mal 3": {
+    "words": 368,
+    "nonempty": 340,
+    "joint": 26,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Ps 1": {
+    "words": 67,
+    "nonempty": 62,
+    "joint": 4,
+    "nulls": 1,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Ps 2": {
+    "words": 92,
+    "nonempty": 86,
+    "joint": 6,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 3": {
+    "words": 70,
+    "nonempty": 66,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 4": {
+    "words": 77,
+    "nonempty": 75,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 5": {
+    "words": 111,
+    "nonempty": 106,
+    "joint": 2,
+    "nulls": 3,
+    "coverage": 0.973,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 6": {
+    "words": 84,
+    "nonempty": 80,
+    "joint": 3,
+    "nulls": 1,
+    "coverage": 0.988,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 7": {
+    "words": 142,
+    "nonempty": 139,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 8": {
+    "words": 77,
+    "nonempty": 75,
+    "joint": 1,
+    "nulls": 1,
+    "coverage": 0.987,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 9": {
+    "words": 165,
+    "nonempty": 155,
+    "joint": 6,
+    "nulls": 4,
+    "coverage": 0.976,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 10": {
+    "words": 163,
+    "nonempty": 149,
+    "joint": 10,
+    "nulls": 4,
+    "coverage": 0.975,
+    "rules": []
+   },
+   "Ps 11": {
+    "words": 68,
+    "nonempty": 66,
+    "joint": 1,
+    "nulls": 1,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Ps 12": {
+    "words": 79,
+    "nonempty": 71,
+    "joint": 8,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 13": {
+    "words": 55,
+    "nonempty": 50,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Ps 14": {
+    "words": 73,
+    "nonempty": 71,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 15": {
+    "words": 55,
+    "nonempty": 50,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 16": {
+    "words": 97,
+    "nonempty": 92,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 17": {
+    "words": 124,
+    "nonempty": 119,
+    "joint": 2,
+    "nulls": 3,
+    "coverage": 0.976,
+    "rules": []
+   },
+   "Ps 18": {
+    "words": 397,
+    "nonempty": 376,
+    "joint": 21,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 19": {
+    "words": 126,
+    "nonempty": 123,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 20": {
+    "words": 70,
+    "nonempty": 70,
+    "joint": 0,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 21": {
+    "words": 104,
+    "nonempty": 99,
+    "joint": 4,
+    "nulls": 1,
+    "coverage": 0.99,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 22": {
+    "words": 253,
+    "nonempty": 246,
+    "joint": 5,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 23": {
+    "words": 57,
+    "nonempty": 56,
+    "joint": 1,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 24": {
+    "words": 89,
+    "nonempty": 88,
+    "joint": 1,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 25": {
+    "words": 159,
+    "nonempty": 150,
+    "joint": 6,
+    "nulls": 3,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Ps 26": {
+    "words": 85,
+    "nonempty": 83,
+    "joint": 1,
+    "nulls": 1,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Ps 27": {
+    "words": 149,
+    "nonempty": 140,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 28": {
+    "words": 96,
+    "nonempty": 90,
+    "joint": 6,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 29": {
+    "words": 91,
+    "nonempty": 88,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 30": {
+    "words": 97,
+    "nonempty": 92,
+    "joint": 3,
+    "nulls": 2,
+    "coverage": 0.979,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 31": {
+    "words": 220,
+    "nonempty": 207,
+    "joint": 12,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 32": {
+    "words": 110,
+    "nonempty": 103,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 33": {
+    "words": 161,
+    "nonempty": 152,
+    "joint": 8,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Ps 34": {
+    "words": 165,
+    "nonempty": 156,
+    "joint": 8,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 35": {
+    "words": 229,
+    "nonempty": 216,
+    "joint": 11,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Ps 36": {
+    "words": 100,
+    "nonempty": 95,
+    "joint": 4,
+    "nulls": 1,
+    "coverage": 0.99,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 37": {
+    "words": 298,
+    "nonempty": 290,
+    "joint": 8,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 38": {
+    "words": 168,
+    "nonempty": 154,
+    "joint": 12,
+    "nulls": 2,
+    "coverage": 0.988,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 39": {
+    "words": 129,
+    "nonempty": 125,
+    "joint": 3,
+    "nulls": 1,
+    "coverage": 0.992,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 40": {
+    "words": 185,
+    "nonempty": 174,
+    "joint": 11,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 41": {
+    "words": 119,
+    "nonempty": 108,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.983,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 42": {
+    "words": 132,
+    "nonempty": 126,
+    "joint": 4,
+    "nulls": 2,
+    "coverage": 0.985,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 43": {
+    "words": 59,
+    "nonempty": 56,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 44": {
+    "words": 197,
+    "nonempty": 181,
+    "joint": 15,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 45": {
+    "words": 160,
+    "nonempty": 149,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.988,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 46": {
+    "words": 100,
+    "nonempty": 95,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 47": {
+    "words": 77,
+    "nonempty": 73,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 48": {
+    "words": 111,
+    "nonempty": 108,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 49": {
+    "words": 167,
+    "nonempty": 149,
+    "joint": 16,
+    "nulls": 2,
+    "coverage": 0.988,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 50": {
+    "words": 178,
+    "nonempty": 172,
+    "joint": 5,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Ps 51": {
+    "words": 153,
+    "nonempty": 146,
+    "joint": 5,
+    "nulls": 2,
+    "coverage": 0.987,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 52": {
+    "words": 90,
+    "nonempty": 88,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 53": {
+    "words": 77,
+    "nonempty": 75,
+    "joint": 1,
+    "nulls": 1,
+    "coverage": 0.987,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 54": {
+    "words": 62,
+    "nonempty": 58,
+    "joint": 2,
+    "nulls": 2,
+    "coverage": 0.968,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 55": {
+    "words": 193,
+    "nonempty": 185,
+    "joint": 6,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 56": {
+    "words": 120,
+    "nonempty": 114,
+    "joint": 4,
+    "nulls": 2,
+    "coverage": 0.983,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 57": {
+    "words": 105,
+    "nonempty": 102,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.99,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 58": {
+    "words": 100,
+    "nonempty": 90,
+    "joint": 8,
+    "nulls": 2,
+    "coverage": 0.98,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 59": {
+    "words": 156,
+    "nonempty": 146,
+    "joint": 6,
+    "nulls": 4,
+    "coverage": 0.974,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 60": {
+    "words": 113,
+    "nonempty": 99,
+    "joint": 11,
+    "nulls": 3,
+    "coverage": 0.973,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 61": {
+    "words": 68,
+    "nonempty": 65,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 62": {
+    "words": 117,
+    "nonempty": 109,
+    "joint": 8,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 63": {
+    "words": 93,
+    "nonempty": 88,
+    "joint": 3,
+    "nulls": 2,
+    "coverage": 0.978,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 64": {
+    "words": 82,
+    "nonempty": 79,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.988,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 65": {
+    "words": 109,
+    "nonempty": 106,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.991,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 66": {
+    "words": 154,
+    "nonempty": 147,
+    "joint": 5,
+    "nulls": 2,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Ps 67": {
+    "words": 53,
+    "nonempty": 51,
+    "joint": 0,
+    "nulls": 2,
+    "coverage": 0.962,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 68": {
+    "words": 310,
+    "nonempty": 301,
+    "joint": 6,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 69": {
+    "words": 291,
+    "nonempty": 279,
+    "joint": 11,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 70": {
+    "words": 47,
+    "nonempty": 45,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 71": {
+    "words": 203,
+    "nonempty": 188,
+    "joint": 10,
+    "nulls": 5,
+    "coverage": 0.975,
+    "rules": []
+   },
+   "Ps 72": {
+    "words": 162,
+    "nonempty": 157,
+    "joint": 2,
+    "nulls": 3,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Ps 73": {
+    "words": 193,
+    "nonempty": 180,
+    "joint": 9,
+    "nulls": 4,
+    "coverage": 0.979,
+    "rules": []
+   },
+   "Ps 74": {
+    "words": 195,
+    "nonempty": 184,
+    "joint": 8,
+    "nulls": 3,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Ps 75": {
+    "words": 87,
+    "nonempty": 84,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.989,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 76": {
+    "words": 90,
+    "nonempty": 84,
+    "joint": 3,
+    "nulls": 3,
+    "coverage": 0.967,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 77": {
+    "words": 154,
+    "nonempty": 140,
+    "joint": 10,
+    "nulls": 4,
+    "coverage": 0.974,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 78": {
+    "words": 530,
+    "nonempty": 501,
+    "joint": 27,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Ps 79": {
+    "words": 132,
+    "nonempty": 117,
+    "joint": 11,
+    "nulls": 4,
+    "coverage": 0.97,
+    "rules": []
+   },
+   "Ps 80": {
+    "words": 141,
+    "nonempty": 135,
+    "joint": 6,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 81": {
+    "words": 125,
+    "nonempty": 118,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 82": {
+    "words": 61,
+    "nonempty": 56,
+    "joint": 3,
+    "nulls": 2,
+    "coverage": 0.967,
+    "rules": []
+   },
+   "Ps 83": {
+    "words": 130,
+    "nonempty": 122,
+    "joint": 5,
+    "nulls": 3,
+    "coverage": 0.977,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 84": {
+    "words": 116,
+    "nonempty": 114,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 85": {
+    "words": 96,
+    "nonempty": 93,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.99,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 86": {
+    "words": 147,
+    "nonempty": 145,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 87": {
+    "words": 54,
+    "nonempty": 53,
+    "joint": 0,
+    "nulls": 1,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Ps 88": {
+    "words": 142,
+    "nonempty": 140,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 89": {
+    "words": 384,
+    "nonempty": 362,
+    "joint": 16,
+    "nulls": 6,
+    "coverage": 0.984,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 90": {
+    "words": 140,
+    "nonempty": 133,
+    "joint": 6,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Ps 91": {
+    "words": 112,
+    "nonempty": 111,
+    "joint": 1,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 92": {
+    "words": 112,
+    "nonempty": 101,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.982,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 93": {
+    "words": 45,
+    "nonempty": 45,
+    "joint": 0,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 94": {
+    "words": 169,
+    "nonempty": 159,
+    "joint": 10,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 95": {
+    "words": 89,
+    "nonempty": 86,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Ps 96": {
+    "words": 112,
+    "nonempty": 109,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 97": {
+    "words": 95,
+    "nonempty": 95,
+    "joint": 0,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 98": {
+    "words": 75,
+    "nonempty": 73,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 99": {
+    "words": 83,
+    "nonempty": 83,
+    "joint": 0,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 100": {
+    "words": 43,
+    "nonempty": 40,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "Ps 101": {
+    "words": 83,
+    "nonempty": 77,
+    "joint": 5,
+    "nulls": 1,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Ps 102": {
+    "words": 212,
+    "nonempty": 201,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 103": {
+    "words": 167,
+    "nonempty": 160,
+    "joint": 6,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Ps 104": {
+    "words": 271,
+    "nonempty": 257,
+    "joint": 12,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Ps 105": {
+    "words": 294,
+    "nonempty": 273,
+    "joint": 19,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Ps 106": {
+    "words": 331,
+    "nonempty": 307,
+    "joint": 22,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Ps 107": {
+    "words": 278,
+    "nonempty": 266,
+    "joint": 10,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Ps 108": {
+    "words": 98,
+    "nonempty": 95,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.99,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 109": {
+    "words": 227,
+    "nonempty": 217,
+    "joint": 9,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Ps 110": {
+    "words": 65,
+    "nonempty": 62,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 111": {
+    "words": 74,
+    "nonempty": 72,
+    "joint": 1,
+    "nulls": 1,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Ps 112": {
+    "words": 79,
+    "nonempty": 75,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 113": {
+    "words": 60,
+    "nonempty": 55,
+    "joint": 5,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 114": {
+    "words": 52,
+    "nonempty": 48,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 115": {
+    "words": 135,
+    "nonempty": 121,
+    "joint": 13,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Ps 116": {
+    "words": 131,
+    "nonempty": 120,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Ps 117": {
+    "words": 17,
+    "nonempty": 15,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 118": {
+    "words": 198,
+    "nonempty": 179,
+    "joint": 19,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 119": {
+    "words": 1064,
+    "nonempty": 1031,
+    "joint": 28,
+    "nulls": 5,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Ps 120": {
+    "words": 51,
+    "nonempty": 48,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.98,
+    "rules": []
+   },
+   "Ps 121": {
+    "words": 56,
+    "nonempty": 54,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 122": {
+    "words": 62,
+    "nonempty": 57,
+    "joint": 4,
+    "nulls": 1,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Ps 123": {
+    "words": 42,
+    "nonempty": 36,
+    "joint": 3,
+    "nulls": 3,
+    "coverage": 0.929,
+    "rules": []
+   },
+   "Ps 124": {
+    "words": 57,
+    "nonempty": 54,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 125": {
+    "words": 49,
+    "nonempty": 45,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 126": {
+    "words": 50,
+    "nonempty": 45,
+    "joint": 3,
+    "nulls": 2,
+    "coverage": 0.96,
+    "rules": []
+   },
+   "Ps 127": {
+    "words": 60,
+    "nonempty": 56,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 128": {
+    "words": 47,
+    "nonempty": 46,
+    "joint": 1,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 129": {
+    "words": 54,
+    "nonempty": 53,
+    "joint": 0,
+    "nulls": 1,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Ps 130": {
+    "words": 54,
+    "nonempty": 52,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 131": {
+    "words": 33,
+    "nonempty": 30,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 132": {
+    "words": 131,
+    "nonempty": 118,
+    "joint": 13,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 133": {
+    "words": 40,
+    "nonempty": 38,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 134": {
+    "words": 25,
+    "nonempty": 23,
+    "joint": 2,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 135": {
+    "words": 167,
+    "nonempty": 152,
+    "joint": 13,
+    "nulls": 2,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Ps 136": {
+    "words": 166,
+    "nonempty": 137,
+    "joint": 28,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Ps 137": {
+    "words": 84,
+    "nonempty": 75,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 138": {
+    "words": 76,
+    "nonempty": 75,
+    "joint": 1,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 139": {
+    "words": 177,
+    "nonempty": 166,
+    "joint": 7,
+    "nulls": 4,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "Ps 140": {
+    "words": 116,
+    "nonempty": 107,
+    "joint": 6,
+    "nulls": 3,
+    "coverage": 0.974,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 141": {
+    "words": 95,
+    "nonempty": 91,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 142": {
+    "words": 75,
+    "nonempty": 71,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "psalm-title"
+    ]
+   },
+   "Ps 143": {
+    "words": 117,
+    "nonempty": 112,
+    "joint": 4,
+    "nulls": 1,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Ps 144": {
+    "words": 130,
+    "nonempty": 119,
+    "joint": 10,
+    "nulls": 1,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ps 145": {
+    "words": 152,
+    "nonempty": 142,
+    "joint": 7,
+    "nulls": 3,
+    "coverage": 0.98,
+    "rules": []
+   },
+   "Ps 146": {
+    "words": 85,
+    "nonempty": 75,
+    "joint": 10,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 147": {
+    "words": 141,
+    "nonempty": 132,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 148": {
+    "words": 111,
+    "nonempty": 102,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ps 149": {
+    "words": 63,
+    "nonempty": 58,
+    "joint": 3,
+    "nulls": 2,
+    "coverage": 0.968,
+    "rules": []
+   },
+   "Ps 150": {
+    "words": 37,
+    "nonempty": 34,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.973,
+    "rules": []
+   },
+   "Prov 1": {
+    "words": 237,
+    "nonempty": 226,
+    "joint": 8,
+    "nulls": 3,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Prov 2": {
+    "words": 143,
+    "nonempty": 139,
+    "joint": 3,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Prov 3": {
+    "words": 258,
+    "nonempty": 239,
+    "joint": 14,
+    "nulls": 5,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Prov 4": {
+    "words": 200,
+    "nonempty": 189,
+    "joint": 8,
+    "nulls": 3,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Prov 5": {
+    "words": 160,
+    "nonempty": 155,
+    "joint": 4,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Prov 6": {
+    "words": 271,
+    "nonempty": 248,
+    "joint": 21,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Prov 7": {
+    "words": 193,
+    "nonempty": 182,
+    "joint": 10,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Prov 8": {
+    "words": 258,
+    "nonempty": 241,
+    "joint": 10,
+    "nulls": 7,
+    "coverage": 0.973,
+    "rules": []
+   },
+   "Prov 9": {
+    "words": 127,
+    "nonempty": 123,
+    "joint": 4,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Prov 10": {
+    "words": 234,
+    "nonempty": 224,
+    "joint": 7,
+    "nulls": 3,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Prov 11": {
+    "words": 223,
+    "nonempty": 209,
+    "joint": 9,
+    "nulls": 5,
+    "coverage": 0.978,
+    "rules": []
+   },
+   "Prov 12": {
+    "words": 202,
+    "nonempty": 193,
+    "joint": 7,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Prov 13": {
+    "words": 183,
+    "nonempty": 171,
+    "joint": 9,
+    "nulls": 3,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Prov 14": {
+    "words": 248,
+    "nonempty": 241,
+    "joint": 4,
+    "nulls": 3,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Prov 15": {
+    "words": 252,
+    "nonempty": 242,
+    "joint": 8,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Prov 16": {
+    "words": 252,
+    "nonempty": 244,
+    "joint": 6,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Prov 17": {
+    "words": 227,
+    "nonempty": 208,
+    "joint": 15,
+    "nulls": 4,
+    "coverage": 0.982,
+    "rules": []
+   },
+   "Prov 18": {
+    "words": 175,
+    "nonempty": 164,
+    "joint": 8,
+    "nulls": 3,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Prov 19": {
+    "words": 230,
+    "nonempty": 215,
+    "joint": 12,
+    "nulls": 3,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Prov 20": {
+    "words": 226,
+    "nonempty": 209,
+    "joint": 11,
+    "nulls": 6,
+    "coverage": 0.973,
+    "rules": []
+   },
+   "Prov 21": {
+    "words": 233,
+    "nonempty": 219,
+    "joint": 10,
+    "nulls": 4,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Prov 22": {
+    "words": 225,
+    "nonempty": 210,
+    "joint": 9,
+    "nulls": 6,
+    "coverage": 0.973,
+    "rules": []
+   },
+   "Prov 23": {
+    "words": 274,
+    "nonempty": 241,
+    "joint": 23,
+    "nulls": 10,
+    "coverage": 0.964,
+    "rules": []
+   },
+   "Prov 24": {
+    "words": 269,
+    "nonempty": 252,
+    "joint": 15,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Prov 25": {
+    "words": 239,
+    "nonempty": 230,
+    "joint": 7,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Prov 26": {
+    "words": 211,
+    "nonempty": 198,
+    "joint": 8,
+    "nulls": 5,
+    "coverage": 0.976,
+    "rules": []
+   },
+   "Prov 27": {
+    "words": 212,
+    "nonempty": 199,
+    "joint": 10,
+    "nulls": 3,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Prov 28": {
+    "words": 229,
+    "nonempty": 215,
+    "joint": 9,
+    "nulls": 5,
+    "coverage": 0.978,
+    "rules": []
+   },
+   "Prov 29": {
+    "words": 204,
+    "nonempty": 197,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Prov 30": {
+    "words": 301,
+    "nonempty": 286,
+    "joint": 13,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Prov 31": {
+    "words": 219,
+    "nonempty": 207,
+    "joint": 7,
+    "nulls": 5,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "Job 1": {
+    "words": 345,
+    "nonempty": 303,
+    "joint": 41,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Job 2": {
+    "words": 209,
+    "nonempty": 182,
+    "joint": 26,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Job 3": {
+    "words": 204,
+    "nonempty": 190,
+    "joint": 13,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Job 4": {
+    "words": 149,
+    "nonempty": 142,
+    "joint": 7,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 5": {
+    "words": 205,
+    "nonempty": 194,
+    "joint": 8,
+    "nulls": 3,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Job 6": {
+    "words": 220,
+    "nonempty": 196,
+    "joint": 20,
+    "nulls": 4,
+    "coverage": 0.982,
+    "rules": []
+   },
+   "Job 7": {
+    "words": 172,
+    "nonempty": 160,
+    "joint": 8,
+    "nulls": 4,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "Job 8": {
+    "words": 166,
+    "nonempty": 151,
+    "joint": 14,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Job 9": {
+    "words": 259,
+    "nonempty": 248,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Job 10": {
+    "words": 169,
+    "nonempty": 154,
+    "joint": 11,
+    "nulls": 4,
+    "coverage": 0.976,
+    "rules": []
+   },
+   "Job 11": {
+    "words": 148,
+    "nonempty": 139,
+    "joint": 8,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Job 12": {
+    "words": 183,
+    "nonempty": 169,
+    "joint": 14,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 13": {
+    "words": 203,
+    "nonempty": 184,
+    "joint": 18,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Job 14": {
+    "words": 177,
+    "nonempty": 167,
+    "joint": 8,
+    "nulls": 2,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Job 15": {
+    "words": 261,
+    "nonempty": 245,
+    "joint": 14,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Job 16": {
+    "words": 172,
+    "nonempty": 159,
+    "joint": 9,
+    "nulls": 4,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "Job 17": {
+    "words": 112,
+    "nonempty": 103,
+    "joint": 8,
+    "nulls": 1,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Job 18": {
+    "words": 142,
+    "nonempty": 134,
+    "joint": 7,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Job 19": {
+    "words": 213,
+    "nonempty": 193,
+    "joint": 19,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Job 20": {
+    "words": 208,
+    "nonempty": 193,
+    "joint": 12,
+    "nulls": 3,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Job 21": {
+    "words": 240,
+    "nonempty": 229,
+    "joint": 10,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Job 22": {
+    "words": 210,
+    "nonempty": 195,
+    "joint": 11,
+    "nulls": 4,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Job 23": {
+    "words": 118,
+    "nonempty": 112,
+    "joint": 6,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 24": {
+    "words": 203,
+    "nonempty": 194,
+    "joint": 7,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Job 25": {
+    "words": 43,
+    "nonempty": 40,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 26": {
+    "words": 100,
+    "nonempty": 92,
+    "joint": 5,
+    "nulls": 3,
+    "coverage": 0.97,
+    "rules": []
+   },
+   "Job 27": {
+    "words": 169,
+    "nonempty": 156,
+    "joint": 13,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 28": {
+    "words": 207,
+    "nonempty": 193,
+    "joint": 13,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Job 29": {
+    "words": 169,
+    "nonempty": 156,
+    "joint": 13,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 30": {
+    "words": 227,
+    "nonempty": 210,
+    "joint": 15,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Job 31": {
+    "words": 310,
+    "nonempty": 297,
+    "joint": 10,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Job 32": {
+    "words": 197,
+    "nonempty": 178,
+    "joint": 19,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 33": {
+    "words": 246,
+    "nonempty": 230,
+    "joint": 11,
+    "nulls": 5,
+    "coverage": 0.98,
+    "rules": []
+   },
+   "Job 34": {
+    "words": 297,
+    "nonempty": 280,
+    "joint": 16,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Job 35": {
+    "words": 116,
+    "nonempty": 113,
+    "joint": 3,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Job 36": {
+    "words": 240,
+    "nonempty": 224,
+    "joint": 14,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Job 37": {
+    "words": 188,
+    "nonempty": 177,
+    "joint": 9,
+    "nulls": 2,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Job 38": {
+    "words": 299,
+    "nonempty": 275,
+    "joint": 20,
+    "nulls": 4,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Job 39": {
+    "words": 213,
+    "nonempty": 200,
+    "joint": 9,
+    "nulls": 4,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "Job 40": {
+    "words": 215,
+    "nonempty": 197,
+    "joint": 13,
+    "nulls": 5,
+    "coverage": 0.977,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Job 41": {
+    "words": 177,
+    "nonempty": 161,
+    "joint": 13,
+    "nulls": 3,
+    "coverage": 0.983,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Job 42": {
+    "words": 241,
+    "nonempty": 204,
+    "joint": 34,
+    "nulls": 3,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Song 1": {
+    "words": 150,
+    "nonempty": 140,
+    "joint": 9,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Song 2": {
+    "words": 177,
+    "nonempty": 163,
+    "joint": 10,
+    "nulls": 4,
+    "coverage": 0.977,
+    "rules": []
+   },
+   "Song 3": {
+    "words": 133,
+    "nonempty": 126,
+    "joint": 5,
+    "nulls": 2,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Song 4": {
+    "words": 178,
+    "nonempty": 170,
+    "joint": 3,
+    "nulls": 5,
+    "coverage": 0.972,
+    "rules": []
+   },
+   "Song 5": {
+    "words": 185,
+    "nonempty": 179,
+    "joint": 6,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Song 6": {
+    "words": 114,
+    "nonempty": 110,
+    "joint": 3,
+    "nulls": 1,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Song 7": {
+    "words": 139,
+    "nonempty": 131,
+    "joint": 8,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Song 8": {
+    "words": 174,
+    "nonempty": 156,
+    "joint": 16,
+    "nulls": 2,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Ruth 1": {
+    "words": 325,
+    "nonempty": 292,
+    "joint": 26,
+    "nulls": 7,
+    "coverage": 0.978,
+    "rules": []
+   },
+   "Ruth 2": {
+    "words": 378,
+    "nonempty": 334,
+    "joint": 41,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ruth 3": {
+    "words": 257,
+    "nonempty": 225,
+    "joint": 25,
+    "nulls": 7,
+    "coverage": 0.973,
+    "rules": []
+   },
+   "Ruth 4": {
+    "words": 335,
+    "nonempty": 286,
+    "joint": 44,
+    "nulls": 5,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Lam 1": {
+    "words": 375,
+    "nonempty": 347,
+    "joint": 24,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Lam 2": {
+    "words": 381,
+    "nonempty": 362,
+    "joint": 14,
+    "nulls": 5,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Lam 3": {
+    "words": 381,
+    "nonempty": 355,
+    "joint": 21,
+    "nulls": 5,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Lam 4": {
+    "words": 258,
+    "nonempty": 238,
+    "joint": 7,
+    "nulls": 13,
+    "coverage": 0.95,
+    "rules": []
+   },
+   "Lam 5": {
+    "words": 145,
+    "nonempty": 126,
+    "joint": 12,
+    "nulls": 7,
+    "coverage": 0.952,
+    "rules": []
+   },
+   "Eccl 1": {
+    "words": 215,
+    "nonempty": 194,
+    "joint": 20,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Eccl 2": {
+    "words": 381,
+    "nonempty": 342,
+    "joint": 36,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Eccl 3": {
+    "words": 273,
+    "nonempty": 247,
+    "joint": 26,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Eccl 4": {
+    "words": 237,
+    "nonempty": 204,
+    "joint": 31,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Eccl 5": {
+    "words": 266,
+    "nonempty": 242,
+    "joint": 22,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Eccl 6": {
+    "words": 170,
+    "nonempty": 150,
+    "joint": 19,
+    "nulls": 1,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Eccl 7": {
+    "words": 330,
+    "nonempty": 298,
+    "joint": 30,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Eccl 8": {
+    "words": 281,
+    "nonempty": 251,
+    "joint": 28,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Eccl 9": {
+    "words": 309,
+    "nonempty": 267,
+    "joint": 41,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Eccl 10": {
+    "words": 196,
+    "nonempty": 187,
+    "joint": 7,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Eccl 11": {
+    "words": 143,
+    "nonempty": 132,
+    "joint": 10,
+    "nulls": 1,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Eccl 12": {
+    "words": 186,
+    "nonempty": 172,
+    "joint": 11,
+    "nulls": 3,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Esth 1": {
+    "words": 371,
+    "nonempty": 324,
+    "joint": 46,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Esth 2": {
+    "words": 438,
+    "nonempty": 374,
+    "joint": 60,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Esth 3": {
+    "words": 303,
+    "nonempty": 255,
+    "joint": 47,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Esth 4": {
+    "words": 285,
+    "nonempty": 248,
+    "joint": 33,
+    "nulls": 4,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Esth 5": {
+    "words": 265,
+    "nonempty": 232,
+    "joint": 33,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Esth 6": {
+    "words": 263,
+    "nonempty": 233,
+    "joint": 30,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Esth 7": {
+    "words": 187,
+    "nonempty": 170,
+    "joint": 17,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Esth 8": {
+    "words": 343,
+    "nonempty": 294,
+    "joint": 45,
+    "nulls": 4,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Esth 9": {
+    "words": 544,
+    "nonempty": 431,
+    "joint": 99,
+    "nulls": 14,
+    "coverage": 0.974,
+    "rules": []
+   },
+   "Esth 10": {
+    "words": 46,
+    "nonempty": 43,
+    "joint": 2,
+    "nulls": 1,
+    "coverage": 0.978,
+    "rules": []
+   },
+   "Dan 1": {
+    "words": 309,
+    "nonempty": 260,
+    "joint": 40,
+    "nulls": 9,
+    "coverage": 0.971,
+    "rules": []
+   },
+   "Dan 2": {
+    "words": 842,
+    "nonempty": 693,
+    "joint": 119,
+    "nulls": 30,
+    "coverage": 0.964,
+    "rules": []
+   },
+   "Dan 3": {
+    "words": 631,
+    "nonempty": 507,
+    "joint": 96,
+    "nulls": 28,
+    "coverage": 0.956,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Dan 4": {
+    "words": 599,
+    "nonempty": 524,
+    "joint": 45,
+    "nulls": 30,
+    "coverage": 0.95,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Dan 5": {
+    "words": 524,
+    "nonempty": 436,
+    "joint": 51,
+    "nulls": 37,
+    "coverage": 0.929,
+    "rules": []
+   },
+   "Dan 6": {
+    "words": 551,
+    "nonempty": 442,
+    "joint": 92,
+    "nulls": 17,
+    "coverage": 0.969,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Dan 7": {
+    "words": 492,
+    "nonempty": 419,
+    "joint": 46,
+    "nulls": 27,
+    "coverage": 0.945,
+    "rules": []
+   },
+   "Dan 8": {
+    "words": 383,
+    "nonempty": 343,
+    "joint": 38,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Dan 9": {
+    "words": 462,
+    "nonempty": 417,
+    "joint": 39,
+    "nulls": 6,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Dan 10": {
+    "words": 342,
+    "nonempty": 292,
+    "joint": 48,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Dan 11": {
+    "words": 611,
+    "nonempty": 558,
+    "joint": 45,
+    "nulls": 8,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Dan 12": {
+    "words": 177,
+    "nonempty": 168,
+    "joint": 9,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezra 1": {
+    "words": 186,
+    "nonempty": 168,
+    "joint": 18,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Ezra 2": {
+    "words": 542,
+    "nonempty": 387,
+    "joint": 149,
+    "nulls": 6,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Ezra 3": {
+    "words": 251,
+    "nonempty": 221,
+    "joint": 25,
+    "nulls": 5,
+    "coverage": 0.98,
+    "rules": []
+   },
+   "Ezra 4": {
+    "words": 403,
+    "nonempty": 343,
+    "joint": 51,
+    "nulls": 9,
+    "coverage": 0.978,
+    "rules": []
+   },
+   "Ezra 5": {
+    "words": 329,
+    "nonempty": 277,
+    "joint": 48,
+    "nulls": 4,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Ezra 6": {
+    "words": 393,
+    "nonempty": 344,
+    "joint": 46,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Ezra 7": {
+    "words": 436,
+    "nonempty": 373,
+    "joint": 52,
+    "nulls": 11,
+    "coverage": 0.975,
+    "rules": []
+   },
+   "Ezra 8": {
+    "words": 463,
+    "nonempty": 423,
+    "joint": 33,
+    "nulls": 7,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Ezra 9": {
+    "words": 286,
+    "nonempty": 267,
+    "joint": 18,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Ezra 10": {
+    "words": 465,
+    "nonempty": 431,
+    "joint": 27,
+    "nulls": 7,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "Neh 1": {
+    "words": 202,
+    "nonempty": 175,
+    "joint": 26,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Neh 2": {
+    "words": 371,
+    "nonempty": 322,
+    "joint": 47,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Neh 3": {
+    "words": 555,
+    "nonempty": 506,
+    "joint": 37,
+    "nulls": 12,
+    "coverage": 0.978,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Neh 4": {
+    "words": 250,
+    "nonempty": 216,
+    "joint": 32,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Neh 5": {
+    "words": 328,
+    "nonempty": 273,
+    "joint": 52,
+    "nulls": 3,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Neh 6": {
+    "words": 305,
+    "nonempty": 271,
+    "joint": 33,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Neh 7": {
+    "words": 626,
+    "nonempty": 461,
+    "joint": 154,
+    "nulls": 11,
+    "coverage": 0.982,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Neh 8": {
+    "words": 357,
+    "nonempty": 325,
+    "joint": 31,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Neh 9": {
+    "words": 656,
+    "nonempty": 587,
+    "joint": 63,
+    "nulls": 6,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Neh 10": {
+    "words": 341,
+    "nonempty": 314,
+    "joint": 24,
+    "nulls": 3,
+    "coverage": 0.991,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Neh 11": {
+    "words": 378,
+    "nonempty": 342,
+    "joint": 31,
+    "nulls": 5,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Neh 12": {
+    "words": 471,
+    "nonempty": 444,
+    "joint": 23,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Neh 13": {
+    "words": 473,
+    "nonempty": 430,
+    "joint": 38,
+    "nulls": 5,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "1Chr 1": {
+    "words": 422,
+    "nonempty": 362,
+    "joint": 53,
+    "nulls": 7,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "1Chr 2": {
+    "words": 534,
+    "nonempty": 455,
+    "joint": 74,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "1Chr 3": {
+    "words": 195,
+    "nonempty": 188,
+    "joint": 6,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Chr 4": {
+    "words": 475,
+    "nonempty": 412,
+    "joint": 58,
+    "nulls": 5,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "1Chr 5": {
+    "words": 451,
+    "nonempty": 392,
+    "joint": 57,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": [
+     "versification"
+    ]
+   },
+   "1Chr 6": {
+    "words": 629,
+    "nonempty": 482,
+    "joint": 142,
+    "nulls": 5,
+    "coverage": 0.992,
+    "rules": [
+     "versification"
+    ]
+   },
+   "1Chr 7": {
+    "words": 426,
+    "nonempty": 369,
+    "joint": 52,
+    "nulls": 5,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "1Chr 8": {
+    "words": 300,
+    "nonempty": 254,
+    "joint": 42,
+    "nulls": 4,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "1Chr 9": {
+    "words": 490,
+    "nonempty": 416,
+    "joint": 68,
+    "nulls": 6,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "1Chr 10": {
+    "words": 203,
+    "nonempty": 163,
+    "joint": 38,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "1Chr 11": {
+    "words": 519,
+    "nonempty": 470,
+    "joint": 40,
+    "nulls": 9,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "1Chr 12": {
+    "words": 495,
+    "nonempty": 423,
+    "joint": 67,
+    "nulls": 5,
+    "coverage": 0.99,
+    "rules": [
+     "versification"
+    ]
+   },
+   "1Chr 13": {
+    "words": 212,
+    "nonempty": 187,
+    "joint": 25,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Chr 14": {
+    "words": 194,
+    "nonempty": 172,
+    "joint": 20,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "1Chr 15": {
+    "words": 364,
+    "nonempty": 319,
+    "joint": 43,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Chr 16": {
+    "words": 409,
+    "nonempty": 383,
+    "joint": 26,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Chr 17": {
+    "words": 408,
+    "nonempty": 360,
+    "joint": 47,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1Chr 18": {
+    "words": 243,
+    "nonempty": 212,
+    "joint": 30,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Chr 19": {
+    "words": 319,
+    "nonempty": 274,
+    "joint": 44,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Chr 20": {
+    "words": 143,
+    "nonempty": 122,
+    "joint": 17,
+    "nulls": 4,
+    "coverage": 0.972,
+    "rules": []
+   },
+   "1Chr 21": {
+    "words": 492,
+    "nonempty": 439,
+    "joint": 52,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1Chr 22": {
+    "words": 307,
+    "nonempty": 280,
+    "joint": 25,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "1Chr 23": {
+    "words": 333,
+    "nonempty": 292,
+    "joint": 35,
+    "nulls": 6,
+    "coverage": 0.982,
+    "rules": []
+   },
+   "1Chr 24": {
+    "words": 270,
+    "nonempty": 238,
+    "joint": 31,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Chr 25": {
+    "words": 287,
+    "nonempty": 236,
+    "joint": 48,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "1Chr 26": {
+    "words": 355,
+    "nonempty": 332,
+    "joint": 22,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Chr 27": {
+    "words": 406,
+    "nonempty": 345,
+    "joint": 51,
+    "nulls": 10,
+    "coverage": 0.975,
+    "rules": []
+   },
+   "1Chr 28": {
+    "words": 381,
+    "nonempty": 346,
+    "joint": 34,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Chr 29": {
+    "words": 480,
+    "nonempty": 447,
+    "joint": 31,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Chr 1": {
+    "words": 284,
+    "nonempty": 249,
+    "joint": 35,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "2Chr 2": {
+    "words": 327,
+    "nonempty": 274,
+    "joint": 53,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "2Chr 3": {
+    "words": 238,
+    "nonempty": 214,
+    "joint": 22,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "2Chr 4": {
+    "words": 311,
+    "nonempty": 253,
+    "joint": 56,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Chr 5": {
+    "words": 246,
+    "nonempty": 210,
+    "joint": 33,
+    "nulls": 3,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "2Chr 6": {
+    "words": 741,
+    "nonempty": 660,
+    "joint": 77,
+    "nulls": 4,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Chr 7": {
+    "words": 395,
+    "nonempty": 343,
+    "joint": 50,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Chr 8": {
+    "words": 291,
+    "nonempty": 245,
+    "joint": 43,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "2Chr 9": {
+    "words": 486,
+    "nonempty": 433,
+    "joint": 51,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Chr 10": {
+    "words": 311,
+    "nonempty": 270,
+    "joint": 40,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "2Chr 11": {
+    "words": 293,
+    "nonempty": 234,
+    "joint": 57,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "2Chr 12": {
+    "words": 253,
+    "nonempty": 226,
+    "joint": 27,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Chr 13": {
+    "words": 363,
+    "nonempty": 313,
+    "joint": 47,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": [
+     "versification"
+    ]
+   },
+   "2Chr 14": {
+    "words": 217,
+    "nonempty": 190,
+    "joint": 25,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": [
+     "versification"
+    ]
+   },
+   "2Chr 15": {
+    "words": 252,
+    "nonempty": 236,
+    "joint": 14,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "2Chr 16": {
+    "words": 259,
+    "nonempty": 220,
+    "joint": 39,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Chr 17": {
+    "words": 239,
+    "nonempty": 212,
+    "joint": 26,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Chr 18": {
+    "words": 558,
+    "nonempty": 487,
+    "joint": 67,
+    "nulls": 4,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "2Chr 19": {
+    "words": 182,
+    "nonempty": 170,
+    "joint": 11,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Chr 20": {
+    "words": 580,
+    "nonempty": 527,
+    "joint": 49,
+    "nulls": 4,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "2Chr 21": {
+    "words": 321,
+    "nonempty": 292,
+    "joint": 29,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Chr 22": {
+    "words": 243,
+    "nonempty": 219,
+    "joint": 23,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Chr 23": {
+    "words": 385,
+    "nonempty": 334,
+    "joint": 49,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Chr 24": {
+    "words": 455,
+    "nonempty": 405,
+    "joint": 47,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "2Chr 25": {
+    "words": 493,
+    "nonempty": 430,
+    "joint": 60,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Chr 26": {
+    "words": 369,
+    "nonempty": 319,
+    "joint": 46,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "2Chr 27": {
+    "words": 129,
+    "nonempty": 114,
+    "joint": 14,
+    "nulls": 1,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "2Chr 28": {
+    "words": 450,
+    "nonempty": 391,
+    "joint": 55,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "2Chr 29": {
+    "words": 540,
+    "nonempty": 490,
+    "joint": 45,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "2Chr 30": {
+    "words": 432,
+    "nonempty": 398,
+    "joint": 33,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "2Chr 31": {
+    "words": 332,
+    "nonempty": 299,
+    "joint": 30,
+    "nulls": 3,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "2Chr 32": {
+    "words": 549,
+    "nonempty": 500,
+    "joint": 44,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "2Chr 33": {
+    "words": 380,
+    "nonempty": 336,
+    "joint": 41,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "2Chr 34": {
+    "words": 613,
+    "nonempty": 529,
+    "joint": 75,
+    "nulls": 9,
+    "coverage": 0.985,
+    "rules": []
+   },
+   "2Chr 35": {
+    "words": 431,
+    "nonempty": 386,
+    "joint": 41,
+    "nulls": 4,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "2Chr 36": {
+    "words": 366,
+    "nonempty": 331,
+    "joint": 33,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   }
+  },
+  "gr": {
+   "Matt 1": {
+    "words": 436,
+    "nonempty": 326,
+    "joint": 110,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Matt 2": {
+    "words": 457,
+    "nonempty": 399,
+    "joint": 56,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Matt 3": {
+    "words": 331,
+    "nonempty": 276,
+    "joint": 55,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Matt 4": {
+    "words": 428,
+    "nonempty": 352,
+    "joint": 74,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Matt 5": {
+    "words": 821,
+    "nonempty": 692,
+    "joint": 127,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Matt 6": {
+    "words": 648,
+    "nonempty": 537,
+    "joint": 106,
+    "nulls": 5,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Matt 7": {
+    "words": 516,
+    "nonempty": 427,
+    "joint": 85,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Matt 8": {
+    "words": 583,
+    "nonempty": 488,
+    "joint": 93,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Matt 9": {
+    "words": 647,
+    "nonempty": 536,
+    "joint": 106,
+    "nulls": 5,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Matt 10": {
+    "words": 720,
+    "nonempty": 606,
+    "joint": 114,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Matt 11": {
+    "words": 493,
+    "nonempty": 431,
+    "joint": 62,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Matt 12": {
+    "words": 906,
+    "nonempty": 744,
+    "joint": 160,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Matt 13": {
+    "words": 1076,
+    "nonempty": 886,
+    "joint": 186,
+    "nulls": 4,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Matt 14": {
+    "words": 559,
+    "nonempty": 474,
+    "joint": 81,
+    "nulls": 4,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Matt 15": {
+    "words": 609,
+    "nonempty": 477,
+    "joint": 129,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Matt 16": {
+    "words": 526,
+    "nonempty": 438,
+    "joint": 87,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Matt 17": {
+    "words": 496,
+    "nonempty": 402,
+    "joint": 92,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Matt 18": {
+    "words": 669,
+    "nonempty": 541,
+    "joint": 125,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Matt 19": {
+    "words": 536,
+    "nonempty": 434,
+    "joint": 93,
+    "nulls": 9,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Matt 20": {
+    "words": 539,
+    "nonempty": 453,
+    "joint": 84,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Matt 21": {
+    "words": 864,
+    "nonempty": 728,
+    "joint": 136,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Matt 22": {
+    "words": 662,
+    "nonempty": 561,
+    "joint": 100,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Matt 23": {
+    "words": 655,
+    "nonempty": 547,
+    "joint": 105,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Matt 24": {
+    "words": 824,
+    "nonempty": 678,
+    "joint": 143,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Matt 25": {
+    "words": 753,
+    "nonempty": 648,
+    "joint": 104,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Matt 26": {
+    "words": 1240,
+    "nonempty": 1042,
+    "joint": 198,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Matt 27": {
+    "words": 1006,
+    "nonempty": 855,
+    "joint": 144,
+    "nulls": 7,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Matt 28": {
+    "words": 329,
+    "nonempty": 283,
+    "joint": 45,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Mark 1": {
+    "words": 701,
+    "nonempty": 565,
+    "joint": 133,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Mark 2": {
+    "words": 542,
+    "nonempty": 426,
+    "joint": 113,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Mark 3": {
+    "words": 535,
+    "nonempty": 406,
+    "joint": 126,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Mark 4": {
+    "words": 683,
+    "nonempty": 559,
+    "joint": 121,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Mark 5": {
+    "words": 698,
+    "nonempty": 566,
+    "joint": 131,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Mark 6": {
+    "words": 983,
+    "nonempty": 796,
+    "joint": 182,
+    "nulls": 5,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Mark 7": {
+    "words": 603,
+    "nonempty": 484,
+    "joint": 117,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Mark 8": {
+    "words": 632,
+    "nonempty": 520,
+    "joint": 112,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Mark 9": {
+    "words": 859,
+    "nonempty": 675,
+    "joint": 183,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Mark 10": {
+    "words": 881,
+    "nonempty": 734,
+    "joint": 146,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Mark 11": {
+    "words": 566,
+    "nonempty": 467,
+    "joint": 99,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Mark 12": {
+    "words": 793,
+    "nonempty": 671,
+    "joint": 122,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Mark 13": {
+    "words": 604,
+    "nonempty": 487,
+    "joint": 117,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Mark 14": {
+    "words": 1200,
+    "nonempty": 989,
+    "joint": 203,
+    "nulls": 8,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Mark 15": {
+    "words": 669,
+    "nonempty": 565,
+    "joint": 101,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Mark 16": {
+    "words": 337,
+    "nonempty": 264,
+    "joint": 39,
+    "nulls": 34,
+    "coverage": 0.899,
+    "rules": []
+   },
+   "Luke 1": {
+    "words": 1186,
+    "nonempty": 972,
+    "joint": 213,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Luke 2": {
+    "words": 849,
+    "nonempty": 693,
+    "joint": 154,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Luke 3": {
+    "words": 587,
+    "nonempty": 501,
+    "joint": 84,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Luke 4": {
+    "words": 768,
+    "nonempty": 622,
+    "joint": 143,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Luke 5": {
+    "words": 750,
+    "nonempty": 601,
+    "joint": 146,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Luke 6": {
+    "words": 923,
+    "nonempty": 767,
+    "joint": 156,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Luke 7": {
+    "words": 889,
+    "nonempty": 741,
+    "joint": 139,
+    "nulls": 9,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Luke 8": {
+    "words": 1086,
+    "nonempty": 890,
+    "joint": 195,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Luke 9": {
+    "words": 1150,
+    "nonempty": 924,
+    "joint": 222,
+    "nulls": 4,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Luke 10": {
+    "words": 788,
+    "nonempty": 646,
+    "joint": 138,
+    "nulls": 4,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Luke 11": {
+    "words": 977,
+    "nonempty": 827,
+    "joint": 150,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Luke 12": {
+    "words": 1042,
+    "nonempty": 881,
+    "joint": 159,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Luke 13": {
+    "words": 660,
+    "nonempty": 534,
+    "joint": 122,
+    "nulls": 4,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Luke 14": {
+    "words": 607,
+    "nonempty": 505,
+    "joint": 99,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Luke 15": {
+    "words": 564,
+    "nonempty": 471,
+    "joint": 88,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Luke 16": {
+    "words": 595,
+    "nonempty": 505,
+    "joint": 90,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Luke 17": {
+    "words": 568,
+    "nonempty": 468,
+    "joint": 100,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Luke 18": {
+    "words": 681,
+    "nonempty": 535,
+    "joint": 143,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Luke 19": {
+    "words": 753,
+    "nonempty": 617,
+    "joint": 136,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Luke 20": {
+    "words": 699,
+    "nonempty": 578,
+    "joint": 118,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Luke 21": {
+    "words": 586,
+    "nonempty": 488,
+    "joint": 93,
+    "nulls": 5,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Luke 22": {
+    "words": 1082,
+    "nonempty": 899,
+    "joint": 181,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Luke 23": {
+    "words": 847,
+    "nonempty": 696,
+    "joint": 143,
+    "nulls": 8,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Luke 24": {
+    "words": 809,
+    "nonempty": 670,
+    "joint": 138,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "John 1": {
+    "words": 826,
+    "nonempty": 708,
+    "joint": 117,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "John 2": {
+    "words": 430,
+    "nonempty": 341,
+    "joint": 88,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "John 3": {
+    "words": 657,
+    "nonempty": 549,
+    "joint": 107,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "John 4": {
+    "words": 936,
+    "nonempty": 772,
+    "joint": 162,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "John 5": {
+    "words": 790,
+    "nonempty": 683,
+    "joint": 102,
+    "nulls": 5,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "John 6": {
+    "words": 1238,
+    "nonempty": 1045,
+    "joint": 190,
+    "nulls": 3,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "John 7": {
+    "words": 850,
+    "nonempty": 725,
+    "joint": 122,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "John 8": {
+    "words": 905,
+    "nonempty": 750,
+    "joint": 153,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "John 9": {
+    "words": 689,
+    "nonempty": 563,
+    "joint": 125,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "John 10": {
+    "words": 697,
+    "nonempty": 585,
+    "joint": 107,
+    "nulls": 5,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "John 11": {
+    "words": 944,
+    "nonempty": 795,
+    "joint": 148,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "John 12": {
+    "words": 890,
+    "nonempty": 753,
+    "joint": 137,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "John 13": {
+    "words": 660,
+    "nonempty": 553,
+    "joint": 107,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "John 14": {
+    "words": 577,
+    "nonempty": 507,
+    "joint": 68,
+    "nulls": 2,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "John 15": {
+    "words": 500,
+    "nonempty": 423,
+    "joint": 73,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "John 16": {
+    "words": 580,
+    "nonempty": 498,
+    "joint": 81,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "John 17": {
+    "words": 498,
+    "nonempty": 449,
+    "joint": 48,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "John 18": {
+    "words": 790,
+    "nonempty": 642,
+    "joint": 147,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "John 19": {
+    "words": 818,
+    "nonempty": 672,
+    "joint": 141,
+    "nulls": 5,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "John 20": {
+    "words": 614,
+    "nonempty": 504,
+    "joint": 110,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "John 21": {
+    "words": 549,
+    "nonempty": 448,
+    "joint": 100,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Acts 1": {
+    "words": 506,
+    "nonempty": 422,
+    "joint": 81,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Acts 2": {
+    "words": 835,
+    "nonempty": 669,
+    "joint": 159,
+    "nulls": 7,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Acts 3": {
+    "words": 496,
+    "nonempty": 400,
+    "joint": 94,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Acts 4": {
+    "words": 686,
+    "nonempty": 567,
+    "joint": 115,
+    "nulls": 4,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Acts 5": {
+    "words": 771,
+    "nonempty": 623,
+    "joint": 141,
+    "nulls": 7,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Acts 6": {
+    "words": 278,
+    "nonempty": 241,
+    "joint": 37,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Acts 7": {
+    "words": 1116,
+    "nonempty": 915,
+    "joint": 199,
+    "nulls": 2,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Acts 8": {
+    "words": 694,
+    "nonempty": 560,
+    "joint": 134,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Acts 9": {
+    "words": 786,
+    "nonempty": 661,
+    "joint": 124,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Acts 10": {
+    "words": 836,
+    "nonempty": 675,
+    "joint": 157,
+    "nulls": 4,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Acts 11": {
+    "words": 527,
+    "nonempty": 433,
+    "joint": 93,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Acts 12": {
+    "words": 492,
+    "nonempty": 394,
+    "joint": 97,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Acts 13": {
+    "words": 931,
+    "nonempty": 778,
+    "joint": 141,
+    "nulls": 12,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Acts 14": {
+    "words": 473,
+    "nonempty": 405,
+    "joint": 68,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Acts 15": {
+    "words": 694,
+    "nonempty": 570,
+    "joint": 123,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": []
+   },
+   "Acts 16": {
+    "words": 719,
+    "nonempty": 591,
+    "joint": 124,
+    "nulls": 4,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Acts 17": {
+    "words": 675,
+    "nonempty": 552,
+    "joint": 123,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Acts 18": {
+    "words": 510,
+    "nonempty": 431,
+    "joint": 77,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Acts 19": {
+    "words": 753,
+    "nonempty": 612,
+    "joint": 140,
+    "nulls": 1,
+    "coverage": 0.999,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Acts 20": {
+    "words": 676,
+    "nonempty": 555,
+    "joint": 118,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Acts 21": {
+    "words": 798,
+    "nonempty": 662,
+    "joint": 131,
+    "nulls": 5,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Acts 22": {
+    "words": 569,
+    "nonempty": 464,
+    "joint": 105,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Acts 23": {
+    "words": 661,
+    "nonempty": 535,
+    "joint": 125,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Acts 24": {
+    "words": 458,
+    "nonempty": 373,
+    "joint": 77,
+    "nulls": 8,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "Acts 25": {
+    "words": 530,
+    "nonempty": 445,
+    "joint": 83,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Acts 26": {
+    "words": 593,
+    "nonempty": 497,
+    "joint": 95,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Acts 27": {
+    "words": 752,
+    "nonempty": 610,
+    "joint": 142,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Acts 28": {
+    "words": 597,
+    "nonempty": 483,
+    "joint": 109,
+    "nulls": 5,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Rom 1": {
+    "words": 543,
+    "nonempty": 465,
+    "joint": 78,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rom 2": {
+    "words": 449,
+    "nonempty": 377,
+    "joint": 72,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rom 3": {
+    "words": 428,
+    "nonempty": 360,
+    "joint": 63,
+    "nulls": 5,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "Rom 4": {
+    "words": 399,
+    "nonempty": 347,
+    "joint": 52,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rom 5": {
+    "words": 432,
+    "nonempty": 373,
+    "joint": 59,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rom 6": {
+    "words": 367,
+    "nonempty": 300,
+    "joint": 67,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rom 7": {
+    "words": 467,
+    "nonempty": 392,
+    "joint": 72,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Rom 8": {
+    "words": 652,
+    "nonempty": 566,
+    "joint": 80,
+    "nulls": 6,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "Rom 9": {
+    "words": 525,
+    "nonempty": 453,
+    "joint": 72,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rom 10": {
+    "words": 338,
+    "nonempty": 290,
+    "joint": 48,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rom 11": {
+    "words": 578,
+    "nonempty": 460,
+    "joint": 112,
+    "nulls": 6,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "Rom 12": {
+    "words": 304,
+    "nonempty": 240,
+    "joint": 63,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Rom 13": {
+    "words": 270,
+    "nonempty": 214,
+    "joint": 54,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Rom 14": {
+    "words": 379,
+    "nonempty": 314,
+    "joint": 60,
+    "nulls": 5,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Rom 15": {
+    "words": 541,
+    "nonempty": 457,
+    "joint": 82,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Rom 16": {
+    "words": 383,
+    "nonempty": 313,
+    "joint": 55,
+    "nulls": 15,
+    "coverage": 0.961,
+    "rules": []
+   },
+   "1Cor 1": {
+    "words": 497,
+    "nonempty": 417,
+    "joint": 76,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "1Cor 2": {
+    "words": 287,
+    "nonempty": 234,
+    "joint": 51,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "1Cor 3": {
+    "words": 340,
+    "nonempty": 297,
+    "joint": 42,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "1Cor 4": {
+    "words": 345,
+    "nonempty": 288,
+    "joint": 57,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Cor 5": {
+    "words": 221,
+    "nonempty": 189,
+    "joint": 31,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Cor 6": {
+    "words": 334,
+    "nonempty": 279,
+    "joint": 55,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Cor 7": {
+    "words": 687,
+    "nonempty": 582,
+    "joint": 102,
+    "nulls": 3,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Cor 8": {
+    "words": 226,
+    "nonempty": 185,
+    "joint": 38,
+    "nulls": 3,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "1Cor 9": {
+    "words": 449,
+    "nonempty": 372,
+    "joint": 75,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Cor 10": {
+    "words": 463,
+    "nonempty": 396,
+    "joint": 65,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Cor 11": {
+    "words": 529,
+    "nonempty": 446,
+    "joint": 83,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Cor 12": {
+    "words": 465,
+    "nonempty": 404,
+    "joint": 56,
+    "nulls": 5,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "1Cor 13": {
+    "words": 197,
+    "nonempty": 159,
+    "joint": 36,
+    "nulls": 2,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "1Cor 14": {
+    "words": 606,
+    "nonempty": 517,
+    "joint": 88,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1Cor 15": {
+    "words": 843,
+    "nonempty": 739,
+    "joint": 104,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Cor 16": {
+    "words": 323,
+    "nonempty": 284,
+    "joint": 37,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Cor 1": {
+    "words": 487,
+    "nonempty": 395,
+    "joint": 91,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "2Cor 2": {
+    "words": 285,
+    "nonempty": 230,
+    "joint": 55,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Cor 3": {
+    "words": 296,
+    "nonempty": 251,
+    "joint": 42,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "2Cor 4": {
+    "words": 320,
+    "nonempty": 266,
+    "joint": 54,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Cor 5": {
+    "words": 338,
+    "nonempty": 291,
+    "joint": 47,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Cor 6": {
+    "words": 266,
+    "nonempty": 230,
+    "joint": 35,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "2Cor 7": {
+    "words": 328,
+    "nonempty": 275,
+    "joint": 53,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Cor 8": {
+    "words": 410,
+    "nonempty": 329,
+    "joint": 81,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Cor 9": {
+    "words": 284,
+    "nonempty": 243,
+    "joint": 39,
+    "nulls": 2,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "2Cor 10": {
+    "words": 311,
+    "nonempty": 244,
+    "joint": 62,
+    "nulls": 5,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "2Cor 11": {
+    "words": 500,
+    "nonempty": 417,
+    "joint": 80,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Cor 12": {
+    "words": 412,
+    "nonempty": 339,
+    "joint": 73,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Cor 13": {
+    "words": 236,
+    "nonempty": 212,
+    "joint": 24,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Gal 1": {
+    "words": 362,
+    "nonempty": 307,
+    "joint": 53,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Gal 2": {
+    "words": 385,
+    "nonempty": 331,
+    "joint": 51,
+    "nulls": 3,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Gal 3": {
+    "words": 455,
+    "nonempty": 398,
+    "joint": 55,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Gal 4": {
+    "words": 444,
+    "nonempty": 388,
+    "joint": 53,
+    "nulls": 3,
+    "coverage": 0.993,
+    "rules": []
+   },
+   "Gal 5": {
+    "words": 313,
+    "nonempty": 279,
+    "joint": 34,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Gal 6": {
+    "words": 267,
+    "nonempty": 228,
+    "joint": 38,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Eph 1": {
+    "words": 401,
+    "nonempty": 350,
+    "joint": 49,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Eph 2": {
+    "words": 362,
+    "nonempty": 317,
+    "joint": 41,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Eph 3": {
+    "words": 324,
+    "nonempty": 275,
+    "joint": 47,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Eph 4": {
+    "words": 481,
+    "nonempty": 415,
+    "joint": 66,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Eph 5": {
+    "words": 455,
+    "nonempty": 380,
+    "joint": 66,
+    "nulls": 9,
+    "coverage": 0.98,
+    "rules": []
+   },
+   "Eph 6": {
+    "words": 393,
+    "nonempty": 342,
+    "joint": 49,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Phil 1": {
+    "words": 501,
+    "nonempty": 436,
+    "joint": 64,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Phil 2": {
+    "words": 431,
+    "nonempty": 370,
+    "joint": 50,
+    "nulls": 11,
+    "coverage": 0.974,
+    "rules": []
+   },
+   "Phil 3": {
+    "words": 337,
+    "nonempty": 285,
+    "joint": 51,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Phil 4": {
+    "words": 357,
+    "nonempty": 303,
+    "joint": 52,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Col 1": {
+    "words": 538,
+    "nonempty": 458,
+    "joint": 79,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Col 2": {
+    "words": 388,
+    "nonempty": 327,
+    "joint": 59,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Col 3": {
+    "words": 369,
+    "nonempty": 318,
+    "joint": 51,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Col 4": {
+    "words": 285,
+    "nonempty": 246,
+    "joint": 38,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "1Thess 1": {
+    "words": 210,
+    "nonempty": 176,
+    "joint": 33,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Thess 2": {
+    "words": 390,
+    "nonempty": 315,
+    "joint": 68,
+    "nulls": 7,
+    "coverage": 0.982,
+    "rules": []
+   },
+   "1Thess 3": {
+    "words": 247,
+    "nonempty": 197,
+    "joint": 50,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Thess 4": {
+    "words": 309,
+    "nonempty": 262,
+    "joint": 47,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Thess 5": {
+    "words": 317,
+    "nonempty": 286,
+    "joint": 31,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Thess 1": {
+    "words": 234,
+    "nonempty": 189,
+    "joint": 41,
+    "nulls": 4,
+    "coverage": 0.983,
+    "rules": []
+   },
+   "2Thess 2": {
+    "words": 312,
+    "nonempty": 266,
+    "joint": 45,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "2Thess 3": {
+    "words": 274,
+    "nonempty": 234,
+    "joint": 40,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Tim 1": {
+    "words": 306,
+    "nonempty": 279,
+    "joint": 24,
+    "nulls": 3,
+    "coverage": 0.99,
+    "rules": []
+   },
+   "1Tim 2": {
+    "words": 186,
+    "nonempty": 171,
+    "joint": 15,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Tim 3": {
+    "words": 207,
+    "nonempty": 195,
+    "joint": 12,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Tim 4": {
+    "words": 221,
+    "nonempty": 204,
+    "joint": 15,
+    "nulls": 2,
+    "coverage": 0.991,
+    "rules": []
+   },
+   "1Tim 5": {
+    "words": 328,
+    "nonempty": 293,
+    "joint": 35,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Tim 6": {
+    "words": 343,
+    "nonempty": 314,
+    "joint": 27,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Tim 1": {
+    "words": 317,
+    "nonempty": 275,
+    "joint": 40,
+    "nulls": 2,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "2Tim 2": {
+    "words": 356,
+    "nonempty": 317,
+    "joint": 35,
+    "nulls": 4,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "2Tim 3": {
+    "words": 235,
+    "nonempty": 210,
+    "joint": 25,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2Tim 4": {
+    "words": 327,
+    "nonempty": 297,
+    "joint": 29,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Titus 1": {
+    "words": 251,
+    "nonempty": 229,
+    "joint": 22,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Titus 2": {
+    "words": 189,
+    "nonempty": 175,
+    "joint": 12,
+    "nulls": 2,
+    "coverage": 0.989,
+    "rules": []
+   },
+   "Titus 3": {
+    "words": 219,
+    "nonempty": 201,
+    "joint": 17,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Phlm 1": {
+    "words": 334,
+    "nonempty": 287,
+    "joint": 47,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Heb 1": {
+    "words": 257,
+    "nonempty": 219,
+    "joint": 38,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Heb 2": {
+    "words": 312,
+    "nonempty": 265,
+    "joint": 43,
+    "nulls": 4,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Heb 3": {
+    "words": 282,
+    "nonempty": 237,
+    "joint": 41,
+    "nulls": 4,
+    "coverage": 0.986,
+    "rules": []
+   },
+   "Heb 4": {
+    "words": 290,
+    "nonempty": 240,
+    "joint": 49,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Heb 5": {
+    "words": 231,
+    "nonempty": 192,
+    "joint": 38,
+    "nulls": 1,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Heb 6": {
+    "words": 300,
+    "nonempty": 254,
+    "joint": 46,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Heb 7": {
+    "words": 454,
+    "nonempty": 385,
+    "joint": 69,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Heb 8": {
+    "words": 274,
+    "nonempty": 238,
+    "joint": 36,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Heb 9": {
+    "words": 507,
+    "nonempty": 438,
+    "joint": 66,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Heb 10": {
+    "words": 550,
+    "nonempty": 471,
+    "joint": 79,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Heb 11": {
+    "words": 631,
+    "nonempty": 541,
+    "joint": 85,
+    "nulls": 5,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Heb 12": {
+    "words": 472,
+    "nonempty": 400,
+    "joint": 69,
+    "nulls": 3,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Heb 13": {
+    "words": 375,
+    "nonempty": 322,
+    "joint": 53,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jas 1": {
+    "words": 406,
+    "nonempty": 347,
+    "joint": 59,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jas 2": {
+    "words": 414,
+    "nonempty": 363,
+    "joint": 50,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Jas 3": {
+    "words": 295,
+    "nonempty": 255,
+    "joint": 40,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jas 4": {
+    "words": 276,
+    "nonempty": 238,
+    "joint": 38,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Jas 5": {
+    "words": 348,
+    "nonempty": 299,
+    "joint": 49,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Pet 1": {
+    "words": 405,
+    "nonempty": 363,
+    "joint": 42,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Pet 2": {
+    "words": 392,
+    "nonempty": 349,
+    "joint": 41,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "1Pet 3": {
+    "words": 368,
+    "nonempty": 317,
+    "joint": 44,
+    "nulls": 7,
+    "coverage": 0.981,
+    "rules": []
+   },
+   "1Pet 4": {
+    "words": 305,
+    "nonempty": 263,
+    "joint": 42,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1Pet 5": {
+    "words": 208,
+    "nonempty": 185,
+    "joint": 22,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Pet 1": {
+    "words": 384,
+    "nonempty": 326,
+    "joint": 57,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "2Pet 2": {
+    "words": 372,
+    "nonempty": 332,
+    "joint": 38,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "2Pet 3": {
+    "words": 342,
+    "nonempty": 300,
+    "joint": 42,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1John 1": {
+    "words": 207,
+    "nonempty": 187,
+    "joint": 20,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "1John 2": {
+    "words": 585,
+    "nonempty": 510,
+    "joint": 68,
+    "nulls": 7,
+    "coverage": 0.988,
+    "rules": []
+   },
+   "1John 3": {
+    "words": 467,
+    "nonempty": 397,
+    "joint": 69,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1John 4": {
+    "words": 449,
+    "nonempty": 370,
+    "joint": 78,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "1John 5": {
+    "words": 429,
+    "nonempty": 363,
+    "joint": 66,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "2John 1": {
+    "words": 245,
+    "nonempty": 216,
+    "joint": 27,
+    "nulls": 2,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "3John 1": {
+    "words": 219,
+    "nonempty": 191,
+    "joint": 28,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Jude 1": {
+    "words": 459,
+    "nonempty": 398,
+    "joint": 61,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rev 1": {
+    "words": 469,
+    "nonempty": 402,
+    "joint": 65,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Rev 2": {
+    "words": 621,
+    "nonempty": 508,
+    "joint": 105,
+    "nulls": 8,
+    "coverage": 0.987,
+    "rules": []
+   },
+   "Rev 3": {
+    "words": 525,
+    "nonempty": 442,
+    "joint": 83,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rev 4": {
+    "words": 293,
+    "nonempty": 238,
+    "joint": 54,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Rev 5": {
+    "words": 339,
+    "nonempty": 309,
+    "joint": 29,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Rev 6": {
+    "words": 417,
+    "nonempty": 357,
+    "joint": 59,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Rev 7": {
+    "words": 398,
+    "nonempty": 324,
+    "joint": 73,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Rev 8": {
+    "words": 319,
+    "nonempty": 273,
+    "joint": 45,
+    "nulls": 1,
+    "coverage": 0.997,
+    "rules": []
+   },
+   "Rev 9": {
+    "words": 496,
+    "nonempty": 387,
+    "joint": 109,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rev 10": {
+    "words": 291,
+    "nonempty": 253,
+    "joint": 38,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rev 11": {
+    "words": 495,
+    "nonempty": 413,
+    "joint": 82,
+    "nulls": 0,
+    "coverage": 1,
+    "rules": []
+   },
+   "Rev 12": {
+    "words": 438,
+    "nonempty": 375,
+    "joint": 62,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": [
+     "versification"
+    ]
+   },
+   "Rev 13": {
+    "words": 446,
+    "nonempty": 365,
+    "joint": 80,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Rev 14": {
+    "words": 548,
+    "nonempty": 481,
+    "joint": 66,
+    "nulls": 1,
+    "coverage": 0.998,
+    "rules": []
+   },
+   "Rev 15": {
+    "words": 217,
+    "nonempty": 180,
+    "joint": 36,
+    "nulls": 1,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Rev 16": {
+    "words": 470,
+    "nonempty": 392,
+    "joint": 76,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   },
+   "Rev 17": {
+    "words": 442,
+    "nonempty": 384,
+    "joint": 51,
+    "nulls": 7,
+    "coverage": 0.984,
+    "rules": []
+   },
+   "Rev 18": {
+    "words": 625,
+    "nonempty": 506,
+    "joint": 115,
+    "nulls": 4,
+    "coverage": 0.994,
+    "rules": []
+   },
+   "Rev 19": {
+    "words": 523,
+    "nonempty": 428,
+    "joint": 91,
+    "nulls": 4,
+    "coverage": 0.992,
+    "rules": []
+   },
+   "Rev 20": {
+    "words": 406,
+    "nonempty": 337,
+    "joint": 67,
+    "nulls": 2,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Rev 21": {
+    "words": 603,
+    "nonempty": 511,
+    "joint": 89,
+    "nulls": 3,
+    "coverage": 0.995,
+    "rules": []
+   },
+   "Rev 22": {
+    "words": 452,
+    "nonempty": 389,
+    "joint": 61,
+    "nulls": 2,
+    "coverage": 0.996,
+    "rules": []
+   }
+  }
+ },
+ "lowConfidenceClusters": [
+  {
+   "lang": "gr",
+   "book": "Rom",
+   "base": "16:24",
+   "english": "16:24–16:24",
+   "words": 11,
+   "matched": 0,
+   "theirs": 0
+  }
+ ],
+ "problems": []
+}

@@ -1,0 +1,126 @@
+[
+ {
+  "lemma": "λέγω",
+  "abbott": "G2036",
+  "abbottLemma": "ἔπω",
+  "canonical": "G3004",
+  "canonicalLemma": "λέγω",
+  "used": "G3004",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "εἰμί",
+  "abbott": "G1488",
+  "abbottLemma": "εἶ",
+  "canonical": "G1510",
+  "canonicalLemma": "εἰμί",
+  "used": "G1510",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "ἄρχω",
+  "abbott": "G756",
+  "abbottLemma": "ἄρχομαι",
+  "canonical": "G757",
+  "canonicalLemma": "ἄρχω",
+  "used": "G757",
+  "note": "reviewed override"
+ },
+ {
+  "lemma": "οὔ",
+  "abbott": "G3757",
+  "abbottLemma": "οὗ",
+  "canonical": "G3756",
+  "canonicalLemma": "οὐ",
+  "used": "G3756",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "μοιχαλίς",
+  "abbott": "G3426",
+  "abbottLemma": "μόδιος",
+  "canonical": "G3428",
+  "canonicalLemma": "μοιχαλίς",
+  "used": "G3428",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "ἕκτος",
+  "abbott": "G1622",
+  "abbottLemma": "ἐκτός",
+  "canonical": "G1623",
+  "canonicalLemma": "ἕκτος",
+  "used": "G1623",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "ἐκτός",
+  "abbott": "G1623",
+  "abbottLemma": "ἕκτος",
+  "canonical": "G1622",
+  "canonicalLemma": "ἐκτός",
+  "used": "G1622",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "συμβουλεύω",
+  "abbott": "G4821",
+  "abbottLemma": "συμβασιλεύω",
+  "canonical": "G4823",
+  "canonicalLemma": "συμβουλεύω",
+  "used": "G4823",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "συμπόσιον",
+  "abbott": "G4844",
+  "abbottLemma": "συμπίνω",
+  "canonical": "G4849",
+  "canonicalLemma": "συμπόσιον",
+  "used": "G4849",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "καταβαρύνομαι",
+  "abbott": "G2600",
+  "abbottLemma": "κατάβασις",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "Ζηλωτής",
+  "abbott": "G2207",
+  "abbottLemma": "ζηλωτής",
+  "canonical": "G2208",
+  "canonicalLemma": "Ζηλωτής",
+  "used": "G2208",
+  "note": "reviewed override"
+ },
+ {
+  "lemma": "σύνειμι",
+  "abbott": "G4896",
+  "abbottLemma": "σύνειμι",
+  "canonical": "G4895",
+  "canonicalLemma": "σύνειμι",
+  "used": "G4895",
+  "note": "reviewed override"
+ },
+ {
+  "lemma": "προσκλίνομαι",
+  "abbott": "G4347",
+  "abbottLemma": "προσκολλάω",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "Ὦ",
+  "abbott": "G5598",
+  "abbottLemma": "Ω",
+  "canonical": "G5599",
+  "canonicalLemma": "ὦ",
+  "used": "G5599",
+  "note": "canonical Strong lemma preferred"
+ }
+]

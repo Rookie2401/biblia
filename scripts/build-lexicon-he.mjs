@@ -91,10 +91,25 @@ const curated = JSON.parse(fs.readFileSync(path.join(root, 'data', 'curated', 'h
 const posCounts = fs.existsSync(path.join(buildDir, 'pos-he.json')) ? JSON.parse(fs.readFileSync(path.join(buildDir, 'pos-he.json'), 'utf8')) : {};
 const consOf = (w) => (w || '').normalize('NFC').replace(/[֑-ׇ͏]/g, '').replace(/[^א-ת]/g, '');
 const ARCHAIC = /\b(thou|thee|thy|thine|ye|hath|shalt|art|wilt|doth|begat|forgattest|didst|saith|unto|whoso|shew|receiveth|maketh|floodest|longeth|dost|hast|wouldest|shutteth|strengtheneth|hurleth)\b/i;
-const clean = (x) => x.replace(/\(.*?\)/g, ' ').replace(/\[.*?\]/g, ' ').replace(/\s+/g, ' ').trim();
+// Strong's wraps some definitions in braces and tags idioms in brackets; the braces are markup, not content
+const clean = (x) => x.replace(/[{}]/g, '').replace(/\(.*?\)/g, ' ').replace(/\[.*?\]/g, ' ').replace(/\s+/g, ' ').trim().replace(/\.$/, '');
 const words = (x) => x.trim().split(/\s+/).length;
-/** A candidate is usable as a lexical gloss when it is short, modern and not a cross reference. */
-const usable = (g, max = 6) => !!g && words(g) <= max && !ARCHAIC.test(g) && !/\bcompare\b|\bsee\b|^and |^the .* (which|that) |[!?]/i.test(g) && !/\.\s*\S/.test(g);
+/**
+ * A candidate is usable as a lexical gloss when it is short, modern, complete and not a cross
+ * reference or an editorial note: no dangling "See"/"Compare", no "from the margin", no unmatched
+ * brackets or quotes, no sentence-final period followed by more text, no cut-off clause.
+ */
+const usable = (g, max = 6) =>
+  !!g &&
+  words(g) <= max &&
+  !ARCHAIC.test(g) &&
+  !/\bcompare\b|\bsee\b|\bmargin\b|\bi\.e\b|\be\.g\b|\bcf\b|^and |^the .* (which|that) |[!?]/i.test(g) &&
+  !/\.\s*\S/.test(g) &&
+  !/[{}\[\]]/.test(g) &&
+  (g.match(/\(/g) || []).length === (g.match(/\)/g) || []).length &&
+  (g.match(/"/g) || []).length % 2 === 0 &&
+  !/[,;:(\-–—.]\s*$/.test(g) &&
+  !/^[,;:)\-–—]/.test(g);
 /** Choose the LexicalIndex entry for a lemma id: exact augmented id first, then the one whose headword matches Strong's. */
 function pickIndex(id, num, strongLemma) {
   const exact = index.get(id) || [];
@@ -109,8 +124,10 @@ function pickIndex(id, num, strongLemma) {
  * Returns [gloss, source].
  */
 function shortGloss(id, num, liE, bdbE, st, isName) {
-  if (curated[id]) return [curated[id], 'curated'];
-  if (curated[num] && !id.includes(' ')) return [curated[num], 'curated'];
+  const cg = (v) => (typeof v === 'object' ? v.g : v);
+  if (liE?.def) liE = { ...liE, def: liE.def.trim().replace(/\.$/, '') };
+  if (curated[id]) return [cg(curated[id]), 'curated'];
+  if (curated[num] && !id.includes(' ')) return [cg(curated[num]), 'curated'];
   // a name: the index gives the conventional English form; BDB's definition is its etymology
   if (isName && liE?.def && /^[A-Z]/.test(liE.def) && usable(liE.def, 4)) return [liE.def, 'index'];
   const bdbDefs = (bdbE?.defs || []).map((d) => d.trim()).filter((d) => usable(d, 5) && !(isName && /hath|^Yah/.test(d)));
@@ -119,13 +136,15 @@ function shortGloss(id, num, liE, bdbE, st, isName) {
   if (st) {
     const skip = /^(properly|probably|apparently|perhaps|a primitive root|from|the same as|denominative|of uncertain derivation|feminine of|masculine of|plural of|or|i\.e\.|by implication|by extension|figuratively|specifically|literally|in the sense of|contracted|patrial|patronymic|a variation|of foreign origin|of egyptian|of persian|of uncertain)/i;
     const clauses = clean(st.strongs_def || '').split(/[;:.]/).map((c) => c.trim()).filter((c) => c && !skip.test(c));
-    const d = (clauses[0] ?? '').split(',').slice(0, isName ? 1 : 2).join(',').trim();
-    if (d && d.length <= 48 && usable(d, 8)) return [d, 'strongs'];
+    // the first complete clause that passes the quality check; never a string cut at a character count
+    for (const clause of clauses) {
+      const d = clause.split(',').slice(0, isName ? 1 : 2).join(',').trim();
+      if (d && d.length <= 48 && usable(d, 8)) return [d, 'strongs'];
+    }
     const k = clean(st.kjv_def || '').split(/[;,]/).map((c) => c.replace(/^[×x+]\s*/, '').trim()).filter((c) => c && usable(c, 3))[0];
     if (k) return [k, 'kjv'];
-    if (d) return [d.slice(0, 48), 'strongs'];
   }
-  if (liE?.def) return [liE.def, 'index'];
+  // nothing usable: the entry is reported by the build so that a curated gloss can be added
   return ['', ''];
 }
 /** Part of speech: what the corpus morphology says (dominant code), else the LexicalIndex. */
@@ -138,11 +157,14 @@ function partOfSpeech(id, liE) {
   return liE?.pos ? POS[liE.pos] ?? liE.pos : undefined;
 }
 
-const POS = { N: 'noun', Np: 'proper noun', V: 'verb', A: 'adjective', D: 'adverb', P: 'pronoun', R: 'preposition', C: 'conjunction', T: 'particle', I: 'interjection', X: '', Ng: 'gentilic', Nc: 'noun', Ac: 'number', Ao: 'ordinal', Ag: 'gentilic adjective' };
+const POS = { N: 'noun', Np: 'proper noun', V: 'verb', A: 'adjective', D: 'adverb', P: 'pronoun', Pp: 'pronoun', Pd: 'pronoun', Pi: 'pronoun', Pf: 'pronoun', Pr: 'relative pronoun', R: 'preposition', C: 'conjunction', T: 'particle', Tj: 'interjection', I: 'interjection', X: '', Ng: 'gentilic', Nc: 'noun', Ac: 'number', Ao: 'ordinal', Ag: 'gentilic adjective' };
+/** The human-readable part-of-speech vocabulary the app may ship; anything else fails the build. */
+const POS_VOCAB = new Set(['noun', 'proper noun', 'verb', 'adjective', 'adverb', 'pronoun', 'relative pronoun', 'preposition', 'conjunction', 'particle', 'interjection', 'gentilic', 'number', 'ordinal', 'gentilic adjective']);
 
 const entries = {};
 let withBdb = 0;
 let withFull = 0;
+const augmentedDiverging = []; // augmented ids whose headword is not the Strong's headword (no Strong's metadata attached)
 for (const id of Object.keys(conc)) {
   const num = id.split(' ')[0];
   const st = strongs['H' + num];
@@ -159,23 +181,38 @@ for (const id of Object.keys(conc)) {
         .filter(([lid]) => conc[lid])
     : [];
   const aramaic = /Aramaic|Chaldee/i.test(st?.strongs_def || '') || /^(Aramaic)/.test(st?.derivation || '');
-  const full = sefariaFor(num, st?.lemma || liE?.w || '', aramaic);
-  const pos = partOfSpeech(id, liE);
-  const [gloss, gsrc] = shortGloss(id, num, liE, b, st, pos === 'proper noun');
+  // An augmented id (859 d = אַתֶּם) may name a different word than the Strong's number's headword
+  // (אַתָּה). Strong's metadata is attached only when it describes this very lemma; otherwise the
+  // entry keeps its own headword, the index transliteration and gloss, and no borrowed material.
+  const bareOf = (w) => consOf(w).replace(/[וי]/g, '');
+  const sameWord = (a, b2) => consOf(a) === consOf(b2) || bareOf(a) === bareOf(b2);
+  const augmented = id.includes(' ');
+  // headword: the index entry's own form for an augmented id or a multi-word name; otherwise Strong's
+  const headword = liE && !sameWord(liE.w, st?.lemma || '') && (augmented || liE.w.includes(' ') || liE.w.includes('־')) ? liE.w : st?.lemma || liE?.w || b?.w || '';
+  const sameLemma = !st || sameWord(headword, st.lemma);
+  if (!sameLemma) augmentedDiverging.push(`${id} ${headword} ≠ ${st.lemma}`);
+  const stMeta = sameLemma ? st : undefined;
+  const bOwn = b && (sameLemma || consOf(b.w) === consOf(headword)) ? b : undefined;
+  // a curated entry may be a plain gloss or { g, pos, noFull } (pos override; no full BDB entry when the sources have none for this sense)
+  const curatedObj = typeof curated[id] === 'object' ? curated[id] : typeof curated[num] === 'object' && !augmented ? curated[num] : null;
+  const pos = curatedObj?.pos || partOfSpeech(id, liE);
+  const [gloss, gsrc] = shortGloss(id, num, liE, bOwn, stMeta, pos === 'proper noun');
+  // homographs under one number (1254 a create / 1254 b be fat): the gloss's own words pick the entry
+  const full = curatedObj?.noFull ? undefined : sefariaFor(num, headword, aramaic, { strict: !sameLemma, pos, hint: augmented ? gloss : '' });
   if (full) withFull++;
   entries[id] = {
     id,
     // the headword: the index entry when it names something else than Strong's lemma (a multi-word name sharing the number)
-    w: liE && consOf(liE.w) !== consOf(st?.lemma) && (id.includes(' ') || liE.pos === 'Np' || liE.w.includes(' ') || liE.w.includes('־')) ? liE.w : st?.lemma || liE?.w || b?.w || '',
-    x: st?.xlit || liE?.xlit || undefined,
-    pron: st?.pron || undefined,
+    w: headword,
+    x: stMeta?.xlit || liE?.xlit || undefined,
+    pron: stMeta?.pron || undefined,
     pos,
     g: gloss,
     gs: gsrc || undefined,
-    sd: st?.strongs_def?.trim() || undefined,
-    kj: st?.kjv_def?.trim() || undefined,
-    der: st?.derivation?.trim() || undefined,
-    bdb: full ? full.html : b?.html || undefined,
+    sd: stMeta?.strongs_def?.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim() || undefined,
+    kj: stMeta?.kjv_def?.trim() || undefined,
+    der: stMeta?.derivation?.trim() || undefined,
+    bdb: full ? full.html : bOwn?.html || undefined,
     bdbFull: full ? 1 : undefined,
     bdbId: bdbId || undefined,
     root: rootEntry ? rootEntry.w : liE?.root || undefined,
@@ -185,6 +222,10 @@ for (const id of Object.keys(conc)) {
     n: conc[id].length / 4,
   };
 }
+
+// root-family rows were built while the entries were still being assembled: give every member
+// its final headword and short gloss (never the BDB skeleton's archaic definition)
+for (const e of Object.values(entries)) if (e.fam) e.fam = e.fam.map(([lid, w, g]) => [lid, entries[lid]?.w || w, entries[lid]?.g || g]);
 
 const shardOf = (id) => String(Math.floor(Number(id.split(' ')[0]) / 300));
 const shards = {};
@@ -218,5 +259,17 @@ fs.writeFileSync(
   ),
 );
 console.log(`Hebrew lexicon: ${Object.keys(entries).length} lemma ids, ${withBdb} with an Open Scriptures BDB entry, ${withFull} with the full BDB text (Sefaria, ${sefaria.length} entries on disk), ${Object.keys(shards).length} shards`);
+console.log(`augmented ids naming a different word than their Strong's headword (own metadata only): ${augmentedDiverging.length}`);
+fs.writeFileSync(path.join(buildDir, 'he-augmented-diverging.txt'), augmentedDiverging.join('\n'));
+const emptyGloss = Object.values(entries).filter((e) => !e.g);
+if (emptyGloss.length) {
+  console.error('BUILD FAILED — lemma ids without a usable gloss (add a curated gloss): ' + emptyGloss.map((e) => `${e.id} ${e.w} (${e.n})`).join(', '));
+  process.exit(1);
+}
+const badPos = Object.values(entries).filter((e) => e.pos && !POS_VOCAB.has(e.pos));
+if (badPos.length) {
+  console.error('BUILD FAILED — part-of-speech values outside the vocabulary: ' + badPos.map((e) => `${e.id}=${e.pos}`).join(', '));
+  process.exit(1);
+}
 const missing = Object.values(entries).filter((e) => !e.bdb).sort((a, b) => b.n - a.n).slice(0, 20);
 console.log('most frequent without BDB: ' + missing.map((e) => `${e.id}:${e.w}(${e.n})`).join(' '));

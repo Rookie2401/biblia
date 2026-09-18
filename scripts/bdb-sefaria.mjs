@@ -74,21 +74,48 @@ export function sefariaIndex(entries) {
    * Best full entry for a lemma id: same Strong's number, preferring a matching headword and the
    * right language; otherwise the text-index entry with the same consonantal headword.
    */
-  return function sefariaFor(num, lemma, aramaic) {
+  /** Does the entry's opening (BDB's part-of-speech abbreviation) agree with the corpus part of speech? +1 / −1 / 0 when unknown. */
+  const posFit = (e, pos) => {
+    if (!pos) return 0;
+    const head = e.html.replace(/<[^>]+>/g, ' ').slice(0, 120);
+    const isVerb = /\bvb\b/.test(head);
+    const isName = /\bn\.pr\b/.test(head);
+    const isNoun = /\bn\.(?!pr)|\bsubst\b/.test(head) && !isName;
+    const isAdj = /\badj\b/.test(head);
+    if (pos === 'verb') return isVerb ? 1 : isName || isNoun || isAdj ? -1 : 0;
+    if (pos === 'proper noun' || pos === 'gentilic') return isName ? 1 : isVerb ? -1 : 0;
+    if (pos === 'noun') return isNoun ? 1 : isVerb || isName ? -1 : 0;
+    if (pos === 'adjective') return isAdj ? 1 : isVerb || isName ? -1 : 0;
+    return isVerb ? -1 : 0;
+  };
+  /** +1 per distinctive word of the short gloss found in the entry's opening (separates homographs under one number). */
+  const hintFit = (e, hint) => {
+    if (!hint) return 0;
+    const head = e.html.replace(/<[^>]+>/g, ' ').slice(0, 200).toLowerCase();
+    const STOP = new Set(['the', 'and', 'with', 'from', 'that', 'this', 'into', 'upon', 'over', 'make', 'thing', 'one', 'who', 'which', 'for', 'self', 'yourself', 'himself', 'not', 'off', 'out', 'act', 'being']);
+    const keys = hint.toLowerCase().split(/[^a-z]+/).filter((k) => k.length >= 3 && !STOP.has(k));
+    return keys.filter((k) => new RegExp(`\\b${k}`).test(head)).length;
+  };
+  return function sefariaFor(num, lemma, aramaic, { strict = false, pos = '', hint = '' } = {}) {
     const lc = cons(lemma);
     const c = byStrong.get(String(num)) || [];
     if (c.length) {
-      const ranked = c.map((e) => ({ e, score: (e.cons === lc ? 4 : 0) + (e.aramaic === aramaic ? 2 : 0) + (e.strongs.size <= 2 ? 1 : 0) })).sort((a, b) => b.score - a.score);
+      const ranked = c.map((e) => ({ e, score: (e.cons === lc ? 4 : 0) + (e.aramaic === aramaic ? 2 : 0) + (e.strongs.size <= 2 ? 1 : 0) + 2 * posFit(e, pos) + hintFit(e, hint) })).sort((a, b) => b.score - a.score);
       const best = ranked[0];
-      if (best.score >= 4 || best.e.strongs.size <= 3) return best.e;
+      // strict: the headword itself must match (an augmented id naming a different word than the number's headword)
+      if (best.score >= 4 && posFit(best.e, pos) >= 0 && (!strict || best.e.cons === lc)) return best.e;
+      if (!strict && best.e.strongs.size <= 3 && posFit(best.e, pos) >= 0) return best.e;
     }
     if (!lc) return undefined;
     // exact consonants, else the same skeleton with the vowel letters ו/י removed (אַהֲרוֹן / אַהֲרֹן)
     let h = byCons.get(lc) || [];
-    if (!h.length) h = byBare.get(bare(lc)) || [];
+    if (!h.length && !strict) h = byBare.get(bare(lc)) || [];
+    // strict: never an entry that belongs to another Strong's number (אתִּי is not Ittai)
+    if (strict) h = h.filter((e) => e.strongs.size === 0 || e.strongs.has(String(num)));
+    h = h.filter((e) => posFit(e, pos) >= 0);
     if (!h.length) return undefined;
-    // prefer the words-API entry (structured), then language, then the entry without a homograph number
-    const ranked = h.map((e) => ({ e, score: (e.aramaic === aramaic ? 4 : 0) + (e.source === 'words' ? 2 : 0) + (e.strongs.size === 0 ? 1 : 0) })).sort((a, b) => b.score - a.score);
+    // prefer an entry linked to this number, then the right kind of word, then the words-API entry (structured), then language
+    const ranked = h.map((e) => ({ e, score: (e.strongs.has(String(num)) ? 6 : 0) + 3 * posFit(e, pos) + (e.aramaic === aramaic ? 4 : 0) + (e.source === 'words' ? 2 : 0) + (e.strongs.size === 0 ? 1 : 0) })).sort((a, b) => b.score - a.score);
     return ranked[0].e;
   };
 }
