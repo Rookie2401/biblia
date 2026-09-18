@@ -204,23 +204,37 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   const numeral = lang === 'he' ? hebrewNumeral(ch) : greekNumeral(ch);
   const selKey = sel?.kind === 'word' ? `${sel.ref.v}:${sel.ref.i}` : '';
 
-  const onProseClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const t = e.target as HTMLElement;
-    const w = t.closest('.w') as HTMLElement | null;
+  /** Toggle the selection for a word or verse-number control. Returns false when the target is neither. */
+  const activate = (t: HTMLElement): boolean => {
+    const w = t.closest('button.w') as HTMLElement | null;
     if (w?.dataset.i !== undefined) {
       triggerRef.current = w;
       const r = { book: bookId, ch, v: Number(w.dataset.v), i: Number(w.dataset.i) };
       setSel(sel?.kind === 'word' && sel.ref.v === r.v && sel.ref.i === r.i ? null : { kind: 'word', ref: r });
-      return;
+      return true;
     }
     const vn = t.closest('.vn') as HTMLElement | null;
     if (vn?.dataset.v) {
       triggerRef.current = vn;
       const v = Number(vn.dataset.v);
       setSel(sel?.kind === 'verse' && sel.v === v ? null : { kind: 'verse', v });
-      return;
+      return true;
     }
+    return false;
+  };
+  const onProseClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const t = e.target as HTMLElement;
+    if (activate(t)) return;
     if (!t.closest('.panel')) setSel(null);
+  };
+  // Native buttons activate on Enter/Space by themselves; handling the keys here as well keeps the
+  // behaviour identical in browsers and automation that deliver only a keydown, without double-firing.
+  const onProseKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+    const t = e.target as HTMLElement;
+    if (!t.matches('button.w, button.vn')) return;
+    e.preventDefault();
+    activate(t);
   };
 
   return (
@@ -248,7 +262,7 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
         {error && <div className="reader__prose" style={{ fontFamily: 'var(--serif)', direction: 'ltr', textAlign: 'center' }} role="alert"><span className="card__err">{error}</span></div>}
         {!book && !error && <div className="reader__prose faint" style={{ fontFamily: 'var(--serif)', direction: 'ltr', textAlign: 'center' }} aria-live="polite">Loading {info.en}…</div>}
         {book && chapter && (
-          <div ref={proseRef} className={`reader__prose reader__prose--${lang}${settings.showStatusMarks ? ' marks' : ''}`} onClick={onProseClick}>
+          <div ref={proseRef} className={`reader__prose reader__prose--${lang}${settings.showStatusMarks ? ' marks' : ''}`} onClick={onProseClick} onKeyDown={onProseKeyDown}>
             <div className="reader__title">{refLabel(bookId, ch)}</div>
             {notice && <div className="note" style={{ direction: 'ltr', fontFamily: 'var(--serif)', fontSize: '0.9rem' }} role="status">{notice}</div>}
             {lang === 'he' ? (

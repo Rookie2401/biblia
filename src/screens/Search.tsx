@@ -27,10 +27,16 @@ export default function Search() {
     };
   }, []);
 
+  // the URL is the source of truth when it changes from outside (a link to #/search?q=…); typing writes it back, debounced
+  const fromUrl = params.get('q') ?? '';
   useEffect(() => {
+    setQ((current) => (current === fromUrl ? current : fromUrl));
+  }, [fromUrl]);
+  useEffect(() => {
+    if (q === fromUrl) return;
     const t = setTimeout(() => setParams(q ? { q } : {}, { replace: true }), 200);
     return () => clearTimeout(t);
-  }, [q, setParams]);
+  }, [q, fromUrl, setParams]);
 
   const ref = useMemo(() => parseRef(q), [q]);
   const results = useMemo(() => (rows ? searchLexicon(rows, q, scope) : []), [rows, q, scope]);

@@ -68,7 +68,7 @@ export function entryLemma(lang: Lang, e: HeEntry | GrEntry): string {
 
 export function seedFor(info: WordInfo, e?: HeEntry | GrEntry): LexemeSeed | undefined {
   if (!info.lexId) return undefined;
-  return { lang: info.lang, id: info.lexId, lemma: e ? entryLemma(info.lang, e) : glossIndex(info.lang)?.get(info.lexId)?.[1] ?? info.lexId, gloss: e?.g ?? glossIndex(info.lang)?.get(info.lexId)?.[3] ?? '' };
+  return { lang: info.lang, id: info.lexId, lemma: e ? entryLemma(info.lang, e) : indexLemma(info.lang, info.lexId) || info.lexId, gloss: e?.g ?? glossIndex(info.lang)?.get(info.lexId)?.[3] ?? '' };
 }
 
 // ---- short glosses from the index
@@ -94,10 +94,12 @@ export function shortGloss(lang: Lang, lexId: string | undefined): string {
   const row = indices[lang]?.get(lexId) ?? (lang === 'he' ? indices.he?.get(lexId.split(' ')[0]) : undefined);
   return row?.[3] ?? '';
 }
-/** Pointed lemma / Greek lemma from the index. */
+/** Pointed lemma / Greek lemma from the index (Hebrew rows: [id, lemma, …]; Greek rows: [lemma, Strong's, …]). */
 export function indexLemma(lang: Lang, lexId: string | undefined): string {
   if (!lexId) return '';
-  return indices[lang]?.get(lexId)?.[1] ?? '';
+  const row = indices[lang]?.get(lexId);
+  if (!row) return '';
+  return lang === 'he' ? row[1] : row[0];
 }
 
 /** Lexeme keys and word infos of a whole chapter (for statuses, encounters and "mark as known"). */

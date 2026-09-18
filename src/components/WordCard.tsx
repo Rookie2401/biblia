@@ -98,7 +98,7 @@ export function WordCard(p: WordCardProps) {
   return (
     <div>
       <div className="panel__head">
-        <span className="label">Word · {refLabel(info.ref.book, info.ref.ch, info.ref.v)}</span>
+        <span className="label">{p.standalone || !info.ref.book ? 'Word' : `Word · ${refLabel(info.ref.book, info.ref.ch, info.ref.v)}`}</span>
         <button className="iconbtn" onClick={p.onClose} aria-label="Close">{I.close}</button>
       </div>
       <div className={info.lang === 'he' ? 'card__surface' : 'card__surface card__surface--gr'}>{info.printed}</div>
@@ -184,7 +184,7 @@ export function WordCard(p: WordCardProps) {
         <>
           {he?.bdb && (
             <div className="card__section">
-              <DictEntry html={he.bdb} title="Brown–Driver–Briggs" collapsible={!p.standalone} />
+              <DictEntry html={he.bdb} title="Brown–Driver–Briggs" collapsible={!p.standalone} onHebrew={(id) => p.onOpenLexeme('he', id)} />
             </div>
           )}
           {gr?.as && (
