@@ -520,7 +520,8 @@ button.w:focus-visible, button.vn:focus-visible { outline: 2px solid var(--accen
   .page { padding-left: max(0.9rem, env(safe-area-inset-left, 0px)); padding-right: max(0.9rem, env(safe-area-inset-right, 0px)); }
   .home__title { font-size: 1.7rem; }
 }
-html, body { max-width: 100%; overflow-x: hidden; }
+/* overflow-x on html AND body turns the body into the scroll container and stops viewport scrolling; clip only the app shell instead */
+.shell { overflow-x: clip; }
 
 /* labelled settings */
 .field--row label { flex: 1; min-width: 0; }
