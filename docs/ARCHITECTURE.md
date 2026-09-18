@@ -74,6 +74,32 @@ the deponent's active form, then Strong's number (98.6% matched).
 - Deep links: `#/read/<Book>/<ch>?v=<verse>&i=<word>` (used by the concordance and dictionary
   references, BDB `data-ref="Gen.1.1"`, Abbott-Smith `osisRef`).
 
+## Accessibility and safety (audit corrections, 2026-09-18)
+
+- **Reader controls.** Words with a card and verse numbers are native `<button>`s with reset
+  styling (`button.w`, `button.vn`), `aria-pressed` for the selection and an accessible label
+  on verse numbers ("Open Genesis 1:1 verse view"). The prose container handles click and
+  Enter/Space centrally (`activate()` in `Reader.tsx`), so native activation and browsers
+  that deliver only a keydown behave alike without double-firing. Words with no aligned
+  morphology stay plain spans.
+- **Modal sheets.** `components/dialog.ts` (`useModalDialog`) moves focus into the dialog,
+  cycles Tab inside it, closes on Escape, marks the page inert and returns focus to the
+  activating control. The word/verse panel is a modal dialog only below 980px
+  (`useMediaQuery`); on wide screens it stays a non-modal `complementary` side panel.
+- **Routes.** `Reader` validates book/chapter (`validRef`) before rendering or recording
+  anything and shows a not-found page otherwise; `?v=`/`?i=` are validated against the
+  loaded chapter (a notice, never an empty panel). `adjacentChapter` returns null for an
+  invalid chapter. `Word` validates `:lang` and the lexicon id.
+- **Search.** `state/search.ts` is a pure function over explicit `SearchRow` objects; the
+  URL `?q=` is the source of truth. BDB cross references resolve through
+  `lex/he-bdb-index.json` (BDB entry id → lemma ids) inside `DictEntry`.
+- **Vocabulary writes** run in Dexie read-write transactions (see `state/vocab.ts`); `done`
+  is monotonic and listeners are notified after commit.
+- **Dictionary HTML** is sanitized at build time (`scripts/sanitize-html.mjs`), asserted
+  before shards are written, and checked again by `text/safeHtml.ts` before injection.
+- **Contrast / targets / layout.** `--ink-faint` is 5.1:1 (light) and 5.6:1 (dark) on paper;
+  phone-width controls are 44px; the home list is a two-row grid below 420px.
+
 ## IndexedDB
 
 | Table | Key | Notes |
