@@ -115,9 +115,9 @@ export default function Home() {
         <h1 className="home__title">
           <span className="he">תַּנַ״ךְ</span>
           <span className="gr" style={{ display: 'block', textTransform: 'none', letterSpacing: 0, fontWeight: 400, fontSize: '0.9em', marginBottom: '0.3em' }}>Ἡ Καινὴ Διαθήκη</span>
-          Biblia
+          Biblia Sacra
         </h1>
-        <p className="home__subtitle">The Masoretic Text and the Greek New Testament, nearly every word explained.</p>
+        <p className="home__subtitle">The holy scripture in the original language with a linguistic apparatus underneath.</p>
         <div className="home__rule" />
         {last && (
           <Link className="home__continue" to={`/read/${last.book}/${last.ch}?v=${last.v}`}>
