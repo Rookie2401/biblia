@@ -32,7 +32,7 @@ describe('the data runtime cache cannot silently serve a stale release', () => {
   const entry = dataRuntimeCaching[0];
 
   it('the cache name is scoped to a fingerprint of the shipped data, not a fixed literal', () => {
-    expect(dataVersion).toMatch(/^[a-f0-9]{8,}$/); // a real hash, not a placeholder like "" or "dev"
+    expect(dataVersion).toMatch(/^[a-f0-9]{64}$/); // the full SHA-256 digest, not a truncated prefix
     expect(entry.options.cacheName, 'the cache name must embed the same version the cleanup module targets').toBe(`biblia-data-${dataVersion}`);
     expect(entry.options.cacheName).toBe(dataCacheName);
     expect(entry.options.cacheName).not.toBe('biblia-data'); // the old, unversioned, never-superseded name
@@ -89,7 +89,7 @@ describe('the data runtime cache cannot silently serve a stale release', () => {
       frame(Buffer.from(relPath, 'utf8'));
       frame(content);
       void dir;
-      return h.digest('hex').slice(0, 12);
+      return h.digest('hex');
     });
     const actual = withTempDir({ 'conc/he-0.json': content.toString() }, hashDataDir);
     expect(actual).toBe(expectedHash);

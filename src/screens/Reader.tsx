@@ -121,14 +121,28 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
     }
   }, [lang, glossReloadTick]);
   useEffect(() => {
-    if (!cachedContext(lang, bookId)) void loadContext(lang, bookId).then(() => setTick((t) => t + 1));
+    let alive = true;
+    if (!cachedContext(lang, bookId)) void loadContext(lang, bookId).then(() => alive && setTick((t) => t + 1));
+    return () => {
+      alive = false;
+    };
   }, [lang, bookId]);
 
   const words = useMemo(() => (book ? chapterWords(book, ch) : []), [book, ch]);
   const keys = useMemo(() => words.map((w) => w.key).filter((k): k is string => Boolean(k)), [words]);
+  // Rapid navigation can start a second statusMap() lookup before the first (for the previous
+  // chapter's keys) has resolved; an IndexedDB read has no ordering guarantee, so the older one
+  // could resolve second and overwrite the current chapter's correct map with a stale one.
+  const statusGen = useRef(0);
   const refreshStatuses = useCallback(() => {
-    if (!keys.length) return;
-    statusMap(keys).then(setStatuses);
+    const gen = ++statusGen.current;
+    if (!keys.length) {
+      setStatuses(new Map());
+      return;
+    }
+    statusMap(keys).then((m) => {
+      if (gen === statusGen.current) setStatuses(m);
+    });
   }, [keys]);
   useEffect(refreshStatuses, [refreshStatuses]);
   useEffect(() => onVocabChange(refreshStatuses), [refreshStatuses]);

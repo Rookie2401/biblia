@@ -76,7 +76,19 @@ export function WordCard(p: WordCardProps) {
     };
   }, [refId, info.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => onVocabChange(() => info.key && db.lexemes.get(info.key).then((lx) => setLex(lx ?? null))), [info.key]);
+  useEffect(() => {
+    let alive = true;
+    // unsubscribing stops FUTURE notifications, but a lookup already in flight when the card
+    // moves to a different word must not apply that stale word's record to the new one
+    const unsubscribe = onVocabChange(() => {
+      if (!info.key) return;
+      db.lexemes.get(info.key).then((lx) => alive && setLex(lx ?? null));
+    });
+    return () => {
+      alive = false;
+      unsubscribe();
+    };
+  }, [info.key]);
 
   useEffect(() => {
     if (level < 3 || conc || !info.lexId) return;

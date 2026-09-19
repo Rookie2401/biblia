@@ -97,6 +97,78 @@ describe('Reader does not apply a stale book-load result to the current route', 
   });
 });
 
+describe('Reader does not apply a stale retry completion to a route the reader has since left', () => {
+  it('a retry started for Genesis, then superseded by navigating to Matthew, cannot resurrect Genesis when it resolves', async () => {
+    let resolveRetry!: (r: Response) => void;
+    const retryPending = new Promise<Response>((r) => (resolveRetry = r));
+    let genCalls = 0;
+    vi.stubGlobal(
+      'fetch',
+      fetchRouter({
+        'data/he/Gen': () => {
+          genCalls++;
+          return genCalls === 1 ? Promise.reject(new Error('offline')) : retryPending;
+        },
+      }),
+    );
+
+    const { default: Reader } = await import('../src/screens/Reader.tsx');
+    await renderReaderAt(Reader, '/read/Gen/1');
+    await screen.findByText(/offline/i); // the first load failed and shows the error + retry
+
+    await act(async () => {
+      screen.getByRole('button', { name: /try again/i }).click();
+    });
+    expect(genCalls).toBe(2); // the retry started a second request, now held pending
+
+    // the reader moves on to Matthew before that retry ever settles
+    act(() => navigateTo!('/read/Matt/1'));
+    expect(await screen.findByText('λόγος')).toBeTruthy();
+
+    // the superseded retry finally resolves
+    resolveRetry(jsonResponse(GEN));
+    await new Promise((r) => setTimeout(r, 0));
+
+    expect(screen.queryByText('λόγος')).toBeTruthy(); // still Matthew
+    expect(screen.queryByText(/בְּרֵאשִׁית/)).toBeNull(); // Genesis never appeared
+    expect(screen.queryByText(/offline/i)).toBeNull(); // no leaked error either
+  });
+});
+
+describe('Reader does not let an older vocabulary-status lookup overwrite a newer chapter\'s map', () => {
+  it('a chapter 1 statusMap() result that resolves after moving to chapter 2 does not apply to chapter 2\'s shared word', async () => {
+    // both chapters print the same single word, so it has the identical lexeme key in each —
+    // exactly the realistic case (a common word repeated across chapters) where a stale map
+    // silently overwriting the current one would be visible in the rendered status class.
+    const SHARED_VERSE = { n: 1, t: 'בָּרָא', w: [['1254 a', 'HVqp3ms']] };
+    const GEN2 = { book: 'Gen', chapters: [{ n: 1, verses: [SHARED_VERSE] }, { n: 2, verses: [SHARED_VERSE] }] };
+    vi.stubGlobal('fetch', fetchRouter({ 'data/he/Gen': () => Promise.resolve(jsonResponse(GEN2)) }));
+
+    let resolveCh1Status!: (m: Map<string, string>) => void;
+    const ch1StatusPending = new Promise<Map<string, string>>((r) => (resolveCh1Status = r));
+    let call = 0;
+    vi.doMock('../src/state/vocab.ts', async () => {
+      const actual = await vi.importActual<typeof import('../src/state/vocab.ts')>('../src/state/vocab.ts');
+      return { ...actual, statusMap: vi.fn(() => (++call === 1 ? ch1StatusPending : actual.statusMap([]))) };
+    });
+
+    const { default: Reader } = await import('../src/screens/Reader.tsx');
+    await renderReaderAt(Reader, '/read/Gen/1');
+    await screen.findByText('בָּרָא');
+
+    act(() => navigateTo!('/read/Gen/2'));
+    await screen.findByText('בָּרָא');
+    const word = () => document.querySelector('.reader__prose button.w');
+    expect(word()?.className).toContain('st-new'); // chapter 2's own (empty) status map applied: not known
+
+    // chapter 1's stale lookup finally resolves, marking the shared word "known"
+    resolveCh1Status(new Map([['he:1254 a', 'known']]));
+    await new Promise((r) => setTimeout(r, 0));
+
+    expect(word()?.className).toContain('st-new'); // must still read as chapter 2's own (unknown) status
+  });
+});
+
 describe('Reader does not retain a gloss-index error across a route whose index is already cached', () => {
   it('a Hebrew index failure does not appear on a Greek chapter loaded after the Greek index is already cached', async () => {
     vi.stubGlobal(

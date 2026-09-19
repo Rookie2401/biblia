@@ -42,7 +42,10 @@ export function hashDataDir(dataDir: string): string {
     }
   };
   walk(dataDir);
-  return hash.digest('hex').slice(0, 12);
+  // the full digest, not a truncated prefix: a 48-bit prefix is fine in practice for this corpus,
+  // but the doc comment above promises a fingerprint of the data, and only the whole digest
+  // actually carries SHA-256's collision resistance
+  return hash.digest('hex');
 }
 
 // Exported (in addition to being used below) so test/pwa-config.test.ts can check the exact

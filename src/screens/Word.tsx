@@ -22,6 +22,10 @@ export default function Word() {
     if (!lang) return;
     let alive = true;
     setIndexError(false);
+    // reset unconditionally: the previous word's known/lemma must not stay on screen while the
+    // new one is loading, or indefinitely if the new request fails
+    setKnown(null);
+    setLemma('');
     ensureGlossIndex(lang)
       .then((m) => {
         if (!alive) return;
