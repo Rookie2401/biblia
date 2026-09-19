@@ -107,9 +107,11 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   const [glossIndexError, setGlossIndexError] = useState(false);
   const [glossReloadTick, setGlossReloadTick] = useState(0);
   useEffect(() => {
+    // reset unconditionally: an error from a previous language/book must not survive into a
+    // chapter whose own index is already cached and therefore never re-enters the branch below
+    setGlossIndexError(false);
     if (!glossIndex(lang)) {
       let alive = true;
-      setGlossIndexError(false);
       void ensureGlossIndex(lang)
         .then(() => alive && setTick((t) => t + 1))
         .catch(() => alive && setGlossIndexError(true));

@@ -19,8 +19,10 @@ export function VerseCard({ book, ch, v, selected, onSelectWord, onPrev, onNext,
   const [reloadTick, setReloadTick] = useState(0);
   useEffect(() => {
     let alive = true;
+    // reset unconditionally: an error from a previous language/book must not survive into a view
+    // whose own index is already cached and therefore never re-enters the branch below
+    setGlossError(false);
     if (!glossIndex(lang)) {
-      setGlossError(false);
       void ensureGlossIndex(lang)
         .then(() => alive && setTick((t) => t + 1))
         .catch(() => alive && setGlossError(true));

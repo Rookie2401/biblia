@@ -2,6 +2,7 @@
 // hands to Workbox, so a future edit that reintroduces a fixed cache name, a stale-forever
 // handler, or a capacity ceiling at or below the shipped data-file count fails a test run instead
 // of shipping.
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -63,6 +64,35 @@ describe('the data runtime cache cannot silently serve a stale release', () => {
     const before = withTempDir({ 'ctx/he/Gen.json': 'x', 'ctx/he/Exod.json': 'y' }, hashDataDir);
     const after = withTempDir({ 'ctx/he/Gen.json': 'x', 'ctx/he/Leviticus.json': 'y' }, hashDataDir);
     expect(after).not.toBe(before);
+  });
+  it('two different trees that would collide under naive "path:content" string concatenation hash differently', () => {
+    // content audit 4's exact example: two files "a"="b", "c"="d" naively join to "a:bc:d", the
+    // same byte stream as one file "a"="bc:d" alone. Length-prefixed framing must tell them apart.
+    const twoFiles = withTempDir({ a: 'b', c: 'd' }, hashDataDir);
+    const oneFile = withTempDir({ a: 'bc:d' }, hashDataDir);
+    expect(twoFiles).not.toBe(oneFile);
+  });
+  it('the relative path is normalized to "/" before hashing, independent of the host path separator', () => {
+    // reconstruct the exact framed byte stream hashDataDir must produce for a nested file, using an
+    // explicit "/" join, and check it matches — this fails if the implementation ever hashes
+    // path.relative()'s raw, platform-dependent separator (backslash on Windows) instead
+    const content = Buffer.from('{"1697":[0,0,0,0]}');
+    const relPath = 'conc/he-0.json'; // the forward-slash form, regardless of host OS
+    const expectedHash = withTempDir({ 'conc/he-0.json': content.toString() }, (dir) => {
+      const h = crypto.createHash('sha256');
+      const frame = (buf: Buffer) => {
+        const len = Buffer.alloc(4);
+        len.writeUInt32LE(buf.length, 0);
+        h.update(len);
+        h.update(buf);
+      };
+      frame(Buffer.from(relPath, 'utf8'));
+      frame(content);
+      void dir;
+      return h.digest('hex').slice(0, 12);
+    });
+    const actual = withTempDir({ 'conc/he-0.json': content.toString() }, hashDataDir);
+    expect(actual).toBe(expectedHash);
   });
   it('two builds of the same data produce the same cache name (no accidental per-build randomness like Date.now())', () => {
     expect(dataCacheName).toBe(dataRuntimeCaching[0].options.cacheName);

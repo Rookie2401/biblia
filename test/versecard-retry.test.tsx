@@ -78,4 +78,32 @@ describe('VerseCard recovers from a failed glossary-index load', () => {
     expect(screen.queryByRole('alert')).toBeNull(); // must not show an error for the Greek view it never caused
     expect(screen.queryByText(/could not load the lexicon glosses/i)).toBeNull();
   });
+
+  it('an error committed for Hebrew does not survive a move to Greek whose index is already cached', async () => {
+    // content audit 4's exact reproduction: unlike the previous test, here the destination
+    // language's index is already loaded (by something else) BEFORE the card ever renders for it,
+    // so the effect's "if (!glossIndex(lang))" branch is skipped entirely on the Greek render —
+    // the error reset must not depend on reaching that branch.
+    const grRows = [['λόγος', 'G3056', 'lógos', 'a word, speech', 330, 'dodson']];
+    const fetchMock = vi.fn((url: string) => {
+      if (url.includes('ctx/')) return Promise.resolve(ctx404());
+      if (url.includes('he-index')) return Promise.reject(new Error('offline'));
+      if (url.includes('gr-index')) return Promise.resolve(jsonResponse(grRows));
+      return Promise.resolve(jsonResponse([]));
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const { VerseCard } = await import('../src/components/VerseCard.tsx');
+    const { ensureGlossIndex } = await import('../src/state/wordinfo.ts');
+    await ensureGlossIndex('gr'); // Greek's index is already cached before the card ever mounts
+
+    const { rerender } = render(<VerseCard book={heBook} ch={1} v={1} onSelectWord={() => undefined} onClose={() => undefined} />);
+    await screen.findByRole('alert'); // the Hebrew failure commits the error
+
+    rerender(<VerseCard book={grBook} ch={1} v={1} onSelectWord={() => undefined} onClose={() => undefined} />);
+    await screen.findByText('λόγος'); // the Greek card rendered
+
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(screen.queryByText(/could not load the lexicon glosses/i)).toBeNull();
+  });
 });

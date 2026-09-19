@@ -14,9 +14,20 @@ const root = path.dirname(fileURLToPath(import.meta.url));
  * the runtime data cache below a fresh name, and a returning user's stale cache from a previous
  * release is never served past that release (see src/pwa/cleanupCaches.ts, which deletes the old
  * bucket). Full-content hashing the whole ~57 MB corpus costs well under a second.
+ *
+ * Each entry is length-prefixed (a 4-byte count, then that many bytes) rather than joined with a
+ * plain separator character, so two different trees can never serialize to the same byte stream
+ * just because a path or a file's content happens to contain the separator. Paths are normalized
+ * to "/" so the same data hashes identically on Windows and POSIX.
  */
 export function hashDataDir(dataDir: string): string {
   const hash = crypto.createHash('sha256');
+  const lenBuf = Buffer.alloc(4);
+  const writeFramed = (buf: Buffer) => {
+    lenBuf.writeUInt32LE(buf.length, 0);
+    hash.update(lenBuf);
+    hash.update(buf);
+  };
   const walk = (dir: string) => {
     if (!fs.existsSync(dir)) return;
     for (const name of fs.readdirSync(dir).sort()) {
@@ -24,8 +35,9 @@ export function hashDataDir(dataDir: string): string {
       const st = fs.statSync(p);
       if (st.isDirectory()) walk(p);
       else {
-        hash.update(`${path.relative(dataDir, p)}:`);
-        hash.update(fs.readFileSync(p));
+        const relPath = path.relative(dataDir, p).split(path.sep).join('/');
+        writeFramed(Buffer.from(relPath, 'utf8'));
+        writeFramed(fs.readFileSync(p));
       }
     }
   };
