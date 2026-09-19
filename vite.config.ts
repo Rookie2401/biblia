@@ -9,14 +9,13 @@ import { VitePWA } from 'vite-plugin-pwa';
 const root = path.dirname(fileURLToPath(import.meta.url));
 
 /**
- * A short fingerprint of the shipped data (public/data): a corrected gloss, a realigned verse or
- * a rebuilt shard changes it, giving the runtime data cache below a fresh name so a returning
- * user's stale cache from a previous release is never served past that release (see
- * src/pwa/cleanupCaches.ts, which deletes the old bucket). Cheap: file sizes only for the whole
- * tree, plus the full bytes of the few small files most content fixes actually touch.
+ * A fingerprint of the shipped data (public/data): the full bytes of every file, not just sizes,
+ * so any correction — even one that happens to preserve every touched file's byte length — gives
+ * the runtime data cache below a fresh name, and a returning user's stale cache from a previous
+ * release is never served past that release (see src/pwa/cleanupCaches.ts, which deletes the old
+ * bucket). Full-content hashing the whole ~57 MB corpus costs well under a second.
  */
-function computeDataVersion(): string {
-  const dataDir = path.join(root, 'public', 'data');
+export function hashDataDir(dataDir: string): string {
   const hash = crypto.createHash('sha256');
   const walk = (dir: string) => {
     if (!fs.existsSync(dir)) return;
@@ -24,20 +23,19 @@ function computeDataVersion(): string {
       const p = path.join(dir, name);
       const st = fs.statSync(p);
       if (st.isDirectory()) walk(p);
-      else hash.update(`${path.relative(dataDir, p)}:${st.size}\n`);
+      else {
+        hash.update(`${path.relative(dataDir, p)}:`);
+        hash.update(fs.readFileSync(p));
+      }
     }
   };
   walk(dataDir);
-  for (const f of ['lex/he-index.json', 'lex/gr-index.json', 'ctx/COVERAGE.json']) {
-    const p = path.join(dataDir, f);
-    if (fs.existsSync(p)) hash.update(fs.readFileSync(p));
-  }
   return hash.digest('hex').slice(0, 12);
 }
 
 // Exported (in addition to being used below) so test/pwa-config.test.ts can check the exact
 // object handed to Workbox without reflecting on vite-plugin-pwa's internal plugin state.
-export const dataVersion = computeDataVersion();
+export const dataVersion = hashDataDir(path.join(root, 'public', 'data'));
 export const DATA_CACHE_MAX_ENTRIES = 1000; // ~400 shipped today; generous headroom for the corpus to grow
 export const dataCacheName = `biblia-data-${dataVersion}`;
 export const dataRuntimeCaching = [

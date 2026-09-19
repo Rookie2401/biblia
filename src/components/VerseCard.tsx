@@ -18,13 +18,19 @@ export function VerseCard({ book, ch, v, selected, onSelectWord, onPrev, onNext,
   const [glossError, setGlossError] = useState(false);
   const [reloadTick, setReloadTick] = useState(0);
   useEffect(() => {
+    let alive = true;
     if (!glossIndex(lang)) {
       setGlossError(false);
       void ensureGlossIndex(lang)
-        .then(() => setTick((t) => t + 1))
-        .catch(() => setGlossError(true));
+        .then(() => alive && setTick((t) => t + 1))
+        .catch(() => alive && setGlossError(true));
     }
-    if (!cachedContext(lang, book.book)) void loadContext(lang, book.book).then(() => setTick((t) => t + 1));
+    if (!cachedContext(lang, book.book)) void loadContext(lang, book.book).then(() => alive && setTick((t) => t + 1));
+    // a response for a request this card started for a book/language it has since moved on from
+    // (props changed) must never set state for whatever verse is showing now
+    return () => {
+      alive = false;
+    };
   }, [lang, book.book, reloadTick]);
   const verse = book.chapters[ch - 1]?.verses[v - 1];
   if (!verse) return null;

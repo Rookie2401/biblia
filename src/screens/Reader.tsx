@@ -72,37 +72,50 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   const endSeen = useRef(false);
   const lang = info.lang;
 
+  // Incremented every time the route (bookId/ch) changes or a retry is requested, so a response
+  // for a request that is no longer the current one — because the reader moved on before it
+  // settled — is recognisable and ignored, whether it succeeds or fails. Without this a slow or
+  // retried request for a book the user has since left could still apply itself, or an error for
+  // it, to whatever route is on screen when it finally resolves.
+  const bookGen = useRef(0);
   useEffect(() => {
-    let alive = true;
+    const gen = ++bookGen.current;
     setBook(null);
     setError(null);
     setSel(null);
     setNotice(null);
     endSeen.current = false;
     loadBook(bookId)
-      .then((b) => alive && setBook(b))
-      .catch((e) => alive && setError(e instanceof Error ? e.message : String(e)));
+      .then((b) => gen === bookGen.current && setBook(b))
+      .catch((e) => gen === bookGen.current && setError(e instanceof Error ? e.message : String(e)));
     setSettings({ lastBook: bookId });
     void markChapterVisit(bookId, ch, false);
+    // unmount or a route change (including one that happens while a retry below is in flight)
+    // invalidates whichever request is current, so nothing pending can resolve into "current" again
     return () => {
-      alive = false;
+      bookGen.current++;
     };
   }, [bookId, ch]);
   const retryBook = () => {
+    const gen = ++bookGen.current;
     setError(null);
     loadBook(bookId)
-      .then(setBook)
-      .catch((e) => setError(e instanceof Error ? e.message : String(e)));
+      .then((b) => gen === bookGen.current && setBook(b))
+      .catch((e) => gen === bookGen.current && setError(e instanceof Error ? e.message : String(e)));
   };
 
   const [glossIndexError, setGlossIndexError] = useState(false);
   const [glossReloadTick, setGlossReloadTick] = useState(0);
   useEffect(() => {
     if (!glossIndex(lang)) {
+      let alive = true;
       setGlossIndexError(false);
       void ensureGlossIndex(lang)
-        .then(() => setTick((t) => t + 1))
-        .catch(() => setGlossIndexError(true));
+        .then(() => alive && setTick((t) => t + 1))
+        .catch(() => alive && setGlossIndexError(true));
+      return () => {
+        alive = false;
+      };
     }
   }, [lang, glossReloadTick]);
   useEffect(() => {

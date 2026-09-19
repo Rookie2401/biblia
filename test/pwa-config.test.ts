@@ -2,32 +2,29 @@
 // hands to Workbox, so a future edit that reintroduces a fixed cache name, a stale-forever
 // handler, or a capacity ceiling at or below the shipped data-file count fails a test run instead
 // of shipping.
-import crypto from 'node:crypto';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { DATA_CACHE_MAX_ENTRIES, dataCacheName, dataRuntimeCaching, dataVersion } from '../vite.config.ts';
+import { DATA_CACHE_MAX_ENTRIES, dataCacheName, dataRuntimeCaching, dataVersion, hashDataDir } from '../vite.config.ts';
 
 const root = path.resolve(__dirname, '..');
 const dataDir = path.join(root, 'public', 'data');
 const have = fs.existsSync(dataDir);
 
-function recomputeDataVersion(): string {
-  const hash = crypto.createHash('sha256');
-  const walk = (dir: string) => {
-    for (const name of fs.readdirSync(dir).sort()) {
-      const p = path.join(dir, name);
-      const st = fs.statSync(p);
-      if (st.isDirectory()) walk(p);
-      else hash.update(`${path.relative(dataDir, p)}:${st.size}\n`);
+/** A throwaway directory tree to probe hashDataDir's content-sensitivity without touching the real corpus. */
+function withTempDir<T>(files: Record<string, string>, run: (dir: string) => T): T {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'biblia-hash-test-'));
+  try {
+    for (const [rel, content] of Object.entries(files)) {
+      const p = path.join(dir, rel);
+      fs.mkdirSync(path.dirname(p), { recursive: true });
+      fs.writeFileSync(p, content);
     }
-  };
-  walk(dataDir);
-  for (const f of ['lex/he-index.json', 'lex/gr-index.json', 'ctx/COVERAGE.json']) {
-    const p = path.join(dataDir, f);
-    if (fs.existsSync(p)) hash.update(fs.readFileSync(p));
+    return run(dir);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
   }
-  return hash.digest('hex').slice(0, 12);
 }
 
 describe('the data runtime cache cannot silently serve a stale release', () => {
@@ -43,8 +40,29 @@ describe('the data runtime cache cannot silently serve a stale release', () => {
     expect(entry.handler).not.toBe('CacheFirst');
     expect(entry.handler).toBe('StaleWhileRevalidate');
   });
-  it.skipIf(!have)('the version is a deterministic fingerprint of public/data, matching an independent recomputation', () => {
-    expect(recomputeDataVersion()).toBe(dataVersion);
+  it.skipIf(!have)('the exported version matches recomputing the real hash function against the real tree (deterministic, no drift)', () => {
+    expect(hashDataDir(dataDir)).toBe(dataVersion);
+  });
+  it('the hash covers full file content, not just size or path: a same-length content change moves it', () => {
+    // content audit 3: the previous algorithm hashed sizes plus a hard-coded shortlist of files,
+    // so a same-length edit to any OTHER file (a lexicon shard, a canon text, a ctx alignment
+    // file) left the version — and therefore the cache name — unchanged. hashDataDir must not
+    // reproduce that gap for ANY file in the tree, not just the ones a test happens to name.
+    const before = withTempDir({ 'lex/he-3.json': '{"1254 a":{"g":"create"}}', 'unrelated.json': '{}' }, hashDataDir);
+    const after = withTempDir({ 'lex/he-3.json': '{"1254 a":{"g":"trade "}}', 'unrelated.json': '{}' }, hashDataDir); // same byte length, different content
+    expect(after).not.toBe(before);
+  });
+  it('the hash is sensitive to every file in the tree, not a fixed shortlist', () => {
+    // deliberately NOT touching he-index.json / gr-index.json / COVERAGE.json — the exact three
+    // files the previous algorithm special-cased — to prove no file is privileged over another
+    const before = withTempDir({ 'conc/he-0.json': '{"1697":[0,0,0,0]}' }, hashDataDir);
+    const after = withTempDir({ 'conc/he-0.json': '{"1697":[0,0,0,1]}' }, hashDataDir); // same length, one digit differs
+    expect(after).not.toBe(before);
+  });
+  it('renaming or removing a file changes the hash even if total bytes are unchanged', () => {
+    const before = withTempDir({ 'ctx/he/Gen.json': 'x', 'ctx/he/Exod.json': 'y' }, hashDataDir);
+    const after = withTempDir({ 'ctx/he/Gen.json': 'x', 'ctx/he/Leviticus.json': 'y' }, hashDataDir);
+    expect(after).not.toBe(before);
   });
   it('two builds of the same data produce the same cache name (no accidental per-build randomness like Date.now())', () => {
     expect(dataCacheName).toBe(dataRuntimeCaching[0].options.cacheName);
