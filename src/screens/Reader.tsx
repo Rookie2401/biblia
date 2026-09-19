@@ -89,7 +89,7 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
       .then((b) => gen === bookGen.current && setBook(b))
       .catch((e) => gen === bookGen.current && setError(e instanceof Error ? e.message : String(e)));
     setSettings({ lastBook: bookId });
-    void markChapterVisit(bookId, ch, false);
+    markChapterVisit(bookId, ch, false).catch(() => {});
     // unmount or a route change (including one that happens while a retry below is in flight)
     // invalidates whichever request is current, so nothing pending can resolve into "current" again
     return () => {
@@ -140,9 +140,14 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
       setStatuses(new Map());
       return;
     }
-    statusMap(keys).then((m) => {
-      if (gen === statusGen.current) setStatuses(m);
-    });
+    statusMap(keys)
+      .then((m) => {
+        if (gen === statusGen.current) setStatuses(m);
+      })
+      .catch(() => {
+        // IndexedDB failed (quota, permission, private mode, corruption): leave the previous
+        // status map in place rather than an unhandled rejection
+      });
   }, [keys]);
   useEffect(refreshStatuses, [refreshStatuses]);
   useEffect(() => onVocabChange(refreshStatuses), [refreshStatuses]);
@@ -188,12 +193,12 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
           if (e.target.id === 'chapter-end') {
             if (!endSeen.current) {
               endSeen.current = true;
-              void recordEncounters(keys, seedFn);
-              void markChapterVisit(bookId, ch, true);
+              recordEncounters(keys, seedFn).catch(() => {});
+              markChapterVisit(bookId, ch, true).catch(() => {});
             }
           } else {
             const v = Number((e.target as HTMLElement).dataset.v);
-            if (v) void savePosition(bookId, ch, v);
+            if (v) savePosition(bookId, ch, v).catch(() => {});
           }
         }
       },
@@ -337,11 +342,15 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
                   title="Every word in this chapter that is still new and was never tapped becomes “automatic” (known without asking). Tapping a word later undoes it for that word."
                   onClick={async () => {
                     const seedMap = new Map(words.filter((w) => w.key).map((w) => [w.key!, w]));
-                    const n = await markUnlookedAsKnown(keys, (k) => {
-                      const w = seedMap.get(k);
-                      return w ? seedFor(w) : undefined;
-                    });
-                    setMsg(n ? `${n} untapped word${n === 1 ? '' : 's'} marked automatic.` : 'No untapped new words left in this chapter.');
+                    try {
+                      const n = await markUnlookedAsKnown(keys, (k) => {
+                        const w = seedMap.get(k);
+                        return w ? seedFor(w) : undefined;
+                      });
+                      setMsg(n ? `${n} untapped word${n === 1 ? '' : 's'} marked automatic.` : 'No untapped new words left in this chapter.');
+                    } catch {
+                      setMsg('Could not update the vocabulary (offline storage problem). Try again.');
+                    }
                   }}
                 >
                   Mark the rest of this chapter as known

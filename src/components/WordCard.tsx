@@ -53,6 +53,10 @@ export function WordCard(p: WordCardProps) {
     setConcAll(false);
     setEntry(undefined);
     setCtx(undefined);
+    // the previous word's vocabulary record (status, encounters, forms) must not stay attached
+    // to the new word — and stay actionable, since the status picker writes by lex.key — while
+    // this word's own lookup is pending, or indefinitely if it fails
+    setLex(null);
     let alive = true;
     if (info.ref.book && !p.standalone) loadContext(info.lang, info.ref.book).then(() => alive && setCtx(contextGloss(info.lang, info.ref.book, info.ref.ch, info.ref.v, info.ref.i)));
     (async () => {
@@ -62,13 +66,18 @@ export function WordCard(p: WordCardProps) {
       if (!info.key) return;
       const seed = seedFor(info, e);
       if (!seed) return;
-      if (p.standalone || lookedUp.has(refId)) {
-        const lx = await db.lexemes.get(info.key);
-        if (alive) setLex(lx ?? null);
-      } else {
-        lookedUp.add(refId);
-        const lx = await recordLookup(seed, info.ref, plainForm(info));
-        if (alive) setLex(lx);
+      try {
+        if (p.standalone || lookedUp.has(refId)) {
+          const lx = await db.lexemes.get(info.key);
+          if (alive) setLex(lx ?? null);
+        } else {
+          lookedUp.add(refId);
+          const lx = await recordLookup(seed, info.ref, plainForm(info));
+          if (alive) setLex(lx);
+        }
+      } catch {
+        // IndexedDB failed (quota, permission, private mode, corruption): lex stays at the safe
+        // default set above rather than becoming an unhandled rejection
       }
     })();
     return () => {
@@ -82,7 +91,10 @@ export function WordCard(p: WordCardProps) {
     // moves to a different word must not apply that stale word's record to the new one
     const unsubscribe = onVocabChange(() => {
       if (!info.key) return;
-      db.lexemes.get(info.key).then((lx) => alive && setLex(lx ?? null));
+      db.lexemes
+        .get(info.key)
+        .then((lx) => alive && setLex(lx ?? null))
+        .catch(() => {});
     });
     return () => {
       alive = false;

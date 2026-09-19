@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BackLink, Topbar } from '../components/ui.tsx';
 import { STATUS_NAMES } from '../components/StatusPicker.tsx';
@@ -10,10 +10,27 @@ export default function Vocab() {
   const [rows, setRows] = useState<Lexeme[]>([]);
   const [tab, setTab] = useState<VocabStatus | 'all'>('all');
   const [lang, setLang] = useState<'all' | 'he' | 'gr'>('all');
-  const load = () => db.lexemes.orderBy('updatedAt').reverse().toArray().then(setRows);
+  // A burst of vocabulary notifications (e.g. several words recorded at once) can start more than
+  // one load before the first resolves; an IndexedDB read has no ordering guarantee, so only the
+  // most recently started load may commit its result.
+  const loadGen = useRef(0);
   useEffect(() => {
-    void load();
-    return onVocabChange(() => void load());
+    const load = () => {
+      const gen = ++loadGen.current;
+      db.lexemes
+        .orderBy('updatedAt')
+        .reverse()
+        .toArray()
+        .then((r) => {
+          if (gen === loadGen.current) setRows(r);
+        })
+        .catch(() => {
+          // IndexedDB failed (quota, permission, private mode, corruption): leave the previous
+          // rows in place rather than an unhandled rejection
+        });
+    };
+    load();
+    return onVocabChange(load);
   }, []);
   const shown = rows.filter((r) => (tab === 'all' || r.status === tab) && (lang === 'all' || r.lang === lang));
   const counts = Object.fromEntries(VOCAB_STATUSES.map((s) => [s, rows.filter((r) => r.status === s && (lang === 'all' || r.lang === lang)).length]));

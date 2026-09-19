@@ -13,6 +13,10 @@ const grManifestBox: { current: Promise<{ split: string[]; shards?: string[] }> 
 function loadGrManifest(): Promise<{ split: string[]; shards?: string[] }> {
   return memoAsync(grManifestBox, () => fetchJson<{ split: string[]; shards?: string[] }>('./data/lex/gr-manifest.json'));
 }
+const heManifestBox: { current: Promise<{ shards: number[] }> | null } = { current: null };
+function loadHeManifest(): Promise<{ shards: number[] }> {
+  return memoAsync(heManifestBox, () => fetchJson<{ shards: number[] }>('./data/lex/he-manifest.json'));
+}
 
 async function fetchJson<T>(url: string): Promise<T> {
   const r = await fetch(url);
@@ -88,11 +92,11 @@ export function searchIndex(lang: Lang): Promise<IndexRow[]> {
 
 /** Every data file, for "download everything for offline use". */
 export async function allDataUrls(bookIds: string[], langOfBook: (id: string) => Lang): Promise<string[]> {
-  const man = await loadGrManifest();
+  const [heMan, grMan] = await Promise.all([loadHeManifest(), loadGrManifest()]);
   const urls = bookIds.map((id) => `./data/${langOfBook(id)}/${id}.json`);
-  for (let i = 0; i <= 29; i++) urls.push(`./data/lex/he-${i}.json`, `./data/conc/he-${i}.json`);
-  for (const s of man.shards ?? []) urls.push(`./data/lex/gr-${s}.json`, `./data/conc/gr-${s}.json`);
-  urls.push('./data/lex/he-index.json', './data/lex/gr-index.json', './data/lex/gr-manifest.json', './data/lex/he-bdb-index.json');
+  for (const i of heMan.shards) urls.push(`./data/lex/he-${i}.json`, `./data/conc/he-${i}.json`);
+  for (const s of grMan.shards ?? []) urls.push(`./data/lex/gr-${s}.json`, `./data/conc/gr-${s}.json`);
+  urls.push('./data/lex/he-index.json', './data/lex/gr-index.json', './data/lex/he-manifest.json', './data/lex/gr-manifest.json', './data/lex/he-bdb-index.json');
   for (const id of bookIds) urls.push(`./data/ctx/${langOfBook(id)}/${id}.json`);
   return urls;
 }

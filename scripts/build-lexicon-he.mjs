@@ -245,6 +245,10 @@ for (const [id, e] of Object.entries(entries)) {
 }
 for (const e of Object.values(entries)) if (e.bdb) assertSafe(e.bdb, 'BDB ' + e.id);
 for (const [k, v] of Object.entries(shards)) fs.writeFileSync(path.join(lexDir, `he-${k}.json`), JSON.stringify(v));
+// The actual shard numbers, so allDataUrls() ("download everything") never has to hard-code an
+// upper bound that can drift out of sync with the corpus (content audit 6).
+const heShardNumbers = Object.keys(shards).map(Number).sort((a, b) => a - b);
+fs.writeFileSync(path.join(lexDir, 'he-manifest.json'), JSON.stringify({ shards: heShardNumbers }));
 // BDB entry id -> [lemma id, lemma, gloss], for the cross references inside entries
 const bdbIndexOut = {};
 for (const [bid, ids] of bdbToIds) {
