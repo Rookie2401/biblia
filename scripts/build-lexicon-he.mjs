@@ -77,9 +77,14 @@ for (const sec of bdbXml.matchAll(/<section id="([^"]+)">([\s\S]*?)<\/section>/g
   for (const m of sec[2].matchAll(/<entry id="([^"]+)"([^>]*)>([\s\S]*?)<\/entry>/g)) {
     const [, id, attrs, body] = m;
     const w = (body.match(/<w[^>]*>([\s\S]*?)<\/w>/) || [])[1];
+    // BDB often lists more than one spelling before the part of speech (Kt/Qr pairs, spelling
+    // variants: "מלוכי Kt, מלִיכוּ Qr"); keep every one so a headword match can find any of them,
+    // not only the first.
+    const headSpan = body.split(/<pos>|<def>/)[0];
+    const ws = [...headSpan.matchAll(/<w[^>]*>([\s\S]*?)<\/w>/g)].map((m) => text(m[1]));
     const isRoot = /type="root"/.test(attrs);
     const defs = [...body.matchAll(/<def>([\s\S]*?)<\/def>/g)].map((d) => text(d[1]));
-    const e = { html: renderBdb(body), w: w ? text(w) : '', section: secId, isRoot, def: defs[0] || '', defs };
+    const e = { html: renderBdb(body), w: w ? text(w) : '', ws, section: secId, isRoot, def: defs[0] || '', defs };
     bdb.set(id, e);
     info.entries.push(id);
     if (isRoot && !info.root) info.root = id;
@@ -124,13 +129,15 @@ function pickIndex(id, num, strongLemma) {
  * Returns [gloss, source].
  */
 function shortGloss(id, num, liE, bdbE, st, isName) {
+  // a curated object may carry only a transliteration override ({ x }, no gloss): that is not a
+  // gloss source, so fall through to the BDB/index/Strong's chain below for the gloss itself
   const cg = (v) => (typeof v === 'object' ? v.g : v);
   if (liE?.def) liE = { ...liE, def: liE.def.trim().replace(/\.$/, '') };
-  if (curated[id]) return [cg(curated[id]), 'curated'];
-  if (curated[num] && !id.includes(' ')) return [cg(curated[num]), 'curated'];
+  if (curated[id] && cg(curated[id])) return [cg(curated[id]), 'curated'];
+  if (curated[num] && !id.includes(' ') && cg(curated[num])) return [cg(curated[num]), 'curated'];
   // a name: the index gives the conventional English form; BDB's definition is its etymology
   if (isName && liE?.def && /^[A-Z]/.test(liE.def) && usable(liE.def, 4)) return [liE.def, 'index'];
-  const bdbDefs = (bdbE?.defs || []).map((d) => d.trim()).filter((d) => usable(d, 5) && !(isName && /hath|^Yah/.test(d)));
+  const bdbDefs = (bdbE?.defs || []).map((d) => d.trim()).filter((d) => usable(d, 5) && !(isName && /\bhath\b|^Yah\b/.test(d)));
   if (bdbDefs.length) return [[...new Set(bdbDefs)].slice(0, 3).join(', '), 'bdb'];
   if (liE?.def && usable(liE.def, 4) && !(isName && /^[a-z]/.test(liE.def))) return [liE.def, 'index'];
   if (st) {
@@ -192,7 +199,7 @@ for (const id of Object.keys(conc)) {
   const sameLemma = !st || sameWord(headword, st.lemma);
   if (!sameLemma) augmentedDiverging.push(`${id} ${headword} ≠ ${st.lemma}`);
   const stMeta = sameLemma ? st : undefined;
-  const bOwn = b && (sameLemma || consOf(b.w) === consOf(headword)) ? b : undefined;
+  const bOwn = b && (sameLemma || (b.ws || [b.w]).some((w) => consOf(w) === consOf(headword))) ? b : undefined;
   // a curated entry may be a plain gloss or { g, pos, noFull } (pos override; no full BDB entry when the sources have none for this sense)
   const curatedObj = typeof curated[id] === 'object' ? curated[id] : typeof curated[num] === 'object' && !augmented ? curated[num] : null;
   const pos = curatedObj?.pos || partOfSpeech(id, liE);
@@ -204,7 +211,8 @@ for (const id of Object.keys(conc)) {
     id,
     // the headword: the index entry when it names something else than Strong's lemma (a multi-word name sharing the number)
     w: headword,
-    x: stMeta?.xlit || liE?.xlit || undefined,
+    // the Lexical Index source itself leaves xlit="" for a few multiword idiom sub-senses (518 b, 3588 b: כִּי אם); curatedObj.x fills exactly those
+    x: curatedObj?.x || stMeta?.xlit || liE?.xlit || undefined,
     pron: stMeta?.pron || undefined,
     pos,
     g: gloss,
@@ -273,3 +281,21 @@ if (badPos.length) {
 }
 const missing = Object.values(entries).filter((e) => !e.bdb).sort((a, b) => b.n - a.n).slice(0, 20);
 console.log('most frequent without BDB: ' + missing.map((e) => `${e.id}:${e.w}(${e.n})`).join(' '));
+// An id with a bdbId but no rendered text means the Lexical Index says a BDB entry exists yet
+// nothing was attached — usually a fixable matching bug (content audit 2 found one: an entry
+// whose headword was only its FIRST alternate spelling, so a Kt/Qr pair never matched). A handful
+// are genuine: the Lexical Index links a multi-word compound name or a derived stem to a BDB
+// entry that only covers one component or the bare root, and neither that entry nor Sefaria's
+// crawl has the compound/derived form as its own headword.
+const KNOWN_BDB_ID_NO_TEXT = new Set(['1286', '4192', '3635 b']); // אֵל בְּרִית, מוּת לַבֵּן, שַׁכְלֵל — see comment above
+const bdbIdNoText = Object.values(entries).filter((e) => e.bdbId && !e.bdb);
+const unexpectedBdbIdNoText = bdbIdNoText.filter((e) => !KNOWN_BDB_ID_NO_TEXT.has(e.id));
+if (unexpectedBdbIdNoText.length) {
+  console.error('BUILD FAILED — new lemma ids have a BDB identifier but no rendered text (likely a matching bug, not a content gap — investigate before adding to KNOWN_BDB_ID_NO_TEXT): ' + unexpectedBdbIdNoText.map((e) => `${e.id} ${e.w}`).join(', '));
+  process.exit(1);
+}
+if (bdbIdNoText.length < KNOWN_BDB_ID_NO_TEXT.size) {
+  const fixed = [...KNOWN_BDB_ID_NO_TEXT].filter((id) => !bdbIdNoText.some((e) => e.id === id));
+  console.error('BUILD FAILED — KNOWN_BDB_ID_NO_TEXT lists ids that now resolve (remove from the allowlist): ' + fixed.join(', '));
+  process.exit(1);
+}

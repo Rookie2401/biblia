@@ -35,6 +35,24 @@ Dictionary HTML is sanitized at build time (`scripts/sanitize-html.mjs`: element
 allowlists, dangerous elements removed with their content, nesting rebalanced, every shipped
 entry re-asserted) and validated again before rendering (`src/text/safeHtml.ts`).
 
+### Reproducing the data build
+
+`public/data` (the app's shipped output) and the raw inputs under `data/mam-raw`, `data/oshb`,
+`data/gnt`, `data/lexicon` and `data/bsb` are git-ignored: they are large, and four of the five
+are re-downloadable with `node scripts/fetch-sources.mjs` (Sefaria's API and the public
+GitHub repos above). The fifth, `data/bsb/bsb_tables.xlsx` (55 MB, the Berean interlinear
+tables), is a manual download from
+[berean.bible/downloads.htm](https://berean.bible/downloads.htm) — Settings links to the same
+page. Only `data/bdb-sefaria` and `data/bdb-texts` (the crawled Sefaria BDB text, `fetch-bdb*.mjs`)
+are committed, since re-crawling them takes tens of minutes against a public API.
+
+Because the four re-downloadable sources track their upstream repos' `master` branch, a rebuild
+months later could pull a newer revision than the one an audit checked. `node
+scripts/checksum-sources.mjs` records a SHA-256 of every file under those five directories to
+`data/build/SOURCE-CHECKSUMS.json` (committed); running it again after `fetch-sources.mjs` and
+diffing against the committed manifest shows whether anything upstream has moved since the
+inputs this repository's data was built from.
+
 ## English layers
 
 Two kinds of English appear, always labelled:

@@ -20,6 +20,28 @@ const cons = (w: string) => w.normalize('NFC').replace(/[֑-ׇ]/g, '').replace(/
 const plain = (html?: string) => (html ?? '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
 const HE_POS = ['noun', 'proper noun', 'verb', 'adjective', 'adverb', 'pronoun', 'relative pronoun', 'preposition', 'conjunction', 'particle', 'interjection', 'gentilic', 'number', 'ordinal', 'gentilic adjective'];
 
+describe('build script source hygiene', () => {
+  // A shell heredoc mangled two \b escapes into raw backspace bytes in a past edit (content audit
+  // 2): the regex still looked correct on screen (backspace is invisible) but silently stopped
+  // matching. Scripts must never contain control bytes outside \t \n \r.
+  it('no scripts/*.mjs file contains a stray control byte', () => {
+    const scriptsDir = path.join(root, 'scripts');
+    const offenders: string[] = [];
+    for (const f of fs.readdirSync(scriptsDir)) {
+      if (!f.endsWith('.mjs')) continue;
+      const buf = fs.readFileSync(path.join(scriptsDir, f));
+      for (let i = 0; i < buf.length; i++) {
+        const b = buf[i];
+        if (b < 0x09 || (b > 0x0d && b < 0x20)) {
+          offenders.push(`${f}:${i} (0x${b.toString(16)})`);
+          break;
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+});
+
 describe.skipIf(!have)('shipped lexicon quality', () => {
   const he = load<HeEntry>('he-');
   const gr = load<GrEntry>('gr-');
@@ -192,6 +214,32 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
       expect(grBy.get(l)?.id, l).toBe(o.strong);
       expect(o.why.length, l).toBeGreaterThan(10);
     }
+  });
+  it('a BDB entry that lists more than one spelling (Kt/Qr pairs) is matched by any of them, not only the first', () => {
+    // "4409 b" מְלִיכוּ (Qr) shares its BDB entry with "מלוכי" (Kt); the entry's own <w> tags name
+    // both, so the fallback that attaches a skeleton entry to an augmented id must check all of
+    // them, not just the one that happens to come first in the markup.
+    const e = heBy.get('4409 b')!;
+    expect(plain(e.bdb)).toMatch(/מלוכי/);
+    expect(plain(e.bdb)).toMatch(/n\.pr\.m/);
+    expect(plain(e.bdb)).toMatch(/priest/);
+  });
+  it('a curated transliteration override fills a gap in the Lexical Index source itself', () => {
+    // the Open Scriptures Lexical Index ships xlit="" for these two כִּי אם sub-senses
+    expect(heBy.get('518 b')?.x).toBe('kî ʾim');
+    expect(heBy.get('3588 b')?.x).toBe('kî ʾim');
+    expect(heBy.get('3588 b')?.g).toBe('but rather, except'); // the x-only curated shape must not swallow the gloss precedence
+    expect(heBy.get('3588 b')?.gs).toBe('curated');
+    expect(heBy.get('518 b')?.gs).not.toBe('curated'); // 518 b has no curated gloss, only a curated x — gs should still come from the real gloss source
+  });
+  it('every id with a BDB identifier either has rendered text or is a documented content gap', () => {
+    // a bdbId with no rendered text either means a real matching bug (content audit 2 found one:
+    // the multi-spelling case above) or a genuine gap where neither the linked skeleton entry nor
+    // Sefaria's crawl covers this exact multi-word/derived-stem headword. Any id outside this small,
+    // named allowlist is a regression the build itself also fails on (build-lexicon-he.mjs).
+    const KNOWN = new Set(['1286', '4192', '3635 b']);
+    const gaps = he.filter((e) => e.bdbId && !e.bdb);
+    expect(gaps.map((e) => e.id).sort()).toEqual([...KNOWN].sort());
   });
   it('the search index rows carry the gloss source', () => {
     const idx = JSON.parse(fs.readFileSync(path.join(lexDir, 'he-index.json'), 'utf8')) as unknown[][];
