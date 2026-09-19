@@ -6,15 +6,16 @@
  */
 import { useEffect, useState, type MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { memoAsync } from '../data/asyncCache.ts';
 import { book as bookInfo } from '../text/canon.ts';
 import { isSafeDictHtml, stripTags } from '../text/safeHtml.ts';
 
 type BdbIndex = Record<string, [string, string, string][]>; // bdb id -> [lemma id, lemma, gloss]
-let bdbIndex: Promise<BdbIndex> | null = null;
+const bdbIndexBox: { current: Promise<BdbIndex> | null } = { current: null };
 export function loadBdbIndex(): Promise<BdbIndex> {
-  return (bdbIndex ??= fetch('./data/lex/he-bdb-index.json')
-    .then((r) => (r.ok ? (r.json() as Promise<BdbIndex>) : {}))
-    .catch(() => ({})));
+  // memoAsync clears the memo on a real failure so the next call retries the fetch; this call's
+  // own promise still resolves to {} rather than rejecting (no cross-reference is a fatal error).
+  return memoAsync(bdbIndexBox, () => fetch('./data/lex/he-bdb-index.json').then((r) => (r.ok ? (r.json() as Promise<BdbIndex>) : Promise.reject(new Error(`he-bdb-index.json: ${r.status}`))))).catch(() => ({}));
 }
 
 export function DictEntry({ html, title, collapsible = true, onHebrew }: { html: string; title: string; collapsible?: boolean; onHebrew?: (lemmaId: string) => void }) {

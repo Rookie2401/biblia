@@ -88,10 +88,23 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
       alive = false;
     };
   }, [bookId, ch]);
+  const retryBook = () => {
+    setError(null);
+    loadBook(bookId)
+      .then(setBook)
+      .catch((e) => setError(e instanceof Error ? e.message : String(e)));
+  };
 
+  const [glossIndexError, setGlossIndexError] = useState(false);
+  const [glossReloadTick, setGlossReloadTick] = useState(0);
   useEffect(() => {
-    if (!glossIndex(lang)) void ensureGlossIndex(lang).then(() => setTick((t) => t + 1));
-  }, [lang]);
+    if (!glossIndex(lang)) {
+      setGlossIndexError(false);
+      void ensureGlossIndex(lang)
+        .then(() => setTick((t) => t + 1))
+        .catch(() => setGlossIndexError(true));
+    }
+  }, [lang, glossReloadTick]);
   useEffect(() => {
     if (!cachedContext(lang, bookId)) void loadContext(lang, bookId).then(() => setTick((t) => t + 1));
   }, [lang, bookId]);
@@ -263,12 +276,25 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
           <div className="reader__progress"><span style={{ width: `${(ch / nChapters) * 100}%` }} /></div>
         </header>
 
-        {error && <div className="reader__prose" style={{ fontFamily: 'var(--serif)', direction: 'ltr', textAlign: 'center' }} role="alert"><span className="card__err">{error}</span></div>}
+        {error && (
+          <div className="reader__prose" style={{ fontFamily: 'var(--serif)', direction: 'ltr', textAlign: 'center' }} role="alert">
+            <span className="card__err">{error}</span>
+            <div className="card__actions" style={{ justifyContent: 'center', marginTop: '0.6rem' }}>
+              <button type="button" className="btn btn--small" onClick={retryBook}>Try again</button>
+            </div>
+          </div>
+        )}
         {!book && !error && <div className="reader__prose faint" style={{ fontFamily: 'var(--serif)', direction: 'ltr', textAlign: 'center' }} aria-live="polite">Loading {info.en}…</div>}
         {book && chapter && (
           <div ref={proseRef} className={`reader__prose reader__prose--${lang}${settings.showStatusMarks ? ' marks' : ''}`} onClick={onProseClick} onKeyDown={onProseKeyDown}>
             <div className="reader__title">{refLabel(bookId, ch)}</div>
             {notice && <div className="note" style={{ direction: 'ltr', fontFamily: 'var(--serif)', fontSize: '0.9rem' }} role="status">{notice}</div>}
+            {glossIndexError && (
+              <div className="note" style={{ direction: 'ltr', fontFamily: 'var(--serif)', fontSize: '0.9rem' }} role="alert">
+                Could not load the lexicon glosses (offline or a network problem).{' '}
+                <button type="button" className="btn btn--small btn--quiet" onClick={() => setGlossReloadTick((t) => t + 1)}>Try again</button>
+              </div>
+            )}
             {lang === 'he' ? (
               <HebrewChapter verses={chapter.verses as HeVerse[]} bookId={bookId} ch={ch} mode={settings.hebrewDisplay} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} showNumbers={settings.showVerseNumbers} poetry={POETRY.has(bookId)} glossLine={settings.showGlossLine} />
             ) : (

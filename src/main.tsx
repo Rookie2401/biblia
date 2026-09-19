@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
+import { cleanupObsoleteDataCaches } from './pwa/cleanupCaches.ts';
+
+void cleanupObsoleteDataCaches();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

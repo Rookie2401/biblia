@@ -16,19 +16,26 @@ export default function Word() {
   const nav = useNavigate();
   const [lemma, setLemma] = useState('');
   const [known, setKnown] = useState<boolean | null>(null);
+  const [indexError, setIndexError] = useState(false);
+  const [reloadTick, setReloadTick] = useState(0);
   useEffect(() => {
     if (!lang) return;
     let alive = true;
-    ensureGlossIndex(lang).then((m) => {
-      if (!alive) return;
-      const hit = m.get(id) ?? (lang === 'he' ? m.get(id.split(' ')[0]) : undefined);
-      setKnown(!!hit);
-      setLemma(indexLemma(lang, id) || hit?.[1] || id);
-    });
+    setIndexError(false);
+    ensureGlossIndex(lang)
+      .then((m) => {
+        if (!alive) return;
+        const hit = m.get(id) ?? (lang === 'he' ? m.get(id.split(' ')[0]) : undefined);
+        setKnown(!!hit);
+        setLemma(indexLemma(lang, id) || hit?.[1] || id);
+      })
+      .catch(() => {
+        if (alive) setIndexError(true);
+      });
     return () => {
       alive = false;
     };
-  }, [lang, id]);
+  }, [lang, id, reloadTick]);
 
   if (!lang || !id) {
     return (
@@ -65,6 +72,12 @@ export default function Word() {
     <div>
       <Topbar title={lang === 'he' ? 'Hebrew word' : 'Greek word'} left={<BackLink to="/search" label="Search" />} />
       <div className="page page--narrow route-fade">
+        {indexError && (
+          <div className="card__text" role="alert" style={{ marginBottom: '0.8rem' }}>
+            <span className="card__err">Could not confirm this lexicon entry (offline or a network problem).</span>{' '}
+            <button type="button" className="btn btn--small btn--quiet" onClick={() => setReloadTick((t) => t + 1)}>Try again</button>
+          </div>
+        )}
         <WordCard key={`${lang}:${id}`} info={info} standalone onOpenVerse={() => undefined} onClose={() => nav(-1)} onOpenLexeme={(l, i) => nav(`/word/${l}/${encodeURIComponent(i)}`)} onGoTo={(r) => nav(`/read/${r.book}/${r.ch}?v=${r.v}&i=${r.i}`)} />
       </div>
     </div>

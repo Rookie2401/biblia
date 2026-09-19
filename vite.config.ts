@@ -1,14 +1,62 @@
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const root = path.dirname(fileURLToPath(import.meta.url));
+
+/**
+ * A short fingerprint of the shipped data (public/data): a corrected gloss, a realigned verse or
+ * a rebuilt shard changes it, giving the runtime data cache below a fresh name so a returning
+ * user's stale cache from a previous release is never served past that release (see
+ * src/pwa/cleanupCaches.ts, which deletes the old bucket). Cheap: file sizes only for the whole
+ * tree, plus the full bytes of the few small files most content fixes actually touch.
+ */
+function computeDataVersion(): string {
+  const dataDir = path.join(root, 'public', 'data');
+  const hash = crypto.createHash('sha256');
+  const walk = (dir: string) => {
+    if (!fs.existsSync(dir)) return;
+    for (const name of fs.readdirSync(dir).sort()) {
+      const p = path.join(dir, name);
+      const st = fs.statSync(p);
+      if (st.isDirectory()) walk(p);
+      else hash.update(`${path.relative(dataDir, p)}:${st.size}\n`);
+    }
+  };
+  walk(dataDir);
+  for (const f of ['lex/he-index.json', 'lex/gr-index.json', 'ctx/COVERAGE.json']) {
+    const p = path.join(dataDir, f);
+    if (fs.existsSync(p)) hash.update(fs.readFileSync(p));
+  }
+  return hash.digest('hex').slice(0, 12);
+}
+
+// Exported (in addition to being used below) so test/pwa-config.test.ts can check the exact
+// object handed to Workbox without reflecting on vite-plugin-pwa's internal plugin state.
+export const dataVersion = computeDataVersion();
+export const DATA_CACHE_MAX_ENTRIES = 1000; // ~400 shipped today; generous headroom for the corpus to grow
+export const dataCacheName = `biblia-data-${dataVersion}`;
+export const dataRuntimeCaching = [
+  {
+    urlPattern: ({ url }: { url: URL }) => /\/data\/.+\.json$/.test(url.pathname),
+    handler: 'StaleWhileRevalidate' as const,
+    options: { cacheName: dataCacheName, expiration: { maxEntries: DATA_CACHE_MAX_ENTRIES }, cacheableResponse: { statuses: [0, 200] } },
+  },
+];
+
 // Relative base + HashRouter: the built app runs from any static host, sub-path or file: URL.
 // The app shell is precached; the text, morphology and lexicon files under data/ are cached as
-// they are read (cache-first, so once a book has been opened it is available offline). Settings
-// offers "Download everything" to fetch the whole corpus at once.
+// they are read (stale-while-revalidate under a data-version-scoped cache name, so once a book
+// has been opened it is available offline, a background fetch keeps it current while online, and
+// a release with corrected data is never served from an old release's cache indefinitely).
 export default defineConfig({
   base: './',
   build: { chunkSizeWarningLimit: 1200 },
+  define: { __DATA_VERSION__: JSON.stringify(dataVersion) },
   plugins: [
     react(),
     VitePWA({
@@ -21,13 +69,7 @@ export default defineConfig({
         skipWaiting: true,
         clientsClaim: true,
         cleanupOutdatedCaches: true,
-        runtimeCaching: [
-          {
-            urlPattern: ({ url }) => /\/data\/.+\.json$/.test(url.pathname),
-            handler: 'CacheFirst',
-            options: { cacheName: 'biblia-data', expiration: { maxEntries: 400 }, cacheableResponse: { statuses: [0, 200] } },
-          },
-        ],
+        runtimeCaching: dataRuntimeCaching,
       },
       manifest: {
         name: 'Biblia',

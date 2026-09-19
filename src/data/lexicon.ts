@@ -6,9 +6,13 @@
  */
 import type { GrEntry, HeEntry, Lang } from '../model/types.ts';
 import { greekBase } from '../text/greek.ts';
+import { memoAsync, memoAsyncKeyed } from './asyncCache.ts';
 
 const shards = new Map<string, Promise<Record<string, unknown>>>();
-let grManifest: Promise<{ split: string[] }> | null = null;
+const grManifestBox: { current: Promise<{ split: string[]; shards?: string[] }> | null } = { current: null };
+function loadGrManifest(): Promise<{ split: string[]; shards?: string[] }> {
+  return memoAsync(grManifestBox, () => fetchJson<{ split: string[]; shards?: string[] }>('./data/lex/gr-manifest.json'));
+}
 
 async function fetchJson<T>(url: string): Promise<T> {
   const r = await fetch(url);
@@ -32,8 +36,7 @@ export function heShard(id: string): string {
   return String(Math.floor(Number(id.split(' ')[0]) / 300));
 }
 export async function grShard(lemma: string): Promise<string> {
-  if (!grManifest) grManifest = fetchJson<{ split: string[] }>('./data/lex/gr-manifest.json');
-  const { split } = await grManifest;
+  const { split } = await loadGrManifest();
   const b = greekBase(lemma).replace(/[^α-ω]/g, '');
   const one = b[0] || 'x';
   return split.includes(one) ? one + (b[1] || '') : one;
@@ -78,17 +81,14 @@ export async function concordance(lang: Lang, id: string): Promise<number[][]> {
 
 /** Search indices: [id, lemma, transliteration, gloss, count, gloss source]. */
 export type IndexRow = [string, string, string, string, number, string?];
-let heIndex: Promise<IndexRow[]> | null = null;
-let grIndex: Promise<IndexRow[]> | null = null;
+const indexBoxes: Partial<Record<Lang, Promise<IndexRow[]>>> = {};
 export function searchIndex(lang: Lang): Promise<IndexRow[]> {
-  if (lang === 'he') return (heIndex ??= fetchJson<IndexRow[]>('./data/lex/he-index.json'));
-  return (grIndex ??= fetchJson<IndexRow[]>('./data/lex/gr-index.json'));
+  return memoAsyncKeyed(indexBoxes, lang, () => fetchJson<IndexRow[]>(`./data/lex/${lang}-index.json`));
 }
 
 /** Every data file, for "download everything for offline use". */
 export async function allDataUrls(bookIds: string[], langOfBook: (id: string) => Lang): Promise<string[]> {
-  if (!grManifest) grManifest = fetchJson<{ split: string[]; shards?: string[] }>('./data/lex/gr-manifest.json');
-  const man = (await grManifest) as { split: string[]; shards?: string[] };
+  const man = await loadGrManifest();
   const urls = bookIds.map((id) => `./data/${langOfBook(id)}/${id}.json`);
   for (let i = 0; i <= 29; i++) urls.push(`./data/lex/he-${i}.json`, `./data/conc/he-${i}.json`);
   for (const s of man.shards ?? []) urls.push(`./data/lex/gr-${s}.json`, `./data/conc/gr-${s}.json`);

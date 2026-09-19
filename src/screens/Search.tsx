@@ -16,18 +16,25 @@ export default function Search() {
   const nav = useNavigate();
   const [q, setQ] = useState(params.get('q') ?? '');
   const [rows, setRows] = useState<SearchRow[] | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  const [reloadTick, setReloadTick] = useState(0);
   const [scope, setScope] = useState<SearchScope>('all');
 
   useEffect(() => {
     let alive = true;
-    Promise.all([searchIndex('he'), searchIndex('gr')]).then(([he, gr]) => {
-      if (!alive) return;
-      setRows([...toHebrewSearchRows(he), ...toGreekSearchRows(gr)]);
-    });
+    setLoadError(false);
+    Promise.all([searchIndex('he'), searchIndex('gr')])
+      .then(([he, gr]) => {
+        if (!alive) return;
+        setRows([...toHebrewSearchRows(he), ...toGreekSearchRows(gr)]);
+      })
+      .catch(() => {
+        if (alive) setLoadError(true);
+      });
     return () => {
       alive = false;
     };
-  }, []);
+  }, [reloadTick]);
 
   // the URL is the source of truth when it changes from outside (a link to #/search?q=…); typing writes it back, debounced
   const fromUrl = params.get('q') ?? '';
@@ -68,7 +75,15 @@ export default function Search() {
             <div className="home__continue-ref">{refLabel(ref.book, ref.ch, ref.v)}</div>
           </Link>
         )}
-        {!rows && <p className="faint" aria-live="polite">Loading the lexica…</p>}
+        {loadError && (
+          <div className="card__text" role="alert">
+            <span className="card__err">Could not load the lexica. Check your connection and try again.</span>
+            <div className="card__actions" style={{ marginTop: '0.4rem' }}>
+              <button type="button" className="btn btn--small" onClick={() => setReloadTick((t) => t + 1)}>Try again</button>
+            </div>
+          </div>
+        )}
+        {!rows && !loadError && <p className="faint" aria-live="polite">Loading the lexica…</p>}
         {rows && q && !results.length && !ref && <p className="faint" role="status">Nothing found.</p>}
         <div aria-live="polite" className="sr-only">{rows && q ? `${results.length} results` : ''}</div>
         {results.map((r) => (

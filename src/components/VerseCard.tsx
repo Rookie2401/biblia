@@ -15,10 +15,17 @@ import { I } from './ui.tsx';
 export function VerseCard({ book, ch, v, selected, onSelectWord, onPrev, onNext, onClose }: { book: AnyBook; ch: number; v: number; selected?: number; onSelectWord: (i: number) => void; onPrev?: () => void; onNext?: () => void; onClose: () => void }) {
   const lang = isHeBook(book) ? 'he' : 'gr';
   const [, setTick] = useState(0);
+  const [glossError, setGlossError] = useState(false);
+  const [reloadTick, setReloadTick] = useState(0);
   useEffect(() => {
-    if (!glossIndex(lang)) void ensureGlossIndex(lang).then(() => setTick((t) => t + 1));
+    if (!glossIndex(lang)) {
+      setGlossError(false);
+      void ensureGlossIndex(lang)
+        .then(() => setTick((t) => t + 1))
+        .catch(() => setGlossError(true));
+    }
     if (!cachedContext(lang, book.book)) void loadContext(lang, book.book).then(() => setTick((t) => t + 1));
-  }, [lang, book.book]);
+  }, [lang, book.book, reloadTick]);
   const verse = book.chapters[ch - 1]?.verses[v - 1];
   if (!verse) return null;
   const n = lang === 'he' ? contentWords((verse as HeVerse).t).length : verse.w.length;
@@ -42,7 +49,13 @@ export function VerseCard({ book, ch, v, selected, onSelectWord, onPrev, onNext,
         </div>
       )}
       <div className="card__note">Under each word: its rendering in this verse (BSB), then the lemma gloss from the lexicon — a dictionary meaning, not a contextual translation.</div>
-      {!glossIndex(lang) && <div className="card__text faint">Loading glosses…</div>}
+      {!glossIndex(lang) && !glossError && <div className="card__text faint">Loading glosses…</div>}
+      {glossError && (
+        <div className="card__text" role="alert">
+          <span className="card__err">Could not load the lexicon glosses.</span>{' '}
+          <button type="button" className="btn btn--small btn--quiet" onClick={() => setReloadTick((t) => t + 1)}>Try again</button>
+        </div>
+      )}
       <div className={`inter${lang === 'he' ? ' inter--rtl' : ''}`}>
         {infos.map((w, i) => {
           if (!w) return null;

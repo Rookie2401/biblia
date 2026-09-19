@@ -3,6 +3,7 @@
  * lexeme it belongs to, and (loaded lazily) its lexicon entry. Short glosses for whole
  * verses come from the lexicon index (one small file per language) rather than the shards.
  */
+import { memoAsyncKeyed } from '../data/asyncCache.ts';
 import { type AnyBook, isHeBook } from '../data/books.ts';
 import { grEntry, heEntry, heLemmaId, searchIndex, type IndexRow } from '../data/lexicon.ts';
 import { lexemeKey, type GrEntry, type GrTok, type HeEntry, type HeTok, type HeVerse, type Lang, type WordRef } from '../model/types.ts';
@@ -81,12 +82,14 @@ export function glossIndex(lang: Lang): Map<string, IndexRow> | undefined {
 export function ensureGlossIndex(lang: Lang): Promise<Map<string, IndexRow>> {
   const hit = indices[lang];
   if (hit) return Promise.resolve(hit);
-  return (indexLoads[lang] ??= searchIndex(lang).then((rows) => {
-    const m = new Map<string, IndexRow>();
-    for (const r of rows) m.set(r[0], r);
-    indices[lang] = m;
-    return m;
-  }));
+  return memoAsyncKeyed(indexLoads, lang, () =>
+    searchIndex(lang).then((rows) => {
+      const m = new Map<string, IndexRow>();
+      for (const r of rows) m.set(r[0], r);
+      indices[lang] = m;
+      return m;
+    }),
+  );
 }
 /** Short gloss of a token (index must be loaded; '' otherwise). */
 export function shortGloss(lang: Lang, lexId: string | undefined): string {
