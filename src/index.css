@@ -130,6 +130,8 @@ h1, h2, h3, h4, p { margin: 0; }
 .home__entry-index { margin-left: auto; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); font-size: 0.8rem; white-space: nowrap; }
 .home__list-divider { font-variant: small-caps; letter-spacing: 0.08em; color: var(--ink-faint); margin: 1.3rem 0 0.1rem; padding: 0 0.6rem; font-size: 0.82rem; }
 .home__about { color: var(--ink-faint); margin-top: 2.5rem; font-size: 0.9rem; }
+.home__section { letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin: 2.75rem 0 0; padding-top: 2rem; border-top: 1px solid var(--rule); font-size: 1.1rem; font-weight: 600; }
+.home__subtitle--small { font-size: 0.88rem; margin-top: 0.3rem; margin-bottom: 1.5rem; }
 .home__links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
 
 /* --------------------------------------------------------------- forms */
@@ -202,13 +204,22 @@ h1, h2, h3, h4, p { margin: 0; }
 .reader__prose p.heading { text-align: center; font-weight: 500; margin: 1.5em 0 1.4em; text-indent: 0; }
 .reader__title { text-align: center; font-family: var(--serif); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-size: 0.72rem; font-weight: 600; margin-bottom: 1.4rem; direction: ltr; }
 .reader__end { text-align: center; color: var(--ink-faint); font-family: var(--serif); font-size: 0.9rem; margin-top: 3rem; direction: ltr; }
-.reader__nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 15; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid var(--rule); }
+/* will-change forces its own compositor layer, which keeps this fixed-position bar glued to the
+   viewport during an iOS Safari scroll gesture instead of visually lagging/floating a frame or
+   two behind the content before snapping back once scrolling stops (a well-known iOS quirk with
+   plain position: fixed, most reliably worked around this way). */
+.reader__nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 15; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid var(--rule); will-change: transform; -webkit-backface-visibility: hidden; }
 .reader--panel .reader__nav { left: 26rem; }
 @media (max-width: 979px) { .reader--panel .reader__nav { display: none; } }
+/* Logical (not physical left/right) properties throughout: the container's own `direction`
+   (rtl for Hebrew, ltr for Greek, set inline per language) decides which side is "next" —
+   inline-end, the direction reading naturally continues toward — without a separate rule
+   for each language. This also keeps "Previous"/"Next" glued to the true edges instead of
+   drifting inward, which the old physical `margin-right: auto` only did correctly for RTL. */
 .reader__nav-inner { max-width: 44rem; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1rem calc(0.6rem + var(--safe-bottom)); direction: rtl; }
-.reader__nav-btn { color: var(--ink-soft); display: flex; flex-direction: column; gap: 0.1rem; max-width: 45%; padding: 0.3rem 0.4rem; align-items: flex-start; text-align: right; }
+.reader__nav-btn { color: var(--ink-soft); display: flex; flex-direction: column; gap: 0.1rem; max-width: 45%; padding: 0.3rem 0.4rem; align-items: flex-start; text-align: start; }
 .reader__nav-btn:disabled { opacity: 0.3; cursor: default; }
-.reader__nav-btn--next { margin-right: auto; align-items: flex-end; text-align: left; }
+.reader__nav-btn--next { margin-inline-start: auto; align-items: flex-end; text-align: end; }
 .reader__nav-dir { letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); font-size: 0.68rem; font-family: var(--serif); direction: ltr; }
 .reader__nav-cite { white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 100%; font-size: 0.95rem; font-family: var(--heb); }
 
@@ -226,7 +237,8 @@ h1, h2, h3, h4, p { margin: 0; }
 /* -------------------------------------------------------------- panel */
 .panel { position: sticky; top: 0; align-self: start; height: 100dvh; overflow-y: auto; border-right: 1px solid var(--rule); background: var(--paper-raised); padding: calc(1rem + var(--safe-top)) 1.1rem 2rem; direction: ltr; }
 @media (max-width: 979px) {
-  .panel { position: fixed; left: 0; right: 0; bottom: 0; top: auto; height: auto; max-height: 62dvh; border-right: 0; border-top: 1px solid var(--rule-strong); border-radius: 12px 12px 0 0; box-shadow: var(--shadow-raised); z-index: 30; padding: 0.8rem 1rem calc(1rem + var(--safe-bottom)); animation: 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) both sheet-in; }
+  /* same iOS fixed-position drift fix as .reader__nav above */
+  .panel { position: fixed; left: 0; right: 0; bottom: 0; top: auto; height: auto; max-height: 62dvh; border-right: 0; border-top: 1px solid var(--rule-strong); border-radius: 12px 12px 0 0; box-shadow: var(--shadow-raised); z-index: 30; padding: 0.8rem 1rem calc(1rem + var(--safe-bottom)); animation: 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) both sheet-in; will-change: transform; -webkit-backface-visibility: hidden; }
 }
 .panel__head { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.6rem; }
 .panel__head .label { flex: 1; }
@@ -391,8 +403,12 @@ h1, h2, h3, h4, p { margin: 0; }
 .testament { display: flex; justify-content: center; gap: 0.4rem; margin: 1rem 0 0.4rem; }
 
 /* reader: verses */
-.reader__prose--gr { direction: ltr; text-align: left; font-family: var(--serif); font-size: var(--greek-font-size); line-height: calc(var(--reading-line-height) - 0.15); }
-.reader__prose--gr p { text-align: left; }
+/* Greek has no browser hyphenation dictionary and runs as one long paragraph per chapter, so
+   plain ragged-right leaves a very uneven right margin on a narrow phone column (few words per
+   line means one long word not fitting wastes a large fraction of the line). Justifying closes
+   that gap; text-wrap: pretty (already set on every .reader__prose p) keeps the last line sane. */
+.reader__prose--gr { direction: ltr; text-align: justify; text-justify: inter-word; font-family: var(--serif); font-size: var(--greek-font-size); line-height: calc(var(--reading-line-height) - 0.15); }
+.reader__prose--gr p { text-align: justify; text-justify: inter-word; }
 .verse { display: inline; }
 .vn { font-family: var(--serif); font-size: 0.6em; color: var(--accent); vertical-align: super; line-height: 0; margin: 0 0.25em; letter-spacing: 0.02em; cursor: pointer; direction: ltr; unicode-bidi: isolate; user-select: none; }
 .vn:hover { text-decoration: underline; }

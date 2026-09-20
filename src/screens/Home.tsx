@@ -27,6 +27,9 @@ interface Testament {
   title: string;
   native: string;
   lang: Lang;
+  /** "bible" = the Hebrew/Greek Tanakh + New Testament; "other" = everything else (Septuagint,
+   * Vulgate, ...), set apart under its own "Other resources" heading on the home page. */
+  group: 'bible' | 'other';
   divisions: Division[];
 }
 
@@ -37,6 +40,7 @@ export const TREE: Testament[] = [
     title: 'Tanakh',
     native: 'תַּנַ״ךְ',
     lang: 'he',
+    group: 'bible',
     divisions: [
       { id: 'Torah', title: 'Torah', native: 'תּוֹרָה', sections: ['Torah'] },
       { id: 'Neviim', title: 'Neviʾim · Prophets', native: 'נְבִיאִים', sections: ['Neviim'] },
@@ -48,6 +52,7 @@ export const TREE: Testament[] = [
     title: 'New Testament',
     native: 'Ἡ Καινὴ Διαθήκη',
     lang: 'gr',
+    group: 'bible',
     divisions: [
       { id: 'Histories', title: 'Histories', native: 'Εὐαγγέλια · Πράξεις', sections: ['Gospels', 'Acts'] },
       { id: 'Epistles', title: 'Epistles', native: 'Ἐπιστολαί · Ἀποκάλυψις', sections: ['Paul', 'General', 'Revelation'] },
@@ -58,6 +63,7 @@ export const TREE: Testament[] = [
     title: 'Septuagint',
     native: 'Ἡ Μετάφρασις τῶν Ἑβδομήκοντα',
     lang: 'gr',
+    group: 'other',
     divisions: [
       { id: 'LxxLaw', title: 'Law', native: 'Νόμος', sections: ['LxxLaw'] },
       { id: 'LxxHistory', title: 'History', native: 'Ἱστορικά', sections: ['LxxHistory'] },
@@ -120,6 +126,47 @@ export default function Home() {
   }
   const lastBook = getSettings().lastBook;
 
+  const testamentGroup = (t: Testament) => (
+    <Group key={t.id} id={t.id} level={1} open={open.has(t.id)} onToggle={toggle} title={t.title} native={t.native} lang={t.lang} meta={`${t.divisions.reduce((n, d) => n + booksOf(d).length, 0)} books`}>
+      {t.divisions.map((d) => {
+        const books = booksOf(d);
+        return (
+          <Group key={d.id} id={d.id} level={2} open={open.has(d.id)} onToggle={toggle} title={d.title} native={d.native} lang={t.lang} meta={`${books.length} books`}>
+            {books.map((b) => {
+              const p = positions.get(b.id);
+              const finished = b.verses.filter((_, i) => done.has(`${b.id}:${i + 1}`)).length;
+              return (
+                <Group key={b.id} id={b.id} level={3} open={open.has(b.id)} onToggle={toggle} title={b.en} native={b.native} lang={b.lang} current={b.id === lastBook} meta={p ? `at ${p.ch}` : finished ? `${finished}/${b.verses.length}` : `${b.verses.length} ch`}>
+                  <div className="entrylist" role="list" aria-label={`${b.en} chapters`}>
+                    {p && (
+                      <button type="button" className="entry entry--resume" role="listitem" onClick={() => nav(`/read/${b.id}/${p.ch}?v=${p.v}`)}>
+                        <span className="entry__num">Resume</span>
+                        <span className="entry__preview">{refLabel(b.id, p.ch, p.v)}</span>
+                      </button>
+                    )}
+                    {b.verses.map((count, i) => {
+                      const n = i + 1;
+                      const isDone = done.has(`${b.id}:${n}`);
+                      return (
+                        <Link key={n} to={`/read/${b.id}/${n}`} className={`entry entry--chapter${isDone ? ' entry--done' : ''}${p?.ch === n ? ' entry--at' : ''}`} role="listitem" aria-label={`${b.en} ${n}${isDone ? ', read' : ''}`}>
+                          <span className="entry__num">Chapter {n}</span>
+                          <span className={`entry__native ${b.lang}`} lang={b.lang === 'he' ? 'he' : 'el'}>{b.lang === 'he' ? `פֶּרֶק ${hebrewNumeral(n)}` : `Κεφάλαιον ${greekNumeral(n)}`}</span>
+                          <span className="entry__preview">{count} verses{isDone ? ' · read' : p?.ch === n ? ' · reading' : ''}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </Group>
+              );
+            })}
+          </Group>
+        );
+      })}
+    </Group>
+  );
+  const bibleTestaments = TREE.filter((t) => t.group === 'bible');
+  const otherTestaments = TREE.filter((t) => t.group === 'other');
+
   return (
     <div>
       <Topbar
@@ -148,48 +195,20 @@ export default function Home() {
           </Link>
         )}
         <nav className="lib" aria-label="Books">
-          {TREE.map((t) => (
-            <Group key={t.id} id={t.id} level={1} open={open.has(t.id)} onToggle={toggle} title={t.title} native={t.native} lang={t.lang} meta={`${t.divisions.reduce((n, d) => n + booksOf(d).length, 0)} books`}>
-              {t.divisions.map((d) => {
-                const books = booksOf(d);
-                return (
-                  <Group key={d.id} id={d.id} level={2} open={open.has(d.id)} onToggle={toggle} title={d.title} native={d.native} lang={t.lang} meta={`${books.length} books`}>
-                    {books.map((b) => {
-                      const p = positions.get(b.id);
-                      const finished = b.verses.filter((_, i) => done.has(`${b.id}:${i + 1}`)).length;
-                      return (
-                        <Group key={b.id} id={b.id} level={3} open={open.has(b.id)} onToggle={toggle} title={b.en} native={b.native} lang={b.lang} current={b.id === lastBook} meta={p ? `at ${p.ch}` : finished ? `${finished}/${b.verses.length}` : `${b.verses.length} ch`}>
-                        <div className="entrylist" role="list" aria-label={`${b.en} chapters`}>
-                            {p && (
-                              <button type="button" className="entry entry--resume" role="listitem" onClick={() => nav(`/read/${b.id}/${p.ch}?v=${p.v}`)}>
-                                <span className="entry__num">Resume</span>
-                                <span className="entry__preview">{refLabel(b.id, p.ch, p.v)}</span>
-                              </button>
-                            )}
-                            {b.verses.map((count, i) => {
-                              const n = i + 1;
-                              const isDone = done.has(`${b.id}:${n}`);
-                              return (
-                                <Link key={n} to={`/read/${b.id}/${n}`} className={`entry entry--chapter${isDone ? ' entry--done' : ''}${p?.ch === n ? ' entry--at' : ''}`} role="listitem" aria-label={`${b.en} ${n}${isDone ? ', read' : ''}`}>
-                                  <span className="entry__num">Chapter {n}</span>
-                                  <span className={`entry__native ${b.lang}`} lang={b.lang === 'he' ? 'he' : 'el'}>{b.lang === 'he' ? `פֶּרֶק ${hebrewNumeral(n)}` : `Κεφάλαιον ${greekNumeral(n)}`}</span>
-                                  <span className="entry__preview">{count} verses{isDone ? ' · read' : p?.ch === n ? ' · reading' : ''}</span>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </Group>
-                      );
-                    })}
-                  </Group>
-                );
-              })}
-            </Group>
-          ))}
+          {bibleTestaments.map(testamentGroup)}
         </nav>
         <p className="home__about">
           Miqra according to the Masorah · SBL Greek New Testament · OSHB & MorphGNT morphology · BDB · Abbott-Smith · Strong's. <Link to="/settings">Sources & licences</Link>
         </p>
+        {otherTestaments.length > 0 && (
+          <>
+            <h2 className="home__section">Other resources</h2>
+            <p className="home__subtitle home__subtitle--small">Ancient translations and related texts, alongside the Hebrew and Greek Bible above.</p>
+            <nav className="lib" aria-label="Other resources">
+              {otherTestaments.map(testamentGroup)}
+            </nav>
+          </>
+        )}
       </div>
     </div>
   );
