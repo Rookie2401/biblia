@@ -30,7 +30,12 @@ export default function Vocab() {
         });
     };
     load();
-    return onVocabChange(load);
+    const unsubscribe = onVocabChange(load);
+    // a pending read from before unmount must not still be able to commit a result afterward
+    return () => {
+      loadGen.current++;
+      unsubscribe();
+    };
   }, []);
   const shown = rows.filter((r) => (tab === 'all' || r.status === tab) && (lang === 'all' || r.lang === lang));
   const counts = Object.fromEntries(VOCAB_STATUSES.map((s) => [s, rows.filter((r) => r.status === s && (lang === 'all' || r.lang === lang)).length]));

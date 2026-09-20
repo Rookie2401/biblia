@@ -44,6 +44,7 @@ export function WordCard(p: WordCardProps) {
   const [conc, setConc] = useState<number[][] | null>(null);
   const [concAll, setConcAll] = useState(false);
   const [ctx, setCtx] = useState<string | null | undefined>(undefined);
+  const [statusErr, setStatusErr] = useState<string | null>(null);
   const refId = `${info.ref.book}:${info.ref.ch}:${info.ref.v}:${info.ref.i}`;
 
   useEffect(() => {
@@ -53,6 +54,7 @@ export function WordCard(p: WordCardProps) {
     setConcAll(false);
     setEntry(undefined);
     setCtx(undefined);
+    setStatusErr(null);
     // the previous word's vocabulary record (status, encounters, forms) must not stay attached
     // to the new word — and stay actionable, since the status picker writes by lex.key — while
     // this word's own lookup is pending, or indefinitely if it fails
@@ -72,8 +74,15 @@ export function WordCard(p: WordCardProps) {
           if (alive) setLex(lx ?? null);
         } else {
           lookedUp.add(refId);
-          const lx = await recordLookup(seed, info.ref, plainForm(info));
-          if (alive) setLex(lx);
+          try {
+            const lx = await recordLookup(seed, info.ref, plainForm(info));
+            if (alive) setLex(lx);
+          } catch (e) {
+            // the write never landed — a later visit must retry it, not treat this word as
+            // already recorded and only read the (still-missing) row
+            lookedUp.delete(refId);
+            throw e;
+          }
         }
       } catch {
         // IndexedDB failed (quota, permission, private mode, corruption): lex stays at the safe
@@ -179,10 +188,17 @@ export function WordCard(p: WordCardProps) {
       {morphLine && <div className="card__morph">{morphLine}{info.he?.morph.lang === 'Aramaic' ? ' · Aramaic' : ''}</div>}
       {lex && info.key && (
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <StatusPicker value={lex.status} onChange={(s: VocabStatus) => setLexemeStatus(lex.key, s)} />
+          <StatusPicker
+            value={lex.status}
+            onChange={(s: VocabStatus) => {
+              setStatusErr(null);
+              setLexemeStatus(lex.key, s).catch(() => setStatusErr('Could not update the status (offline storage problem). Try again.'));
+            }}
+          />
           {entry?.n ? <span className="status__form" style={{ marginTop: '0.5rem' }}>· {entry.n}× in the {info.lang === 'he' ? 'Tanakh' : 'New Testament'}</span> : null}
         </div>
       )}
+      {statusErr && <div className="card__err" role="alert">{statusErr}</div>}
 
       <div className="card__actions">
         {level === 1 && <button className="btn btn--small" onClick={() => setLevel(2)}>More {I.chevron}</button>}

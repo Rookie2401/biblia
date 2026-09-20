@@ -90,7 +90,10 @@ export function searchIndex(lang: Lang): Promise<IndexRow[]> {
   return memoAsyncKeyed(indexBoxes, lang, () => fetchJson<IndexRow[]>(`./data/lex/${lang}-index.json`));
 }
 
-/** Every data file, for "download everything for offline use". */
+/**
+ * Every data file the app reads at runtime, for "download everything for offline use". Excludes
+ * attribution/diagnostic metadata that nothing in the app reads (ctx/COVERAGE.json, SOURCES.json).
+ */
 export async function allDataUrls(bookIds: string[], langOfBook: (id: string) => Lang): Promise<string[]> {
   const [heMan, grMan] = await Promise.all([loadHeManifest(), loadGrManifest()]);
   const urls = bookIds.map((id) => `./data/${langOfBook(id)}/${id}.json`);

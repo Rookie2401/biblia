@@ -169,6 +169,48 @@ describe('Reader does not let an older vocabulary-status lookup overwrite a newe
   });
 });
 
+describe('Reader clears the previous chapter\'s status map when the new chapter\'s own lookup fails', () => {
+  // content audit 7: a failed statusMap() read for the new chapter deliberately left the displayed
+  // map unchanged (to avoid an unhandled rejection) — but on chapter navigation, "unchanged" means
+  // the previous chapter's map. Confirmed with a real, un-act()-wrapped navigation (both chapters
+  // share one word, so the same DOM node is reused and its class briefly still says "recognized"
+  // from chapter 1, for exactly the render before React's own effects would otherwise clean it up).
+  it('a rejected statusMap() for chapter 2 does not paint chapter 1\'s "recognized" styling onto it', async () => {
+    const SHARED_VERSE = { n: 1, t: 'בָּרָא', w: [['1254 a', 'HVqp3ms']] };
+    const GEN2 = { book: 'Gen', chapters: [{ n: 1, verses: [SHARED_VERSE] }, { n: 2, verses: [SHARED_VERSE] }] };
+    vi.stubGlobal('fetch', fetchRouter({ 'data/he/Gen': () => Promise.resolve(jsonResponse(GEN2)) }));
+
+    let call = 0;
+    vi.doMock('../src/state/vocab.ts', async () => {
+      const actual = await vi.importActual<typeof import('../src/state/vocab.ts')>('../src/state/vocab.ts');
+      return {
+        ...actual,
+        statusMap: vi.fn(() => {
+          call++;
+          return call === 1 ? Promise.resolve(new Map([['he:1254 a', 'recognized']])) : Promise.reject(new Error('offline'));
+        }),
+      };
+    });
+
+    const { default: Reader } = await import('../src/screens/Reader.tsx');
+    await renderReaderAt(Reader, '/read/Gen/1');
+    await screen.findByText('בָּרָא');
+    const word = () => document.querySelector('.reader__prose button.w');
+    const title = () => document.querySelector('.reader__title')?.textContent;
+    await new Promise((r) => setTimeout(r, 0));
+    expect(word()?.className).toContain('st-recognized'); // chapter 1's real status shows
+
+    // deliberately NOT wrapped in act(): the point is to see the DOM as it actually commits,
+    // the same way a real browser would, rather than have React's test helper fast-forward
+    // straight past the moment the bug would be visible
+    navigateTo!('/read/Gen/2');
+    await screen.findByText('בָּרָא'); // resolves once chapter 2's own render has committed
+    expect(title()).toBe('Genesis 2'); // sanity: this is genuinely chapter 2, not stale chapter 1 DOM
+    expect(word()?.className).not.toContain('st-recognized'); // must not carry chapter 1's status
+    expect(word()?.className).toContain('st-new');
+  });
+});
+
 describe('Reader does not retain a gloss-index error across a route whose index is already cached', () => {
   it('a Hebrew index failure does not appear on a Greek chapter loaded after the Greek index is already cached', async () => {
     vi.stubGlobal(

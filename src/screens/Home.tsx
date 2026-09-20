@@ -77,11 +77,20 @@ export default function Home() {
   const [open, setOpen] = useState<Set<string>>(loadOpen);
 
   useEffect(() => {
-    db.positions.orderBy('at').reverse().toArray().then((rows) => {
-      setPositions(new Map(rows.map((r) => [r.book, r])));
-      setLast(rows[0] ?? null);
-    });
-    db.progress.filter((p) => p.done).toArray().then((rows) => setDone(new Set(rows.map((r) => r.id))));
+    db.positions
+      .orderBy('at')
+      .reverse()
+      .toArray()
+      .then((rows) => {
+        setPositions(new Map(rows.map((r) => [r.book, r])));
+        setLast(rows[0] ?? null);
+      })
+      .catch(() => {});
+    db.progress
+      .filter((p) => p.done)
+      .toArray()
+      .then((rows) => setDone(new Set(rows.map((r) => r.id))))
+      .catch(() => {});
   }, []);
 
   function toggle(id: string) {

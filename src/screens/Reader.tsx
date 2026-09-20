@@ -130,6 +130,16 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
 
   const words = useMemo(() => (book ? chapterWords(book, ch) : []), [book, ch]);
   const keys = useMemo(() => words.map((w) => w.key).filter((k): k is string => Boolean(k)), [words]);
+  // A new chapter's word keys must never be painted alongside the previous chapter's status map —
+  // not even for one frame — so this clears synchronously during render (React's documented pattern
+  // for resetting state when a prop changes) rather than in an effect, which would only run after
+  // that stale-styled frame had already committed. `keys` is memoized on [book, ch], so its
+  // reference only changes on a real chapter change, not on unrelated re-renders.
+  const [statusKeys, setStatusKeys] = useState(keys);
+  if (statusKeys !== keys) {
+    setStatusKeys(keys);
+    setStatuses(new Map());
+  }
   // Rapid navigation can start a second statusMap() lookup before the first (for the previous
   // chapter's keys) has resolved; an IndexedDB read has no ordering guarantee, so the older one
   // could resolve second and overwrite the current chapter's correct map with a stale one.
