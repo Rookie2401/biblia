@@ -2,13 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { CANON, adjacentChapter, book, parseRef, refLabel, validRef } from '../src/text/canon.ts';
 
 describe('canon', () => {
-  it('has 124 books (39 Tanakh + 27 NT + 58 Septuagint) with verse counts from the data', () => {
-    expect(CANON.length).toBe(124);
+  it('has 151 books (39 Tanakh + 27 NT + 58 Septuagint + 27 Vulgate NT) with verse counts from the data', () => {
+    expect(CANON.length).toBe(151);
     expect(book('Gen')?.verses.length).toBe(50);
     expect(book('Gen')?.verses[0]).toBe(31);
     expect(book('Ps')?.verses.length).toBe(150);
     expect(book('Rev')?.verses.length).toBe(22);
     expect(book('Matt')?.lang).toBe('gr');
+    expect(book('MattVulg')?.lang).toBe('la');
   });
   it('walks chapters across books within a testament only', () => {
     expect(adjacentChapter('Gen', 50, 1)).toEqual({ book: 'Exod', ch: 1 });
@@ -26,6 +27,14 @@ describe('canon', () => {
     expect(adjacentChapter('GenLxx', 1, -1)).toBeNull();
     // but the Septuagint's own internal divisions (Law/History/Poetry/Prophets) still flow together
     expect(adjacentChapter('DeutLxx', 34, 1)).toEqual({ book: 'JoshLxx', ch: 1 });
+  });
+  it('walks the Vulgate NT as its own testament (lang "la", never crossing into the Greek NT)', () => {
+    expect(adjacentChapter('MattVulg', 28, 1)).toEqual({ book: 'MarkVulg', ch: 1 });
+    expect(adjacentChapter('MattVulg', 1, -1)).toBeNull();
+    expect(adjacentChapter('RevVulg', 22, 1)).toBeNull();
+    // the language check alone already keeps this apart from the Greek NT/Septuagint — no extra
+    // boundary flag needed, unlike the Septuagint (which deliberately shares lang "gr")
+    expect(adjacentChapter('JudeVulg', 1, 1)).toEqual({ book: 'RevVulg', ch: 1 });
   });
   it('refuses to step from an invalid chapter', () => {
     expect(adjacentChapter('Gen', 999, 1)).toBeNull();

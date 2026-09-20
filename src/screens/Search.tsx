@@ -7,9 +7,9 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { BackLink, Topbar } from '../components/ui.tsx';
 import { searchIndex } from '../data/lexicon.ts';
 import { parseRef, refLabel } from '../text/canon.ts';
-import { searchLexicon, toGreekSearchRows, toHebrewSearchRows, wordUrl, type SearchRow, type SearchScope } from '../state/search.ts';
+import { searchLexicon, toGreekSearchRows, toHebrewSearchRows, toLatinSearchRows, wordUrl, type SearchRow, type SearchScope } from '../state/search.ts';
 
-const SOURCE: Record<string, string> = { curated: 'Biblia', bdb: 'BDB', index: 'OS index', strongs: "Strong's", kjv: 'KJV', dodson: 'Dodson', abbott: 'Abbott-Smith' };
+const SOURCE: Record<string, string> = { curated: 'Biblia', bdb: 'BDB', index: 'OS index', strongs: "Strong's", kjv: 'KJV', dodson: 'Dodson', abbott: 'Abbott-Smith', ls: 'Lewis & Short' };
 
 export default function Search() {
   const [params, setParams] = useSearchParams();
@@ -23,10 +23,10 @@ export default function Search() {
   useEffect(() => {
     let alive = true;
     setLoadError(false);
-    Promise.all([searchIndex('he'), searchIndex('gr')])
-      .then(([he, gr]) => {
+    Promise.all([searchIndex('he'), searchIndex('gr'), searchIndex('la')])
+      .then(([he, gr, la]) => {
         if (!alive) return;
-        setRows([...toHebrewSearchRows(he), ...toGreekSearchRows(gr)]);
+        setRows([...toHebrewSearchRows(he), ...toGreekSearchRows(gr), ...toLatinSearchRows(la)]);
       })
       .catch(() => {
         if (alive) setLoadError(true);
@@ -56,15 +56,16 @@ export default function Search() {
       <Topbar title="Search" left={<BackLink />} />
       <div className="page page--narrow route-fade">
         <div className="searchbar">
-          <label htmlFor="search-q" className="sr-only">Search a reference, a Hebrew or Greek word, an English gloss or a Strong's number</label>
-          <input id="search-q" type="search" autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Gen 1:1 · John 3:16 · דבר · λόγος · word · H1697 · G3056" onKeyDown={(e) => { if (e.key === 'Enter' && refUrl) nav(refUrl); }} />
+          <label htmlFor="search-q" className="sr-only">Search a reference, a Hebrew, Greek or Latin word, an English gloss or a Strong's number</label>
+          <input id="search-q" type="search" autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Gen 1:1 · John 3:16 · דבר · λόγος · verbum · word · H1697 · G3056" onKeyDown={(e) => { if (e.key === 'Enter' && refUrl) nav(refUrl); }} />
         </div>
         <div className="filters">
           <fieldset className="segmented" style={{ border: 0, padding: 0, margin: 0 }}>
             <legend className="sr-only">Language</legend>
-            <button type="button" aria-pressed={scope === 'all'} onClick={() => setScope('all')}>Both</button>
+            <button type="button" aria-pressed={scope === 'all'} onClick={() => setScope('all')}>All</button>
             <button type="button" aria-pressed={scope === 'he'} onClick={() => setScope('he')}>Hebrew</button>
             <button type="button" aria-pressed={scope === 'gr'} onClick={() => setScope('gr')}>Greek</button>
+            <button type="button" aria-pressed={scope === 'la'} onClick={() => setScope('la')}>Latin</button>
           </fieldset>
           {rows && <span className="faint" style={{ fontSize: '0.85rem' }}>{rows.length.toLocaleString()} lemmas</span>}
         </div>
@@ -89,10 +90,10 @@ export default function Search() {
         {results.map((r) => (
           <Link key={`${r.lang}:${r.id}`} to={wordUrl(r)} className="result" style={{ display: 'block', color: 'inherit' }}>
             <div className="result__head">
-              <span className={r.lang === 'he' ? 'he' : 'gr'} style={{ fontSize: '1.35rem' }}>{r.lemma}</span>
+              <span className={r.lang === 'he' ? 'he' : r.lang === 'la' ? 'la' : 'gr'} style={{ fontSize: '1.35rem' }}>{r.lemma}</span>
               {r.transliteration && <span className="faint" style={{ fontStyle: 'italic' }}>{r.transliteration}</span>}
               <span className="g">{r.gloss || <span className="faint">no gloss in the source lexica</span>}</span>
-              <span className="result__meta">{r.strong || (r.lang === 'he' ? 'Hebrew' : 'Greek')} · {r.count}×{r.source ? ` · ${SOURCE[r.source] ?? r.source}` : ''}</span>
+              <span className="result__meta">{r.strong || (r.lang === 'he' ? 'Hebrew' : r.lang === 'la' ? 'Latin' : 'Greek')} · {r.count}×{r.source ? ` · ${SOURCE[r.source] ?? r.source}` : ''}</span>
             </div>
           </Link>
         ))}

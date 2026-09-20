@@ -13,10 +13,11 @@ import { useMediaQuery, useModalDialog } from '../components/dialog.ts';
 import { I, IconBtn, Sheet } from '../components/ui.tsx';
 import { loadBook, type AnyBook } from '../data/books.ts';
 import { cachedContext, loadContext } from '../data/context.ts';
-import type { GrVerse, HeVerse, VocabStatus, WordRef } from '../model/types.ts';
+import type { GrVerse, HeVerse, LaVerse, Lang, VocabStatus, WordRef } from '../model/types.ts';
 import { adjacentChapter, book as bookInfo, refLabel, validRef } from '../text/canon.ts';
 import { splitPrinted, greekNumeral } from '../text/greek.ts';
 import { contentWords, hebrewNumeral, render, tokens, type HebrewDisplay } from '../text/hebrew.ts';
+import { contentWords as laContentWords, romanNumeral, splitPrinted as laSplitPrinted } from '../text/latin.ts';
 import { setSettings, useSettings } from '../state/settings.ts';
 import { markUnlookedAsKnown, markChapterVisit, onVocabChange, recordEncounters, savePosition, statusMap } from '../state/vocab.ts';
 import { chapterWords, ensureGlossIndex, glossIndex, seedFor, shortGloss, wordAt, type WordInfo } from '../state/wordinfo.ts';
@@ -74,6 +75,7 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   // Septuagint books are `lang: 'gr'` too (so their vocabulary merges with the NT's), but they
   // are a different edition of a different testament, and need their own labels/attribution.
   const isLxx = info.section.startsWith('Lxx');
+  const isVulg = info.section.startsWith('Vulg');
 
   // Incremented every time the route (bookId/ch) changes or a retry is requested, so a response
   // for a request that is no longer the current one — because the reader moved on before it
@@ -181,7 +183,7 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
       setSel({ kind: 'verse', v });
       return;
     }
-    const n = lang === 'he' ? contentWords((verse as HeVerse).t).length : verse.w.length;
+    const n = lang === 'he' ? contentWords((verse as HeVerse).t).length : lang === 'la' ? laContentWords((verse as LaVerse).t).length : verse.w.length;
     const i = /^\d+$/.test(iS) ? Number(iS) : NaN;
     if (!(i >= 0 && i < n)) {
       setNotice(`${refLabel(bookId, ch, v)} has no word ${iS}.`);
@@ -265,7 +267,7 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
 
   const chapter = book?.chapters[ch - 1];
   const nChapters = info.verses.length;
-  const numeral = lang === 'he' ? hebrewNumeral(ch) : greekNumeral(ch);
+  const numeral = lang === 'he' ? hebrewNumeral(ch) : lang === 'la' ? romanNumeral(ch) : greekNumeral(ch);
   const selKey = sel?.kind === 'word' ? `${sel.ref.v}:${sel.ref.i}` : '';
 
   /** Toggle the selection for a word or verse-number control. Returns false when the target is neither. */
@@ -314,7 +316,7 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
             <Link to="/" className="iconbtn" aria-label="Library" title="Library">{I.back}</Link>
             <button type="button" className="reader__headbtn" onClick={() => setShowToc(true)} title="Chapters" aria-label={`${refLabel(bookId, ch)}: choose a chapter`}>
               <span className="reader__crumb">{info.en} · {ch} / {nChapters}</span>
-              <span className={`reader__chapter${lang === 'gr' ? ' reader__chapter--ltr' : ''}`}>{info.native} {numeral}</span>
+              <span className={`reader__chapter${lang !== 'he' ? ' reader__chapter--ltr' : ''}`}>{info.native} {numeral}</span>
             </button>
             <IconBtn label="Chapters" onClick={() => setShowToc(true)}>{I.list}</IconBtn>
             <IconBtn label="Type & theme" onClick={() => setShowType(true)}>{I.type}</IconBtn>
@@ -344,6 +346,8 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
             )}
             {lang === 'he' ? (
               <HebrewChapter verses={chapter.verses as HeVerse[]} bookId={bookId} ch={ch} mode={settings.hebrewDisplay} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} showNumbers={settings.showVerseNumbers} poetry={POETRY.has(bookId)} glossLine={settings.showGlossLine} />
+            ) : lang === 'la' ? (
+              <LatinChapter verses={chapter.verses as LaVerse[]} bookId={bookId} ch={ch} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} showNumbers={settings.showVerseNumbers} glossLine={settings.showGlossLine} />
             ) : (
               <GreekChapter verses={chapter.verses as GrVerse[]} bookId={bookId} ch={ch} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} showNumbers={settings.showVerseNumbers} glossLine={settings.showGlossLine} />
             )}
@@ -370,23 +374,23 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
                 </button>
                 {msg && <div className="faint" style={{ marginTop: '0.4rem', fontSize: '0.9rem' }} role="status">{msg}</div>}
               </div>
-              {next ? <button type="button" className="btn" onClick={() => goChapter(next)}>{refLabel(next.book, next.ch)} →</button> : `End of the ${lang === 'he' ? 'Tanakh' : isLxx ? 'Septuagint' : 'New Testament'}`}
+              {next ? <button type="button" className="btn" onClick={() => goChapter(next)}>{refLabel(next.book, next.ch)} →</button> : `End of the ${lang === 'he' ? 'Tanakh' : isLxx ? 'Septuagint' : isVulg ? 'Vulgate New Testament' : 'New Testament'}`}
               <div className="faint" style={{ marginTop: '1.5rem', fontSize: '0.8rem' }}>
-                {lang === 'he' ? 'Text: Miqra according to the Masorah · Morphology: OSHB' : isLxx ? 'Text: Septuagint (Rahlfs, 1935) · Morphology: lxx-morph' : 'Text: SBL Greek New Testament · Morphology: MorphGNT'}
+                {lang === 'he' ? 'Text: Miqra according to the Masorah · Morphology: OSHB' : isLxx ? 'Text: Septuagint (Rahlfs, 1935) · Morphology: lxx-morph' : isVulg ? 'Text: Vulgate (Clementine, 1592) · Morphology: PROIEL / Syntacticus' : 'Text: SBL Greek New Testament · Morphology: MorphGNT'}
               </div>
             </div>
           </div>
         )}
 
         <nav className="reader__nav" aria-label="Chapters">
-          <div className="reader__nav-inner" style={lang === 'gr' ? { direction: 'ltr' } : undefined}>
+          <div className="reader__nav-inner" style={lang !== 'he' ? { direction: 'ltr' } : undefined}>
             <button type="button" className="reader__nav-btn" disabled={!prev} onClick={() => goChapter(prev)}>
               <span className="reader__nav-dir">Previous</span>
-              <span className={`reader__nav-cite${lang === 'gr' ? ' reader__nav-cite--ltr' : ''}`}>{prev ? refLabel(prev.book, prev.ch) : ''}</span>
+              <span className={`reader__nav-cite${lang !== 'he' ? ' reader__nav-cite--ltr' : ''}`}>{prev ? refLabel(prev.book, prev.ch) : ''}</span>
             </button>
             <button type="button" className="reader__nav-btn reader__nav-btn--next" disabled={!next} onClick={() => goChapter(next)}>
               <span className="reader__nav-dir">Next</span>
-              <span className={`reader__nav-cite${lang === 'gr' ? ' reader__nav-cite--ltr' : ''}`}>{next ? refLabel(next.book, next.ch) : ''}</span>
+              <span className={`reader__nav-cite${lang !== 'he' ? ' reader__nav-cite--ltr' : ''}`}>{next ? refLabel(next.book, next.ch) : ''}</span>
             </button>
           </div>
         </nav>
@@ -406,7 +410,7 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   );
 }
 
-function TypeSheet({ lang, onClose }: { lang: 'he' | 'gr'; onClose: () => void }) {
+function TypeSheet({ lang, onClose }: { lang: Lang; onClose: () => void }) {
   const settings = useSettings();
   return (
     <Sheet title="Type & theme" onClose={onClose}>
@@ -494,7 +498,7 @@ function VerseNumber({ bookId, ch, v, on, label }: { bookId: string; ch: number;
 }
 
 /** Under the tapped verse: the BSB's rendering of each word in this verse (a translation), word by word in source order. */
-function GlossLine({ words, lang, selI }: { words: WordInfo[]; lang: 'he' | 'gr'; selI?: number }) {
+function GlossLine({ words, lang, selI }: { words: WordInfo[]; lang: Lang; selI?: number }) {
   const w0 = words[0];
   const ctx = w0 ? cachedContext(lang, w0.ref.book)?.chapters[w0.ref.ch - 1]?.[w0.ref.v - 1] : undefined;
   return (
@@ -580,12 +584,56 @@ export function GreekChapter({ verses, bookId, ch, statuses, words, selKey, selV
               return (
                 <span key={i}>
                   {lead}
-                  <Word w={vw[i]} text={word} on={selKey === `${v.n}:${i}`} statuses={statuses} v={v.n} i={i} />
-                  {trail}{' '}
+                  {/* a button is an atomic inline box, so browsers treat the gap right after it as
+                      a valid wrap point even with no space there — nowrap keeps "word." from
+                      breaking into "word" + a stranded "." at the start of the next line */}
+                  <span style={{ whiteSpace: 'nowrap' }}>
+                    <Word w={vw[i]} text={word} on={selKey === `${v.n}:${i}`} statuses={statuses} v={v.n} i={i} />
+                    {trail}
+                  </span>{' '}
                 </span>
               );
             })}
             {glossLine && selVerse === v.n && <GlossLine words={vw} lang="gr" selI={selKey.startsWith(`${v.n}:`) ? Number(selKey.split(':')[1]) : undefined} />}
+          </span>
+        );
+      })}
+    </p>
+  );
+}
+
+/** Latin, like Greek, is one token per printed word — but here the printed word (with its
+ * punctuation) comes from the Clementine text (v.t) and the analysis (v.w[i]) is a separately
+ * aligned lookup by position, so each word's lead/trail punctuation is split off here rather
+ * than carried on the token itself (PROIEL's tokens have none). */
+export function LatinChapter({ verses, bookId, ch, statuses, words, selKey, selVerse, showNumbers, glossLine }: ChapterProps & { verses: LaVerse[] }) {
+  const byVerse = useMemo(() => {
+    const m = new Map<number, WordInfo[]>();
+    for (const w of words) (m.get(w.ref.v) ?? m.set(w.ref.v, []).get(w.ref.v)!).push(w);
+    return m;
+  }, [words]);
+  return (
+    <p>
+      {verses.map((v) => {
+        const vw = byVerse.get(v.n) ?? [];
+        const printedWords = laContentWords(v.t);
+        return (
+          <span key={v.n} id={`v${v.n}`} data-v={v.n} className={`verse${selVerse === v.n ? ' verse--on' : ''}`}>
+            {showNumbers && <VerseNumber bookId={bookId} ch={ch} v={v.n} on={selVerse === v.n} label={String(v.n)} />}
+            {printedWords.length === 0 && <span className="absent">[verse not in this edition]</span>}
+            {printedWords.map((raw, i) => {
+              const { lead, word, trail } = laSplitPrinted(raw);
+              return (
+                <span key={i}>
+                  {lead}
+                  <span style={{ whiteSpace: 'nowrap' }}>
+                    <Word w={vw[i]} text={word} on={selKey === `${v.n}:${i}`} statuses={statuses} v={v.n} i={i} />
+                    {trail}
+                  </span>{' '}
+                </span>
+              );
+            })}
+            {glossLine && selVerse === v.n && <GlossLine words={vw} lang="la" selI={selKey.startsWith(`${v.n}:`) ? Number(selKey.split(':')[1]) : undefined} />}
           </span>
         );
       })}

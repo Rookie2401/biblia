@@ -146,6 +146,40 @@ export const SEPTUAGINT = [
   ['bel-and-the-dragon-theodotion', 'BelThLxx', 'Bel and the Dragon (Theodotion)', 'Βὴλ καὶ Δράκων (Θεοδοτίων)', 'LxxProphets'],
 ];
 
+// Vulgate New Testament (Clementine text, punctuated per the PROIEL/Syntacticus edition),
+// text+morphology from the PROIEL treebank (CC BY-NC-SA 4.0; syntacticus.org). "Vulg" suffix
+// throughout, matching the "Lxx" convention: a different text of the same book, own id.
+export const VULGATE_NT = [
+  // [PROIEL citation-part book code, OSIS-style id, English, Latin, section]
+  ['MATT', 'MattVulg', 'Matthew', 'Secundum Matthæum', 'VulgGospels'],
+  ['MARK', 'MarkVulg', 'Mark', 'Secundum Marcum', 'VulgGospels'],
+  ['LUKE', 'LukeVulg', 'Luke', 'Secundum Lucam', 'VulgGospels'],
+  ['JOHN', 'JohnVulg', 'John', 'Secundum Joannem', 'VulgGospels'],
+  ['ACTS', 'ActsVulg', 'Acts', 'Actus Apostolorum', 'VulgActs'],
+  ['ROM', 'RomVulg', 'Romans', 'Ad Romanos', 'VulgPaul'],
+  ['1COR', '1CorVulg', '1 Corinthians', 'Ad Corinthios I', 'VulgPaul'],
+  ['2COR', '2CorVulg', '2 Corinthians', 'Ad Corinthios II', 'VulgPaul'],
+  ['GAL', 'GalVulg', 'Galatians', 'Ad Galatas', 'VulgPaul'],
+  ['EPH', 'EphVulg', 'Ephesians', 'Ad Ephesios', 'VulgPaul'],
+  ['PHIL', 'PhilVulg', 'Philippians', 'Ad Philippenses', 'VulgPaul'],
+  ['COL', 'ColVulg', 'Colossians', 'Ad Colossenses', 'VulgPaul'],
+  ['1THESS', '1ThessVulg', '1 Thessalonians', 'Ad Thessalonicenses I', 'VulgPaul'],
+  ['2THESS', '2ThessVulg', '2 Thessalonians', 'Ad Thessalonicenses II', 'VulgPaul'],
+  ['1TIM', '1TimVulg', '1 Timothy', 'Ad Timotheum I', 'VulgPaul'],
+  ['2TIM', '2TimVulg', '2 Timothy', 'Ad Timotheum II', 'VulgPaul'],
+  ['TIT', 'TitusVulg', 'Titus', 'Ad Titum', 'VulgPaul'],
+  ['PHILEM', 'PhlmVulg', 'Philemon', 'Ad Philemonem', 'VulgPaul'],
+  ['HEB', 'HebVulg', 'Hebrews', 'Ad Hebræos', 'VulgGeneral'],
+  ['JAS', 'JasVulg', 'James', 'Jacobi', 'VulgGeneral'],
+  ['1PET', '1PetVulg', '1 Peter', 'Petri I', 'VulgGeneral'],
+  ['2PET', '2PetVulg', '2 Peter', 'Petri II', 'VulgGeneral'],
+  ['1JOHN', '1JohnVulg', '1 John', 'Joannis I', 'VulgGeneral'],
+  ['2JOHN', '2JohnVulg', '2 John', 'Joannis II', 'VulgGeneral'],
+  ['3JOHN', '3JohnVulg', '3 John', 'Joannis III', 'VulgGeneral'],
+  ['JUDE', 'JudeVulg', 'Jude', 'Judæ', 'VulgGeneral'],
+  ['REV', 'RevVulg', 'Revelation', 'Apocalypsis', 'VulgRevelation'],
+];
+
 /** Hebrew points and accents (everything combining), used for consonantal comparison. */
 export const HE_MARKS = /[֑-ֽֿ-ׂׄ-ׇ͏]/g;
 export const heCons = (s) => s.replace(HE_MARKS, '').replace(/[׃׀]/g, '').replace(/[/־ ]/g, '');

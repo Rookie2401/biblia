@@ -1,0 +1,1491 @@
+{
+ "MattVulg": {
+  "verses": 1070,
+  "words": 16543,
+  "aligned": 14583,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 375,
+    "aligned": 347
+   },
+   {
+    "n": 2,
+    "words": 423,
+    "aligned": 386
+   },
+   {
+    "n": 3,
+    "words": 288,
+    "aligned": 243
+   },
+   {
+    "n": 4,
+    "words": 393,
+    "aligned": 323
+   },
+   {
+    "n": 5,
+    "words": 737,
+    "aligned": 643
+   },
+   {
+    "n": 6,
+    "words": 569,
+    "aligned": 482
+   },
+   {
+    "n": 7,
+    "words": 466,
+    "aligned": 407
+   },
+   {
+    "n": 8,
+    "words": 536,
+    "aligned": 494
+   },
+   {
+    "n": 9,
+    "words": 578,
+    "aligned": 497
+   },
+   {
+    "n": 10,
+    "words": 649,
+    "aligned": 549
+   },
+   {
+    "n": 11,
+    "words": 458,
+    "aligned": 403
+   },
+   {
+    "n": 12,
+    "words": 783,
+    "aligned": 718
+   },
+   {
+    "n": 13,
+    "words": 934,
+    "aligned": 856
+   },
+   {
+    "n": 14,
+    "words": 489,
+    "aligned": 424
+   },
+   {
+    "n": 15,
+    "words": 551,
+    "aligned": 493
+   },
+   {
+    "n": 16,
+    "words": 470,
+    "aligned": 397
+   },
+   {
+    "n": 17,
+    "words": 457,
+    "aligned": 379
+   },
+   {
+    "n": 18,
+    "words": 624,
+    "aligned": 568
+   },
+   {
+    "n": 19,
+    "words": 503,
+    "aligned": 451
+   },
+   {
+    "n": 20,
+    "words": 503,
+    "aligned": 475
+   },
+   {
+    "n": 21,
+    "words": 771,
+    "aligned": 700
+   },
+   {
+    "n": 22,
+    "words": 589,
+    "aligned": 508
+   },
+   {
+    "n": 23,
+    "words": 605,
+    "aligned": 486
+   },
+   {
+    "n": 24,
+    "words": 709,
+    "aligned": 582
+   },
+   {
+    "n": 25,
+    "words": 702,
+    "aligned": 652
+   },
+   {
+    "n": 26,
+    "words": 1140,
+    "aligned": 1034
+   },
+   {
+    "n": 27,
+    "words": 940,
+    "aligned": 812
+   },
+   {
+    "n": 28,
+    "words": 301,
+    "aligned": 274
+   }
+  ]
+ },
+ "MarkVulg": {
+  "verses": 677,
+  "words": 10311,
+  "aligned": 8957,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 643,
+    "aligned": 557
+   },
+   {
+    "n": 2,
+    "words": 476,
+    "aligned": 423
+   },
+   {
+    "n": 3,
+    "words": 469,
+    "aligned": 412
+   },
+   {
+    "n": 4,
+    "words": 617,
+    "aligned": 563
+   },
+   {
+    "n": 5,
+    "words": 635,
+    "aligned": 559
+   },
+   {
+    "n": 6,
+    "words": 873,
+    "aligned": 739
+   },
+   {
+    "n": 7,
+    "words": 550,
+    "aligned": 468
+   },
+   {
+    "n": 8,
+    "words": 599,
+    "aligned": 490
+   },
+   {
+    "n": 9,
+    "words": 803,
+    "aligned": 726
+   },
+   {
+    "n": 10,
+    "words": 812,
+    "aligned": 733
+   },
+   {
+    "n": 11,
+    "words": 525,
+    "aligned": 436
+   },
+   {
+    "n": 12,
+    "words": 751,
+    "aligned": 606
+   },
+   {
+    "n": 13,
+    "words": 544,
+    "aligned": 489
+   },
+   {
+    "n": 14,
+    "words": 1111,
+    "aligned": 955
+   },
+   {
+    "n": 15,
+    "words": 623,
+    "aligned": 556
+   },
+   {
+    "n": 16,
+    "words": 280,
+    "aligned": 245
+   }
+  ]
+ },
+ "LukeVulg": {
+  "verses": 1151,
+  "words": 18082,
+  "aligned": 15756,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 1088,
+    "aligned": 992
+   },
+   {
+    "n": 2,
+    "words": 785,
+    "aligned": 717
+   },
+   {
+    "n": 3,
+    "words": 615,
+    "aligned": 545
+   },
+   {
+    "n": 4,
+    "words": 707,
+    "aligned": 595
+   },
+   {
+    "n": 5,
+    "words": 672,
+    "aligned": 618
+   },
+   {
+    "n": 6,
+    "words": 840,
+    "aligned": 681
+   },
+   {
+    "n": 7,
+    "words": 830,
+    "aligned": 737
+   },
+   {
+    "n": 8,
+    "words": 1007,
+    "aligned": 830
+   },
+   {
+    "n": 9,
+    "words": 1074,
+    "aligned": 882
+   },
+   {
+    "n": 10,
+    "words": 714,
+    "aligned": 611
+   },
+   {
+    "n": 11,
+    "words": 918,
+    "aligned": 715
+   },
+   {
+    "n": 12,
+    "words": 965,
+    "aligned": 810
+   },
+   {
+    "n": 13,
+    "words": 608,
+    "aligned": 542
+   },
+   {
+    "n": 14,
+    "words": 566,
+    "aligned": 519
+   },
+   {
+    "n": 15,
+    "words": 522,
+    "aligned": 447
+   },
+   {
+    "n": 16,
+    "words": 548,
+    "aligned": 501
+   },
+   {
+    "n": 17,
+    "words": 547,
+    "aligned": 470
+   },
+   {
+    "n": 18,
+    "words": 611,
+    "aligned": 569
+   },
+   {
+    "n": 19,
+    "words": 701,
+    "aligned": 637
+   },
+   {
+    "n": 20,
+    "words": 659,
+    "aligned": 555
+   },
+   {
+    "n": 21,
+    "words": 530,
+    "aligned": 465
+   },
+   {
+    "n": 22,
+    "words": 1008,
+    "aligned": 906
+   },
+   {
+    "n": 23,
+    "words": 802,
+    "aligned": 719
+   },
+   {
+    "n": 24,
+    "words": 765,
+    "aligned": 693
+   }
+  ]
+ },
+ "JohnVulg": {
+  "verses": 879,
+  "words": 14092,
+  "aligned": 12479,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 771,
+    "aligned": 695
+   },
+   {
+    "n": 2,
+    "words": 376,
+    "aligned": 342
+   },
+   {
+    "n": 3,
+    "words": 581,
+    "aligned": 493
+   },
+   {
+    "n": 4,
+    "words": 840,
+    "aligned": 748
+   },
+   {
+    "n": 5,
+    "words": 751,
+    "aligned": 625
+   },
+   {
+    "n": 6,
+    "words": 1110,
+    "aligned": 1015
+   },
+   {
+    "n": 7,
+    "words": 780,
+    "aligned": 657
+   },
+   {
+    "n": 8,
+    "words": 971,
+    "aligned": 846
+   },
+   {
+    "n": 9,
+    "words": 636,
+    "aligned": 486
+   },
+   {
+    "n": 10,
+    "words": 616,
+    "aligned": 555
+   },
+   {
+    "n": 11,
+    "words": 845,
+    "aligned": 726
+   },
+   {
+    "n": 12,
+    "words": 793,
+    "aligned": 721
+   },
+   {
+    "n": 13,
+    "words": 606,
+    "aligned": 521
+   },
+   {
+    "n": 14,
+    "words": 525,
+    "aligned": 493
+   },
+   {
+    "n": 15,
+    "words": 450,
+    "aligned": 419
+   },
+   {
+    "n": 16,
+    "words": 551,
+    "aligned": 485
+   },
+   {
+    "n": 17,
+    "words": 467,
+    "aligned": 437
+   },
+   {
+    "n": 18,
+    "words": 694,
+    "aligned": 632
+   },
+   {
+    "n": 19,
+    "words": 705,
+    "aligned": 634
+   },
+   {
+    "n": 20,
+    "words": 538,
+    "aligned": 504
+   },
+   {
+    "n": 21,
+    "words": 486,
+    "aligned": 445
+   }
+  ]
+ },
+ "ActsVulg": {
+  "verses": 1004,
+  "words": 16779,
+  "aligned": 13750,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 461,
+    "aligned": 373
+   },
+   {
+    "n": 2,
+    "words": 746,
+    "aligned": 596
+   },
+   {
+    "n": 3,
+    "words": 443,
+    "aligned": 387
+   },
+   {
+    "n": 4,
+    "words": 620,
+    "aligned": 538
+   },
+   {
+    "n": 5,
+    "words": 691,
+    "aligned": 613
+   },
+   {
+    "n": 6,
+    "words": 244,
+    "aligned": 217
+   },
+   {
+    "n": 7,
+    "words": 1027,
+    "aligned": 904
+   },
+   {
+    "n": 8,
+    "words": 620,
+    "aligned": 528
+   },
+   {
+    "n": 9,
+    "words": 757,
+    "aligned": 611
+   },
+   {
+    "n": 10,
+    "words": 787,
+    "aligned": 681
+   },
+   {
+    "n": 11,
+    "words": 479,
+    "aligned": 381
+   },
+   {
+    "n": 12,
+    "words": 439,
+    "aligned": 375
+   },
+   {
+    "n": 13,
+    "words": 847,
+    "aligned": 734
+   },
+   {
+    "n": 14,
+    "words": 424,
+    "aligned": 378
+   },
+   {
+    "n": 15,
+    "words": 639,
+    "aligned": 513
+   },
+   {
+    "n": 16,
+    "words": 658,
+    "aligned": 542
+   },
+   {
+    "n": 17,
+    "words": 603,
+    "aligned": 503
+   },
+   {
+    "n": 18,
+    "words": 446,
+    "aligned": 370
+   },
+   {
+    "n": 19,
+    "words": 676,
+    "aligned": 549
+   },
+   {
+    "n": 20,
+    "words": 616,
+    "aligned": 514
+   },
+   {
+    "n": 21,
+    "words": 702,
+    "aligned": 535
+   },
+   {
+    "n": 22,
+    "words": 528,
+    "aligned": 457
+   },
+   {
+    "n": 23,
+    "words": 614,
+    "aligned": 449
+   },
+   {
+    "n": 24,
+    "words": 446,
+    "aligned": 315
+   },
+   {
+    "n": 25,
+    "words": 479,
+    "aligned": 343
+   },
+   {
+    "n": 26,
+    "words": 547,
+    "aligned": 424
+   },
+   {
+    "n": 27,
+    "words": 690,
+    "aligned": 495
+   },
+   {
+    "n": 28,
+    "words": 550,
+    "aligned": 425
+   }
+  ]
+ },
+ "RomVulg": {
+  "verses": 433,
+  "words": 6607,
+  "aligned": 5803,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 523,
+    "aligned": 476
+   },
+   {
+    "n": 2,
+    "words": 414,
+    "aligned": 347
+   },
+   {
+    "n": 3,
+    "words": 396,
+    "aligned": 361
+   },
+   {
+    "n": 4,
+    "words": 391,
+    "aligned": 318
+   },
+   {
+    "n": 5,
+    "words": 379,
+    "aligned": 351
+   },
+   {
+    "n": 6,
+    "words": 343,
+    "aligned": 313
+   },
+   {
+    "n": 7,
+    "words": 422,
+    "aligned": 402
+   },
+   {
+    "n": 8,
+    "words": 618,
+    "aligned": 542
+   },
+   {
+    "n": 9,
+    "words": 488,
+    "aligned": 414
+   },
+   {
+    "n": 10,
+    "words": 314,
+    "aligned": 277
+   },
+   {
+    "n": 11,
+    "words": 548,
+    "aligned": 475
+   },
+   {
+    "n": 12,
+    "words": 273,
+    "aligned": 252
+   },
+   {
+    "n": 13,
+    "words": 242,
+    "aligned": 206
+   },
+   {
+    "n": 14,
+    "words": 360,
+    "aligned": 295
+   },
+   {
+    "n": 15,
+    "words": 504,
+    "aligned": 447
+   },
+   {
+    "n": 16,
+    "words": 392,
+    "aligned": 327
+   }
+  ]
+ },
+ "1CorVulg": {
+  "verses": 437,
+  "words": 6445,
+  "aligned": 5579,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 463,
+    "aligned": 395
+   },
+   {
+    "n": 2,
+    "words": 261,
+    "aligned": 189
+   },
+   {
+    "n": 3,
+    "words": 325,
+    "aligned": 298
+   },
+   {
+    "n": 4,
+    "words": 344,
+    "aligned": 320
+   },
+   {
+    "n": 5,
+    "words": 213,
+    "aligned": 192
+   },
+   {
+    "n": 6,
+    "words": 308,
+    "aligned": 280
+   },
+   {
+    "n": 7,
+    "words": 666,
+    "aligned": 597
+   },
+   {
+    "n": 8,
+    "words": 213,
+    "aligned": 171
+   },
+   {
+    "n": 9,
+    "words": 462,
+    "aligned": 415
+   },
+   {
+    "n": 10,
+    "words": 439,
+    "aligned": 387
+   },
+   {
+    "n": 11,
+    "words": 479,
+    "aligned": 395
+   },
+   {
+    "n": 12,
+    "words": 414,
+    "aligned": 381
+   },
+   {
+    "n": 13,
+    "words": 196,
+    "aligned": 145
+   },
+   {
+    "n": 14,
+    "words": 567,
+    "aligned": 467
+   },
+   {
+    "n": 15,
+    "words": 775,
+    "aligned": 694
+   },
+   {
+    "n": 16,
+    "words": 320,
+    "aligned": 253
+   }
+  ]
+ },
+ "2CorVulg": {
+  "verses": 255,
+  "words": 4299,
+  "aligned": 3667,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 454,
+    "aligned": 400
+   },
+   {
+    "n": 2,
+    "words": 281,
+    "aligned": 264
+   },
+   {
+    "n": 3,
+    "words": 274,
+    "aligned": 250
+   },
+   {
+    "n": 4,
+    "words": 296,
+    "aligned": 241
+   },
+   {
+    "n": 5,
+    "words": 330,
+    "aligned": 250
+   },
+   {
+    "n": 6,
+    "words": 266,
+    "aligned": 248
+   },
+   {
+    "n": 7,
+    "words": 320,
+    "aligned": 261
+   },
+   {
+    "n": 8,
+    "words": 391,
+    "aligned": 356
+   },
+   {
+    "n": 9,
+    "words": 261,
+    "aligned": 207
+   },
+   {
+    "n": 10,
+    "words": 300,
+    "aligned": 254
+   },
+   {
+    "n": 11,
+    "words": 494,
+    "aligned": 438
+   },
+   {
+    "n": 12,
+    "words": 405,
+    "aligned": 337
+   },
+   {
+    "n": 13,
+    "words": 227,
+    "aligned": 161
+   }
+  ]
+ },
+ "GalVulg": {
+  "verses": 149,
+  "words": 2130,
+  "aligned": 1541,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 329,
+    "aligned": 265
+   },
+   {
+    "n": 2,
+    "words": 391,
+    "aligned": 232
+   },
+   {
+    "n": 3,
+    "words": 431,
+    "aligned": 334
+   },
+   {
+    "n": 4,
+    "words": 433,
+    "aligned": 366
+   },
+   {
+    "n": 5,
+    "words": 298,
+    "aligned": 195
+   },
+   {
+    "n": 6,
+    "words": 248,
+    "aligned": 149
+   }
+  ]
+ },
+ "EphVulg": {
+  "verses": 155,
+  "words": 2150,
+  "aligned": 1598,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 355,
+    "aligned": 273
+   },
+   {
+    "n": 2,
+    "words": 326,
+    "aligned": 281
+   },
+   {
+    "n": 3,
+    "words": 278,
+    "aligned": 177
+   },
+   {
+    "n": 4,
+    "words": 428,
+    "aligned": 282
+   },
+   {
+    "n": 5,
+    "words": 416,
+    "aligned": 283
+   },
+   {
+    "n": 6,
+    "words": 347,
+    "aligned": 302
+   }
+  ]
+ },
+ "PhilVulg": {
+  "verses": 104,
+  "words": 1558,
+  "aligned": 1171,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 458,
+    "aligned": 339
+   },
+   {
+    "n": 2,
+    "words": 441,
+    "aligned": 365
+   },
+   {
+    "n": 3,
+    "words": 330,
+    "aligned": 226
+   },
+   {
+    "n": 4,
+    "words": 329,
+    "aligned": 241
+   }
+  ]
+ },
+ "ColVulg": {
+  "verses": 95,
+  "words": 1464,
+  "aligned": 607,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 481,
+    "aligned": 372
+   },
+   {
+    "n": 2,
+    "words": 354,
+    "aligned": 235
+   },
+   {
+    "n": 3,
+    "words": 350,
+    "aligned": 0
+   },
+   {
+    "n": 4,
+    "words": 279,
+    "aligned": 0
+   }
+  ]
+ },
+ "1ThessVulg": {
+  "verses": 89,
+  "words": 1404,
+  "aligned": 1268,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 194,
+    "aligned": 182
+   },
+   {
+    "n": 2,
+    "words": 368,
+    "aligned": 329
+   },
+   {
+    "n": 3,
+    "words": 230,
+    "aligned": 213
+   },
+   {
+    "n": 4,
+    "words": 297,
+    "aligned": 256
+   },
+   {
+    "n": 5,
+    "words": 315,
+    "aligned": 288
+   }
+  ]
+ },
+ "2ThessVulg": {
+  "verses": 47,
+  "words": 751,
+  "aligned": 652,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 219,
+    "aligned": 178
+   },
+   {
+    "n": 2,
+    "words": 277,
+    "aligned": 249
+   },
+   {
+    "n": 3,
+    "words": 255,
+    "aligned": 225
+   }
+  ]
+ },
+ "1TimVulg": {
+  "verses": 113,
+  "words": 1591,
+  "aligned": 14,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 307,
+    "aligned": 0
+   },
+   {
+    "n": 2,
+    "words": 192,
+    "aligned": 0
+   },
+   {
+    "n": 3,
+    "words": 215,
+    "aligned": 0
+   },
+   {
+    "n": 4,
+    "words": 216,
+    "aligned": 2
+   },
+   {
+    "n": 5,
+    "words": 331,
+    "aligned": 0
+   },
+   {
+    "n": 6,
+    "words": 330,
+    "aligned": 12
+   }
+  ]
+ },
+ "2TimVulg": {
+  "verses": 83,
+  "words": 1170,
+  "aligned": 233,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 305,
+    "aligned": 5
+   },
+   {
+    "n": 2,
+    "words": 354,
+    "aligned": 21
+   },
+   {
+    "n": 3,
+    "words": 225,
+    "aligned": 10
+   },
+   {
+    "n": 4,
+    "words": 286,
+    "aligned": 197
+   }
+  ]
+ },
+ "TitusVulg": {
+  "verses": 46,
+  "words": 663,
+  "aligned": 385,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 255,
+    "aligned": 213
+   },
+   {
+    "n": 2,
+    "words": 189,
+    "aligned": 0
+   },
+   {
+    "n": 3,
+    "words": 219,
+    "aligned": 172
+   }
+  ]
+ },
+ "PhlmVulg": {
+  "verses": 25,
+  "words": 322,
+  "aligned": 280,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 322,
+    "aligned": 280
+   }
+  ]
+ },
+ "HebVulg": {
+  "verses": 303,
+  "words": 4598,
+  "aligned": 103,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 216,
+    "aligned": 10
+   },
+   {
+    "n": 2,
+    "words": 313,
+    "aligned": 16
+   },
+   {
+    "n": 3,
+    "words": 268,
+    "aligned": 0
+   },
+   {
+    "n": 4,
+    "words": 274,
+    "aligned": 8
+   },
+   {
+    "n": 5,
+    "words": 229,
+    "aligned": 11
+   },
+   {
+    "n": 6,
+    "words": 275,
+    "aligned": 0
+   },
+   {
+    "n": 7,
+    "words": 435,
+    "aligned": 20
+   },
+   {
+    "n": 8,
+    "words": 250,
+    "aligned": 0
+   },
+   {
+    "n": 9,
+    "words": 447,
+    "aligned": 0
+   },
+   {
+    "n": 10,
+    "words": 505,
+    "aligned": 18
+   },
+   {
+    "n": 11,
+    "words": 592,
+    "aligned": 14
+   },
+   {
+    "n": 12,
+    "words": 458,
+    "aligned": 0
+   },
+   {
+    "n": 13,
+    "words": 336,
+    "aligned": 6
+   }
+  ]
+ },
+ "JasVulg": {
+  "verses": 108,
+  "words": 1650,
+  "aligned": 25,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 389,
+    "aligned": 0
+   },
+   {
+    "n": 2,
+    "words": 397,
+    "aligned": 12
+   },
+   {
+    "n": 3,
+    "words": 279,
+    "aligned": 4
+   },
+   {
+    "n": 4,
+    "words": 262,
+    "aligned": 5
+   },
+   {
+    "n": 5,
+    "words": 323,
+    "aligned": 4
+   }
+  ]
+ },
+ "1PetVulg": {
+  "verses": 105,
+  "words": 1661,
+  "aligned": 24,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 398,
+    "aligned": 0
+   },
+   {
+    "n": 2,
+    "words": 387,
+    "aligned": 8
+   },
+   {
+    "n": 3,
+    "words": 372,
+    "aligned": 12
+   },
+   {
+    "n": 4,
+    "words": 295,
+    "aligned": 0
+   },
+   {
+    "n": 5,
+    "words": 209,
+    "aligned": 4
+   }
+  ]
+ },
+ "2PetVulg": {
+  "verses": 61,
+  "words": 1053,
+  "aligned": 26,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 361,
+    "aligned": 0
+   },
+   {
+    "n": 2,
+    "words": 373,
+    "aligned": 16
+   },
+   {
+    "n": 3,
+    "words": 319,
+    "aligned": 10
+   }
+  ]
+ },
+ "1JohnVulg": {
+  "verses": 105,
+  "words": 1886,
+  "aligned": 30,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 187,
+    "aligned": 7
+   },
+   {
+    "n": 2,
+    "words": 517,
+    "aligned": 11
+   },
+   {
+    "n": 3,
+    "words": 419,
+    "aligned": 0
+   },
+   {
+    "n": 4,
+    "words": 384,
+    "aligned": 6
+   },
+   {
+    "n": 5,
+    "words": 379,
+    "aligned": 6
+   }
+  ]
+ },
+ "2JohnVulg": {
+  "verses": 13,
+  "words": 218,
+  "aligned": 13,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 218,
+    "aligned": 13
+   }
+  ]
+ },
+ "3JohnVulg": {
+  "verses": 14,
+  "words": 211,
+  "aligned": 17,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 211,
+    "aligned": 17
+   }
+  ]
+ },
+ "JudeVulg": {
+  "verses": 25,
+  "words": 442,
+  "aligned": 243,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 442,
+    "aligned": 243
+   }
+  ]
+ },
+ "RevVulg": {
+  "verses": 405,
+  "words": 8483,
+  "aligned": 6879,
+  "chapters": [
+   {
+    "n": 1,
+    "words": 414,
+    "aligned": 346
+   },
+   {
+    "n": 2,
+    "words": 532,
+    "aligned": 471
+   },
+   {
+    "n": 3,
+    "words": 447,
+    "aligned": 390
+   },
+   {
+    "n": 4,
+    "words": 254,
+    "aligned": 191
+   },
+   {
+    "n": 5,
+    "words": 300,
+    "aligned": 229
+   },
+   {
+    "n": 6,
+    "words": 365,
+    "aligned": 315
+   },
+   {
+    "n": 7,
+    "words": 348,
+    "aligned": 230
+   },
+   {
+    "n": 8,
+    "words": 294,
+    "aligned": 253
+   },
+   {
+    "n": 9,
+    "words": 430,
+    "aligned": 333
+   },
+   {
+    "n": 10,
+    "words": 256,
+    "aligned": 182
+   },
+   {
+    "n": 11,
+    "words": 429,
+    "aligned": 349
+   },
+   {
+    "n": 12,
+    "words": 372,
+    "aligned": 311
+   },
+   {
+    "n": 13,
+    "words": 375,
+    "aligned": 312
+   },
+   {
+    "n": 14,
+    "words": 467,
+    "aligned": 385
+   },
+   {
+    "n": 15,
+    "words": 177,
+    "aligned": 144
+   },
+   {
+    "n": 16,
+    "words": 397,
+    "aligned": 310
+   },
+   {
+    "n": 17,
+    "words": 371,
+    "aligned": 329
+   },
+   {
+    "n": 18,
+    "words": 561,
+    "aligned": 458
+   },
+   {
+    "n": 19,
+    "words": 448,
+    "aligned": 387
+   },
+   {
+    "n": 20,
+    "words": 341,
+    "aligned": 272
+   },
+   {
+    "n": 21,
+    "words": 519,
+    "aligned": 378
+   },
+   {
+    "n": 22,
+    "words": 386,
+    "aligned": 304
+   }
+  ]
+ }
+}

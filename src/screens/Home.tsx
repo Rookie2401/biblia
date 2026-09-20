@@ -13,6 +13,7 @@ import type { Lang, Position } from '../model/types.ts';
 import { CANON, refLabel, type BookInfo } from '../text/canon.ts';
 import { greekNumeral } from '../text/greek.ts';
 import { hebrewNumeral } from '../text/hebrew.ts';
+import { romanNumeral } from '../text/latin.ts';
 import { getSettings } from '../state/settings.ts';
 
 interface Division {
@@ -69,6 +70,20 @@ export const TREE: Testament[] = [
       { id: 'LxxHistory', title: 'History', native: 'Ἱστορικά', sections: ['LxxHistory'] },
       { id: 'LxxPoetry', title: 'Poetry & Wisdom', native: 'Ποιητικά', sections: ['LxxPoetry'] },
       { id: 'LxxProphets', title: 'Prophets', native: 'Προφῆται', sections: ['LxxProphets'] },
+    ],
+  },
+  {
+    id: 'vulgate',
+    title: 'Vulgate',
+    native: 'Biblia Sacra Vulgata',
+    lang: 'la',
+    group: 'other',
+    divisions: [
+      { id: 'VulgGospels', title: 'Gospels', native: 'Evangelia', sections: ['VulgGospels'] },
+      { id: 'VulgActs', title: 'Acts', native: 'Actus Apostolorum', sections: ['VulgActs'] },
+      { id: 'VulgPaul', title: 'Letters of Paul', native: 'Epistolæ Paulinæ', sections: ['VulgPaul'] },
+      { id: 'VulgGeneral', title: 'General letters', native: 'Epistolæ Catholicæ', sections: ['VulgGeneral'] },
+      { id: 'VulgRevelation', title: 'Revelation', native: 'Apocalypsis', sections: ['VulgRevelation'] },
     ],
   },
 ];
@@ -150,7 +165,7 @@ export default function Home() {
                       return (
                         <Link key={n} to={`/read/${b.id}/${n}`} className={`entry entry--chapter${isDone ? ' entry--done' : ''}${p?.ch === n ? ' entry--at' : ''}`} role="listitem" aria-label={`${b.en} ${n}${isDone ? ', read' : ''}`}>
                           <span className="entry__num">Chapter {n}</span>
-                          <span className={`entry__native ${b.lang}`} lang={b.lang === 'he' ? 'he' : 'el'}>{b.lang === 'he' ? `פֶּרֶק ${hebrewNumeral(n)}` : `Κεφάλαιον ${greekNumeral(n)}`}</span>
+                          <span className={`entry__native ${b.lang}`} lang={b.lang === 'he' ? 'he' : b.lang === 'la' ? 'la' : 'el'}>{b.lang === 'he' ? `פֶּרֶק ${hebrewNumeral(n)}` : b.lang === 'la' ? `Caput ${romanNumeral(n)}` : `Κεφάλαιον ${greekNumeral(n)}`}</span>
                           <span className="entry__preview">{count} verses{isDone ? ' · read' : p?.ch === n ? ' · reading' : ''}</span>
                         </Link>
                       );

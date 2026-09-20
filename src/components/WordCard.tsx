@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { contextGloss, loadContext } from '../data/context.ts';
 import { concordance } from '../data/lexicon.ts';
 import { db } from '../db/db.ts';
-import type { GrEntry, HeEntry, Lexeme, VocabStatus, WordRef } from '../model/types.ts';
+import type { GrEntry, HeEntry, LaEntry, Lexeme, VocabStatus, WordRef } from '../model/types.ts';
 import { CANON, refLabel } from '../text/canon.ts';
 import { toNiqqud } from '../text/hebrew.ts';
 import { entryLemma, loadEntry, plainForm, seedFor, type WordInfo } from '../state/wordinfo.ts';
@@ -28,7 +28,7 @@ export interface WordCardProps {
   onOpenVerse: () => void;
   onClose: () => void;
   /** open a lexeme by lexicon id (root family, LXX links) */
-  onOpenLexeme: (lang: 'he' | 'gr', id: string) => void;
+  onOpenLexeme: (lang: 'he' | 'gr' | 'la', id: string) => void;
   onGoTo: (ref: WordRef) => void;
   /** the card is on the word page (no reading context) */
   standalone?: boolean;
@@ -38,7 +38,7 @@ export function WordCard(p: WordCardProps) {
   const { info } = p;
   const nav = useNavigate();
   const [level, setLevel] = useState<1 | 2 | 3>(p.standalone ? 3 : 1);
-  const [entry, setEntry] = useState<HeEntry | GrEntry | null | undefined>(undefined);
+  const [entry, setEntry] = useState<HeEntry | GrEntry | LaEntry | null | undefined>(undefined);
   const [lex, setLex] = useState<Lexeme | null>(null);
   const [history, setHistory] = useState(false);
   const [conc, setConc] = useState<number[][] | null>(null);
@@ -124,15 +124,22 @@ export function WordCard(p: WordCardProps) {
 
   const he = info.lang === 'he' ? (entry as HeEntry | null | undefined) : undefined;
   const gr = info.lang === 'gr' ? (entry as GrEntry | null | undefined) : undefined;
+  const la = info.lang === 'la' ? (entry as LaEntry | null | undefined) : undefined;
   const gloss = entry?.g ?? '';
   const glossSource = GLOSS_SOURCE[entry?.gs ?? ''] ?? '';
   const prefixForms = info.he?.segments.filter((s) => ['conjunction', 'preposition', 'article', 'relative', 'interrogative'].includes(s.kind)).map((s) => toNiqqud(s.form)) ?? [];
-  const morphLine = info.he ? heMorphLine(info, prefixForms) : info.gr ? [info.gr.morph.pos, info.gr.morph.features].filter(Boolean).join(' · ') : '';
+  const morphLine = info.he ? heMorphLine(info, prefixForms) : info.gr ? [info.gr.morph.pos, info.gr.morph.features].filter(Boolean).join(' · ') : info.la ? [info.la.morph.pos, info.la.morph.features].filter(Boolean).join(' · ') : '';
   const reading = info.lang === 'he' ? toNiqqud(info.printed) : '';
-  const provenance = info.lang === 'he' ? `OSHB morphology${he?.id ? ` · Strong's H${he.id}` : ''}${he?.bdb ? ' · BDB' : ''}` : `MorphGNT (SBLGNT)${gr?.id ? ` · Strong's ${gr.id}` : ''}${gr?.as ? ' · Abbott-Smith' : ''}`;
+  const provenance =
+    info.lang === 'he'
+      ? `OSHB morphology${he?.id ? ` · Strong's H${he.id}` : ''}${he?.bdb ? ' · BDB' : ''}`
+      : info.lang === 'la'
+        ? `PROIEL / Syntacticus morphology${la?.ls ? ' · Lewis & Short' : ''}`
+        : `MorphGNT (SBLGNT)${gr?.id ? ` · Strong's ${gr.id}` : ''}${gr?.as ? ' · Abbott-Smith' : ''}`;
   const prefixOnly = info.he?.prefixOnly;
   const lemmaShown = entry ? entryLemma(info.lang, entry) : '';
   const concShown = conc ? (concAll ? conc : conc.slice(0, 25)) : [];
+  const langClass = info.lang === 'he' ? 'he' : info.lang === 'la' ? 'la' : 'gr';
 
   return (
     <div>
@@ -140,7 +147,7 @@ export function WordCard(p: WordCardProps) {
         <span className="label">{p.standalone || !info.ref.book ? 'Word' : `Word · ${refLabel(info.ref.book, info.ref.ch, info.ref.v)}`}</span>
         <button className="iconbtn" onClick={p.onClose} aria-label="Close">{I.close}</button>
       </div>
-      <div className={info.lang === 'he' ? 'card__surface' : 'card__surface card__surface--gr'}>{info.printed}</div>
+      <div className={info.lang === 'he' ? 'card__surface' : `card__surface card__surface--${info.lang}`}>{info.printed}</div>
       {reading && reading !== info.printed && <div className="card__vocalized" title="Reading without the accents">{reading}</div>}
       {ctx !== undefined && !p.standalone && (
         <div className="card__ctx">
@@ -166,7 +173,7 @@ export function WordCard(p: WordCardProps) {
       {entry && (
         <div className="card__line">
           <span className="k">Lemma</span>
-          <span className={info.lang === 'he' ? 'he' : 'gr'}>{lemmaShown}</span>
+          <span className={langClass}>{lemmaShown}</span>
           {entry.x && <span className="soft" style={{ fontStyle: 'italic' }}>{entry.x}</span>}
           {he?.pos && <span className="faint">{he.pos}</span>}
           {gr?.id && <span className="faint">{gr.id}</span>}
@@ -195,7 +202,7 @@ export function WordCard(p: WordCardProps) {
               setLexemeStatus(lex.key, s).catch(() => setStatusErr('Could not update the status (offline storage problem). Try again.'));
             }}
           />
-          {entry?.n ? <span className="status__form" style={{ marginTop: '0.5rem' }}>· {entry.n}× in the {info.lang === 'he' ? 'Tanakh' : 'New Testament and Septuagint'}</span> : null}
+          {entry?.n ? <span className="status__form" style={{ marginTop: '0.5rem' }}>· {entry.n}× in the {info.lang === 'he' ? 'Tanakh' : info.lang === 'la' ? 'Vulgate New Testament' : 'New Testament and Septuagint'}</span> : null}
         </div>
       )}
       {statusErr && <div className="card__err" role="alert">{statusErr}</div>}
@@ -226,8 +233,9 @@ export function WordCard(p: WordCardProps) {
           <span className="label">How the form is built</span>
           {info.he && <Morphemes segments={info.he.segments} />}
           {info.gr && <ParseChips items={grChips(info)} />}
+          {info.la && <ParseChips items={laChips(info)} />}
           {(() => {
-            const lines = info.he?.lines ?? info.gr?.lines ?? [];
+            const lines = info.he?.lines ?? info.gr?.lines ?? info.la?.lines ?? [];
             return lines.length ? (
               <div className="encoding">
                 {lines.map((l) => (
@@ -256,6 +264,11 @@ export function WordCard(p: WordCardProps) {
           {gr?.as && (
             <div className="card__section">
               <DictEntry html={gr.as} title="Abbott-Smith" collapsible={!p.standalone} onHebrew={(n) => p.onOpenLexeme('he', n)} />
+            </div>
+          )}
+          {la?.ls && (
+            <div className="card__section">
+              <DictEntry html={la.ls} title="Lewis & Short" collapsible={!p.standalone} onHebrew={() => {}} />
             </div>
           )}
           {entry?.sd && (
@@ -340,6 +353,20 @@ function heMorphLine(info: WordInfo, prefixForms: string[]): string {
 
 function grChips(info: WordInfo): { form: string; label: string }[] {
   const m = info.gr!.morph;
+  const out: { form: string; label: string }[] = [{ form: info.printed, label: m.pos }];
+  if (m.tense) out.push({ form: m.tense, label: 'tense' });
+  if (m.voice) out.push({ form: m.voice, label: 'voice' });
+  if (m.mood) out.push({ form: m.mood, label: 'mood' });
+  if (m.person) out.push({ form: m.person, label: 'person' });
+  if (m.case) out.push({ form: m.case, label: 'case' });
+  if (m.number) out.push({ form: m.number, label: 'number' });
+  if (m.gender) out.push({ form: m.gender, label: 'gender' });
+  if (m.degree) out.push({ form: m.degree, label: 'degree' });
+  return out;
+}
+
+function laChips(info: WordInfo): { form: string; label: string }[] {
+  const m = info.la!.morph;
   const out: { form: string; label: string }[] = [{ form: info.printed, label: m.pos }];
   if (m.tense) out.push({ form: m.tense, label: 'tense' });
   if (m.voice) out.push({ form: m.voice, label: 'voice' });

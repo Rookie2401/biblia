@@ -11,7 +11,7 @@ import { ensureGlossIndex, glossIndex, indexLemma, type WordInfo } from '../stat
 
 export default function Word() {
   const { lang: langS = '', id: idS = '' } = useParams();
-  const lang: Lang | null = langS === 'he' || langS === 'gr' ? langS : null;
+  const lang: Lang | null = langS === 'he' || langS === 'gr' || langS === 'la' ? langS : null;
   const id = decodeURIComponent(idS);
   const nav = useNavigate();
   const [lemma, setLemma] = useState('');
@@ -56,12 +56,13 @@ export default function Word() {
       </div>
     );
   }
+  const langName = lang === 'he' ? 'Hebrew' : lang === 'la' ? 'Latin' : 'Greek';
   if (known === false && glossIndex(lang)) {
     return (
       <div>
-        <Topbar title={lang === 'he' ? 'Hebrew word' : 'Greek word'} left={<BackLink to="/search" label="Search" />} />
+        <Topbar title={`${langName} word`} left={<BackLink to="/search" label="Search" />} />
         <div className="page page--narrow notfound route-fade">
-          <h2>No {lang === 'he' ? 'Hebrew' : 'Greek'} entry “{id}”</h2>
+          <h2>No {langName} entry “{id}”</h2>
           <p className="faint">The lexicon has no entry with that id.</p>
           <div className="card__actions" style={{ justifyContent: 'center' }}>
             <Link className="btn" to={`/search?q=${encodeURIComponent(id)}`}>Search for it</Link>
@@ -74,7 +75,7 @@ export default function Word() {
   const info: WordInfo = { ref: { book: '', ch: 0, v: 0, i: 0 }, lang, printed: lemma || id, form: lemma || id, lexId: id, key: lexemeKey(lang, id) };
   return (
     <div>
-      <Topbar title={lang === 'he' ? 'Hebrew word' : 'Greek word'} left={<BackLink to="/search" label="Search" />} />
+      <Topbar title={`${langName} word`} left={<BackLink to="/search" label="Search" />} />
       <div className="page page--narrow route-fade">
         {indexError && (
           <div className="card__text" role="alert" style={{ marginBottom: '0.8rem' }}>

@@ -5,7 +5,7 @@
 // `assertSafe` re-validates the output and throws, so a build can never ship unapproved markup.
 
 export const ALLOWED_TAGS = { b: [], i: [], em: [], span: ['class'], div: ['class'], p: [], a: ['class', 'data-ref', 'data-he', 'data-bdb'], br: [], table: [], tr: [], td: [], sup: [], sub: [] };
-export const ALLOWED_CLASSES = new Set(['he-inline', 'gr', 'sense', 'n', 'lxx', 'form', 'etym', 'note', 'pos', 'stem']);
+export const ALLOWED_CLASSES = new Set(['he-inline', 'gr', 'la', 'sense', 'n', 'lxx', 'form', 'etym', 'note', 'pos', 'stem']);
 const VOID = new Set(['br']);
 const DROP_WITH_CONTENT = new Set(['script', 'style', 'iframe', 'svg', 'object', 'embed', 'noscript', 'template', 'math', 'textarea', 'select', 'option']);
 const ATTR_VALUE = {

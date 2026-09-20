@@ -32,6 +32,11 @@ export const SECTIONS: { id: string; title: string; native: string; lang: Lang }
   { id: 'LxxHistory', title: 'History', native: 'Ἱστορικά', lang: 'gr' },
   { id: 'LxxPoetry', title: 'Poetry & Wisdom', native: 'Ποιητικά', lang: 'gr' },
   { id: 'LxxProphets', title: 'Prophets', native: 'Προφῆται', lang: 'gr' },
+  { id: 'VulgGospels', title: 'Gospels', native: 'Evangelia', lang: 'la' },
+  { id: 'VulgActs', title: 'Acts', native: 'Actus Apostolorum', lang: 'la' },
+  { id: 'VulgPaul', title: "Letters of Paul", native: 'Epistolæ Paulinæ', lang: 'la' },
+  { id: 'VulgGeneral', title: 'General letters', native: 'Epistolæ Catholicæ', lang: 'la' },
+  { id: 'VulgRevelation', title: 'Revelation', native: 'Apocalypsis', lang: 'la' },
 ];
 
 export function book(id: string): BookInfo | undefined {

@@ -4,27 +4,30 @@
  * verses come from the lexicon index (one small file per language) rather than the shards.
  */
 import { memoAsyncKeyed } from '../data/asyncCache.ts';
-import { type AnyBook, isHeBook } from '../data/books.ts';
-import { grEntry, heEntry, heLemmaId, searchIndex, type IndexRow } from '../data/lexicon.ts';
-import { lexemeKey, type GrEntry, type GrTok, type HeEntry, type HeTok, type HeVerse, type Lang, type WordRef } from '../model/types.ts';
+import { type AnyBook, isHeBook, isLaBook } from '../data/books.ts';
+import { grEntry, heEntry, heLemmaId, laEntry, searchIndex, type IndexRow } from '../data/lexicon.ts';
+import { lexemeKey, type GrEntry, type GrTok, type HeEntry, type HeTok, type HeVerse, type LaEntry, type LaTok, type LaVerse, type Lang, type WordRef } from '../model/types.ts';
 import * as GR from '../morph/greek.ts';
 import * as HE from '../morph/hebrew.ts';
+import * as LA from '../morph/latin.ts';
 import { splitPrinted, greekPlain } from '../text/greek.ts';
 import { contentWords, toNiqqud } from '../text/hebrew.ts';
+import { contentWords as laContentWords, splitPrinted as laSplitPrinted } from '../text/latin.ts';
 import type { LexemeSeed } from './vocab.ts';
 
 export interface WordInfo {
   ref: WordRef;
   lang: Lang;
-  /** the word as printed (Hebrew: pointed and accented; Greek: without its punctuation) */
+  /** the word as printed (Hebrew: pointed and accented; Greek/Latin: without its punctuation) */
   printed: string;
-  /** the form recorded under "forms seen" (Hebrew: niqqud only; Greek: as printed) */
+  /** the form recorded under "forms seen" (Hebrew: niqqud only; Greek/Latin: as printed) */
   form: string;
-  /** lexicon id — Hebrew lemma id ("1254 a") or Greek lemma */
+  /** lexicon id — Hebrew lemma id ("1254 a"), Greek lemma, or Latin lemma */
   lexId?: string;
   key?: string;
   he?: { tok: HeTok; morph: HE.HeMorph; segments: HE.HeSegment[]; lines: HE.EncodingLine[]; prefixOnly: boolean };
   gr?: { tok: GrTok; morph: GR.GrMorph; lines: GR.EncodingLine[] };
+  la?: { tok: LaTok; morph: LA.LaMorph; lines: LA.EncodingLine[] };
 }
 
 export function wordAt(book: AnyBook, ref: WordRef): WordInfo | null {
@@ -51,6 +54,23 @@ export function wordAt(book: AnyBook, ref: WordRef): WordInfo | null {
     }
     return info;
   }
+  if (isLaBook(book)) {
+    const lv = verse as LaVerse;
+    const words = laContentWords(lv.t);
+    const raw = words[ref.i];
+    if (raw === undefined) return null;
+    const { word } = laSplitPrinted(raw);
+    const info: WordInfo = { ref, lang: 'la', printed: word, form: word };
+    const tok = lv.w[ref.i];
+    if (tok) {
+      const morph = LA.decode(tok);
+      const lines = LA.encodingLines(morph, word);
+      info.la = { tok, morph, lines };
+      info.lexId = tok[0];
+      info.key = lexemeKey('la', tok[0]);
+    }
+    return info;
+  }
   const tok = verse.w[ref.i] as GrTok | undefined;
   if (!tok) return null;
   const { word } = splitPrinted(tok[0]);
@@ -58,16 +78,16 @@ export function wordAt(book: AnyBook, ref: WordRef): WordInfo | null {
   return { ref, lang: 'gr', printed: word, form: word, lexId: tok[1], key: lexemeKey('gr', tok[1]), gr: { tok, morph, lines: GR.encodingLines(morph, word) } };
 }
 
-export async function loadEntry(info: WordInfo): Promise<HeEntry | GrEntry | undefined> {
+export async function loadEntry(info: WordInfo): Promise<HeEntry | GrEntry | LaEntry | undefined> {
   if (!info.lexId) return undefined;
-  return info.lang === 'he' ? heEntry(info.lexId) : grEntry(info.lexId);
+  return info.lang === 'he' ? heEntry(info.lexId) : info.lang === 'la' ? laEntry(info.lexId) : grEntry(info.lexId);
 }
 
-export function entryLemma(lang: Lang, e: HeEntry | GrEntry): string {
-  return lang === 'he' ? (e as HeEntry).w : (e as GrEntry).l;
+export function entryLemma(lang: Lang, e: HeEntry | GrEntry | LaEntry): string {
+  return lang === 'he' ? (e as HeEntry).w : lang === 'la' ? (e as LaEntry).l : (e as GrEntry).l;
 }
 
-export function seedFor(info: WordInfo, e?: HeEntry | GrEntry): LexemeSeed | undefined {
+export function seedFor(info: WordInfo, e?: HeEntry | GrEntry | LaEntry): LexemeSeed | undefined {
   if (!info.lexId) return undefined;
   return { lang: info.lang, id: info.lexId, lemma: e ? entryLemma(info.lang, e) : indexLemma(info.lang, info.lexId) || info.lexId, gloss: e?.g ?? glossIndex(info.lang)?.get(info.lexId)?.[3] ?? '' };
 }
@@ -111,7 +131,7 @@ export function chapterWords(book: AnyBook, ch: number): WordInfo[] {
   if (!c) return [];
   const out: WordInfo[] = [];
   c.verses.forEach((v) => {
-    const n = isHeBook(book) ? contentWords((v as HeVerse).t).length : v.w.length;
+    const n = isHeBook(book) ? contentWords((v as HeVerse).t).length : isLaBook(book) ? laContentWords((v as LaVerse).t).length : v.w.length;
     for (let i = 0; i < n; i++) {
       const w = wordAt(book, { book: book.book, ch, v: v.n, i });
       if (w) out.push(w);
@@ -121,5 +141,5 @@ export function chapterWords(book: AnyBook, ch: number): WordInfo[] {
 }
 
 export function plainForm(info: WordInfo): string {
-  return info.lang === 'he' ? info.form : greekPlain(info.form);
+  return info.lang === 'he' ? info.form : info.lang === 'gr' ? greekPlain(info.form) : info.form;
 }
