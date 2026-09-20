@@ -51,7 +51,7 @@ export function hashDataDir(dataDir: string): string {
 // Exported (in addition to being used below) so test/pwa-config.test.ts can check the exact
 // object handed to Workbox without reflecting on vite-plugin-pwa's internal plugin state.
 export const dataVersion = hashDataDir(path.join(root, 'public', 'data'));
-export const DATA_CACHE_MAX_ENTRIES = 1000; // ~400 shipped today; generous headroom for the corpus to grow
+export const DATA_CACHE_MAX_ENTRIES = 3000; // ~1070 shipped today (the Septuagint roughly doubled it); generous headroom for the Vulgate still to come
 export const dataCacheName = `biblia-data-${dataVersion}`;
 export const dataRuntimeCaching = [
   {

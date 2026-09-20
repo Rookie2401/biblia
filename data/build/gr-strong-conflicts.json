@@ -122,5 +122,390 @@
   "canonicalLemma": "ὦ",
   "used": "G5599",
   "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "διαχωρίζω",
+  "abbott": "G1316",
+  "abbottLemma": "διαχωρίζομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "αἰσχύνω",
+  "abbott": "G153",
+  "abbottLemma": "αἰσχύνομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἐκλέγω",
+  "abbott": "G1586",
+  "abbottLemma": "ἐκλέγομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "περιποιέω",
+  "abbott": "G4046",
+  "abbottLemma": "περιποιέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "διαστέλλω",
+  "abbott": "G1291",
+  "abbottLemma": "διαστέλλομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἐπιλαμβάνω",
+  "abbott": "G1949",
+  "abbottLemma": "ἐπιλαμβάνομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "γεύω",
+  "abbott": "G1089",
+  "abbottLemma": "γεύομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "προσκαλέω",
+  "abbott": "G4341",
+  "abbottLemma": "προσκαλέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἐνυπνιάζω",
+  "abbott": "G1797",
+  "abbottLemma": "ἐνυπνιάζομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "προαιρέω",
+  "abbott": "G4255",
+  "abbottLemma": "προαιρέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἐπισπάω",
+  "abbott": "G1986",
+  "abbottLemma": "ἐπισπάομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἑρμηνευτής",
+  "abbott": "G1328",
+  "abbottLemma": "διερμηνευτής",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀνέχω",
+  "abbott": "G430",
+  "abbottLemma": "ἀνέχομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀναγνωρίζω",
+  "abbott": "G319",
+  "abbottLemma": "ἀναγνωρίζομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀντιλαμβάνω",
+  "abbott": "G482",
+  "abbottLemma": "ἀντιλαμβάνομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "προχειρίζω",
+  "abbott": "G4400",
+  "abbottLemma": "προχειρίζομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "κύκλος",
+  "abbott": "G2945",
+  "abbottLemma": "κύκλῳ",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "πεζός",
+  "abbott": "G3979",
+  "abbottLemma": "πεζῇ",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "πρέσβυς",
+  "abbott": "G4245",
+  "abbottLemma": "πρεσβύτερος",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "Μαλα",
+  "abbott": "G3123",
+  "abbottLemma": "μᾶλλον",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "περικαθίζω",
+  "abbott": "G4776",
+  "abbottLemma": "συγκαθίζω",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "αἱρέω",
+  "abbott": "G138",
+  "abbottLemma": "αἱρέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀντέχω",
+  "abbott": "G472",
+  "abbottLemma": "ἀντέχομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀμύνω",
+  "abbott": "G292",
+  "abbottLemma": "ἀμύνομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "Αρα",
+  "abbott": "G686",
+  "abbottLemma": "ἄρα",
+  "canonical": "G687",
+  "canonicalLemma": "ἆρα",
+  "used": "G687",
+  "note": "canonical Strong lemma preferred"
+ },
+ {
+  "lemma": "ἀπωθέω",
+  "abbott": "G683",
+  "abbottLemma": "ἀπωθέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "στρατεύω",
+  "abbott": "G4754",
+  "abbottLemma": "στρατεύομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "προσποιέω",
+  "abbott": "G4364",
+  "abbottLemma": "προσποιέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀναβάλλω",
+  "abbott": "G306",
+  "abbottLemma": "ἀναβάλλομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἑπταπλασίων",
+  "abbott": "G4179",
+  "abbottLemma": "πολλαπλασίων",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "καταβαρύνω",
+  "abbott": "G2600",
+  "abbottLemma": "κατάβασις",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "μάλα",
+  "abbott": "G3123",
+  "abbottLemma": "μᾶλλον",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀπάγχω",
+  "abbott": "G519",
+  "abbottLemma": "ἀπάγχομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ὀπτάνω",
+  "abbott": "G3700",
+  "abbottLemma": "ὀπτάνομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀντιτάσσω",
+  "abbott": "G498",
+  "abbottLemma": "ἀντιτάσσομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ὑπεραίρω",
+  "abbott": "G5229",
+  "abbottLemma": "ὑπεραίρομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "δωρέω",
+  "abbott": "G1433",
+  "abbottLemma": "δωρέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "τόμος",
+  "abbott": "G5114",
+  "abbottLemma": "τομώτερος",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀποτάσσω",
+  "abbott": "G657",
+  "abbottLemma": "ἀποτάσσομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "προπορεύω",
+  "abbott": "G4313",
+  "abbottLemma": "προπορεύομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἀπομάσσω",
+  "abbott": "G631",
+  "abbottLemma": "ἀπομάσσομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "εὔκοπος",
+  "abbott": "G2123",
+  "abbottLemma": "εὐκοπώτερος",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "προκαλέω",
+  "abbott": "G4292",
+  "abbottLemma": "προκαλέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "προτρέπω",
+  "abbott": "G4389",
+  "abbottLemma": "προτρέπομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἐξηχέω",
+  "abbott": "G1837",
+  "abbottLemma": "ἐξηχέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "σέβω",
+  "abbott": "G4576",
+  "abbottLemma": "σέβομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ἐξαπορέω",
+  "abbott": "G1820",
+  "abbottLemma": "ἐξαπορέομαι",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
+ },
+ {
+  "lemma": "ζ",
+  "abbott": "G2193",
+  "abbottLemma": "ἕως",
+  "canonical": null,
+  "used": null,
+  "note": "Abbott-Smith number names another word; no canonical match"
  }
 ]

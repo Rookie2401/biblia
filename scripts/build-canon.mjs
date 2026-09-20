@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { GNT, TANAKH } from './canon.mjs';
+import { GNT, SEPTUAGINT, TANAKH } from './canon.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = [];
@@ -12,6 +12,13 @@ for (const [, id, en, native, section] of TANAKH) {
   out.push({ id, lang: 'he', en, native, section, verses: b.chapters.map((c) => c.verses.length) });
 }
 for (const [, id, en, native, section] of GNT) {
+  const b = JSON.parse(fs.readFileSync(path.join(root, 'public', 'data', 'gr', id + '.json'), 'utf8'));
+  out.push({ id, lang: 'gr', en, native, section, verses: b.chapters.map((c) => c.verses.length) });
+}
+// Septuagint books are `lang: 'gr'` too (they ARE Greek) and come last — build-lxx.mjs's
+// concordance book indices assume exactly this order (every TANAKH book, then every GNT book,
+// then these, in the SEPTUAGINT array's own order).
+for (const [, id, en, native, section] of SEPTUAGINT) {
   const b = JSON.parse(fs.readFileSync(path.join(root, 'public', 'data', 'gr', id + '.json'), 'utf8'));
   out.push({ id, lang: 'gr', en, native, section, verses: b.chapters.map((c) => c.verses.length) });
 }

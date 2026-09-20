@@ -53,6 +53,18 @@ export const TREE: Testament[] = [
       { id: 'Epistles', title: 'Epistles', native: 'Ἐπιστολαί · Ἀποκάλυψις', sections: ['Paul', 'General', 'Revelation'] },
     ],
   },
+  {
+    id: 'lxx',
+    title: 'Septuagint',
+    native: 'Ἡ Μετάφρασις τῶν Ἑβδομήκοντα',
+    lang: 'gr',
+    divisions: [
+      { id: 'LxxLaw', title: 'Law', native: 'Νόμος', sections: ['LxxLaw'] },
+      { id: 'LxxHistory', title: 'History', native: 'Ἱστορικά', sections: ['LxxHistory'] },
+      { id: 'LxxPoetry', title: 'Poetry & Wisdom', native: 'Ποιητικά', sections: ['LxxPoetry'] },
+      { id: 'LxxProphets', title: 'Prophets', native: 'Προφῆται', sections: ['LxxProphets'] },
+    ],
+  },
 ];
 
 export function booksOf(d: Division): BookInfo[] {

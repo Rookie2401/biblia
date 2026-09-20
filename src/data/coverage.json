@@ -4,6 +4,6 @@
   "hebrewWordsWithMorphology": 305309,
   "hebrewUnmatched": 143,
   "hebrewCoveragePercent": 99.95,
-  "computed": "2026-09-19",
+  "computed": "2026-09-20",
   "definition": "maqaf-split content words of the MAM text that have an OSHB analysis aligned to them"
 }

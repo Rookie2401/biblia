@@ -47,6 +47,14 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
   const gr = load<GrEntry>('gr-');
   const heBy = new Map(he.map((e) => [e.id, e]));
   const grBy = new Map(gr.map((e) => [e.l, e]));
+  // the Greek lexicon now covers both the New Testament (MorphGNT) and the Septuagint
+  // (lxx-morph); the NT's own lemma set (fully scholar-curated, Abbott-Smith/Strong's/Dodson
+  // coverage) keeps its original 100%-coverage guarantee unchanged. The Septuagint adds ~14,000
+  // more lemmas, mostly transliterated Hebrew proper names, that none of those NT-focused
+  // sources (nor TFLSJ, the LSJ-based fallback) cover — an honest, disclosed gap, not a defect;
+  // WordCard already has a graceful "no gloss in the source lexica" state for exactly this.
+  const ntLemmasPath = path.join(root, 'data', 'build', 'nt-lemmas.json');
+  const ntLemmas: Set<string> = fs.existsSync(ntLemmasPath) ? new Set(JSON.parse(fs.readFileSync(ntLemmasPath, 'utf8'))) : new Set();
 
   it('every Hebrew lemma has a short gloss with a named source and no archaic KJV phrasing', () => {
     expect(he.length).toBeGreaterThan(9000);
@@ -150,11 +158,9 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
     expect(plain(heBy.get('7451 c')?.bdb)).toMatch(/n\.f\. evil, misery/);
   });
 
-  it('every Greek lemma has a gloss, a transliteration and a named source; no "descendent"', () => {
+  it('every Greek lemma has a transliteration; no "descendent"', () => {
     expect(gr.length).toBeGreaterThan(5400);
-    expect(gr.filter((e) => !e.g).map((e) => e.l)).toEqual([]);
     expect(gr.filter((e) => !e.x).map((e) => e.l)).toEqual([]);
-    expect(gr.filter((e) => !e.gs).map((e) => e.l)).toEqual([]);
     expect(gr.filter((e) => /descendent/.test(e.g + (e.long ?? ''))).map((e) => e.l)).toEqual([]);
     expect(grBy.get('ἐλεάω')?.g).toMatch(/mercy/);
     expect(grBy.get('ἕνεκεν')?.g).toMatch(/because of/);
@@ -164,6 +170,20 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
     expect(grBy.get('Μαριάμ')?.id).toBe('G3137');
     expect(grBy.get('Ἰωβήλ')?.g).toBe('Jobel (variant of Obed)');
     expect(grBy.get('ραββουνι')?.g).toMatch(/^Rabboni/); // MorphGNT's lemma form (no breathing), kept as the source has it
+  });
+  it('every New Testament lemma (unlike the Septuagint-only additions) still has a gloss and a named source', () => {
+    if (!ntLemmas.size) return; // needs build-gnt.mjs's nt-lemmas.json; skip in isolation
+    const ntGr = gr.filter((e) => ntLemmas.has(e.l));
+    expect(ntGr.length).toBeGreaterThan(5400);
+    expect(ntGr.filter((e) => !e.g).map((e) => e.l)).toEqual([]);
+    expect(ntGr.filter((e) => !e.gs).map((e) => e.l)).toEqual([]);
+  });
+  it('Septuagint-only vocabulary still has a gloss for a reasonable majority (mostly transliterated proper names never covered by an NT-focused lexicon)', () => {
+    if (!ntLemmas.size) return;
+    const lxxOnlyGr = gr.filter((e) => !ntLemmas.has(e.l));
+    expect(lxxOnlyGr.length).toBeGreaterThan(9000); // sanity: this really is the whole LXX-only vocabulary, not a stub
+    const coverage = lxxOnlyGr.filter((e) => e.g).length / lxxOnlyGr.length;
+    expect(coverage).toBeGreaterThan(0.4); // documented floor; currently ~45%, mostly obscure genealogy/census names with no entry in any source consulted
   });
   it('Greek lemmas resolve to the Strong entry of the same word, not a neighbour', () => {
     const want: Record<string, [string, string, RegExp, RegExp, RegExp]> = {
@@ -198,20 +218,29 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
     expect(byId.get('G1623')).toEqual(['ἕκτος']);
     expect(byId.get('G1622')).toEqual(['ἐκτός']);
   });
-  it('the Strong conflict report exists and every conflict was resolved to the canonical lemma or a reviewed override', () => {
+  it('the Strong conflict report exists and every New Testament conflict was resolved to the canonical lemma or a reviewed override', () => {
     const p = path.join(root, 'data', 'build', 'gr-strong-conflicts.json');
     if (!fs.existsSync(p)) return;
     const conflicts = JSON.parse(fs.readFileSync(p, 'utf8')) as { lemma: string; abbott: string; canonical: string | null; used: string | null; note: string }[];
     const unresolved = conflicts.filter((c) => !c.used);
-    // καταβαρύνομαι and προσκλίνομαι have no Strong's entry under any spelling; Abbott-Smith's numbers point at other words
-    expect(unresolved.map((c) => c.lemma).sort()).toEqual(['καταβαρύνομαι', 'προσκλίνομαι']);
+    // καταβαρύνομαι and προσκλίνομαι have no Strong's entry under any spelling; Abbott-Smith's numbers point at other words.
+    // The Septuagint adds many more unresolved conflicts of its own (Abbott-Smith, an NT-only
+    // lexicon, sometimes offers a number for a word it was never really glossing) — those are
+    // checked separately below, with a coverage-style ceiling rather than an exact list, since
+    // the LXX corpus is far larger and that number isn't expected to stay perfectly fixed.
+    const ntUnresolved = ntLemmas.size ? unresolved.filter((c) => ntLemmas.has(c.lemma)) : unresolved;
+    expect(ntUnresolved.map((c) => c.lemma).sort()).toEqual(['καταβαρύνομαι', 'προσκλίνομαι']);
+    if (ntLemmas.size) {
+      const lxxUnresolved = unresolved.filter((c) => !ntLemmas.has(c.lemma));
+      expect(lxxUnresolved.length).toBeLessThan(100); // documented ceiling; currently ~47
+    }
     for (const c of conflicts.filter((c) => c.used)) {
       expect(c.used, c.lemma).toBe(c.canonical);
       expect(grBy.get(c.lemma)?.id, c.lemma).toBe(c.used);
     }
-    const overrides = JSON.parse(fs.readFileSync(path.join(root, 'data', 'curated', 'gr-overrides.json'), 'utf8')).overrides as Record<string, { strong: string; why: string }>;
+    const overrides = JSON.parse(fs.readFileSync(path.join(root, 'data', 'curated', 'gr-overrides.json'), 'utf8')).overrides as Record<string, { strong: string | null; why: string }>;
     for (const [l, o] of Object.entries(overrides)) {
-      expect(grBy.get(l)?.id, l).toBe(o.strong);
+      expect(grBy.get(l)?.id ?? null, l).toBe(o.strong); // "strong": null means deliberately no Strong's number (e.g. εἶμι)
       expect(o.why.length, l).toBeGreaterThan(10);
     }
   });

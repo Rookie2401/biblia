@@ -1,0 +1,19 @@
+{
+  "_readme": "Pairs the base-normalized (accent/breathing-insensitive) matcher in scripts/greek-lemma-match.mjs would otherwise merge, but which are genuinely different Greek words distinguished only by accent position or breathing mark — a real class of minimal pairs in Greek, not an orthographic convention difference. Found by manually reviewing every one of the ~270 distinct fuzzy matches build-lxx.mjs produced and checking each against standard Greek lexical knowledge. Key is \"lxxLemma|ntLemma\" exactly as scripts/build-lxx.mjs's bridge log records it.",
+  "blocked": {
+    "ἦ|ἤ": "ἦ = the particle \"truly/surely\" (or a form of εἰμί); ἤ = \"or\" — different words, not an accent-marking variant of one",
+    "πως|πῶς": "πως (enclitic) = indefinite \"somehow\"; πῶς (accented) = interrogative \"how?\" — the same accent-marks-a-different-word pattern as τις/τίς, which the app already keeps separate",
+    "νομός|νόμος": "νομός = \"pasture, district\"; νόμος = \"law\" — a well-known Greek minimal pair distinguished purely by accent position; merging would mix pasture-references into the NT's central \"law\" vocabulary",
+    "ὅρος|ὄρος": "ὅρος (rough breathing) = \"boundary, limit\"; ὄρος (smooth breathing) = \"mountain\" — different words",
+    "βασίλεια|βασιλεία": "βασίλεια = \"queen\" (or neuter plural \"royal residence\"); βασιλεία = \"kingdom\" — different words, not a spelling variant of one",
+    "θέα|θεά": "θέα = \"a sight, spectacle\"; θεά = \"goddess\" — different words",
+    "ἄγνος|ἁγνός": "ἄγνος (smooth breathing) = \"chaste tree\" (a plant); ἁγνός (rough breathing) = \"pure, holy\" — different words",
+    "εἶμι|εἰμί": "εἶμι = \"to go\"; εἰμί = \"to be\" — distinct verbs in careful Greek grammar despite the similar spelling",
+    "κάλως|καλῶς": "κάλως = \"a ship's rope/cable\" (Acts 27:40); καλῶς = \"well, rightly\" — different words",
+    "φαρμακός|φάρμακος": "kept separate out of caution rather than confirmed certainty: φαρμακός traditionally denotes a person (\"sorcerer\"), the accent-shifted form a more general/uncertain sense — occurs in salient denunciation passages (Rev 21:8, 22:15), so a wrong merge here would be unusually visible",
+    "κληρόνομος|κληρονόμος": "low confidence either way; kept separate rather than risk mixing into the common NT word for \"heir\"",
+    "πρωτοτόκος|πρωτότοκος": "low confidence either way; kept separate rather than risk mixing into the common NT word for \"firstborn\"",
+    "οἰκόνομος|οἰκονόμος": "low confidence either way; kept separate rather than risk mixing into the common NT word for \"steward\"",
+    "οἰκόδομος|οἰκοδόμος": "low confidence either way; kept separate rather than risk mixing into the common NT word for \"builder\""
+  }
+}

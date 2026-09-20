@@ -21,7 +21,7 @@ import { StatusPicker, STATUS_NAMES } from './StatusPicker.tsx';
 import { fmtDate, I } from './ui.tsx';
 
 const lookedUp = new Set<string>();
-const GLOSS_SOURCE: Record<string, string> = { curated: 'Biblia', bdb: 'BDB', index: 'Open Scriptures index', strongs: "Strong's", kjv: 'KJV rendering', dodson: 'Dodson', abbott: 'Abbott-Smith' };
+const GLOSS_SOURCE: Record<string, string> = { curated: 'Biblia', bdb: 'BDB', index: 'Open Scriptures index', strongs: "Strong's", kjv: 'KJV rendering', dodson: 'Dodson', abbott: 'Abbott-Smith', tflsj: 'LSJ' };
 
 export interface WordCardProps {
   info: WordInfo;
@@ -195,7 +195,7 @@ export function WordCard(p: WordCardProps) {
               setLexemeStatus(lex.key, s).catch(() => setStatusErr('Could not update the status (offline storage problem). Try again.'));
             }}
           />
-          {entry?.n ? <span className="status__form" style={{ marginTop: '0.5rem' }}>· {entry.n}× in the {info.lang === 'he' ? 'Tanakh' : 'New Testament'}</span> : null}
+          {entry?.n ? <span className="status__form" style={{ marginTop: '0.5rem' }}>· {entry.n}× in the {info.lang === 'he' ? 'Tanakh' : 'New Testament and Septuagint'}</span> : null}
         </div>
       )}
       {statusErr && <div className="card__err" role="alert">{statusErr}</div>}

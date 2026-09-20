@@ -75,6 +75,77 @@ export const GNT = [
   ['87-Re', 'Rev', 'Revelation', 'Ἀποκάλυψις Ἰωάννου', 'Revelation'],
 ];
 
+// Septuagint (Rahlfs 1935), text+morphology from OpenScriptorium/lxx-morph (CC BY 4.0).
+// Ids get an "Lxx" suffix throughout — even for the ~30 books that also exist in TANAKH —
+// since this is a different text (Greek translation, sometimes a different recension) of the
+// same book, not the same data row; a Septuagint chapter is never confused with a Hebrew one.
+export const SEPTUAGINT = [
+  // [lxx-morph filename, OSIS-style id, English, Greek, section]
+  ['genesis', 'GenLxx', 'Genesis', 'Γένεσις', 'LxxLaw'],
+  ['exodus', 'ExodLxx', 'Exodus', 'Ἔξοδος', 'LxxLaw'],
+  ['leviticus', 'LevLxx', 'Leviticus', 'Λευιτικόν', 'LxxLaw'],
+  ['numbers', 'NumLxx', 'Numbers', 'Ἀριθμοί', 'LxxLaw'],
+  ['deuteronomy', 'DeutLxx', 'Deuteronomy', 'Δευτερονόμιον', 'LxxLaw'],
+
+  // lxx-morph's plain "joshua" file only covers chapters 15/18/19 (a partial batch, not the
+  // whole book) — "joshua-vaticanus-b" is the complete text, so it is the one used as "Joshua".
+  ['joshua-vaticanus-b', 'JoshLxx', 'Joshua', 'Ἰησοῦς Ναυῆ', 'LxxHistory'],
+  ['judges', 'JudgLxx', 'Judges', 'Κριταί', 'LxxHistory'],
+  ['judges-vaticanus-b', 'JudgBLxx', 'Judges (Codex Vaticanus B)', 'Κριταί (Β)', 'LxxHistory'],
+  ['ruth', 'RuthLxx', 'Ruth', 'Ῥούθ', 'LxxHistory'],
+  ['1-samuel', '1SamLxx', '1 Samuel (1 Kingdoms)', 'Βασιλειῶν Αʹ', 'LxxHistory'],
+  ['2-samuel', '2SamLxx', '2 Samuel (2 Kingdoms)', 'Βασιλειῶν Βʹ', 'LxxHistory'],
+  ['1-kings', '1KgsLxx', '1 Kings (3 Kingdoms)', 'Βασιλειῶν Γʹ', 'LxxHistory'],
+  ['2-kings', '2KgsLxx', '2 Kings (4 Kingdoms)', 'Βασιλειῶν Δʹ', 'LxxHistory'],
+  ['1-chronicles', '1ChrLxx', '1 Chronicles', 'Παραλειπομένων Αʹ', 'LxxHistory'],
+  ['2-chronicles', '2ChrLxx', '2 Chronicles', 'Παραλειπομένων Βʹ', 'LxxHistory'],
+  ['1-esdras', '1Esd', '1 Esdras', 'Ἔσδρας Αʹ', 'LxxHistory'],
+  ['2-esdras', '2Esd', '2 Esdras (Ezra–Nehemiah)', 'Ἔσδρας Βʹ', 'LxxHistory'],
+  ['esther-greek', 'EsthLxx', 'Esther', 'Ἐσθήρ', 'LxxHistory'],
+  ['judith', 'Jdt', 'Judith', 'Ἰουδίθ', 'LxxHistory'],
+  ['tobit', 'Tob', 'Tobit', 'Τωβίτ', 'LxxHistory'],
+  ['tobit-sinaiticus', 'TobS', 'Tobit (Codex Sinaiticus)', 'Τωβίτ (Σιναϊτικός)', 'LxxHistory'],
+  ['1-maccabees', '1Macc', '1 Maccabees', 'Μακκαβαίων Αʹ', 'LxxHistory'],
+  ['2-maccabees', '2Macc', '2 Maccabees', 'Μακκαβαίων Βʹ', 'LxxHistory'],
+  ['3-maccabees', '3Macc', '3 Maccabees', 'Μακκαβαίων Γʹ', 'LxxHistory'],
+  ['4-maccabees', '4Macc', '4 Maccabees', 'Μακκαβαίων Δʹ', 'LxxHistory'],
+
+  ['psalms-lxx', 'PsLxx', 'Psalms', 'Ψαλμοί', 'LxxPoetry'],
+  ['odes', 'Odes', 'Odes', 'ᾨδαί', 'LxxPoetry'],
+  ['psalms-of-solomon', 'PsSol', 'Psalms of Solomon', 'Ψαλμοὶ Σολομῶντος', 'LxxPoetry'],
+  ['proverbs', 'ProvLxx', 'Proverbs', 'Παροιμίαι', 'LxxPoetry'],
+  ['ecclesiastes', 'EcclLxx', 'Ecclesiastes', 'Ἐκκλησιαστής', 'LxxPoetry'],
+  ['song-of-solomon', 'SongLxx', 'Song of Songs', 'Ἆσμα Ἀσμάτων', 'LxxPoetry'],
+  ['job-lxx', 'JobLxx', 'Job', 'Ἰώβ', 'LxxPoetry'],
+  ['wisdom', 'Wis', 'Wisdom of Solomon', 'Σοφία Σαλωμῶντος', 'LxxPoetry'],
+  ['sirach', 'Sir', 'Sirach', 'Σοφία Σειράχ', 'LxxPoetry'],
+
+  ['hosea', 'HosLxx', 'Hosea', 'Ὡσηέ', 'LxxProphets'],
+  ['amos', 'AmosLxx', 'Amos', 'Ἀμώς', 'LxxProphets'],
+  ['micah', 'MicLxx', 'Micah', 'Μιχαίας', 'LxxProphets'],
+  ['joel', 'JoelLxx', 'Joel', 'Ἰωήλ', 'LxxProphets'],
+  ['obadiah', 'ObadLxx', 'Obadiah', 'Ὀβδιού', 'LxxProphets'],
+  ['jonah', 'JonahLxx', 'Jonah', 'Ἰωνᾶς', 'LxxProphets'],
+  ['nahum', 'NahLxx', 'Nahum', 'Ναούμ', 'LxxProphets'],
+  ['habakkuk', 'HabLxx', 'Habakkuk', 'Ἀμβακούμ', 'LxxProphets'],
+  ['zephaniah', 'ZephLxx', 'Zephaniah', 'Σοφονίας', 'LxxProphets'],
+  ['haggai', 'HagLxx', 'Haggai', 'Ἁγγαῖος', 'LxxProphets'],
+  ['zechariah', 'ZechLxx', 'Zechariah', 'Ζαχαρίας', 'LxxProphets'],
+  ['malachi', 'MalLxx', 'Malachi', 'Μαλαχίας', 'LxxProphets'],
+  ['isaiah', 'IsaLxx', 'Isaiah', 'Ἠσαΐας', 'LxxProphets'],
+  ['jeremiah-lxx', 'JerLxx', 'Jeremiah', 'Ἱερεμίας', 'LxxProphets'],
+  ['baruch', 'Bar', 'Baruch', 'Βαρούχ', 'LxxProphets'],
+  ['lamentations', 'LamLxx', 'Lamentations', 'Θρῆνοι', 'LxxProphets'],
+  ['letter-of-jeremiah', 'EpJer', 'Letter of Jeremiah', 'Ἐπιστολὴ Ἱερεμίου', 'LxxProphets'],
+  ['ezekiel', 'EzekLxx', 'Ezekiel', 'Ἰεζεκιήλ', 'LxxProphets'],
+  ['daniel', 'DanLxx', 'Daniel (Old Greek)', 'Δανιήλ (Παλαιά)', 'LxxProphets'],
+  ['daniel-theodotion', 'DanThLxx', 'Daniel (Theodotion)', 'Δανιήλ (Θεοδοτίων)', 'LxxProphets'],
+  ['susanna', 'SusLxx', 'Susanna (Old Greek)', 'Σουσάννα (Παλαιά)', 'LxxProphets'],
+  ['susanna-theodotion', 'SusThLxx', 'Susanna (Theodotion)', 'Σουσάννα (Θεοδοτίων)', 'LxxProphets'],
+  ['bel-and-the-dragon', 'BelLxx', 'Bel and the Dragon (Old Greek)', 'Βὴλ καὶ Δράκων (Παλαιά)', 'LxxProphets'],
+  ['bel-and-the-dragon-theodotion', 'BelThLxx', 'Bel and the Dragon (Theodotion)', 'Βὴλ καὶ Δράκων (Θεοδοτίων)', 'LxxProphets'],
+];
+
 /** Hebrew points and accents (everything combining), used for consonantal comparison. */
 export const HE_MARKS = /[֑-ֽֿ-ׂׄ-ׇ͏]/g;
 export const heCons = (s) => s.replace(HE_MARKS, '').replace(/[׃׀]/g, '').replace(/[/־ ]/g, '');

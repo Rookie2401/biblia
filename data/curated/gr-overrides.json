@@ -2,6 +2,7 @@
   "_about": "Reviewed Strong's assignments where the lemma is a homograph in Strong's, or where MorphGNT's lemma spelling is not the one Strong's uses and the automatic spelling check cannot confirm Abbott-Smith's number. Each override is applied before any automatic match; the build fails if one is not honoured. Reviewed 2026-09-18 against the corpus occurrences and the Strong's headwords.",
   "overrides": {
     "σύνειμι": { "strong": "G4895", "why": "Strong's has two σύνειμι: G4895 'be with' (εἰμί) and G4896 'come together' (εἶμι). MorphGNT uses one lemma; the occurrences (Luke 9:18, Acts 22:11; Luke 8:4 is the other verb) are read as G4895 per review." },
+    "εἶμι": { "strong": null, "why": "\"to go\" (a genuinely different verb from εἰμί \"to be\", appearing only in the Septuagint here). Strong's Greek Dictionary never heads it on its own — only as a component of compound entries like σύνειμι above — so there is no correct Strong's number to assign; without this override the automatic match's accent-insensitive comparison would wrongly collide it with εἰμί's G1510." },
     "βάτος": { "strong": "G942", "why": "G942 bramble (Luke 6:44, 20:37, Mark 12:26, Acts 7:30, 35) vs G943 the liquid measure bath (Luke 16:6 only); the lemma is glossed as the bramble." },
     "ῥέω": { "strong": "G4482", "why": "G4482 'flow' (John 7:38); G4483 is the suppletive 'say' (ἐρρέθη), which MorphGNT lemmatises separately." },
     "Ζηλωτής": { "strong": "G2208", "why": "Capitalised: the Zealot (Simon), G2208; the common noun zealot is G2207." },

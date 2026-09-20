@@ -5,6 +5,7 @@
  *   Greek:  key = MorphGNT lemma, shard = first letter (large letters split by second letter)
  */
 import type { GrEntry, HeEntry, Lang } from '../model/types.ts';
+import { CANON } from '../text/canon.ts';
 import { greekBase } from '../text/greek.ts';
 import { memoAsync, memoAsyncKeyed } from './asyncCache.ts';
 
@@ -90,6 +91,13 @@ export function searchIndex(lang: Lang): Promise<IndexRow[]> {
   return memoAsyncKeyed(indexBoxes, lang, () => fetchJson<IndexRow[]>(`./data/lex/${lang}-index.json`));
 }
 
+const byId = new Map(CANON.map((b) => [b.id, b]));
+/** True for a book with a BSB-alignment context file (every Tanakh/NT book; not the Septuagint,
+ * which the Berean Standard Bible was never aligned against). */
+function hasContext(id: string): boolean {
+  return !byId.get(id)?.section.startsWith('Lxx');
+}
+
 /**
  * Every data file the app reads at runtime, for "download everything for offline use". Excludes
  * attribution/diagnostic metadata that nothing in the app reads (ctx/COVERAGE.json, SOURCES.json).
@@ -100,6 +108,6 @@ export async function allDataUrls(bookIds: string[], langOfBook: (id: string) =>
   for (const i of heMan.shards) urls.push(`./data/lex/he-${i}.json`, `./data/conc/he-${i}.json`);
   for (const s of grMan.shards ?? []) urls.push(`./data/lex/gr-${s}.json`, `./data/conc/gr-${s}.json`);
   urls.push('./data/lex/he-index.json', './data/lex/gr-index.json', './data/lex/he-manifest.json', './data/lex/gr-manifest.json', './data/lex/he-bdb-index.json');
-  for (const id of bookIds) urls.push(`./data/ctx/${langOfBook(id)}/${id}.json`);
+  for (const id of bookIds) if (hasContext(id)) urls.push(`./data/ctx/${langOfBook(id)}/${id}.json`);
   return urls;
 }

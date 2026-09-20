@@ -8,13 +8,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { GNT } from './canon.mjs';
+import { GNT, TANAKH } from './canon.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(root, 'public', 'data', 'gr');
 const buildDir = path.join(root, 'data', 'build');
 fs.mkdirSync(outDir, { recursive: true });
 fs.mkdirSync(buildDir, { recursive: true });
+
+// Concordance book indices are global positions in the final CANON array (build-canon.mjs
+// places every TANAKH book first, then GNT), not local positions within this file's own
+// book list — otherwise a Greek word's concordance would resolve against a Hebrew book.
+const GLOBAL_OFFSET = TANAKH.length;
 
 const SIGLA = /[⸀⸁⸂⸃⸄⸅⸆⸇]/g;
 const conc = {};
@@ -35,7 +40,7 @@ GNT.forEach(([file, id], bookIdx) => {
     const lem = lemma.normalize('NFC');
     const i = vs.w.length;
     vs.w.push(parse === '--------' ? [printed, lem, pos] : [printed, lem, pos, parse]);
-    (conc[lem] ??= []).push(bookIdx, c, v, i);
+    (conc[lem] ??= []).push(GLOBAL_OFFSET + bookIdx, c, v, i);
     words++;
   }
   for (const ch of chapters) {
@@ -49,6 +54,10 @@ GNT.forEach(([file, id], bookIdx) => {
 });
 console.log();
 fs.writeFileSync(path.join(buildDir, 'conc-gr.json'), JSON.stringify(conc));
+// the pure NT lemma set, kept separate from conc-gr.json because build-lxx.mjs extends that
+// file in place with Septuagint occurrences — reading it back as "the NT vocabulary" on a
+// second run would let the Septuagint match against its own prior output instead of the NT.
+fs.writeFileSync(path.join(buildDir, 'nt-lemmas.json'), JSON.stringify(Object.keys(conc)));
 fs.writeFileSync(
   path.join(outDir, 'SOURCES.json'),
   JSON.stringify(

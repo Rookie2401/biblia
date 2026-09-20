@@ -11,6 +11,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { assertSafe, sanitizeHtml } from './sanitize-html.mjs';
+import { base as lxxBase } from './greek-lemma-match.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const lexDir = path.join(root, 'public', 'data', 'lex');
@@ -39,6 +40,29 @@ for (const line of fs.readFileSync(path.join(root, 'data', 'lexicon', 'dodson.cs
   const id = 'G' + String(Number(cells[0]));
   if (!Number.isFinite(Number(cells[0]))) continue;
   dodson.set(id, { brief: cells[3] || '', long: cells[4] || '' });
+}
+
+// ---- TFLSJ (STEPBible's LSJ-based lexicon; covers Septuagint-only vocabulary Abbott-Smith,
+// an NT-only lexicon, was never going to have). Tab-separated: eStrong, dStrong, uStrong,
+// Greek, Transliteration, Morph, Gloss, LSJ Meaning. Keyed by the exact Greek spelling (case
+// preserved, same reasoning as the LXX/NT lemma merge: λίβανος "frankincense" and Λίβανος
+// "Lebanon" must stay separate entries).
+const tflsjByLemma = new Map();
+const tflsjByBase = new Map(); // accent-insensitive (case-preserving) fallback, for spelling variance between Rahlfs' transliteration of a name and TFLSJ's own
+for (const file of ['tflsj-main.txt', 'tflsj-extra.txt']) {
+  const text = fs.readFileSync(path.join(root, 'data', 'tflsj', file), 'utf8');
+  const headerAt = text.indexOf('eStrong\t');
+  for (const line of text.slice(headerAt).split('\n').slice(1)) {
+    const cells = line.split('\t');
+    if (cells.length !== 8) continue;
+    const [, , , greekRaw, , , glossRaw] = cells;
+    const greek = greekRaw.normalize('NFC').trim();
+    const gloss = glossRaw.trim();
+    if (!greek || !gloss) continue;
+    if (!tflsjByLemma.has(greek)) tflsjByLemma.set(greek, gloss);
+    const b = lxxBase(greek);
+    if (!tflsjByBase.has(b)) tflsjByBase.set(b, gloss);
+  }
 }
 
 // ---- Abbott-Smith (TEI)
@@ -193,8 +217,9 @@ for (const lemma of Object.keys(conc)) {
   if (st) matchedStrongs++;
   const dd = gid ? dodson.get(gid) : undefined;
   const cur = curated[lemma];
-  const gloss = cur || fixTypos(dd?.brief) || as?.glosses[0] || (st ? shortStrongs(st) : '');
-  const gs = cur ? 'curated' : dd?.brief ? 'dodson' : as?.glosses[0] ? 'abbott' : st ? 'strongs' : '';
+  const tflsj = tflsjByLemma.get(lemma) ?? tflsjByBase.get(lxxBase(lemma));
+  const gloss = cur || fixTypos(dd?.brief) || as?.glosses[0] || (st ? shortStrongs(st) : '') || tflsj || '';
+  const gs = cur ? 'curated' : dd?.brief ? 'dodson' : as?.glosses[0] ? 'abbott' : st ? 'strongs' : tflsj ? 'tflsj' : '';
   entries[lemma] = {
     l: lemma,
     id: gid || undefined,
@@ -235,7 +260,9 @@ fs.writeFileSync(path.join(lexDir, 'gr-manifest.json'), JSON.stringify({ split: 
 // every disagreement between Abbott-Smith's number and the canonical Strong's lemma, for review
 fs.writeFileSync(path.join(buildDir, 'gr-strong-conflicts.json'), JSON.stringify(conflicts, null, 1));
 console.log(`Strong's conflicts (Abbott-Smith number ≠ canonical lemma): ${conflicts.length}, listed in data/build/gr-strong-conflicts.json`);
-for (const [lemma, o] of Object.entries(overrides)) if (entries[lemma] && entries[lemma].id !== o.strong) throw new Error(`override not applied for ${lemma}`);
+// "strong": null means "deliberately no Strong's number" (a word Strong's never headed on its
+// own); entries[lemma].id is undefined in that case (`gid || undefined`), so compare loosely.
+for (const [lemma, o] of Object.entries(overrides)) if (entries[lemma] && (entries[lemma].id || null) !== (o.strong || null)) throw new Error(`override not applied for ${lemma}`);
 fs.writeFileSync(path.join(lexDir, 'gr-index.json'), JSON.stringify(Object.values(entries).map((e) => [e.l, e.id || '', e.x || '', e.g, e.n, e.gs || ''])));
 fs.writeFileSync(
   path.join(lexDir, 'gr-SOURCES.json'),
@@ -244,6 +271,7 @@ fs.writeFileSync(
       abbottSmith: { title: 'G. Abbott-Smith, A Manual Greek Lexicon of the New Testament (T&T Clark, 1922)', license: 'public domain; TEI transcription CC BY-SA 4.0', url: 'https://github.com/translatable-exegetical-tools/Abbott-Smith' },
       dodson: { title: 'Dodson Greek Lexicon (John Jeffrey Dodson, 2010)', license: 'public domain', url: 'https://github.com/biblicalhumanities/Dodson-Greek-Lexicon' },
       strongs: { title: "Strong's Greek Dictionary (1890)", license: 'public domain; JSON CC BY-SA', url: 'https://github.com/openscriptures/strongs' },
+      tflsj: { title: 'Translators Formatted full LSJ Bible lexicon (Liddell-Scott-Jones, ed. Tyndale House Cambridge)', license: 'CC BY 4.0', url: 'https://github.com/STEPBible/STEPBible-Data' },
     },
     null,
     2,

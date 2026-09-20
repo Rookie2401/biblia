@@ -71,6 +71,9 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   const triggerRef = useRef<HTMLElement | null>(null);
   const endSeen = useRef(false);
   const lang = info.lang;
+  // Septuagint books are `lang: 'gr'` too (so their vocabulary merges with the NT's), but they
+  // are a different edition of a different testament, and need their own labels/attribution.
+  const isLxx = info.section.startsWith('Lxx');
 
   // Incremented every time the route (bookId/ch) changes or a retry is requested, so a response
   // for a request that is no longer the current one — because the reader moved on before it
@@ -367,8 +370,10 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
                 </button>
                 {msg && <div className="faint" style={{ marginTop: '0.4rem', fontSize: '0.9rem' }} role="status">{msg}</div>}
               </div>
-              {next ? <button type="button" className="btn" onClick={() => goChapter(next)}>{refLabel(next.book, next.ch)} →</button> : `End of the ${lang === 'he' ? 'Tanakh' : 'New Testament'}`}
-              <div className="faint" style={{ marginTop: '1.5rem', fontSize: '0.8rem' }}>{lang === 'he' ? 'Text: Miqra according to the Masorah · Morphology: OSHB' : 'Text: SBL Greek New Testament · Morphology: MorphGNT'}</div>
+              {next ? <button type="button" className="btn" onClick={() => goChapter(next)}>{refLabel(next.book, next.ch)} →</button> : `End of the ${lang === 'he' ? 'Tanakh' : isLxx ? 'Septuagint' : 'New Testament'}`}
+              <div className="faint" style={{ marginTop: '1.5rem', fontSize: '0.8rem' }}>
+                {lang === 'he' ? 'Text: Miqra according to the Masorah · Morphology: OSHB' : isLxx ? 'Text: Septuagint (Rahlfs, 1935) · Morphology: lxx-morph' : 'Text: SBL Greek New Testament · Morphology: MorphGNT'}
+              </div>
             </div>
           </div>
         )}

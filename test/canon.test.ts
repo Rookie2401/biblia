@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { CANON, adjacentChapter, book, parseRef, refLabel, validRef } from '../src/text/canon.ts';
 
 describe('canon', () => {
-  it('has 66 books with verse counts from the data', () => {
-    expect(CANON.length).toBe(66);
+  it('has 124 books (39 Tanakh + 27 NT + 58 Septuagint) with verse counts from the data', () => {
+    expect(CANON.length).toBe(124);
     expect(book('Gen')?.verses.length).toBe(50);
     expect(book('Gen')?.verses[0]).toBe(31);
     expect(book('Ps')?.verses.length).toBe(150);
@@ -16,6 +16,16 @@ describe('canon', () => {
     expect(adjacentChapter('2Chr', 36, 1)).toBeNull();
     expect(adjacentChapter('Matt', 1, -1)).toBeNull();
     expect(adjacentChapter('Jude', 1, 1)).toEqual({ book: 'Rev', ch: 1 });
+  });
+  it('does not walk from the New Testament into the Septuagint or back, even though both are lang "gr"', () => {
+    // CANON places every Septuagint book directly after Revelation (so their shared "gr"
+    // vocabulary can merge) — without an extra check beyond language, "next chapter" from
+    // Revelation 22 would silently land on Genesis (LXX) 1, and "previous" from there on
+    // Revelation 22, instead of stopping at the end of each testament as every other boundary does
+    expect(adjacentChapter('Rev', 22, 1)).toBeNull();
+    expect(adjacentChapter('GenLxx', 1, -1)).toBeNull();
+    // but the Septuagint's own internal divisions (Law/History/Poetry/Prophets) still flow together
+    expect(adjacentChapter('DeutLxx', 34, 1)).toEqual({ book: 'JoshLxx', ch: 1 });
   });
   it('refuses to step from an invalid chapter', () => {
     expect(adjacentChapter('Gen', 999, 1)).toBeNull();
