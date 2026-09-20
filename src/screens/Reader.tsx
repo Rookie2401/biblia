@@ -228,7 +228,12 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
   const selected: WordInfo | null = useMemo(() => (sel?.kind === 'word' && book ? wordAt(book, sel.ref) : null), [sel, book]);
   const selVerse = sel?.kind === 'word' ? sel.ref.v : sel?.kind === 'verse' ? sel.v : undefined;
   const close = useCallback(() => setSel(null), []);
-  useModalDialog(panelRef, { active: mobile && !!sel, onClose: close, returnTo: triggerRef.current, inertSelector: '.reader__main' });
+  // Inerting the header and nav keeps chapter navigation out of reach while a card is open, but
+  // the prose itself stays reachable on purpose: tapping a different word or verse number must
+  // swap the sheet to that word/verse directly (onProseClick's activate() already does this —
+  // inerting the whole .reader__main, as this used to, blocked the tap from ever reaching it, so
+  // closing the sheet with the × was the only way back to the text).
+  useModalDialog(panelRef, { active: mobile && !!sel, onClose: close, returnTo: triggerRef.current, inertSelector: '.reader__header, .reader__nav' });
 
   function goChapter(target: { book: string; ch: number } | null, top = true) {
     if (!target) return;
