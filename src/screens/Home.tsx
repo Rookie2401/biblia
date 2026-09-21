@@ -212,9 +212,6 @@ export default function Home() {
         <nav className="lib" aria-label="Books">
           {bibleTestaments.map(testamentGroup)}
         </nav>
-        <p className="home__about">
-          Miqra according to the Masorah · SBL Greek New Testament · OSHB & MorphGNT morphology · BDB · Abbott-Smith · Strong's. <Link to="/settings">Sources & licences</Link>
-        </p>
         {otherTestaments.length > 0 && (
           <>
             <h2 className="home__section">Other resources</h2>
@@ -222,11 +219,13 @@ export default function Home() {
             <nav className="lib" aria-label="Other resources">
               {otherTestaments.map(testamentGroup)}
             </nav>
-            <p className="home__about">
-              Septuagint (Rahlfs, 1935) · lxx-morph morphology, merged into the Greek vocabulary above. Vulgate (Clementine, 1592) · PROIEL/Syntacticus morphology · Lewis & Short. <Link to="/settings">Sources & licences</Link>
-            </p>
           </>
         )}
+        <p className="home__about">
+          Miqra according to the Masorah · SBL Greek New Testament · OSHB & MorphGNT morphology · BDB · Abbott-Smith · Strong's.
+          {otherTestaments.length > 0 && <> Septuagint (Rahlfs, 1935) · lxx-morph morphology, merged into the Greek vocabulary above. Vulgate (Clementine, 1592) · PROIEL/Syntacticus morphology · Lewis & Short.</>}
+          {' '}<Link to="/settings">Sources & licences</Link>
+        </p>
       </div>
     </div>
   );
