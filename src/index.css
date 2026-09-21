@@ -360,7 +360,11 @@ h1, h2, h3, h4, p { margin: 0; }
 .spinner { display: inline-block; width: 0.9em; height: 0.9em; border: 2px solid var(--rule-strong); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: -0.15em; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .kbd { font-family: var(--serif); font-size: 0.75rem; border: 1px solid var(--rule-strong); border-radius: 4px; padding: 0 0.3rem; color: var(--ink-faint); }
-@media (prefers-reduced-motion: reduce) { .route-fade, .reader__prose, .panel, .sheet, .sheet-backdrop { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .route-fade, .reader__prose, .panel, .sheet, .sheet-backdrop { animation: none; }
+  .lib__chev { transition: none; }
+  .iconbtn, .iconbtn:active { transform: none; }
+}
 
 /* "Update available" prompt (service worker in prompt mode) */
 .update-toast {
@@ -491,7 +495,9 @@ h1, h2, h3, h4, p { margin: 0; }
 .tabs button[aria-pressed='true'] { color: var(--accent); border-bottom-color: var(--accent); }
 .card__ref { letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-size: 0.7rem; font-weight: 600; margin-bottom: 0.3rem; }
 .progressbar { height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; margin: 0.5rem 0; }
-.progressbar > span { display: block; height: 100%; background: var(--accent); transition: width 0.2s; }
+/* scaleX (compositor-only) instead of animating width (layout) — this bar can update rapidly
+   during a real download, and width was visibly stepping rather than gliding under that rate. */
+.progressbar > span { display: block; width: 100%; height: 100%; background: var(--accent); transform-origin: left; transition: transform 0.2s ease-out; will-change: transform; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.85rem; color: var(--ink-soft); margin: 0.5rem 0; }
 
 /* chapter names in the bottom nav are English: keep them left-to-right inside the RTL bar */
@@ -555,12 +561,18 @@ fieldset.field legend { color: var(--ink-soft); font-size: 0.9rem; padding: 0; m
 
 /* ================================================== home: library accordion */
 /* Height-animated disclosure (from the Classical Library): grid-template-rows 0fr to 1fr
-   animates to/from auto height; the inner element clips, fades and lifts. */
-.collapsible { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
+   animates to/from auto height; the inner element clips, fades and lifts. `contain` gives the
+   browser a hard layout/paint boundary at the row being resized, so opening a long book (Psalms:
+   150 chapter links) doesn't force the rest of the accordion — everything above and below this
+   one row — to be re-measured on every animation frame, just this row's own content. */
+.collapsible { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; contain: layout paint style; }
 .collapsible[data-open='true'] { grid-template-rows: 1fr; }
-.collapsible__inner { overflow: hidden; min-height: 0; opacity: 0; transform: translateY(-0.3rem); transition: opacity 0.22s ease, transform 0.22s ease; }
+.collapsible__inner { overflow: hidden; min-height: 0; opacity: 0; transform: translateY(-0.3rem); transition: opacity 0.22s ease, transform 0.22s ease; will-change: opacity, transform; }
 .collapsible[data-open='true'] > .collapsible__inner { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .collapsible__inner { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .collapsible, .collapsible__inner { transition: none; }
+  .collapsible__inner { transform: none; }
+}
 
 .lib { max-width: 30rem; margin: 0.5rem auto 0; text-align: left; display: flex; flex-direction: column; }
 .lib__group { border-bottom: 1px solid var(--rule); }

@@ -89,7 +89,7 @@ export default function Settings() {
         </div>
         {dl && (
           <>
-            <div className="progressbar" role="progressbar" aria-label="Download progress" aria-valuemin={0} aria-valuemax={dl.total} aria-valuenow={dl.done} aria-valuetext={`${dl.done} of ${dl.total} files`}><span style={{ width: `${(100 * dl.done) / dl.total}%` }} /></div>
+            <div className="progressbar" role="progressbar" aria-label="Download progress" aria-valuemin={0} aria-valuemax={dl.total} aria-valuenow={dl.done} aria-valuetext={`${dl.done} of ${dl.total} files`}><span style={{ transform: `scaleX(${dl.done / dl.total})` }} /></div>
             <div className="faint" style={{ fontSize: '0.85rem' }} aria-live="polite">{dlDone ? `Download finished: ${dl.total} files${dl.failed ? `, ${dl.failed} failed` : ''}.` : `${dl.done} / ${dl.total} files${dl.failed ? ` · ${dl.failed} failed` : ''}`}</div>
           </>
         )}
