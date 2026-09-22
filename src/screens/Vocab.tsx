@@ -9,7 +9,7 @@ import { onVocabChange } from '../state/vocab.ts';
 export default function Vocab() {
   const [rows, setRows] = useState<Lexeme[]>([]);
   const [tab, setTab] = useState<VocabStatus | 'all'>('all');
-  const [lang, setLang] = useState<'all' | 'he' | 'gr' | 'la'>('all');
+  const [lang, setLang] = useState<'all' | 'he' | 'gr'>('all');
   // A burst of vocabulary notifications (e.g. several words recorded at once) can start more than
   // one load before the first resolves; an IndexedDB read has no ordering guarantee, so only the
   // most recently started load may commit its result.
@@ -48,7 +48,6 @@ export default function Vocab() {
             <button aria-pressed={lang === 'all'} onClick={() => setLang('all')}>All</button>
             <button aria-pressed={lang === 'he'} onClick={() => setLang('he')}>Hebrew</button>
             <button aria-pressed={lang === 'gr'} onClick={() => setLang('gr')}>Greek</button>
-            <button aria-pressed={lang === 'la'} onClick={() => setLang('la')}>Latin</button>
           </div>
         </div>
         <div className="tabs">

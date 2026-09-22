@@ -6,7 +6,7 @@
   "description": "Biblia: the Masoretic Text and the Greek New Testament with a complete linguistic apparatus under every word (V0).",
   "scripts": {
     "fetch:sources": "node scripts/fetch-sources.mjs",
-    "build:data": "node scripts/build-tanakh.mjs && node scripts/build-gnt.mjs && node scripts/build-lxx.mjs && node scripts/build-vulgate-nt.mjs && node scripts/build-lexicon-gr.mjs && node scripts/build-lexicon-he.mjs && node scripts/build-lexicon-la.mjs && node scripts/build-canon.mjs && node scripts/coverage.mjs && node --max-old-space-size=8000 scripts/build-bsb.mjs",
+    "build:data": "node scripts/build-tanakh.mjs && node scripts/build-gnt.mjs && node scripts/build-lxx.mjs && node scripts/build-lexicon-gr.mjs && node scripts/build-lexicon-he.mjs && node scripts/build-canon.mjs && node scripts/coverage.mjs && node --max-old-space-size=8000 scripts/build-bsb.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",

@@ -47,12 +47,9 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
   const gr = load<GrEntry>('gr-');
   const heBy = new Map(he.map((e) => [e.id, e]));
   const grBy = new Map(gr.map((e) => [e.l, e]));
-  // the Greek lexicon now covers both the New Testament (MorphGNT) and the Septuagint
-  // (lxx-morph); the NT's own lemma set (fully scholar-curated, Abbott-Smith/Strong's/Dodson
-  // coverage) keeps its original 100%-coverage guarantee unchanged. The Septuagint adds ~14,000
-  // more lemmas, mostly transliterated Hebrew proper names, that none of those NT-focused
-  // sources (nor TFLSJ, the LSJ-based fallback) cover — an honest, disclosed gap, not a defect;
-  // WordCard already has a graceful "no gloss in the source lexica" state for exactly this.
+  // The Greek lexicon is the New Testament's lemma set (MorphGNT) and nothing else: the
+  // Septuagint's own vocabulary moved to Vetus on 2026-09-22. What each NT lemma keeps is a
+  // Septuagint occurrence count (lxxN) — the word's presence there, not its text.
   const ntLemmasPath = path.join(root, 'data', 'build', 'nt-lemmas.json');
   const ntLemmas: Set<string> = fs.existsSync(ntLemmasPath) ? new Set(JSON.parse(fs.readFileSync(ntLemmasPath, 'utf8'))) : new Set();
 
@@ -171,19 +168,29 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
     expect(grBy.get('Ἰωβήλ')?.g).toBe('Jobel (variant of Obed)');
     expect(grBy.get('ραββουνι')?.g).toMatch(/^Rabboni/); // MorphGNT's lemma form (no breathing), kept as the source has it
   });
-  it('every New Testament lemma (unlike the Septuagint-only additions) still has a gloss and a named source', () => {
-    if (!ntLemmas.size) return; // needs build-gnt.mjs's nt-lemmas.json; skip in isolation
-    const ntGr = gr.filter((e) => ntLemmas.has(e.l));
-    expect(ntGr.length).toBeGreaterThan(5400);
-    expect(ntGr.filter((e) => !e.g).map((e) => e.l)).toEqual([]);
-    expect(ntGr.filter((e) => !e.gs).map((e) => e.l)).toEqual([]);
+  it('every Greek lemma has a gloss and a named source, and the lexicon is exactly the New Testament vocabulary', () => {
+    expect(gr.filter((e) => !e.g).map((e) => e.l)).toEqual([]);
+    expect(gr.filter((e) => !e.gs).map((e) => e.l)).toEqual([]);
+    expect(gr.filter((e) => e.gs === 'tflsj')).toEqual([]); // the LSJ fallback only ever served Septuagint-only lemmas
+    if (ntLemmas.size) {
+      expect(gr.filter((e) => !ntLemmas.has(e.l)).map((e) => e.l)).toEqual([]); // no Septuagint-only entry survived the split
+      expect(gr.length).toBe(ntLemmas.size);
+    }
   });
-  it('Septuagint-only vocabulary still has a gloss for a reasonable majority (mostly transliterated proper names never covered by an NT-focused lexicon)', () => {
-    if (!ntLemmas.size) return;
-    const lxxOnlyGr = gr.filter((e) => !ntLemmas.has(e.l));
-    expect(lxxOnlyGr.length).toBeGreaterThan(9000); // sanity: this really is the whole LXX-only vocabulary, not a stub
-    const coverage = lxxOnlyGr.filter((e) => e.g).length / lxxOnlyGr.length;
-    expect(coverage).toBeGreaterThan(0.4); // documented floor; currently ~45%, mostly obscure genealogy/census names with no entry in any source consulted
+  it('a New Testament lemma that also occurs in the Septuagint carries its count there (lxxN); one that does not carries none', () => {
+    // κύριος and λόγος are everywhere in the Septuagint; Pilate, the Pharisees and baptism are
+    // New Testament vocabulary only. (Χριστός, note, does occur — Rahlfs lemmatises it capitalised
+    // twice, e.g. in the Psalms of Solomon — so it is not the counter-example it looks like.)
+    expect(grBy.get('κύριος')?.lxxN).toBeGreaterThan(8000);
+    expect(grBy.get('λόγος')?.lxxN).toBeGreaterThan(1000);
+    expect(grBy.get('θεός')?.lxxN).toBeGreaterThan(3000);
+    expect(grBy.get('Πιλᾶτος')?.lxxN).toBeUndefined();
+    expect(grBy.get('Φαρισαῖος')?.lxxN).toBeUndefined();
+    expect(grBy.get('βάπτισμα')?.lxxN).toBeUndefined();
+    const withLxx = gr.filter((e) => e.lxxN);
+    expect(withLxx.length).toBeGreaterThan(3000); // most NT vocabulary is Septuagint vocabulary too
+    expect(withLxx.every((e) => Number.isInteger(e.lxxN) && e.lxxN! > 0)).toBe(true);
+    expect(gr.some((e) => e.lxxN === 0)).toBe(false); // "never occurs" is absence, not zero
   });
   it('Greek lemmas resolve to the Strong entry of the same word, not a neighbour', () => {
     const want: Record<string, [string, string, RegExp, RegExp, RegExp]> = {
@@ -224,16 +231,7 @@ describe.skipIf(!have)('shipped lexicon quality', () => {
     const conflicts = JSON.parse(fs.readFileSync(p, 'utf8')) as { lemma: string; abbott: string; canonical: string | null; used: string | null; note: string }[];
     const unresolved = conflicts.filter((c) => !c.used);
     // καταβαρύνομαι and προσκλίνομαι have no Strong's entry under any spelling; Abbott-Smith's numbers point at other words.
-    // The Septuagint adds many more unresolved conflicts of its own (Abbott-Smith, an NT-only
-    // lexicon, sometimes offers a number for a word it was never really glossing) — those are
-    // checked separately below, with a coverage-style ceiling rather than an exact list, since
-    // the LXX corpus is far larger and that number isn't expected to stay perfectly fixed.
-    const ntUnresolved = ntLemmas.size ? unresolved.filter((c) => ntLemmas.has(c.lemma)) : unresolved;
-    expect(ntUnresolved.map((c) => c.lemma).sort()).toEqual(['καταβαρύνομαι', 'προσκλίνομαι']);
-    if (ntLemmas.size) {
-      const lxxUnresolved = unresolved.filter((c) => !ntLemmas.has(c.lemma));
-      expect(lxxUnresolved.length).toBeLessThan(100); // documented ceiling; currently ~47
-    }
+    expect(unresolved.map((c) => c.lemma).sort()).toEqual(['καταβαρύνομαι', 'προσκλίνομαι']);
     for (const c of conflicts.filter((c) => c.used)) {
       expect(c.used, c.lemma).toBe(c.canonical);
       expect(grBy.get(c.lemma)?.id, c.lemma).toBe(c.used);

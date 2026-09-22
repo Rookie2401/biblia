@@ -4,7 +4,7 @@
  * by reference (book · chapter · verse · word index), never by copying it.
  */
 
-export type Lang = 'he' | 'gr' | 'la';
+export type Lang = 'he' | 'gr';
 
 /** Where a word is: OSIS book id, chapter, verse, maqaf-split word index (Hebrew) / token index (Greek). */
 export interface WordRef {
@@ -18,10 +18,6 @@ export interface WordRef {
 export type HeTok = [string, string, string?];
 /** MorphGNT analysis of one Greek word: [text as printed, lemma, part of speech, parse?]. */
 export type GrTok = [string, string, string, string?];
-/** PROIEL analysis of one Vulgate word: [lemma, part of speech, parse?]. The printed form comes
- * from LaVerse.t (the Clementine text) at this word's index, not from this tuple — PROIEL's own
- * tokens carry no punctuation, so the Clementine text is the one source of truth for display. */
-export type LaTok = [string, string, string?];
 
 export interface HeVerse {
   n: number;
@@ -44,15 +40,6 @@ export interface GrVerse {
   n: number;
   w: GrTok[];
 }
-export interface LaVerse {
-  n: number;
-  /** the verse exactly as the Clementine (1592) print text has it, words space-separated */
-  t: string;
-  /** one entry per whitespace-separated word of t; null when that word could not be confidently
-   * aligned to a PROIEL token (the Clementine text is always shown in full regardless — an
-   * unaligned word simply isn't tappable) */
-  w: (LaTok | null)[];
-}
 export interface Chapter<V> {
   n: number;
   verses: V[];
@@ -65,11 +52,6 @@ export interface GrBook {
   book: string;
   chapters: Chapter<GrVerse>[];
 }
-export interface LaBook {
-  book: string;
-  chapters: Chapter<LaVerse>[];
-}
-
 /** Hebrew lexicon entry (BDB + Strong's + Open Scriptures index), keyed by OSHB lemma id ("1254 a"). */
 export interface HeEntry {
   id: string;
@@ -115,24 +97,12 @@ export interface GrEntry {
   as?: string;
   /** Hebrew words this Greek word renders in the LXX: [Strong's number, Hebrew] */
   heb?: [number, string][];
+  /** occurrences in the New Testament */
   n: number;
-}
-
-/** Latin lexicon entry (Lewis & Short), keyed by PROIEL lemma. No Strong's numbering exists for
- * Latin; sd/kj/der stay unset (never written by build-lexicon-la.mjs) and exist only so the
- * card can read HeEntry | GrEntry | LaEntry's shared optional fields without a type error. */
-export interface LaEntry {
-  l: string;
-  x?: string; // principal parts / inflection info, where L&S gives one
-  g: string; // short lemma gloss
-  /** where the short gloss comes from: curated | ls */
-  gs?: string;
-  sd?: undefined;
-  kj?: undefined;
-  der?: undefined;
-  /** Lewis & Short entry as trusted HTML */
-  ls?: string;
-  n: number;
+  /** occurrences of the same word in the Septuagint (Rahlfs; lxx-morph), when it occurs there at
+   * all. The Septuagint itself is read in Vetus, the companion app; this is the one trace of it
+   * kept here so a New Testament word's card can say the word also lives there. */
+  lxxN?: number;
 }
 
 export const VOCAB_STATUSES = ['new', 'recognized', 'familiar', 'known', 'automatic'] as const;

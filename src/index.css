@@ -130,8 +130,6 @@ h1, h2, h3, h4, p { margin: 0; }
 .home__entry-index { margin-left: auto; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); font-size: 0.8rem; white-space: nowrap; }
 .home__list-divider { font-variant: small-caps; letter-spacing: 0.08em; color: var(--ink-faint); margin: 1.3rem 0 0.1rem; padding: 0 0.6rem; font-size: 0.82rem; }
 .home__about { color: var(--ink-faint); margin-top: 2.5rem; font-size: 0.9rem; }
-.home__section { letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin: 2.75rem 0 0; padding-top: 2rem; border-top: 1px solid var(--rule); font-size: 1.1rem; font-weight: 600; }
-.home__subtitle--small { font-size: 0.88rem; margin-top: 0.3rem; margin-bottom: 1.5rem; }
 .home__links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
 
 /* --------------------------------------------------------------- forms */
@@ -386,11 +384,11 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 
 /* ================================================================ Biblia */
-.gr, .la { font-family: var(--serif); direction: ltr; unicode-bidi: isolate; }
-.card__surface--gr, .card__surface--la { direction: ltr; text-align: left; font-family: var(--serif); font-size: 1.9rem; }
-.card__line .gr, .card__line .la { font-size: 1.15rem; color: var(--ink); }
-.chip .gr, .chip .la { font-size: 1rem; color: var(--ink); }
-.morph__form.gr, .morph__form.la { direction: ltr; font-family: var(--serif); font-size: 1.25rem; }
+.gr { font-family: var(--serif); direction: ltr; unicode-bidi: isolate; }
+.card__surface--gr { direction: ltr; text-align: left; font-family: var(--serif); font-size: 1.9rem; }
+.card__line .gr { font-size: 1.15rem; color: var(--ink); }
+.chip .gr { font-size: 1rem; color: var(--ink); }
+.morph__form.gr { direction: ltr; font-family: var(--serif); font-size: 1.25rem; }
 .morphs--ltr { flex-direction: row; justify-content: flex-start; }
 
 /* home: canon */
@@ -412,8 +410,6 @@ h1, h2, h3, h4, p { margin: 0; }
    that gap; text-wrap: pretty (already set on every .reader__prose p) keeps the last line sane. */
 .reader__prose--gr { direction: ltr; text-align: justify; text-justify: inter-word; font-family: var(--serif); font-size: var(--greek-font-size); line-height: calc(var(--reading-line-height) - 0.15); }
 .reader__prose--gr p { text-align: justify; text-justify: inter-word; }
-.reader__prose--la { direction: ltr; text-align: justify; text-justify: inter-word; font-family: var(--serif); font-size: var(--greek-font-size); line-height: calc(var(--reading-line-height) - 0.15); }
-.reader__prose--la p { text-align: justify; text-justify: inter-word; }
 .verse { display: inline; }
 .vn { font-family: var(--serif); font-size: 0.6em; color: var(--accent); vertical-align: super; line-height: 0; margin: 0 0.25em; letter-spacing: 0.02em; cursor: pointer; direction: ltr; unicode-bidi: isolate; user-select: none; }
 .vn:hover { text-decoration: underline; }
@@ -438,7 +434,7 @@ h1, h2, h3, h4, p { margin: 0; }
 /* dictionary entries (BDB / Abbott-Smith), trusted HTML from the data build */
 .dict { font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft); }
 .dict b { color: var(--ink); font-weight: 600; }
-.dict b.gr, .dict b.la { font-size: 1.1rem; }
+.dict b.gr { font-size: 1.1rem; }
 .dict i { font-style: italic; }
 .dict .pos { color: var(--olive); font-style: italic; }
 .dict .stem { font-variant: small-caps; letter-spacing: 0.04em; color: var(--accent); font-weight: 600; }
@@ -446,7 +442,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .dict .sense .sense { margin-left: 1rem; }
 .dict .sense > .n { color: var(--accent); font-weight: 600; margin-right: 0.3rem; }
 .dict .he-inline { font-size: 1.1rem; color: var(--ink); }
-.dict .gr, .dict .la { color: var(--ink); }
+.dict .gr { color: var(--ink); }
 .dict .lxx { color: var(--ink-faint); }
 .dict .form { color: var(--ink); margin-bottom: 0.3rem; }
 .dict .etym { color: var(--ink-faint); font-size: 0.9rem; margin-bottom: 0.3rem; }
@@ -487,7 +483,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .vocab__dot--recognized { background: var(--mark-new); }
 .vocab__dot--familiar { background: var(--accent-soft); }
 .vocab__dot--known, .vocab__dot--automatic { background: var(--olive); }
-.vocab__lemma .he, .vocab__lemma .gr, .vocab__lemma .la { font-size: 1.25rem; }
+.vocab__lemma .he, .vocab__lemma .gr { font-size: 1.25rem; }
 .vocab__gloss { color: var(--ink-soft); font-size: 0.9rem; }
 .tabs { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
 .tabs button { border-bottom: 2px solid transparent; padding: 0.3rem 0.5rem; color: var(--ink-soft); font-size: 0.9rem; letter-spacing: 0.04em; }

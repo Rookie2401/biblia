@@ -3,10 +3,10 @@
  * scripts/build-*.mjs). A handful of books are kept in memory; the service worker keeps
  * every file that was ever fetched, so a book read once is available offline.
  */
-import type { GrBook, HeBook, LaBook } from '../model/types.ts';
+import type { GrBook, HeBook } from '../model/types.ts';
 import { langOf } from '../text/canon.ts';
 
-export type AnyBook = HeBook | GrBook | LaBook;
+export type AnyBook = HeBook | GrBook;
 
 const cache = new Map<string, AnyBook>();
 const pending = new Map<string, Promise<AnyBook>>();
@@ -46,7 +46,4 @@ export function cachedBook(id: string): AnyBook | undefined {
 
 export function isHeBook(b: AnyBook): b is HeBook {
   return langOf(b.book) === 'he';
-}
-export function isLaBook(b: AnyBook): b is LaBook {
-  return langOf(b.book) === 'la';
 }

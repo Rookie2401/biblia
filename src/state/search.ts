@@ -13,7 +13,6 @@ import type { IndexRow } from '../data/lexicon.ts';
 import type { Lang } from '../model/types.ts';
 import { greekBase } from '../text/greek.ts';
 import { skeleton } from '../text/hebrew.ts';
-import { latinBase } from '../text/latin.ts';
 
 export interface SearchRow {
   lang: Lang;
@@ -29,7 +28,7 @@ export interface SearchRow {
   source: string;
 }
 
-export type SearchScope = 'all' | 'he' | 'gr' | 'la';
+export type SearchScope = 'all' | 'he' | 'gr';
 
 /** Greek index rows are [lemma, Strong's id, transliteration, gloss, count]. */
 export function toGreekSearchRows(rows: IndexRow[]): SearchRow[] {
@@ -37,10 +36,6 @@ export function toGreekSearchRows(rows: IndexRow[]): SearchRow[] {
 }
 export function toHebrewSearchRows(rows: IndexRow[]): SearchRow[] {
   return rows.map(([id, lemma, transliteration, gloss, count, source]) => ({ lang: 'he', id, lemma: lemma || id, transliteration: transliteration || '', gloss: gloss || '', count, strong: `H${id.split(' ')[0]}`, source: source || '' }));
-}
-/** Latin index rows are [lemma, '' (no Strong's number), transliteration, gloss, count, source]. */
-export function toLatinSearchRows(rows: IndexRow[]): SearchRow[] {
-  return rows.map(([lemma, , transliteration, gloss, count, source]) => ({ lang: 'la', id: lemma, lemma, transliteration: transliteration || '', gloss: gloss || '', count, strong: '', source: source || '' }));
 }
 
 export function wordUrl(row: Pick<SearchRow, 'lang' | 'id'>): string {
@@ -84,10 +79,9 @@ export function searchLexicon(rows: SearchRow[], query: string, scope: SearchSco
   } else {
     const l = s.toLowerCase();
     const word = new RegExp(`\\b${escapeRe(l)}`, 'i');
-    const lb = latinBase(s);
-    // exact gloss first, then a Latin lemma match, then a gloss that opens with the word, then the rest; ties by frequency
-    const score = (r: SearchRow) => (r.gloss.toLowerCase() === l || r.transliteration.toLowerCase() === l ? 3 : r.lang === 'la' && latinBase(r.lemma) === lb ? 2 : new RegExp('^' + escapeRe(l) + '\b', 'i').test(r.gloss) ? 1 : 0);
-    out = rows.filter((r) => word.test(r.gloss) || r.transliteration.toLowerCase().startsWith(l) || (r.lang === 'la' && latinBase(r.lemma).includes(lb)));
+    // exact gloss first, then a gloss that opens with the word, then the rest; ties by frequency
+    const score = (r: SearchRow) => (r.gloss.toLowerCase() === l || r.transliteration.toLowerCase() === l ? 2 : new RegExp('^' + escapeRe(l) + '\b', 'i').test(r.gloss) ? 1 : 0);
+    out = rows.filter((r) => word.test(r.gloss) || r.transliteration.toLowerCase().startsWith(l));
     out.sort((a, b) => score(b) - score(a) || b.count - a.count);
   }
   if (scope !== 'all') out = out.filter((r) => r.lang === scope);

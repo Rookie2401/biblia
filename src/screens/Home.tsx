@@ -13,7 +13,6 @@ import type { Lang, Position } from '../model/types.ts';
 import { CANON, refLabel, type BookInfo } from '../text/canon.ts';
 import { greekNumeral } from '../text/greek.ts';
 import { hebrewNumeral } from '../text/hebrew.ts';
-import { romanNumeral } from '../text/latin.ts';
 import { getSettings } from '../state/settings.ts';
 
 interface Division {
@@ -28,20 +27,17 @@ interface Testament {
   title: string;
   native: string;
   lang: Lang;
-  /** "bible" = the Hebrew/Greek Tanakh + New Testament; "other" = everything else (Septuagint,
-   * Vulgate, ...), set apart under its own "Other resources" heading on the home page. */
-  group: 'bible' | 'other';
   divisions: Division[];
 }
 
-/** Tanakh in Masoretic order; the New Testament as narrative books and letters (Revelation, addressed to the seven churches, sits with the letters). */
+/** Tanakh in Masoretic order; the New Testament as narrative books and letters (Revelation, addressed to the seven churches, sits with the letters).
+ * The Septuagint and the Vulgate are not here: they are read in Vetus, the companion app. */
 export const TREE: Testament[] = [
   {
     id: 'tanakh',
     title: 'Tanakh',
     native: 'תַּנַ״ךְ',
     lang: 'he',
-    group: 'bible',
     divisions: [
       { id: 'Torah', title: 'Torah', native: 'תּוֹרָה', sections: ['Torah'] },
       { id: 'Neviim', title: 'Neviʾim · Prophets', native: 'נְבִיאִים', sections: ['Neviim'] },
@@ -53,37 +49,9 @@ export const TREE: Testament[] = [
     title: 'New Testament',
     native: 'Ἡ Καινὴ Διαθήκη',
     lang: 'gr',
-    group: 'bible',
     divisions: [
       { id: 'Histories', title: 'Histories', native: 'Εὐαγγέλια · Πράξεις', sections: ['Gospels', 'Acts'] },
       { id: 'Epistles', title: 'Epistles', native: 'Ἐπιστολαί · Ἀποκάλυψις', sections: ['Paul', 'General', 'Revelation'] },
-    ],
-  },
-  {
-    id: 'lxx',
-    title: 'Septuagint',
-    native: 'Ἡ Μετάφρασις τῶν Ἑβδομήκοντα',
-    lang: 'gr',
-    group: 'other',
-    divisions: [
-      { id: 'LxxLaw', title: 'Law', native: 'Νόμος', sections: ['LxxLaw'] },
-      { id: 'LxxHistory', title: 'History', native: 'Ἱστορικά', sections: ['LxxHistory'] },
-      { id: 'LxxPoetry', title: 'Poetry & Wisdom', native: 'Ποιητικά', sections: ['LxxPoetry'] },
-      { id: 'LxxProphets', title: 'Prophets', native: 'Προφῆται', sections: ['LxxProphets'] },
-    ],
-  },
-  {
-    id: 'vulgate',
-    title: 'Vulgate',
-    native: 'Biblia Sacra Vulgata',
-    lang: 'la',
-    group: 'other',
-    divisions: [
-      { id: 'VulgGospels', title: 'Gospels', native: 'Evangelia', sections: ['VulgGospels'] },
-      { id: 'VulgActs', title: 'Acts', native: 'Actus Apostolorum', sections: ['VulgActs'] },
-      { id: 'VulgPaul', title: 'Letters of Paul', native: 'Epistolæ Paulinæ', sections: ['VulgPaul'] },
-      { id: 'VulgGeneral', title: 'General letters', native: 'Epistolæ Catholicæ', sections: ['VulgGeneral'] },
-      { id: 'VulgRevelation', title: 'Revelation', native: 'Apocalypsis', sections: ['VulgRevelation'] },
     ],
   },
 ];
@@ -165,7 +133,7 @@ export default function Home() {
                       return (
                         <Link key={n} to={`/read/${b.id}/${n}`} className={`entry entry--chapter${isDone ? ' entry--done' : ''}${p?.ch === n ? ' entry--at' : ''}`} role="listitem" aria-label={`${b.en} ${n}${isDone ? ', read' : ''}`}>
                           <span className="entry__num">Chapter {n}</span>
-                          <span className={`entry__native ${b.lang}`} lang={b.lang === 'he' ? 'he' : b.lang === 'la' ? 'la' : 'el'}>{b.lang === 'he' ? `פֶּרֶק ${hebrewNumeral(n)}` : b.lang === 'la' ? `Caput ${romanNumeral(n)}` : `Κεφάλαιον ${greekNumeral(n)}`}</span>
+                          <span className={`entry__native ${b.lang}`} lang={b.lang === 'he' ? 'he' : 'el'}>{b.lang === 'he' ? `פֶּרֶק ${hebrewNumeral(n)}` : `Κεφάλαιον ${greekNumeral(n)}`}</span>
                           <span className="entry__preview">{count} verses{isDone ? ' · read' : p?.ch === n ? ' · reading' : ''}</span>
                         </Link>
                       );
@@ -179,9 +147,6 @@ export default function Home() {
       })}
     </Group>
   );
-  const bibleTestaments = TREE.filter((t) => t.group === 'bible');
-  const otherTestaments = TREE.filter((t) => t.group === 'other');
-
   return (
     <div>
       <Topbar
@@ -210,20 +175,11 @@ export default function Home() {
           </Link>
         )}
         <nav className="lib" aria-label="Books">
-          {bibleTestaments.map(testamentGroup)}
+          {TREE.map(testamentGroup)}
         </nav>
-        {otherTestaments.length > 0 && (
-          <>
-            <h2 className="home__section">Other resources</h2>
-            <p className="home__subtitle home__subtitle--small">Ancient translations and related texts, alongside the Hebrew and Greek Bible above.</p>
-            <nav className="lib" aria-label="Other resources">
-              {otherTestaments.map(testamentGroup)}
-            </nav>
-          </>
-        )}
         <p className="home__about">
-          Miqra according to the Masorah · SBL Greek New Testament · OSHB & MorphGNT morphology · BDB · Abbott-Smith · Strong's.
-          {otherTestaments.length > 0 && <> Septuagint (Rahlfs, 1935) · lxx-morph morphology, merged into the Greek vocabulary above. Vulgate (Clementine, 1592) · PROIEL/Syntacticus morphology · Lewis & Short.</>}
+          Miqra according to the Masorah · SBL Greek New Testament · OSHB & MorphGNT morphology · BDB · Abbott-Smith · Strong's · Septuagint occurrence counts from lxx-morph.
+          The Septuagint and the Vulgate themselves are read in <i>Vetus</i>, the companion app.
           {' '}<Link to="/settings">Sources & licences</Link>
         </p>
       </div>

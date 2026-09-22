@@ -4,17 +4,16 @@
  * The two English layers are labelled so that a dictionary meaning is never read as a translation.
  */
 import { useEffect, useState } from 'react';
-import { type AnyBook, isHeBook, isLaBook } from '../data/books.ts';
+import { type AnyBook, isHeBook } from '../data/books.ts';
 import { cachedContext, loadContext } from '../data/context.ts';
-import type { HeVerse, LaVerse, WordRef } from '../model/types.ts';
+import type { HeVerse, WordRef } from '../model/types.ts';
 import { book as bookInfo, refLabel } from '../text/canon.ts';
 import { contentWords, hebrewNumeral, toNiqqud } from '../text/hebrew.ts';
-import { contentWords as laContentWords } from '../text/latin.ts';
 import { ensureGlossIndex, glossIndex, shortGloss, wordAt } from '../state/wordinfo.ts';
 import { I } from './ui.tsx';
 
 export function VerseCard({ book, ch, v, selected, onSelectWord, onPrev, onNext, onClose }: { book: AnyBook; ch: number; v: number; selected?: number; onSelectWord: (i: number) => void; onPrev?: () => void; onNext?: () => void; onClose: () => void }) {
-  const lang = isHeBook(book) ? 'he' : isLaBook(book) ? 'la' : 'gr';
+  const lang = isHeBook(book) ? 'he' : 'gr';
   const [, setTick] = useState(0);
   const [glossError, setGlossError] = useState(false);
   const [reloadTick, setReloadTick] = useState(0);
@@ -37,7 +36,7 @@ export function VerseCard({ book, ch, v, selected, onSelectWord, onPrev, onNext,
   }, [lang, book.book, reloadTick]);
   const verse = book.chapters[ch - 1]?.verses[v - 1];
   if (!verse) return null;
-  const n = lang === 'he' ? contentWords((verse as HeVerse).t).length : lang === 'la' ? laContentWords((verse as LaVerse).t).length : verse.w.length;
+  const n = lang === 'he' ? contentWords((verse as HeVerse).t).length : verse.w.length;
   const infos = Array.from({ length: n }, (_, i) => wordAt(book, { book: book.book, ch, v, i } as WordRef));
   const info = bookInfo(book.book);
   const hv = lang === 'he' ? (verse as HeVerse) : undefined;
@@ -75,7 +74,7 @@ export function VerseCard({ book, ch, v, selected, onSelectWord, onPrev, onNext,
               <span className={`inter__form ${lang}`}>{lang === 'he' ? toNiqqud(w.printed) : w.printed}</span>
               <span className="inter__ctx">{c ? c : c === '' ? '‒' : '·'}</span>
               <span className="inter__gloss">{lemmaGloss || (w.lexId ? 'no gloss' : '·')}</span>
-              <span className="inter__morph">{w.he ? shortMorph(w.he.morph.pos, w.he.morph.featureList) : w.gr ? shortMorph(w.gr.morph.pos, w.gr.morph.featureList) : w.la ? shortMorph(w.la.morph.pos, w.la.morph.featureList) : ''}</span>
+              <span className="inter__morph">{w.he ? shortMorph(w.he.morph.pos, w.he.morph.featureList) : w.gr ? shortMorph(w.gr.morph.pos, w.gr.morph.featureList) : ''}</span>
             </button>
           );
         })}

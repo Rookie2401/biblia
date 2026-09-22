@@ -11,7 +11,7 @@ import { ensureGlossIndex, glossIndex, indexLemma, type WordInfo } from '../stat
 
 export default function Word() {
   const { lang: langS = '', id: idS = '' } = useParams();
-  const lang: Lang | null = langS === 'he' || langS === 'gr' || langS === 'la' ? langS : null;
+  const lang: Lang | null = langS === 'he' || langS === 'gr' ? langS : null;
   const id = decodeURIComponent(idS);
   const nav = useNavigate();
   const [lemma, setLemma] = useState('');
@@ -56,7 +56,7 @@ export default function Word() {
       </div>
     );
   }
-  const langName = lang === 'he' ? 'Hebrew' : lang === 'la' ? 'Latin' : 'Greek';
+  const langName = lang === 'he' ? 'Hebrew' : 'Greek';
   if (known === false && glossIndex(lang)) {
     return (
       <div>

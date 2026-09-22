@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { BackLink, Topbar } from '../components/ui.tsx';
 import { allDataUrls } from '../data/lexicon.ts';
 import coverage from '../data/coverage.json';
-import vulgateCoverage from '../data/vulgate-coverage.json';
 import { db } from '../db/db.ts';
 import { CANON, langOf } from '../text/canon.ts';
 import { DEFAULTS, setSettings, useSettings } from '../state/settings.ts';
@@ -104,10 +103,7 @@ export default function Settings() {
           <p><b>Greek text</b> — <i>The Greek New Testament: SBL Edition</i>, ed. Michael W. Holmes (SBL / Logos, 2010), CC BY 4.0.</p>
           <p><b>Greek morphology</b> — MorphGNT, SBLGNT edition, CC BY-SA 3.0.</p>
           <p><b>Greek lexicon</b> — G. Abbott-Smith, <i>A Manual Greek Lexicon of the New Testament</i> (1922, public domain; TEI transcription by translatable-exegetical-tools, CC BY-SA 4.0), the Dodson Greek Lexicon (public domain) and Strong's Greek Dictionary (public domain). Short glosses come from Dodson, else Abbott-Smith, else Strong's; the {GR_CURATED} MorphGNT lemmas none of them cover (spelling variants, contracted forms, names) carry a curated gloss marked <i>Biblia</i> and are linked to the nearest lexicon entry.</p>
-          <p><b>Septuagint text &amp; morphology</b> — <a href="https://github.com/OpenScriptorium/lxx-morph" target="_blank" rel="noreferrer">lxx-morph</a> (Rahlfs, 1935 edition; morphological analysis via the Perseus Morpheus analyser with reviewed disambiguation), CC BY 4.0. Septuagint words are matched to the New Testament's own Greek lexicon at build time wherever they are the same lemma, so their vocabulary status and lookup count are shared; a lemma found only in the Septuagint is glossed from STEPBible's TFLSJ (the Translators Formatted LSJ), CC BY 4.0.</p>
-          <p><b>Vulgate text</b> — the Clementine Vulgate (1592), via the Perseus Digital Library / <i>seven1m/open-bibles</i>, public domain.</p>
-          <p><b>Vulgate morphology</b> — the <a href="https://syntacticus.org" target="_blank" rel="noreferrer">PROIEL / Syntacticus</a> treebank of the Vulgate New Testament, CC BY-NC-SA 4.0. Its own tokens carry no punctuation, so each of its words is matched by position to the Clementine text above; a word that cannot be confidently matched is shown but not tappable. Coverage is uneven and worth stating plainly: {vulgateCoverage.coveragePercent}% of the text overall, close to complete in the Gospels, Acts, Romans, 1–2 Corinthians, Philippians, 1–2 Thessalonians and Revelation, and only fragmentary in Colossians, the Pastoral Epistles, Hebrews, James, 1–2 Peter, 1–3 John and Jude — that treebank is itself still a work in progress, not something this app has trimmed down.</p>
-          <p><b>Latin lexicon</b> — Lewis &amp; Short, <i>A Latin Dictionary</i> (1879, public domain; TEI transcription by the Perseus Digital Library), CC BY-SA 4.0.</p>
+          <p><b>Septuagint occurrence counts</b> — on a Greek word's card, "N× in the Septuagint" is counted from <a href="https://github.com/OpenScriptorium/lxx-morph" target="_blank" rel="noreferrer">lxx-morph</a> (Rahlfs, 1935 edition), CC BY 4.0, after its lemmas are reconciled with the New Testament's own at build time (reviewed exceptions in <i>data/curated/lxx-lemma-blocklist.json</i>). The Septuagint text itself, and the Vulgate, are read in <i>Vetus</i>, the companion app, which spells its Greek vocabulary the same way — so a word here and the same word there are one entry.</p>
           <p><b>Type</b> — Frank Ruhl Libre and EB Garamond (SIL Open Font License).</p>
           <p>The grammatical explanations under <i>More</i> are the app's own summaries of standard grammar (Gesenius–Kautzsch, Joüon–Muraoka; Smyth, Wallace) and are not part of any source.</p>
         </div>

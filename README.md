@@ -20,7 +20,18 @@ Library (offline PWA, paper-and-Garamond chrome).
 | Greek text | SBL Greek New Testament (Holmes, 2010) | CC BY 4.0 |
 | Greek morphology | MorphGNT, SBLGNT edition | CC BY-SA 3.0 |
 | Greek lexicon | Abbott-Smith (1922, TEI), Dodson, Strong's | public domain |
+| Septuagint occurrence counts | [lxx-morph](https://github.com/OpenScriptorium/lxx-morph) (Rahlfs 1935), counted per NT lemma at build time | CC BY 4.0 |
 | Contextual renderings | Berean Standard Bible interlinear tables (per-word English in its verse), aligned at build time | public domain |
+
+The Septuagint and the Vulgate are not read here: on 2026-09-22 they were split out into
+[Vetus](../vetus-v0), a companion app with the same reader and lexicon machinery. What Biblia
+keeps is the *presence* of the Septuagint in its Greek lexicon — `scripts/build-lxx.mjs` reads
+the lxx-morph word list, reconciles each lemma with the New Testament's own spelling
+(`scripts/greek-lemma-match.mjs`, reviewed exceptions in `data/curated/lxx-lemma-blocklist.json`)
+and writes `data/build/lxx-counts.json`, which `build-lexicon-gr.mjs` folds into every entry as
+`lxxN`. A New Testament word's card then says "N× in the New Testament · M× in the Septuagint",
+and because Vetus reconciles against a copy of the same NT lemma list, the two apps mean the
+same lexeme by the same spelling.
 
 The text is never edited: MAM's reader markup is resolved (ketiv/qere read as qere, paragraph
 marks kept as flags, editorial footnotes kept as notes) and everything else is shown as the

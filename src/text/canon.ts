@@ -28,15 +28,6 @@ export const SECTIONS: { id: string; title: string; native: string; lang: Lang }
   { id: 'Paul', title: 'Letters of Paul', native: 'Ἐπιστολαὶ Παύλου', lang: 'gr' },
   { id: 'General', title: 'General letters', native: 'Καθολικαὶ ἐπιστολαί', lang: 'gr' },
   { id: 'Revelation', title: 'Revelation', native: 'Ἀποκάλυψις', lang: 'gr' },
-  { id: 'LxxLaw', title: 'Law', native: 'Νόμος', lang: 'gr' },
-  { id: 'LxxHistory', title: 'History', native: 'Ἱστορικά', lang: 'gr' },
-  { id: 'LxxPoetry', title: 'Poetry & Wisdom', native: 'Ποιητικά', lang: 'gr' },
-  { id: 'LxxProphets', title: 'Prophets', native: 'Προφῆται', lang: 'gr' },
-  { id: 'VulgGospels', title: 'Gospels', native: 'Evangelia', lang: 'la' },
-  { id: 'VulgActs', title: 'Acts', native: 'Actus Apostolorum', lang: 'la' },
-  { id: 'VulgPaul', title: "Letters of Paul", native: 'Epistolæ Paulinæ', lang: 'la' },
-  { id: 'VulgGeneral', title: 'General letters', native: 'Epistolæ Catholicæ', lang: 'la' },
-  { id: 'VulgRevelation', title: 'Revelation', native: 'Apocalypsis', lang: 'la' },
 ];
 
 export function book(id: string): BookInfo | undefined {
@@ -52,15 +43,8 @@ export function chapterCount(id: string): number {
   return byId.get(id)?.verses.length ?? 0;
 }
 
-/** The Septuagint shares `lang: 'gr'` with the New Testament (so a Septuagint word's vocabulary
- * can merge with the NT's), but they are separate reading sequences — a "next chapter" must
- * never cross from Revelation into Genesis (LXX) or vice versa just because both are Greek.
- * Within each, the existing divisions (Torah/Neviim/Ketuvim; Gospels/Acts/Paul/...; the four
- * Septuagint groups) were always meant to flow into each other, so this only needs to catch
- * the one new boundary, not reintroduce a check on every different `section` value. */
-const isLxx = (section: string): boolean => section.startsWith('Lxx');
-
-/** The chapter after (dir = 1) or before (dir = -1) this one, crossing into the next book of the same testament. */
+/** The chapter after (dir = 1) or before (dir = -1) this one, crossing into the next book of the
+ * same testament (the two testaments are the two languages, so a language change is the boundary). */
 export function adjacentChapter(id: string, ch: number, dir: 1 | -1): { book: string; ch: number } | null {
   const b = byId.get(id);
   if (!b || !Number.isInteger(ch) || ch < 1 || ch > b.verses.length) return null;
@@ -68,7 +52,7 @@ export function adjacentChapter(id: string, ch: number, dir: 1 | -1): { book: st
   if (next >= 1 && next <= b.verses.length) return { book: id, ch: next };
   const i = bookIndex(id) + dir;
   const nb = CANON[i];
-  if (!nb || nb.lang !== b.lang || isLxx(nb.section) !== isLxx(b.section)) return null;
+  if (!nb || nb.lang !== b.lang) return null;
   return { book: nb.id, ch: dir === 1 ? 1 : nb.verses.length };
 }
 

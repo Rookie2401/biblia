@@ -4,8 +4,7 @@
  *   Hebrew: key = OSHB lemma id ("1254 a"), shard = floor(number / 300)
  *   Greek:  key = MorphGNT lemma, shard = first letter (large letters split by second letter)
  */
-import type { GrEntry, HeEntry, LaEntry, Lang } from '../model/types.ts';
-import { CANON } from '../text/canon.ts';
+import type { GrEntry, HeEntry, Lang } from '../model/types.ts';
 import { greekBase } from '../text/greek.ts';
 import { memoAsync, memoAsyncKeyed } from './asyncCache.ts';
 
@@ -17,10 +16,6 @@ function loadGrManifest(): Promise<{ split: string[]; shards?: string[] }> {
 const heManifestBox: { current: Promise<{ shards: number[] }> | null } = { current: null };
 function loadHeManifest(): Promise<{ shards: number[] }> {
   return memoAsync(heManifestBox, () => fetchJson<{ shards: number[] }>('./data/lex/he-manifest.json'));
-}
-const laManifestBox: { current: Promise<{ shards: string[] }> | null } = { current: null };
-function loadLaManifest(): Promise<{ shards: string[] }> {
-  return memoAsync(laManifestBox, () => fetchJson<{ shards: string[] }>('./data/lex/la-manifest.json'));
 }
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -50,12 +45,6 @@ export async function grShard(lemma: string): Promise<string> {
   const one = b[0] || 'x';
   return split.includes(one) ? one + (b[1] || '') : one;
 }
-/** Latin lexicon: one shard per first letter — the NT-only vocabulary (a few thousand lemmas)
- * never needs the split-by-second-letter scheme Greek's much larger corpus does. */
-export function laShard(lemma: string): string {
-  const c = lemma.normalize('NFC').toLowerCase().replace(/[^a-z]/g, '')[0];
-  return c || 'x';
-}
 
 /** Numeric Strong's id from an OSHB lemma ("c/d/1254 a" → "1254 a"; "1008+" → "1008"). */
 export function heLemmaId(lemma: string): string | null {
@@ -70,10 +59,6 @@ export async function heEntry(id: string): Promise<HeEntry | undefined> {
 export async function grEntry(lemma: string): Promise<GrEntry | undefined> {
   const s = await shard(`./data/lex/gr-${await grShard(lemma)}.json`);
   return s[lemma] as GrEntry | undefined;
-}
-export async function laEntry(lemma: string): Promise<LaEntry | undefined> {
-  const s = await shard(`./data/lex/la-${laShard(lemma)}.json`);
-  return s[lemma] as LaEntry | undefined;
 }
 
 /** Every entry of a Hebrew shard (for the root-family and LXX cross references). */
@@ -90,7 +75,7 @@ export async function heEntries(ids: string[]): Promise<Map<string, HeEntry>> {
 
 /** Occurrences of a lexeme as [bookIndex, chapter, verse, wordIndex] tuples. */
 export async function concordance(lang: Lang, id: string): Promise<number[][]> {
-  const path = lang === 'he' ? `./data/conc/he-${heShard(id)}.json` : lang === 'gr' ? `./data/conc/gr-${await grShard(id)}.json` : `./data/conc/la-${laShard(id)}.json`;
+  const path = lang === 'he' ? `./data/conc/he-${heShard(id)}.json` : `./data/conc/gr-${await grShard(id)}.json`;
   const s = await shard(path);
   const flat = (s[id] as number[] | undefined) ?? [];
   const out: number[][] = [];
@@ -105,25 +90,16 @@ export function searchIndex(lang: Lang): Promise<IndexRow[]> {
   return memoAsyncKeyed(indexBoxes, lang, () => fetchJson<IndexRow[]>(`./data/lex/${lang}-index.json`));
 }
 
-const byId = new Map(CANON.map((b) => [b.id, b]));
-/** True for a book with a BSB-alignment context file (every Tanakh/NT book; not the Septuagint
- * or Vulgate, which the Berean Standard Bible was never aligned against). */
-function hasContext(id: string): boolean {
-  const section = byId.get(id)?.section ?? '';
-  return !section.startsWith('Lxx') && !section.startsWith('Vulg');
-}
-
 /**
  * Every data file the app reads at runtime, for "download everything for offline use". Excludes
  * attribution/diagnostic metadata that nothing in the app reads (ctx/COVERAGE.json, SOURCES.json).
  */
 export async function allDataUrls(bookIds: string[], langOfBook: (id: string) => Lang): Promise<string[]> {
-  const [heMan, grMan, laMan] = await Promise.all([loadHeManifest(), loadGrManifest(), loadLaManifest()]);
+  const [heMan, grMan] = await Promise.all([loadHeManifest(), loadGrManifest()]);
   const urls = bookIds.map((id) => `./data/${langOfBook(id)}/${id}.json`);
   for (const i of heMan.shards) urls.push(`./data/lex/he-${i}.json`, `./data/conc/he-${i}.json`);
   for (const s of grMan.shards ?? []) urls.push(`./data/lex/gr-${s}.json`, `./data/conc/gr-${s}.json`);
-  for (const s of laMan.shards ?? []) urls.push(`./data/lex/la-${s}.json`, `./data/conc/la-${s}.json`);
-  urls.push('./data/lex/he-index.json', './data/lex/gr-index.json', './data/lex/la-index.json', './data/lex/he-manifest.json', './data/lex/gr-manifest.json', './data/lex/la-manifest.json', './data/lex/he-bdb-index.json');
-  for (const id of bookIds) if (hasContext(id)) urls.push(`./data/ctx/${langOfBook(id)}/${id}.json`);
+  urls.push('./data/lex/he-index.json', './data/lex/gr-index.json', './data/lex/he-manifest.json', './data/lex/gr-manifest.json', './data/lex/he-bdb-index.json');
+  for (const id of bookIds) urls.push(`./data/ctx/${langOfBook(id)}/${id}.json`);
   return urls;
 }
