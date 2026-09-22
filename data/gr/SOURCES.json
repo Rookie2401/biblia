@@ -1,0 +1,14 @@
+{
+  "text": {
+    "title": "The Greek New Testament: SBL Edition",
+    "editor": "Michael W. Holmes",
+    "publisher": "Society of Biblical Literature / Logos Bible Software, 2010",
+    "license": "CC BY 4.0",
+    "url": "https://sblgnt.com"
+  },
+  "morphology": {
+    "title": "MorphGNT: SBLGNT Edition",
+    "license": "CC BY-SA 3.0",
+    "url": "https://github.com/morphgnt/sblgnt"
+  }
+}

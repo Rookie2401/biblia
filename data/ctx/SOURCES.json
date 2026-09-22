@@ -1,0 +1,7 @@
+{
+  "title": "Berean Standard Bible interlinear tables",
+  "publisher": "Bible Hub / Berean Bible Translation Committee",
+  "license": "public domain (dedicated 30 April 2023)",
+  "url": "https://berean.bible/downloads.htm",
+  "note": "per-word English renderings of the BSB, aligned verse by verse to the MAM and SBLGNT texts at build time through an explicit versification map; the BSB translates the WLC and the NA/SBL Greek, so a few words in our base texts carry no rendering"
+}

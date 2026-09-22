@@ -1,0 +1,15 @@
+{
+  "text": {
+    "title": "Miqra according to the Masorah",
+    "edition": "Digital edition of the Tanakh based on the Aleppo Codex and related manuscripts",
+    "via": "Sefaria API",
+    "license": "CC BY-SA 4.0",
+    "url": "https://he.wikisource.org/wiki/משתמש:Dovi/מקרא_על_פי_המסורה",
+    "fetched": "2026-09-20"
+  },
+  "morphology": {
+    "title": "Open Scriptures Hebrew Bible morphology",
+    "license": "CC BY 4.0",
+    "url": "https://github.com/openscriptures/morphhb"
+  }
+}

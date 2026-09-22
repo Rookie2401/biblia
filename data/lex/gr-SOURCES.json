@@ -1,0 +1,22 @@
+{
+  "abbottSmith": {
+    "title": "G. Abbott-Smith, A Manual Greek Lexicon of the New Testament (T&T Clark, 1922)",
+    "license": "public domain; TEI transcription CC BY-SA 4.0",
+    "url": "https://github.com/translatable-exegetical-tools/Abbott-Smith"
+  },
+  "dodson": {
+    "title": "Dodson Greek Lexicon (John Jeffrey Dodson, 2010)",
+    "license": "public domain",
+    "url": "https://github.com/biblicalhumanities/Dodson-Greek-Lexicon"
+  },
+  "strongs": {
+    "title": "Strong's Greek Dictionary (1890)",
+    "license": "public domain; JSON CC BY-SA",
+    "url": "https://github.com/openscriptures/strongs"
+  },
+  "septuagintCounts": {
+    "title": "Septuagint occurrence counts per lemma, from lxx-morph (Rahlfs 1935)",
+    "license": "CC BY 4.0",
+    "url": "https://github.com/OpenScriptorium/lxx-morph"
+  }
+}

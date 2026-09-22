@@ -1,0 +1,17 @@
+{
+  "bdb": {
+    "title": "Brown, Driver & Briggs, A Hebrew and English Lexicon of the Old Testament (1906)",
+    "license": "public domain; XML by Open Scriptures CC BY 4.0",
+    "url": "https://github.com/openscriptures/HebrewLexicon"
+  },
+  "lexicalIndex": {
+    "title": "Open Scriptures Hebrew Lexical Index",
+    "license": "CC BY 4.0",
+    "url": "https://github.com/openscriptures/HebrewLexicon"
+  },
+  "strongs": {
+    "title": "Strong's Hebrew Dictionary (1890)",
+    "license": "public domain; JSON CC BY-SA",
+    "url": "https://github.com/openscriptures/strongs"
+  }
+}
