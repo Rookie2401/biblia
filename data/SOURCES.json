@@ -1,0 +1,36 @@
+{
+  "copiedFrom": "C:/Users/CJWal/dev/biblia-v0",
+  "copiedAt": "2026-10-18",
+  "he": {
+    "text": {
+      "title": "Miqra according to the Masorah",
+      "edition": "Digital edition of the Tanakh based on the Aleppo Codex and related manuscripts",
+      "via": "Sefaria API",
+      "license": "CC BY-SA 4.0",
+      "url": "https://he.wikisource.org/wiki/משתמש:Dovi/מקרא_על_פי_המסורה",
+      "fetched": "2026-09-20"
+    },
+    "morphology": {
+      "title": "Open Scriptures Hebrew Bible morphology",
+      "license": "CC BY 4.0",
+      "url": "https://github.com/openscriptures/morphhb"
+    },
+    "note": "Tanakh: Miqra according to the Masorah text with the Open Scriptures Hebrew Bible morphology aligned per word by the Biblia app’s build (scripts/build-tanakh.mjs)."
+  },
+  "el": {
+    "text": {
+      "title": "The Greek New Testament: SBL Edition",
+      "editor": "Michael W. Holmes",
+      "publisher": "Society of Biblical Literature / Logos Bible Software, 2010",
+      "license": "CC BY 4.0",
+      "url": "https://sblgnt.com"
+    },
+    "morphology": {
+      "title": "MorphGNT: SBLGNT Edition",
+      "license": "CC BY-SA 3.0",
+      "url": "https://github.com/morphgnt/sblgnt"
+    },
+    "note": "Greek New Testament: the SBL edition with MorphGNT’s analysis per word, as the Biblia app’s build (scripts/build-gnt.mjs) carries them."
+  },
+  "parsing": "None of the Biblia app’s parsing code is used here. The per-word morphology columns are passed to the Go analysers (adapter-he, adapter-el) as the sources’ own readings; the card, the period decision and the Variants tab are GoLearn’s."
+}
