@@ -18,11 +18,11 @@
  * caches this app made are touched: the origin is shared with other apps on github.io. */
 'use strict';
 
-var BUILD_ID = 'bc49b2116c8a';
+var BUILD_ID = '7f2646dd7c80';
 var DATA_ID = '7f3972579321';
 var PRECACHE = [
   "./",
-  "./assets/index-2JHiMPE6.js",
+  "./assets/index-MDDN__7W.js",
   "./assets/index-SeePR-rQ.css",
   "./config.json",
   "./icons/apple-touch-icon.png",
