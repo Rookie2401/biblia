@@ -18,13 +18,27 @@
  * caches this app made are touched: the origin is shared with other apps on github.io. */
 'use strict';
 
-var BUILD_ID = '7f2646dd7c80';
+var BUILD_ID = 'dc60b1a8190c';
 var DATA_ID = '7f3972579321';
 var PRECACHE = [
   "./",
-  "./assets/index-MDDN__7W.js",
-  "./assets/index-SeePR-rQ.css",
+  "./assets/index-BbVTD-VP.js",
+  "./assets/index-CjVZZHWt.css",
   "./config.json",
+  "./fonts/EB-Garamond-OFL.txt",
+  "./fonts/FONTS.md",
+  "./fonts/eb-garamond-greek-400-italic.woff2",
+  "./fonts/eb-garamond-greek-400-normal.woff2",
+  "./fonts/eb-garamond-greek-600-normal.woff2",
+  "./fonts/eb-garamond-greek-ext-400-italic.woff2",
+  "./fonts/eb-garamond-greek-ext-400-normal.woff2",
+  "./fonts/eb-garamond-greek-ext-600-normal.woff2",
+  "./fonts/eb-garamond-latin-400-italic.woff2",
+  "./fonts/eb-garamond-latin-400-normal.woff2",
+  "./fonts/eb-garamond-latin-600-normal.woff2",
+  "./fonts/frank-ruhl-libre-OFL.txt",
+  "./fonts/frank-ruhl-libre-hebrew-400-normal.woff2",
+  "./fonts/frank-ruhl-libre-hebrew-500-normal.woff2",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
