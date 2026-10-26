@@ -124,11 +124,14 @@ button.sub[aria-expanded="true"], .sourcesBtn[aria-expanded="true"], .analysisBt
   button, input, select { min-width: 44px; min-height: 44px; }
   details.feat > summary { min-height: 44px; display: flex; align-items: center; }
   .close { min-width: 44px; }
-  .rate { column-gap: 0; justify-content: space-between; }
-  .rateBtn { position: relative; width: 44px; height: 44px; border: 0; background: transparent; }
-  .rateBtn::before { content: ''; position: absolute; width: 26px; height: 26px; border: 1px solid #7d7059; border-radius: 50%; background: #1e1a15; }
-  .rateBtn:hover:not(:disabled)::before { border-color: #b98f57; }
-  .rateBtn.on::before { border-color: #c8a06a; background: #c8a06a; }
+  /* the level meter keeps the same small circles as with a pointer (the button IS the circle: its border, its gold fill when .on, nothing
+     overridden here); the 44px touch target is an invisible ::after that extends 9px around each circle, and the 9px margin keeps the
+     targets from overlapping. 2026-10-25: before, the button was made a 44px transparent square with the circle drawn by ::before, but
+     .rateBtn.on (more specific) painted the whole square gold and the uncentred ::before sat in its corner: Biblia on an iPhone showed six
+     overlapping blobs instead of circles. */
+  .rate { column-gap: 0; }
+  .rateBtn { min-width: 26px; min-height: 26px; width: 26px; height: 26px; margin: 9px; position: relative; }
+  .rateBtn::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; }
 }
 .more { margin-top: 10px; padding-top: 2px; font-size: 0.95em; }
 .more h4 { margin: 10px 0 2px; font-size: 0.72em; letter-spacing: .14em; text-transform: uppercase; color: #a89c86; font-weight: 600; }
