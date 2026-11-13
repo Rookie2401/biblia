@@ -18,12 +18,12 @@
  * caches this app made are touched: the origin is shared with other apps on github.io. */
 'use strict';
 
-var BUILD_ID = '1ffc3a32fbaa';
+var BUILD_ID = 'f7ac449d8260';
 var DATA_ID = '7f3972579321';
 var PRECACHE = [
   "./",
-  "./assets/index-8Bhsgxfh.css",
-  "./assets/index-XOgQoBYz.js",
+  "./assets/index-D9XTFxo4.css",
+  "./assets/index-DfD5urBp.js",
   "./config.json",
   "./fonts/EB-Garamond-OFL.txt",
   "./fonts/FONTS.md",
