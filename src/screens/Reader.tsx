@@ -8,6 +8,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { VerseCard } from '../components/VerseCard.tsx';
+import { VerseNumberOptions } from '../components/VerseNumberOptions.tsx';
 import { WordCard } from '../components/WordCard.tsx';
 import { useMediaQuery, useModalDialog } from '../components/dialog.ts';
 import { I, IconBtn, Sheet } from '../components/ui.tsx';
@@ -17,7 +18,7 @@ import type { GrVerse, HeVerse, Lang, VocabStatus, WordRef } from '../model/type
 import { adjacentChapter, book as bookInfo, refLabel, validRef } from '../text/canon.ts';
 import { splitPrinted, greekNumeral } from '../text/greek.ts';
 import { contentWords, hebrewNumeral, render, tokens, type HebrewDisplay } from '../text/hebrew.ts';
-import { setSettings, useSettings } from '../state/settings.ts';
+import { setSettings, useSettings, type VerseNumberMode } from '../state/settings.ts';
 import { markUnlookedAsKnown, markChapterVisit, onVocabChange, recordEncounters, savePosition, statusMap } from '../state/vocab.ts';
 import { chapterWords, ensureGlossIndex, glossIndex, seedFor, shortGloss, wordAt, type WordInfo } from '../state/wordinfo.ts';
 
@@ -345,9 +346,9 @@ function Chapter({ bookId, ch }: { bookId: string; ch: number }) {
               </div>
             )}
             {lang === 'he' ? (
-              <HebrewChapter verses={chapter.verses as HeVerse[]} bookId={bookId} ch={ch} mode={settings.hebrewDisplay} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} showNumbers={settings.showVerseNumbers} poetry={POETRY.has(bookId)} glossLine={settings.showGlossLine} />
+              <HebrewChapter verses={chapter.verses as HeVerse[]} bookId={bookId} ch={ch} mode={settings.hebrewDisplay} verseNumberMode={settings.verseNumberMode} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} poetry={POETRY.has(bookId)} glossLine={settings.showGlossLine} />
             ) : (
-              <GreekChapter verses={chapter.verses as GrVerse[]} bookId={bookId} ch={ch} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} showNumbers={settings.showVerseNumbers} glossLine={settings.showGlossLine} />
+              <GreekChapter verses={chapter.verses as GrVerse[]} bookId={bookId} ch={ch} verseNumberMode={settings.verseNumberMode} statuses={statuses} words={words} selKey={selKey} selVerse={selVerse} glossLine={settings.showGlossLine} />
             )}
             <div className="reader__end" id="chapter-end">
               <div style={{ marginBottom: '1rem' }}>
@@ -452,7 +453,7 @@ function TypeSheet({ lang, onClose }: { lang: Lang; onClose: () => void }) {
           </div>
         </fieldset>
       </div>
-      <div className="sheet__row"><label htmlFor="rd-verses">Verses</label><input id="rd-verses" type="checkbox" checked={settings.showVerseNumbers} onChange={(e) => setSettings({ showVerseNumbers: e.target.checked })} /> <label htmlFor="rd-verses" className="faint" style={{ fontSize: '0.85rem', width: 'auto' }}>show verse numbers</label></div>
+      <div className="sheet__row"><VerseNumberOptions value={settings.verseNumberMode} /></div>
       <div className="sheet__row"><label htmlFor="rd-marks">Marks</label><input id="rd-marks" type="checkbox" checked={settings.showStatusMarks} onChange={(e) => setSettings({ showStatusMarks: e.target.checked })} /> <label htmlFor="rd-marks" className="faint" style={{ fontSize: '0.85rem', width: 'auto' }}>underline words not yet known</label></div>
       <div className="sheet__row"><label htmlFor="rd-gloss">Glosses</label><input id="rd-gloss" type="checkbox" checked={settings.showGlossLine} onChange={(e) => setSettings({ showGlossLine: e.target.checked })} /> <label htmlFor="rd-gloss" className="faint" style={{ fontSize: '0.85rem', width: 'auto' }}>gloss line under the tapped verse</label></div>
       <div className="sheet__actions"><button type="button" className="btn btn--small" onClick={onClose}>Done</button></div>
@@ -467,7 +468,7 @@ interface ChapterProps {
   words: WordInfo[];
   selKey: string;
   selVerse?: number;
-  showNumbers: boolean;
+  verseNumberMode: VerseNumberMode;
   glossLine: boolean;
 }
 
@@ -511,7 +512,7 @@ function GlossLine({ words, lang, selI }: { words: WordInfo[]; lang: Lang; selI?
   );
 }
 
-export function HebrewChapter({ verses, bookId, ch, mode, statuses, words, selKey, selVerse, showNumbers, poetry, glossLine }: ChapterProps & { verses: HeVerse[]; mode: HebrewDisplay; poetry: boolean }) {
+export function HebrewChapter({ verses, bookId, ch, mode, verseNumberMode, statuses, words, selKey, selVerse, poetry, glossLine }: ChapterProps & { verses: HeVerse[]; mode: HebrewDisplay; poetry: boolean }) {
   const byVerse = useMemo(() => {
     const m = new Map<number, WordInfo[]>();
     for (const w of words) (m.get(w.ref.v) ?? m.set(w.ref.v, []).get(w.ref.v)!).push(w);
@@ -545,7 +546,7 @@ export function HebrewChapter({ verses, bookId, ch, mode, statuses, words, selKe
     });
     const verseEl = (
       <span key={v.n} id={`v${v.n}`} data-v={v.n} className={`verse${selVerse === v.n ? ' verse--on' : ''}`} style={poetry ? { display: 'block', marginBottom: '0.2em' } : undefined}>
-        {showNumbers && <VerseNumber bookId={bookId} ch={ch} v={v.n} on={selVerse === v.n} label={hebrewNumeral(v.n)} />}
+        {verseNumberMode !== 'hidden' && <VerseNumber bookId={bookId} ch={ch} v={v.n} on={selVerse === v.n} label={verseNumberMode === 'native' ? hebrewNumeral(v.n) : String(v.n)} />}
         {parts}
         {v.s ? <span className="samekh" /> : null}
         {glossLine && selVerse === v.n && <GlossLine words={vw} lang="he" selI={selKey.startsWith(`${v.n}:`) ? Number(selKey.split(':')[1]) : undefined} />}
@@ -563,7 +564,7 @@ export function HebrewChapter({ verses, bookId, ch, mode, statuses, words, selKe
   );
 }
 
-export function GreekChapter({ verses, bookId, ch, statuses, words, selKey, selVerse, showNumbers, glossLine }: ChapterProps & { verses: GrVerse[] }) {
+export function GreekChapter({ verses, bookId, ch, verseNumberMode, statuses, words, selKey, selVerse, glossLine }: ChapterProps & { verses: GrVerse[] }) {
   const byVerse = useMemo(() => {
     const m = new Map<number, WordInfo[]>();
     for (const w of words) (m.get(w.ref.v) ?? m.set(w.ref.v, []).get(w.ref.v)!).push(w);
@@ -575,7 +576,7 @@ export function GreekChapter({ verses, bookId, ch, statuses, words, selKey, selV
         const vw = byVerse.get(v.n) ?? [];
         return (
           <span key={v.n} id={`v${v.n}`} data-v={v.n} className={`verse${selVerse === v.n ? ' verse--on' : ''}`}>
-            {showNumbers && <VerseNumber bookId={bookId} ch={ch} v={v.n} on={selVerse === v.n} label={String(v.n)} />}
+            {verseNumberMode !== 'hidden' && <VerseNumber bookId={bookId} ch={ch} v={v.n} on={selVerse === v.n} label={verseNumberMode === 'native' ? greekNumeral(v.n) : String(v.n)} />}
             {v.w.length === 0 && <span className="absent">[verse not in this edition]</span>}
             {v.w.map((tok, i) => {
               const { lead, word, trail } = splitPrinted(tok[0]);

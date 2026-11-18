@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BackLink, Topbar } from '../components/ui.tsx';
+import { VerseNumberOptions } from '../components/VerseNumberOptions.tsx';
 import { allDataUrls } from '../data/lexicon.ts';
 import coverage from '../data/coverage.json';
 import { db } from '../db/db.ts';
@@ -69,7 +70,7 @@ export default function Settings() {
             <button type="button" aria-pressed={s.hebrewDisplay === 'consonants'} onClick={() => setSettings({ hebrewDisplay: 'consonants' })}>consonants</button>
           </div>
         </fieldset>
-        <div className="field field--row"><label htmlFor="st-verses">Verse numbers</label><input id="st-verses" type="checkbox" checked={s.showVerseNumbers} onChange={(e) => setSettings({ showVerseNumbers: e.target.checked })} /></div>
+        <VerseNumberOptions className="field" value={s.verseNumberMode} />
         <div className="field field--row"><label htmlFor="st-marks">Underline words not yet known</label><input id="st-marks" type="checkbox" checked={s.showStatusMarks} onChange={(e) => setSettings({ showStatusMarks: e.target.checked })} /></div>
         <div className="field field--row"><label htmlFor="st-gloss">Gloss line under the tapped verse</label><input id="st-gloss" type="checkbox" checked={s.showGlossLine} onChange={(e) => setSettings({ showGlossLine: e.target.checked })} /></div>
 

@@ -34,7 +34,7 @@ describe('reader words and verse numbers are operable controls', () => {
     render(
       <MemoryRouter>
         <div onClick={() => undefined}>
-          <HebrewChapter verses={[HE]} bookId="Gen" ch={1} mode="full" statuses={new Map()} words={words(heBook, 7)} selKey="1:1" showNumbers poetry={false} glossLine={false} />
+          <HebrewChapter verses={[HE]} bookId="Gen" ch={1} mode="full" statuses={new Map()} words={words(heBook, 7)} selKey="1:1" verseNumberMode="native" poetry={false} glossLine={false} />
         </div>
       </MemoryRouter>,
     );
@@ -49,7 +49,7 @@ describe('reader words and verse numbers are operable controls', () => {
   it('renders Greek words as buttons and keeps punctuation outside them', () => {
     render(
       <MemoryRouter>
-        <GreekChapter verses={[GR]} bookId="Matt" ch={1} statuses={new Map()} words={words(grBook, 4)} selKey="" showNumbers glossLine={false} />
+        <GreekChapter verses={[GR]} bookId="Matt" ch={1} statuses={new Map()} words={words(grBook, 4)} selKey="" verseNumberMode="native" glossLine={false} />
       </MemoryRouter>,
     );
     expect(screen.getByRole('button', { name: 'Βίβλος' })).toBeTruthy();
@@ -63,7 +63,7 @@ describe('reader words and verse numbers are operable controls', () => {
   it('a word button and its trailing punctuation share a no-wrap wrapper, so a line can never break between them', () => {
     render(
       <MemoryRouter>
-        <GreekChapter verses={[GR]} bookId="Matt" ch={1} statuses={new Map()} words={words(grBook, 4)} selKey="" showNumbers glossLine={false} />
+        <GreekChapter verses={[GR]} bookId="Matt" ch={1} statuses={new Map()} words={words(grBook, 4)} selKey="" verseNumberMode="native" glossLine={false} />
       </MemoryRouter>,
     );
     const btn = screen.getAllByRole('button', { name: 'Βίβλος' })[0];
@@ -81,7 +81,7 @@ describe('reader words and verse numbers are operable controls', () => {
             if (w) hits.push(`${w.dataset.v}:${w.dataset.i ?? 'verse'}`);
           }}
         >
-          <HebrewChapter verses={[HE]} bookId="Gen" ch={1} mode="full" statuses={new Map()} words={words(heBook, 7)} selKey="" showNumbers poetry={false} glossLine={false} />
+          <HebrewChapter verses={[HE]} bookId="Gen" ch={1} mode="full" statuses={new Map()} words={words(heBook, 7)} selKey="" verseNumberMode="native" poetry={false} glossLine={false} />
         </div>
       </MemoryRouter>,
     );
@@ -95,5 +95,27 @@ describe('reader words and verse numbers are operable controls', () => {
     expect(hits[0]).toBe('1:1');
     expect(hits).toContain('1:verse');
     expect(w.tagName).toBe('BUTTON');
+  });
+  it('renders native, decimal and hidden Hebrew verse numbers', () => {
+    const props = { verses: [HE], bookId: 'Gen', ch: 1, mode: 'full' as const, statuses: new Map(), words: words(heBook, 7), selKey: '', poetry: false, glossLine: false };
+    const { rerender } = render(<MemoryRouter><HebrewChapter {...props} verseNumberMode="native" /></MemoryRouter>);
+    expect(screen.getByRole('button', { name: 'Open Genesis 1:1 verse view' }).textContent).toBe('א');
+    rerender(<MemoryRouter><HebrewChapter {...props} verseNumberMode="decimal" /></MemoryRouter>);
+    expect(screen.getByRole('button', { name: 'Open Genesis 1:1 verse view' }).textContent).toBe('1');
+    rerender(<MemoryRouter><HebrewChapter {...props} verseNumberMode="hidden" /></MemoryRouter>);
+    expect(screen.queryByRole('button', { name: 'Open Genesis 1:1 verse view' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'בְּרֵאשִׁ֖ית' })).toBeTruthy();
+    expect(document.querySelector('#v1')).toBeTruthy();
+  });
+  it('renders native, decimal and hidden Greek verse numbers', () => {
+    const props = { verses: [GR], bookId: 'Matt', ch: 1, statuses: new Map(), words: words(grBook, 4), selKey: '', glossLine: false };
+    const { rerender } = render(<MemoryRouter><GreekChapter {...props} verseNumberMode="native" /></MemoryRouter>);
+    expect(screen.getByRole('button', { name: 'Open Matthew 1:1 verse view' }).textContent).toBe('αʹ');
+    rerender(<MemoryRouter><GreekChapter {...props} verseNumberMode="decimal" /></MemoryRouter>);
+    expect(screen.getByRole('button', { name: 'Open Matthew 1:1 verse view' }).textContent).toBe('1');
+    rerender(<MemoryRouter><GreekChapter {...props} verseNumberMode="hidden" /></MemoryRouter>);
+    expect(screen.queryByRole('button', { name: 'Open Matthew 1:1 verse view' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Βίβλος' })).toBeTruthy();
+    expect(document.querySelector('#v1')).toBeTruthy();
   });
 });

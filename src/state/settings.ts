@@ -6,6 +6,7 @@ import type { HebrewDisplay } from '../text/hebrew.ts';
 
 export type Theme = 'auto' | 'light' | 'dark';
 export type HebrewFont = 'frank' | 'david' | 'system';
+export type VerseNumberMode = 'native' | 'decimal' | 'hidden';
 
 export interface Settings {
   theme: Theme;
@@ -14,7 +15,7 @@ export interface Settings {
   lineHeight: number;
   hebrewFont: HebrewFont;
   hebrewDisplay: HebrewDisplay;
-  showVerseNumbers: boolean;
+  verseNumberMode: VerseNumberMode;
   showStatusMarks: boolean;
   /** Looking a word up moves it from new/automatic to "recognized" (LingQ-style). */
   lookupMarksRecognized: boolean;
@@ -34,7 +35,7 @@ export const DEFAULTS: Settings = {
   lineHeight: 1.9,
   hebrewFont: 'frank',
   hebrewDisplay: 'full',
-  showVerseNumbers: true,
+  verseNumberMode: 'native',
   showStatusMarks: true,
   lookupMarksRecognized: true,
   autoKnownAfter: 4,
@@ -48,7 +49,15 @@ function load(): Settings {
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return { ...DEFAULTS };
-    return { ...DEFAULTS, ...JSON.parse(raw) };
+    const stored: unknown = JSON.parse(raw);
+    if (!stored || typeof stored !== 'object' || Array.isArray(stored)) return { ...DEFAULTS };
+    const values = stored as Record<string, unknown>;
+    const { showVerseNumbers, verseNumberMode: storedMode, ...unrelated } = values;
+    const verseNumberMode: VerseNumberMode = storedMode === 'native' || storedMode === 'decimal' || storedMode === 'hidden'
+      ? storedMode
+      : showVerseNumbers === false ? 'hidden' : DEFAULTS.verseNumberMode;
+    const settings = { ...DEFAULTS, ...unrelated, verseNumberMode } as Settings;
+    return settings;
   } catch {
     return { ...DEFAULTS };
   }
