@@ -1,6 +1,8 @@
 /* Biblia service worker (classic script). Built into dist-standalone/sw.js by packages/biblia/vite.config.ts --mode standalone,
- * which replaces the three tokens used below: the shell's build id (a hash of every shell file), the data id (a hash of the
- * texts and lexicon files) and the list of shell files to precache.
+ * which replaces the four tokens used below: the shell's build id (a hash of every shell file), the data id (a hash of the
+ * texts and lexicon files), the list of shell files to precache and the prefix of its caches ("biblia-", as Biblia's caches
+ * have always been named; the Hindi edition, a separate site built with --mode standalone-hi, has "biblia-hindi-", so neither
+ * ever deletes the other's caches on the shared github.io origin).
  *
  *   shell        index.html, the hashed assets, styles, manifest, icons and config.json are precached at install under
  *                "biblia-shell-<build id>" and served cache-first (the cached index and its hashed assets are one consistent
@@ -18,12 +20,12 @@
  * caches this app made are touched: the origin is shared with other apps on github.io. */
 'use strict';
 
-var BUILD_ID = 'c39c3f64a5c3';
+var BUILD_ID = '0f172679d43c';
 var DATA_ID = 'b6d943f69a81';
 var PRECACHE = [
   "./",
-  "./assets/index-BKvun1CJ.css",
-  "./assets/index-D1wjyJqF.js",
+  "./assets/index-CPOC9X6O.js",
+  "./assets/index-C_OJGW_-.css",
   "./config.json",
   "./fonts/EB-Garamond-OFL.txt",
   "./fonts/FONTS.md",
